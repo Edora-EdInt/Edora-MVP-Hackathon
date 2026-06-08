@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EdInt — AI Examination Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;550;600;700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --indigo-50: #EEF2FF;
+  --indigo-100: #E0E7FF;
+  --indigo-200: #C7D2FE;
+  --indigo-300: #A5B4FC;
+  --indigo-400: #818CF8;
+  --indigo-500: #6366F1;
+  --indigo-600: #4F46E5;
+  --indigo-700: #4338CA;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+  --green-50: #ECFDF5;
+  --green-500: #10B981;
+  --green-600: #059669;
+  --yellow-50: #FFFBEB;
+  --yellow-500: #F59E0B;
+  --yellow-600: #D97706;
+  --blue-50: #EFF6FF;
+  --blue-500: #3B82F6;
+  --blue-600: #2563EB;
+  --red-50: #FEF2F2;
+  --red-500: #EF4444;
+  --red-600: #DC2626;
+  --sidebar-width: 260px;
+  --topnav-height: 64px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--gray-50);
+  color: var(--gray-900);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== LOGIN VIEW ===== */
+.login-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: var(--gray-50);
+  position: relative;
+}
+
+.login-bg-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--gray-200) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.5;
+}
+
+.login-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--gray-100);
+  border-radius: 16px;
+  padding: 48px 40px 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+  text-align: center;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.login-logo .logo-mark {
+  width: 40px;
+  height: 40px;
+  background: var(--indigo-600);
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+}
+
+.login-logo .logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--gray-900);
+}
+
+.login-logo .logo-text span {
+  color: var(--indigo-600);
+}
+
+.login-card h2 {
+  font-size: 1.2rem;
+  font-weight: 650;
+  color: var(--gray-900);
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+
+.login-card .login-subtitle {
+  font-size: 0.867rem;
+  color: var(--gray-400);
+  margin-bottom: 32px;
+}
+
+.login-card .login-subtitle strong {
+  color: var(--gray-500);
+  font-weight: 600;
+}
+
+#googleSignInDiv {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  min-height: 48px;
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  color: var(--gray-300);
+  font-size: 0.733rem;
+  font-weight: 500;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--gray-100);
+}
+
+.demo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.demo-btn:hover {
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+  background: var(--gray-50);
+}
+
+.demo-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.login-footer {
+  margin-top: 32px;
+  font-size: 0.667rem;
+  color: var(--gray-300);
+  line-height: 1.5;
+}
+
+.login-error {
+  display: none;
+  background: var(--red-50);
+  color: var(--red-600);
+  font-size: 0.8rem;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.login-error.show {
+  display: block;
+}
+
+/* ===== AUTH TOGGLE ===== */
+.app-view {
+  display: none;
+}
+
+body.authenticated .login-view {
+  display: none;
+}
+
+body.authenticated .app-view {
+  display: block;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: #fff;
+  border-right: 1px solid var(--gray-100);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 20px 24px;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--indigo-600);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--gray-900);
+}
+
+.logo-text span {
+  color: var(--indigo-600);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--gray-500);
+  font-size: 0.933rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.nav-item svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: currentColor;
+  stroke-width: 1.8;
+}
+
+.nav-item:hover {
+  color: var(--gray-700);
+  background: var(--gray-50);
+}
+
+.nav-item.active {
+  color: var(--indigo-600);
+  background: var(--indigo-50);
+  font-weight: 600;
+}
+
+.nav-item.active svg {
+  stroke-width: 2.2;
+}
+
+.sidebar-footer {
+  padding: 8px 14px;
+  border-top: 1px solid var(--gray-100);
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  position: relative;
+}
+
+.user-card:hover {
+  background: var(--gray-50);
+}
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--indigo-500), var(--indigo-700));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.user-avatar.small {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+}
+
+.user-avatar.small img {
+  border-radius: 8px;
+}
+
+.user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: 0.867rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  font-size: 0.733rem;
+  color: var(--gray-400);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sign-out-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--gray-300);
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  opacity: 0;
+}
+
+.user-card:hover .sign-out-btn {
+  opacity: 1;
+}
+
+.sign-out-btn:hover {
+  color: var(--red-500);
+  background: var(--red-50);
+  border-color: var(--red-100);
+}
+
+.sign-out-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ===== TOP NAV ===== */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-width);
+  right: 0;
+  height: var(--topnav-height);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 99;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.nav-left h1 {
+  font-size: 1.133rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  letter-spacing: -0.3px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 0 14px;
+  width: 260px;
+  height: 36px;
+  transition: all 0.15s ease;
+}
+
+.search-box:focus-within {
+  border-color: var(--indigo-300);
+  box-shadow: 0 0 0 3px var(--indigo-100);
+  background: #fff;
+}
+
+.search-box svg {
+  width: 16px;
+  height: 16px;
+  color: var(--gray-400);
+  flex-shrink: 0;
+}
+
+.search-box input {
+  border: none;
+  background: none;
+  outline: none;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  color: var(--gray-700);
+  width: 100%;
+}
+
+.search-box input::placeholder {
+  color: var(--gray-400);
+}
+
+.notification-btn {
+  position: relative;
+  background: none;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.notification-btn:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-300);
+}
+
+.notification-btn svg {
+  width: 18px;
+  height: 18px;
+  color: var(--gray-500);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 18px;
+  height: 18px;
+  background: var(--red-500);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  margin-left: var(--sidebar-width);
+  padding-top: var(--topnav-height);
+  min-height: 100vh;
+  padding: calc(var(--topnav-height) + 32px) 40px 40px;
+}
+
+/* Welcome Section */
+.welcome-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 32px;
+}
+
+.welcome-text h2 {
+  font-size: 1.6rem;
+  font-weight: 650;
+  letter-spacing: -0.5px;
+  color: var(--gray-900);
+  margin-bottom: 6px;
+}
+
+.welcome-text p {
+  font-size: 0.933rem;
+  color: var(--gray-500);
+}
+
+.date-display {
+  font-size: 0.867rem;
+  color: var(--gray-400);
+  font-weight: 500;
+  padding: 6px 14px;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: #fff;
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--gray-200);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.stat-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.stat-icon.exams {
+  background: var(--indigo-50);
+  color: var(--indigo-600);
+}
+
+.stat-icon.students {
+  background: var(--green-50);
+  color: var(--green-600);
+}
+
+.stat-icon.questions {
+  background: var(--yellow-50);
+  color: var(--yellow-600);
+}
+
+.stat-icon.score {
+  background: var(--blue-50);
+  color: var(--blue-600);
+}
+
+.stat-trend {
+  font-size: 0.733rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.stat-trend.up {
+  background: var(--green-50);
+  color: var(--green-600);
+}
+
+.stat-trend.down {
+  background: var(--red-50);
+  color: var(--red-600);
+}
+
+.stat-value {
+  font-size: 1.733rem;
+  font-weight: 650;
+  letter-spacing: -0.5px;
+  color: var(--gray-900);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+
+/* Quick Actions */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header h3 {
+  font-size: 1.067rem;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--gray-900);
+}
+
+.section-header a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--indigo-600);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.section-header a:hover {
+  color: var(--indigo-700);
+}
+
+.quick-actions {
+  margin-bottom: 32px;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.action-card {
+  background: #fff;
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-card:hover {
+  border-color: var(--gray-200);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  transform: translateY(-1px);
+}
+
+.action-card .action-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--indigo-50);
+  color: var(--indigo-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.action-card .action-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.action-card h4 {
+  font-size: 0.933rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+
+.action-card p {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  line-height: 1.4;
+}
+
+/* Recent Exams Table */
+.recent-exams {
+  background: #fff;
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 0.733rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gray-400);
+  border-bottom: 1px solid var(--gray-100);
+}
+
+tbody td {
+  padding: 14px 12px;
+  font-size: 0.867rem;
+  color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-50);
+  transition: background 0.1s;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover td {
+  background: var(--gray-50);
+}
+
+tbody td .exam-name {
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+tbody td .subject {
+  color: var(--gray-500);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.733rem;
+  font-weight: 600;
+}
+
+.badge.completed {
+  background: var(--green-50);
+  color: var(--green-600);
+}
+
+.badge.in-progress {
+  background: var(--yellow-50);
+  color: var(--yellow-600);
+}
+
+.badge.scheduled {
+  background: var(--blue-50);
+  color: var(--blue-600);
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.badge.completed .badge-dot { background: var(--green-500); }
+.badge.in-progress .badge-dot { background: var(--yellow-500); }
+.badge.scheduled .badge-dot { background: var(--blue-500); }
+
+/* Bottom Grid */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+/* AI Insights */
+.ai-insights {
+  background: #fff;
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.insight-item {
+  padding: 16px;
+  background: var(--gray-50);
+  border-radius: 10px;
+}
+
+.insight-item .insight-value {
+  font-size: 1.467rem;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+  color: var(--gray-900);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.insight-item .insight-label {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+
+/* Activity Chart */
+.activity-chart {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--gray-100);
+}
+
+.activity-chart h4 {
+  font-size: 0.867rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 12px;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 80px;
+}
+
+.chart-bar {
+  flex: 1;
+  border-radius: 4px 4px 0 0;
+  background: var(--indigo-100);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  min-height: 8px;
+}
+
+.chart-bar:hover {
+  background: var(--indigo-400);
+}
+
+.chart-bar.active {
+  background: var(--indigo-600);
+}
+
+.chart-labels {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.chart-labels span {
+  flex: 1;
+  font-size: 0.667rem;
+  color: var(--gray-400);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Upcoming Exams */
+.upcoming-exams {
+  background: #fff;
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+
+.upcoming-list {
+  margin-top: 4px;
+}
+
+.upcoming-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-50);
+}
+
+.upcoming-item:last-child {
+  border-bottom: none;
+}
+
+.upcoming-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--gray-50);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.upcoming-date .day {
+  font-size: 1.067rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  line-height: 1;
+}
+
+.upcoming-date .month {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+
+.upcoming-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.upcoming-info .exam-title {
+  font-size: 0.867rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 2px;
+}
+
+.upcoming-info .exam-meta {
+  font-size: 0.733rem;
+  color: var(--gray-400);
+}
+
+.upcoming-info .exam-meta span {
+  margin-right: 12px;
+}
+
+.upcoming-chevron {
+  color: var(--gray-300);
+  flex-shrink: 0;
+}
+
+.upcoming-chevron svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1400px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .actions-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 1100px) {
+  .bottom-grid { grid-template-columns: 1fr; }
+  .main-content { padding-left: 24px; padding-right: 24px; }
+  .top-nav { padding: 0 24px; }
+  .search-box { width: 200px; }
+}
+
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
+  .sidebar.open { transform: translateX(0); }
+  .top-nav { left: 0; }
+  .main-content { margin-left: 0; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .actions-grid { grid-template-columns: 1fr; }
+  .insights-grid { grid-template-columns: 1fr; }
+  .search-box { width: 160px; }
+  .welcome-section { flex-direction: column; align-items: flex-start; gap: 12px; }
+
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+
+  .login-card {
+    padding: 36px 24px 28px;
+  }
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 12px;
+}
+
+.mobile-menu-btn svg {
+  width: 20px;
+  height: 20px;
+  color: var(--gray-600);
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: 50;
+}
+
+.overlay.show {
+  display: block;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gray-300); }
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN VIEW ===== -->
+<div class="login-view" id="loginView">
+  <div class="login-bg-dots"></div>
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="logo-mark">E</div>
+      <div class="logo-text">Ed<span>Int</span></div>
+    </div>
+    <h2>Sign in to EdInt</h2>
+    <p class="login-subtitle">AI-powered examination platform for<br><strong>educational institutions</strong></p>
+
+    <div id="loginError" class="login-error"></div>
+
+    <div id="googleSignInDiv"></div>
+
+    <div class="login-divider">or</div>
+
+    <button class="demo-btn" id="demoBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10h-10V2z"/><path d="M22 12a10 10 0 0 0-10-10v10h10z"/></svg>
+      Continue as Guest (Demo)
+    </button>
+
+    <p class="login-footer">By signing in, you agree to our Terms of Service and Privacy Policy.</p>
+  </div>
+</div>
+
+<!-- ===== APP VIEW ===== -->
+<div class="app-view" id="appView">
+
+<div class="overlay" id="overlay"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">E</div>
+    <div class="logo-text">Ed<span>Int</span></div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a href="#" class="nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span>Dashboard</span>
+    </a>
+    <a href="#" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      <span>Question Bank</span>
+    </a>
+    <a href="#" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+      <span>Generate Exam</span>
+    </a>
+    <a href="#" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span>Variants</span>
+    </a>
+    <a href="#" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span>Students</span>
+    </a>
+    <a href="#" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <span>Evaluation</span>
+    </a>
+    <a href="#" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <span>Analytics</span>
+    </a>
+    <a href="#" class="nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span>Settings</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="user-card" id="userCard">
+      <div class="user-avatar" id="sidebarAvatar">SC</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebarName">Dr. Sarah Chen</div>
+        <div class="user-role" id="sidebarEmail">sarah@edint.io</div>
+      </div>
+      <button class="sign-out-btn" id="signOutBtn" title="Sign out" aria-label="Sign out">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== TOP NAV ===== -->
+<header class="top-nav">
+  <div class="nav-left">
+    <button class="mobile-menu-btn" id="menuBtn" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <h1>Dashboard</h1>
+  </div>
+  <div class="nav-right">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Search exams, students...">
+    </div>
+    <button class="notification-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="notification-badge">3</span>
+    </button>
+    <div class="user-avatar small" id="navAvatar">SC</div>
+  </div>
+</header>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-content">
+
+  <!-- Welcome -->
+  <section class="welcome-section">
+    <div class="welcome-text">
+      <h2 id="welcomeHeading">Good morning, Dr. Chen</h2>
+      <p>Here's what's happening with your examinations today.</p>
+    </div>
+    <div class="date-display" id="dateDisplay">Monday, June 8</div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-card-top">
+        <div class="stat-icon exams">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <span class="stat-trend up">+12%</span>
+      </div>
+      <div class="stat-value">24</div>
+      <div class="stat-label">Total Exams</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-top">
+        <div class="stat-icon students">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <span class="stat-trend up">+8%</span>
+      </div>
+      <div class="stat-value">1,432</div>
+      <div class="stat-label">Active Students</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-top">
+        <div class="stat-icon questions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <span class="stat-trend up">+23%</span>
+      </div>
+      <div class="stat-value">8,947</div>
+      <div class="stat-label">Questions Generated</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-top">
+        <div class="stat-icon score">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <span class="stat-trend down">-2%</span>
+      </div>
+      <div class="stat-value">83.6%</div>
+      <div class="stat-label">Average Score</div>
+    </div>
+  </section>
+
+  <!-- Quick Actions -->
+  <section class="quick-actions">
+    <div class="section-header">
+      <h3>Quick Actions</h3>
+      <a href="#">View all</a>
+    </div>
+    <div class="actions-grid">
+      <div class="action-card">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        </div>
+        <h4>Create Exam</h4>
+        <p>Design a new examination with AI assistance</p>
+      </div>
+      <div class="action-card">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h4>Generate Questions</h4>
+        <p>Auto-generate questions from any topic</p>
+      </div>
+      <div class="action-card">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h4>Grade Papers</h4>
+        <p>AI-powered answer evaluation & scoring</p>
+      </div>
+      <div class="action-card">
+        <div class="action-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h4>View Reports</h4>
+        <p>Analytics and performance dashboards</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Exams Table -->
+  <section class="recent-exams">
+    <div class="section-header">
+      <h3>Recent Examinations</h3>
+      <a href="#">View all &rarr;</a>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Exam Name</th>
+            <th>Subject</th>
+            <th>Date</th>
+            <th>Students</th>
+            <th>Avg. Score</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="exam-name">Mid-Term Mathematics</span></td>
+            <td><span class="subject">Mathematics</span></td>
+            <td>Jun 5, 2026</td>
+            <td>120</td>
+            <td>78.5%</td>
+            <td><span class="badge completed"><span class="badge-dot"></span>Completed</span></td>
+          </tr>
+          <tr>
+            <td><span class="exam-name">Physics Final Exam</span></td>
+            <td><span class="subject">Physics</span></td>
+            <td>Jun 2, 2026</td>
+            <td>85</td>
+            <td>82.3%</td>
+            <td><span class="badge completed"><span class="badge-dot"></span>Completed</span></td>
+          </tr>
+          <tr>
+            <td><span class="exam-name">Chemistry Quiz III</span></td>
+            <td><span class="subject">Chemistry</span></td>
+            <td>May 29, 2026</td>
+            <td>94</td>
+            <td>&mdash;</td>
+            <td><span class="badge in-progress"><span class="badge-dot"></span>Evaluating</span></td>
+          </tr>
+          <tr>
+            <td><span class="exam-name">English Literature Exam</span></td>
+            <td><span class="subject">English</span></td>
+            <td>May 25, 2026</td>
+            <td>110</td>
+            <td>&mdash;</td>
+            <td><span class="badge scheduled"><span class="badge-dot"></span>Scheduled</span></td>
+          </tr>
+          <tr>
+            <td><span class="exam-name">Biology Practical</span></td>
+            <td><span class="subject">Biology</span></td>
+            <td>May 22, 2026</td>
+            <td>65</td>
+            <td>91.2%</td>
+            <td><span class="badge completed"><span class="badge-dot"></span>Completed</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Bottom Two Columns -->
+  <div class="bottom-grid">
+    <section class="ai-insights">
+      <div class="section-header">
+        <h3>AI Engine Insights</h3>
+        <a href="#">Details</a>
+      </div>
+      <div class="insights-grid">
+        <div class="insight-item">
+          <div class="insight-value">1,247</div>
+          <div class="insight-label">Questions generated this week</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-value">97.3%</div>
+          <div class="insight-label">AI accuracy rate</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-value">Medium</div>
+          <div class="insight-label">Avg. difficulty</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-value">12m 34s</div>
+          <div class="insight-label">Avg. evaluation time</div>
+        </div>
+      </div>
+      <div class="activity-chart">
+        <h4>Weekly Activity</h4>
+        <div class="chart-bars">
+          <div class="chart-bar" style="height: 45%;" title="Mon: 560"></div>
+          <div class="chart-bar" style="height: 70%;" title="Tue: 870"></div>
+          <div class="chart-bar active" style="height: 100%;" title="Wed: 1,247"></div>
+          <div class="chart-bar" style="height: 55%;" title="Thu: 680"></div>
+          <div class="chart-bar" style="height: 35%;" title="Fri: 430"></div>
+          <div class="chart-bar" style="height: 20%;" title="Sat: 250"></div>
+          <div class="chart-bar" style="height: 15%;" title="Sun: 180"></div>
+        </div>
+        <div class="chart-labels">
+          <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+        </div>
+      </div>
+    </section>
+    <section class="upcoming-exams">
+      <div class="section-header">
+        <h3>Upcoming Exams</h3>
+        <a href="#">Calendar</a>
+      </div>
+      <div class="upcoming-list">
+        <div class="upcoming-item">
+          <div class="upcoming-date">
+            <span class="day">12</span>
+            <span class="month">Jun</span>
+          </div>
+          <div class="upcoming-info">
+            <div class="exam-title">Computer Science</div>
+            <div class="exam-meta">
+              <span>120 students</span>
+              <span>09:00 AM</span>
+            </div>
+          </div>
+          <div class="upcoming-chevron">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="upcoming-item">
+          <div class="upcoming-date">
+            <span class="day">14</span>
+            <span class="month">Jun</span>
+          </div>
+          <div class="upcoming-info">
+            <div class="exam-title">Advanced Mathematics</div>
+            <div class="exam-meta">
+              <span>85 students</span>
+              <span>10:30 AM</span>
+            </div>
+          </div>
+          <div class="upcoming-chevron">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="upcoming-item">
+          <div class="upcoming-date">
+            <span class="day">18</span>
+            <span class="month">Jun</span>
+          </div>
+          <div class="upcoming-info">
+            <div class="exam-title">History Final</div>
+            <div class="exam-meta">
+              <span>110 students</span>
+              <span>09:00 AM</span>
+            </div>
+          </div>
+          <div class="upcoming-chevron">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="upcoming-item">
+          <div class="upcoming-date">
+            <span class="day">21</span>
+            <span class="month">Jun</span>
+          </div>
+          <div class="upcoming-info">
+            <div class="exam-title">Physics Practical</div>
+            <div class="exam-meta">
+              <span>65 students</span>
+              <span>02:00 PM</span>
+            </div>
+          </div>
+          <div class="upcoming-chevron">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+</div><!-- /app-view -->
+
+<script>
+const CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+const STORAGE_KEY = 'edint_auth';
+
+// ===== DOM refs =====
+const loginView = document.getElementById('loginView');
+const appView = document.getElementById('appView');
+const googleBtn = document.getElementById('googleSignInDiv');
+const loginError = document.getElementById('loginError');
+const demoBtn = document.getElementById('demoBtn');
+const sidebarName = document.getElementById('sidebarName');
+const sidebarEmail = document.getElementById('sidebarEmail');
+const sidebarAvatar = document.getElementById('sidebarAvatar');
+const navAvatar = document.getElementById('navAvatar');
+const signOutBtn = document.getElementById('signOutBtn');
+const welcomeHeading = document.getElementById('welcomeHeading');
+const dateDisplay = document.getElementById('dateDisplay');
+
+// ===== Date =====
+const now = new Date();
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+dateDisplay.textContent = `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}`;
+
+// ===== Auth helpers =====
+function getStoredSession() {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+
+function setSession(data) {
+  sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function clearSession() {
+  sessionStorage.removeItem(STORAGE_KEY);
+}
+
+function getGreeting() {
+  const h = now.getHours();
+  if (h < 12) return 'Good morning';
+  if (h < 17) return 'Good afternoon';
+  return 'Good evening';
+}
+
+// ===== UI update =====
+function enterDashboard(user) {
+  const name = user.name || user.given_name || 'User';
+  const email = user.email || '';
+  const picture = user.picture || '';
+  const first = name.charAt(0).toUpperCase();
+
+  sidebarName.textContent = name;
+  sidebarEmail.textContent = email;
+
+  if (picture) {
+    sidebarAvatar.innerHTML = `<img src="${picture}" alt="${name}" referrerpolicy="no-referrer">`;
+    navAvatar.innerHTML = `<img src="${picture}" alt="${name}" referrerpolicy="no-referrer">`;
+  } else {
+    sidebarAvatar.textContent = first;
+    navAvatar.textContent = first;
+  }
+
+  welcomeHeading.textContent = `${getGreeting()}, ${name}`;
+  document.body.classList.add('authenticated');
+}
+
+function exitDashboard() {
+  document.body.classList.remove('authenticated');
+  clearSession();
+  if (window.google?.accounts?.id) {
+    google.accounts.id.disableAutoSelect();
+  }
+}
+
+// ===== Google Sign-In callback =====
+function handleCredentialResponse(response) {
+  try {
+    const payload = JSON.parse(atob(response.credential.split('.')[1]));
+    const user = {
+      sub: payload.sub,
+      name: payload.name,
+      given_name: payload.given_name,
+      email: payload.email,
+      picture: payload.picture,
+      token: response.credential,
+    };
+    setSession(user);
+    enterDashboard(user);
+  } catch (e) {
+    loginError.textContent = 'Authentication failed. Please try again.';
+    loginError.classList.add('show');
+  }
+}
+
+// ===== Demo mode =====
+demoBtn.addEventListener('click', function() {
+  const demoUser = {
+    sub: 'demo-user',
+    name: 'Dr. Sarah Chen',
+    given_name: 'Sarah',
+    email: 'sarah.chen@edint.io',
+    picture: '',
+    token: '',
+    demo: true,
+  };
+  setSession(demoUser);
+  enterDashboard(demoUser);
+});
+
+// ===== Sign out =====
+signOutBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  exitDashboard();
+});
+
+// ===== Mobile menu =====
+const menuBtn = document.getElementById('menuBtn');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+
+function toggleMenu() {
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+}
+
+menuBtn.addEventListener('click', toggleMenu);
+overlay.addEventListener('click', toggleMenu);
+
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', function(e) {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    this.classList.add('active');
+    if (window.innerWidth <= 768) toggleMenu();
+  });
+});
+
+// ===== Init =====
+(function init() {
+  const existing = getStoredSession();
+  if (existing) {
+    enterDashboard(existing);
+    return;
+  }
+
+  if (CLIENT_ID && CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
+    window.google?.accounts?.id?.initialize({
+      client_id: CLIENT_ID,
+      callback: handleCredentialResponse,
+      auto_select: false,
+    });
+    window.google?.accounts?.id?.renderButton(googleBtn, {
+      type: 'standard',
+      shape: 'pill',
+      theme: 'outline',
+      text: 'signin_with',
+      size: 'large',
+      logo_alignment: 'left',
+      width: 320,
+    });
+  } else {
+    googleBtn.innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;padding:14px 0;">Google Sign-In requires a valid OAuth Client ID.<br>See README for setup instructions, or use Demo mode below.</p>';
+  }
+})();
+</script>
+
+</body>
+</html>
