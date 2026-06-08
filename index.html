@@ -1101,6 +1101,616 @@ tbody td .subject {
   display: block;
 }
 
+/* ===== GENERATE EXAM PAGE ===== */
+.gen-header {
+  margin-bottom: 32px;
+}
+.gen-header h2 {
+  font-size: 1.6rem;
+  font-weight: 650;
+  letter-spacing: -0.5px;
+  color: var(--gray-900);
+  margin-bottom: 6px;
+}
+.gen-header p {
+  font-size: 0.933rem;
+  color: var(--gray-500);
+}
+.gen-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: start;
+}
+.gen-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+/* Cards */
+.gen-card {
+  background: #fff;
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 24px;
+}
+.gen-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.gen-step {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--indigo-600);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.gen-card-head h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 2px;
+}
+.gen-card-head p {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+}
+/* Field groups */
+.gen-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.gen-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+.gen-field label .req {
+  color: var(--red-500);
+}
+.gen-row {
+  display: flex;
+  gap: 16px;
+}
+.gen-row.three > * { flex: 1; }
+.gen-row.five > * { flex: 1; }
+/* Select inputs */
+.gen-select {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  background: #fff;
+  font-family: var(--font);
+  font-size: 0.867rem;
+  color: var(--gray-800);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 36px;
+}
+.gen-select:focus {
+  border-color: var(--indigo-300);
+  box-shadow: 0 0 0 3px var(--indigo-100);
+}
+/* Text inputs */
+.gen-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  background: #fff;
+  font-family: var(--font);
+  font-size: 0.867rem;
+  color: var(--gray-800);
+  outline: none;
+  transition: all 0.15s ease;
+}
+.gen-input:focus {
+  border-color: var(--indigo-300);
+  box-shadow: 0 0 0 3px var(--indigo-100);
+}
+.gen-input[type="number"] {
+  text-align: center;
+  -moz-appearance: textfield;
+}
+.gen-input[type="number"]::-webkit-outer-spin-button,
+.gen-input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Searchable Select */
+.ss-wrap {
+  position: relative;
+  width: 100%;
+}
+.ss-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 36px 0 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  background: #fff;
+  font-family: var(--font);
+  font-size: 0.867rem;
+  color: var(--gray-800);
+  outline: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.ss-input:focus {
+  border-color: var(--indigo-300);
+  box-shadow: 0 0 0 3px var(--indigo-100);
+}
+.ss-input.selected {
+  padding-left: 12px;
+}
+.ss-chevron {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-400);
+  pointer-events: none;
+}
+.ss-drop {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  z-index: 50;
+  display: none;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.ss-drop.open { display: block; }
+.ss-opt {
+  padding: 10px 14px;
+  font-size: 0.867rem;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.ss-opt:hover { background: var(--gray-50); }
+.ss-opt.highlighted { background: var(--indigo-50); color: var(--indigo-700); }
+.ss-opt.sel { background: var(--indigo-50); color: var(--indigo-700); font-weight: 600; }
+.ss-empty {
+  padding: 14px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gray-400);
+}
+/* Multi-select */
+.ms-wrap { position: relative; }
+.ms-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 4px 36px 4px 8px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-wrap: wrap;
+  position: relative;
+}
+.ms-trigger:focus-within {
+  border-color: var(--indigo-300);
+  box-shadow: 0 0 0 3px var(--indigo-100);
+}
+.ms-trigger svg {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-400);
+  pointer-events: none;
+}
+.ms-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+.ms-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: var(--indigo-50);
+  color: var(--indigo-700);
+  font-size: 0.733rem;
+  font-weight: 500;
+  border-radius: 6px;
+}
+.ms-badge-remove {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: none;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--indigo-400);
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+  transition: all 0.1s;
+}
+.ms-badge-remove:hover { background: var(--indigo-200); color: var(--indigo-700); }
+.ms-placeholder {
+  color: var(--gray-400);
+  font-size: 0.867rem;
+  padding: 4px 4px;
+}
+.ms-drop {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  z-index: 50;
+  display: none;
+  max-height: 260px;
+  overflow: hidden;
+}
+.ms-drop.open { display: flex; flex-direction: column; }
+.ms-search {
+  padding: 8px;
+  border-bottom: 1px solid var(--gray-100);
+}
+.ms-filter {
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  color: var(--gray-700);
+  outline: none;
+}
+.ms-filter:focus { border-color: var(--indigo-300); }
+.ms-list {
+  overflow-y: auto;
+  flex: 1;
+  padding: 4px;
+}
+.ms-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.ms-opt:hover { background: var(--gray-50); }
+.ms-opt .ms-cb {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--gray-300);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.ms-opt.checked .ms-cb {
+  background: var(--indigo-600);
+  border-color: var(--indigo-600);
+}
+.ms-opt.checked .ms-cb svg { display: block; }
+.ms-opt .ms-cb svg {
+  width: 12px;
+  height: 12px;
+  color: #fff;
+  display: none;
+}
+.ms-opt span {
+  font-size: 0.867rem;
+  color: var(--gray-700);
+}
+.ms-opt.checked span { color: var(--gray-900); font-weight: 500; }
+/* Percentage bars */
+.pct-wrap { position: relative; }
+.pct-bar {
+  height: 4px;
+  background: var(--gray-100);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.pct-fill { height: 100%; border-radius: 2px; transition: width 0.2s; }
+.pct-fill.easy { background: var(--green-500); }
+.pct-fill.medium { background: var(--blue-500); }
+.pct-fill.hard { background: var(--red-500); }
+.diff-total {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--gray-50);
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+.diff-total-label { color: var(--gray-500); font-weight: 500; }
+.diff-total-val { font-weight: 700; color: var(--gray-800); min-width: 40px; }
+.diff-total-status { font-weight: 600; margin-left: auto; }
+.diff-total-status.ok { color: var(--green-600); }
+.diff-total-status.err { color: var(--red-500); }
+/* Toggle switch */
+.toggle-group { width: 100%; }
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.toggle-label { font-size: 0.933rem; font-weight: 600; color: var(--gray-800); }
+.toggle-desc { font-size: 0.8rem; color: var(--gray-400); margin-top: 2px; }
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.toggle input { display: none; }
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--gray-200);
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  transition: transform 0.2s;
+}
+.toggle input:checked + .toggle-track { background: var(--indigo-600); }
+.toggle input:checked + .toggle-track .toggle-thumb { transform: translateX(20px); }
+.variant-count-wrap {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.variant-count-wrap label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+.variant-selector {
+  display: flex;
+  gap: 8px;
+}
+.v-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  background: #fff;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.v-btn:hover { border-color: var(--gray-300); color: var(--gray-800); }
+.v-btn.active { background: var(--indigo-50); border-color: var(--indigo-300); color: var(--indigo-700); font-weight: 600; }
+/* Custom checkboxes */
+.checkbox-grid {
+  display: grid;
+  gap: 10px;
+}
+.checkbox-grid.four { grid-template-columns: repeat(2, 1fr); }
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 10px 12px;
+  border: 1px solid var(--gray-100);
+  border-radius: 8px;
+  transition: all 0.15s;
+}
+.custom-checkbox:hover { background: var(--gray-50); }
+.custom-checkbox input { display: none; }
+.check-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--gray-300);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.check-box svg { width: 12px; height: 12px; color: #fff; display: none; }
+.custom-checkbox input:checked + .check-box { background: var(--indigo-600); border-color: var(--indigo-600); }
+.custom-checkbox input:checked + .check-box svg { display: block; }
+.custom-checkbox span:last-child {
+  font-size: 0.867rem;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+.custom-checkbox input:checked ~ span:last-child { color: var(--gray-900); }
+/* Submit button */
+.gen-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 24px;
+  background: var(--indigo-600);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: -0.2px;
+}
+.gen-submit:hover { background: var(--indigo-700); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(79,70,229,0.25); }
+.gen-submit:active { transform: translateY(0); }
+.gen-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+.gen-submit.loading svg { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+/* Progress overlay */
+.gen-progress {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+}
+.gen-progress.show { display: flex; }
+.gen-progress-ring {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 4px solid var(--gray-100);
+  border-top-color: var(--indigo-600);
+  animation: spin 0.8s linear infinite;
+}
+.gen-progress h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+.gen-progress p {
+  font-size: 0.867rem;
+  color: var(--gray-400);
+  margin-top: -12px;
+}
+.gen-progress-bar {
+  width: 300px;
+  height: 6px;
+  background: var(--gray-100);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.gen-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--indigo-500), var(--indigo-600));
+  border-radius: 3px;
+  width: 0%;
+  transition: width 0.3s;
+}
+/* Summary sidebar */
+.gen-summary {
+  position: sticky;
+  top: calc(var(--topnav-height) + 32px);
+}
+.gen-summary-card {
+  background: #fff;
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 20px;
+}
+.gen-summary-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray-100);
+  margin-bottom: 16px;
+}
+.gen-summary-head h3 {
+  font-size: 0.933rem;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+.gen-summary-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sum-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sum-label {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+.sum-val {
+  font-size: 0.867rem;
+  color: var(--gray-800);
+  font-weight: 600;
+  text-align: right;
+}
+.sum-divider {
+  height: 1px;
+  background: var(--gray-100);
+  margin: 4px 0;
+}
+/* Page navigation */
+.page-content { display: none; }
+.page-content.active { display: block; }
+/* Responsive */
+@media (max-width: 1200px) {
+  .gen-layout { grid-template-columns: 1fr; }
+  .gen-summary { position: static; }
+  .gen-row.five { flex-wrap: wrap; }
+  .gen-row.five > * { flex: 1 1 30%; min-width: 120px; }
+}
+@media (max-width: 768px) {
+  .gen-row.three { flex-direction: column; }
+  .gen-row.five > * { flex: 1 1 45%; }
+  .checkbox-grid.four { grid-template-columns: 1fr; }
+  .gen-card { padding: 16px; }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -1149,7 +1759,7 @@ tbody td .subject {
   </div>
 
   <nav class="sidebar-nav">
-    <a href="#" class="nav-item active">
+    <a href="#" class="nav-item active" data-page="dashboard">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
       <span>Dashboard</span>
     </a>
@@ -1157,7 +1767,7 @@ tbody td .subject {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
       <span>Question Bank</span>
     </a>
-    <a href="#" class="nav-item">
+    <a href="#" class="nav-item" data-page="generate-exam">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
       <span>Generate Exam</span>
     </a>
@@ -1220,6 +1830,8 @@ tbody td .subject {
 
 <!-- ===== MAIN CONTENT ===== -->
 <main class="main-content">
+
+  <div id="page-dashboard">
 
   <!-- Welcome -->
   <section class="welcome-section">
@@ -1491,13 +2103,313 @@ tbody td .subject {
     </section>
   </div>
 
+</div><!-- /page-dashboard -->
+
+<!-- ===== PAGE: GENERATE EXAM ===== -->
+<div id="page-generate-exam" style="display:none;">
+
+  <!-- Page Header -->
+  <div class="gen-header">
+    <div>
+      <h2>Generate Exam</h2>
+      <p>Configure a new examination with AI-powered question generation</p>
+    </div>
+  </div>
+
+  <div class="gen-layout">
+
+    <!-- ===== FORM COLUMN ===== -->
+    <div class="gen-form">
+
+      <!-- SECTION 1 -->
+      <section class="gen-card">
+        <div class="gen-card-head">
+          <span class="gen-step">1</span>
+          <div>
+            <h3>Subject & Curriculum</h3>
+            <p>Select the subject, board, and class level</p>
+          </div>
+        </div>
+        <div class="gen-row three">
+          <div class="gen-field">
+            <label>Subject <span class="req">*</span></label>
+            <div class="ss-wrap" id="subjectWrap">
+              <input type="text" class="ss-input" id="subjectInput" placeholder="Search subject..." autocomplete="off">
+              <svg class="ss-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              <div class="ss-drop" id="subjectDrop">
+                <div class="ss-opt" data-val="Physics">Physics</div>
+                <div class="ss-opt" data-val="Chemistry">Chemistry</div>
+                <div class="ss-opt" data-val="Mathematics">Mathematics</div>
+                <div class="ss-opt" data-val="Biology">Biology</div>
+                <div class="ss-opt" data-val="English">English</div>
+                <div class="ss-opt" data-val="Computer Science">Computer Science</div>
+              </div>
+            </div>
+            <input type="hidden" id="subjectVal">
+          </div>
+          <div class="gen-field">
+            <label>Board <span class="req">*</span></label>
+            <select class="gen-select" id="boardSelect">
+              <option value="CBSE">CBSE</option>
+              <option value="ICSE">ICSE</option>
+              <option value="State Board">State Board</option>
+            </select>
+          </div>
+          <div class="gen-field">
+            <label>Class <span class="req">*</span></label>
+            <select class="gen-select" id="classSelect">
+              <option value="">Select class</option>
+              <option value="6">Class 6</option>
+              <option value="7">Class 7</option>
+              <option value="8">Class 8</option>
+              <option value="9">Class 9</option>
+              <option value="10">Class 10</option>
+              <option value="11">Class 11</option>
+              <option value="12">Class 12</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2 -->
+      <section class="gen-card">
+        <div class="gen-card-head">
+          <span class="gen-step">2</span>
+          <div>
+            <h3>Chapter Selection</h3>
+            <p>Choose one or more chapters to include</p>
+          </div>
+        </div>
+        <div class="gen-field">
+          <div class="ms-wrap" id="chapterWrap">
+            <div class="ms-trigger" id="chapterTrigger">
+              <div class="ms-badges" id="chapterBadges">
+                <span class="ms-placeholder">Select chapters...</span>
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+            <div class="ms-drop" id="chapterDrop">
+              <div class="ms-search">
+                <input type="text" class="ms-filter" id="chapterFilter" placeholder="Filter chapters..." autocomplete="off">
+              </div>
+              <div class="ms-list" id="chapterList">
+                <!-- populated by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3 -->
+      <section class="gen-card">
+        <div class="gen-card-head">
+          <span class="gen-step">3</span>
+          <div>
+            <h3>Exam Configuration</h3>
+            <p>Set the basic parameters for the exam</p>
+          </div>
+        </div>
+        <div class="gen-row three">
+          <div class="gen-field">
+            <label>Total Marks</label>
+            <input type="number" class="gen-input" id="totalMarks" value="100" min="10" max="500">
+          </div>
+          <div class="gen-field">
+            <label>Duration (minutes)</label>
+            <input type="number" class="gen-input" id="examDuration" value="180" min="30" max="600">
+          </div>
+          <div class="gen-field">
+            <label>No. of Questions</label>
+            <input type="number" class="gen-input" id="numQuestions" value="40" min="5" max="200">
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4 -->
+      <section class="gen-card">
+        <div class="gen-card-head">
+          <span class="gen-step">4</span>
+          <div>
+            <h3>Difficulty Distribution</h3>
+            <p>Allocate the percentage split across difficulty levels</p>
+          </div>
+        </div>
+        <div class="gen-row three">
+          <div class="gen-field">
+            <label>Easy (%)</label>
+            <div class="pct-wrap">
+              <input type="number" class="gen-input diff-input" id="diffEasy" value="30" min="0" max="100">
+              <div class="pct-bar"><div class="pct-fill easy" id="easyBar" style="width:30%"></div></div>
+            </div>
+          </div>
+          <div class="gen-field">
+            <label>Medium (%)</label>
+            <div class="pct-wrap">
+              <input type="number" class="gen-input diff-input" id="diffMedium" value="50" min="0" max="100">
+              <div class="pct-bar"><div class="pct-fill medium" id="mediumBar" style="width:50%"></div></div>
+            </div>
+          </div>
+          <div class="gen-field">
+            <label>Hard (%)</label>
+            <div class="pct-wrap">
+              <input type="number" class="gen-input diff-input" id="diffHard" value="20" min="0" max="100">
+              <div class="pct-bar"><div class="pct-fill hard" id="hardBar" style="width:20%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="diff-total" id="diffTotal">
+          <span class="diff-total-label">Total</span>
+          <span class="diff-total-val" id="diffTotalVal">100%</span>
+          <span class="diff-total-status ok" id="diffStatus">&#10003; Balanced</span>
+        </div>
+      </section>
+
+      <!-- SECTION 5 -->
+      <section class="gen-card">
+        <div class="gen-card-head">
+          <span class="gen-step">5</span>
+          <div>
+            <h3>Question Type Distribution</h3>
+            <p>Allocate the percentage split across question types</p>
+          </div>
+        </div>
+        <div class="gen-row five">
+          <div class="gen-field">
+            <label>MCQ (%)</label>
+            <input type="number" class="gen-input qt-input" id="qtMCQ" value="30" min="0" max="100">
+          </div>
+          <div class="gen-field">
+            <label>Short Answer (%)</label>
+            <input type="number" class="gen-input qt-input" id="qtShort" value="25" min="0" max="100">
+          </div>
+          <div class="gen-field">
+            <label>Long Answer (%)</label>
+            <input type="number" class="gen-input qt-input" id="qtLong" value="20" min="0" max="100">
+          </div>
+          <div class="gen-field">
+            <label>Case Study (%)</label>
+            <input type="number" class="gen-input qt-input" id="qtCase" value="10" min="0" max="100">
+          </div>
+          <div class="gen-field">
+            <label>Numerical (%)</label>
+            <input type="number" class="gen-input qt-input" id="qtNumerical" value="15" min="0" max="100">
+          </div>
+        </div>
+        <div class="diff-total" id="qtTotal">
+          <span class="diff-total-label">Total</span>
+          <span class="diff-total-val" id="qtTotalVal">100%</span>
+          <span class="diff-total-status ok" id="qtStatus">&#10003; Balanced</span>
+        </div>
+      </section>
+
+      <!-- SECTION 6 -->
+      <section class="gen-card">
+        <div class="gen-card-head">
+          <span class="gen-step">6</span>
+          <div>
+            <h3>Variant Generation</h3>
+            <p>Create multiple variants to prevent academic dishonesty</p>
+          </div>
+        </div>
+        <div class="gen-row">
+          <div class="toggle-group">
+            <div class="toggle-row">
+              <div>
+                <div class="toggle-label">Generate Multiple Variants</div>
+                <div class="toggle-desc">Create shuffled versions of the same exam</div>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="variantToggle">
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+            </div>
+            <div class="variant-count-wrap" id="variantCountWrap" style="display:none;">
+              <label>Number of Variants</label>
+              <div class="variant-selector">
+                <button class="v-btn" data-v="2">A, B</button>
+                <button class="v-btn active" data-v="3">A, B, C</button>
+                <button class="v-btn" data-v="4">A, B, C, D</button>
+              </div>
+              <input type="hidden" id="variantCount" value="3">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 7 -->
+      <section class="gen-card">
+        <div class="gen-card-head">
+          <span class="gen-step">7</span>
+          <div>
+            <h3>Output Settings</h3>
+            <p>Choose what to generate alongside the question paper</p>
+          </div>
+        </div>
+        <div class="checkbox-grid four">
+          <label class="custom-checkbox">
+            <input type="checkbox" checked>
+            <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Question Paper</span>
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox" checked>
+            <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Answer Key</span>
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox">
+            <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Marking Scheme</span>
+          </label>
+          <label class="custom-checkbox">
+            <input type="checkbox" checked>
+            <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>PDF Format</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- SECTION 8: Generate Button -->
+      <button class="gen-submit" id="genSubmitBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Generate Exam with AI
+      </button>
+
+    </div><!-- /gen-form -->
+
+    <!-- ===== SUMMARY SIDEBAR ===== -->
+    <div class="gen-summary">
+      <div class="gen-summary-card" id="summaryCard">
+        <div class="gen-summary-head">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--indigo-600)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <h3>Exam Summary</h3>
+        </div>
+        <div class="gen-summary-body" id="summaryBody">
+          <div class="sum-row"><span class="sum-label">Board</span><span class="sum-val" id="sumBoard">CBSE</span></div>
+          <div class="sum-row"><span class="sum-label">Class</span><span class="sum-val" id="sumClass">—</span></div>
+          <div class="sum-row"><span class="sum-label">Subject</span><span class="sum-val" id="sumSubject">—</span></div>
+          <div class="sum-row"><span class="sum-label">Chapters</span><span class="sum-val" id="sumChapters">—</span></div>
+          <div class="sum-divider"></div>
+          <div class="sum-row"><span class="sum-label">Total Marks</span><span class="sum-val" id="sumMarks">100</span></div>
+          <div class="sum-row"><span class="sum-label">Duration</span><span class="sum-val" id="sumDuration">180 min</span></div>
+          <div class="sum-row"><span class="sum-label">Questions</span><span class="sum-val" id="sumQuestions">40</span></div>
+          <div class="sum-divider"></div>
+          <div class="sum-row"><span class="sum-label">Difficulty</span><span class="sum-val" id="sumDifficulty">30 / 50 / 20</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /gen-layout -->
+
+</div><!-- /page-generate-exam -->
+
 </main>
 
 </div><!-- /app-view -->
 
 <script>
-const CLIENT_ID = '492689243532-dj5cn2lt9l7e69jid0v7b1noi4b0vu6a.apps.googleusercontent.com';
-const STORAGE_KEY = 'edora-auth';
+const CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+const STORAGE_KEY = 'edint_auth';
 
 // ===== DOM refs =====
 const loginView = document.getElementById('loginView');
@@ -1626,13 +2538,394 @@ function toggleMenu() {
 menuBtn.addEventListener('click', toggleMenu);
 overlay.addEventListener('click', toggleMenu);
 
+// ===== PAGE ROUTING =====
+const pageDashboard = document.getElementById('page-dashboard');
+const pageGenerateExam = document.getElementById('page-generate-exam');
+const pageTitleEl = document.querySelector('.nav-left h1');
+const pageNames = {
+  dashboard: 'Dashboard',
+  'generate-exam': 'Generate Exam',
+};
+
+function navigateTo(page) {
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  pageDashboard.style.display = 'none';
+  pageGenerateExam.style.display = 'none';
+
+  if (page === 'dashboard') {
+    pageDashboard.style.display = 'block';
+    document.querySelector('.nav-item[data-page="dashboard"]')?.classList.add('active');
+    pageTitleEl.textContent = 'Dashboard';
+  } else if (page === 'generate-exam') {
+    pageGenerateExam.style.display = 'block';
+    document.querySelector('.nav-item[data-page="generate-exam"]')?.classList.add('active');
+    pageTitleEl.textContent = 'Generate Exam';
+  }
+
+  if (window.innerWidth <= 768) {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+  }
+}
+
 document.querySelectorAll('.nav-item').forEach(item => {
   item.addEventListener('click', function(e) {
-    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-    this.classList.add('active');
-    if (window.innerWidth <= 768) toggleMenu();
+    e.preventDefault();
+    const page = this.dataset.page || 'dashboard';
+    navigateTo(page);
   });
 });
+
+document.querySelector('.action-card')?.addEventListener('click', function() {
+  navigateTo('generate-exam');
+});
+
+// ===== SEARCHABLE SELECT (Subject) =====
+const subjectInput = document.getElementById('subjectInput');
+const subjectDrop = document.getElementById('subjectDrop');
+const subjectVal = document.getElementById('subjectVal');
+const subjectOpts = subjectDrop.querySelectorAll('.ss-opt');
+
+subjectInput.addEventListener('focus', function() {
+  subjectDrop.classList.add('open');
+  filterSubjectOptions();
+});
+
+subjectInput.addEventListener('input', function() {
+  filterSubjectOptions();
+});
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#subjectWrap')) {
+    subjectDrop.classList.remove('open');
+  }
+});
+
+function filterSubjectOptions() {
+  const q = subjectInput.value.toLowerCase();
+  let found = false;
+  subjectOpts.forEach(opt => {
+    const match = opt.textContent.toLowerCase().includes(q);
+    opt.style.display = match ? '' : 'none';
+    if (match) found = true;
+  });
+  let empty = subjectDrop.querySelector('.ss-empty');
+  if (!found) {
+    if (!empty) {
+      empty = document.createElement('div');
+      empty.className = 'ss-empty';
+      empty.textContent = 'No subjects found';
+      subjectDrop.appendChild(empty);
+    }
+    empty.style.display = '';
+  } else if (empty) {
+    empty.style.display = 'none';
+  }
+}
+
+subjectOpts.forEach(opt => {
+  opt.addEventListener('click', function() {
+    subjectOpts.forEach(o => o.classList.remove('sel'));
+    this.classList.add('sel');
+    subjectInput.value = this.textContent;
+    subjectInput.classList.add('selected');
+    subjectVal.value = this.dataset.val;
+    subjectDrop.classList.remove('open');
+    updateSummary();
+    updateChapterList();
+  });
+});
+
+// ===== MULTI-SELECT CHAPTERS =====
+const chapterData = {
+  Physics: ['Physical World', 'Units & Measurements', 'Motion in a Straight Line', 'Motion in a Plane', 'Laws of Motion', 'Work, Energy & Power', 'System of Particles', 'Gravitation', 'Mechanical Properties of Solids', 'Mechanical Properties of Fluids', 'Thermal Properties', 'Thermodynamics', 'Kinetic Theory', 'Oscillations', 'Waves', 'Electric Charges & Fields', 'Electrostatic Potential', 'Current Electricity', 'Moving Charges', 'Magnetism & Matter', 'Electromagnetic Induction', 'Alternating Current', 'Electromagnetic Waves', 'Ray Optics', 'Wave Optics', 'Dual Nature of Radiation', 'Atoms', 'Nuclei', 'Semiconductor Electronics'],
+  Chemistry: ['Some Basic Concepts', 'Structure of Atom', 'Classification of Elements', 'Chemical Bonding', 'States of Matter', 'Thermodynamics', 'Equilibrium', 'Redox Reactions', 'Hydrogen', 's-Block Elements', 'p-Block Elements', 'Organic Chemistry', 'Hydrocarbons', 'Environmental Chemistry', 'Solid State', 'Solutions', 'Electrochemistry', 'Chemical Kinetics', 'Surface Chemistry', 'General Principles of Metallurgy', 'd & f Block Elements', 'Coordination Compounds', 'Haloalkanes & Haloarenes', 'Alcohols, Phenols & Ethers', 'Aldehydes, Ketones & Carboxylic Acids', 'Amines', 'Biomolecules', 'Polymers', 'Chemistry in Everyday Life'],
+  Mathematics: ['Sets', 'Relations & Functions', 'Trigonometric Functions', 'Principle of Mathematical Induction', 'Complex Numbers', 'Linear Inequalities', 'Permutations & Combinations', 'Binomial Theorem', 'Sequences & Series', 'Straight Lines', 'Conic Sections', 'Introduction to 3D Geometry', 'Limits & Derivatives', 'Statistics', 'Probability', 'Relations & Functions (II)', 'Inverse Trigonometric Functions', 'Matrices', 'Determinants', 'Continuity & Differentiability', 'Application of Derivatives', 'Integrals', 'Application of Integrals', 'Differential Equations', 'Vector Algebra', 'Three Dimensional Geometry', 'Linear Programming'],
+  Biology: ['The Living World', 'Biological Classification', 'Plant Kingdom', 'Animal Kingdom', 'Morphology of Flowering Plants', 'Anatomy of Flowering Plants', 'Structural Organisation in Animals', 'Cell: The Unit of Life', 'Biomolecules', 'Cell Cycle & Cell Division', 'Transport in Plants', 'Mineral Nutrition', 'Photosynthesis', 'Respiration in Plants', 'Plant Growth & Development', 'Reproduction in Organisms', 'Sexual Reproduction in Flowering Plants', 'Human Reproduction', 'Reproductive Health', 'Principles of Inheritance', 'Molecular Basis of Inheritance', 'Evolution', 'Human Health & Disease', 'Microbes in Human Welfare', 'Biotechnology: Principles & Processes', 'Biotechnology & Its Applications', 'Organisms & Populations', 'Ecosystem', 'Biodiversity & Conservation', 'Environmental Issues'],
+  English: ['Reading Comprehension', 'Writing Skills', 'Grammar & Usage', 'Literature: Prose', 'Literature: Poetry', 'Literature: Drama', 'Creative Writing', 'Letter Writing', 'Essay Writing', 'Report Writing', 'Speech Writing', 'Debate Writing', 'Article Writing', 'Notice Writing', 'Advertisement Writing', 'Poster Writing', 'Note Making', 'Summary Writing', 'Dialogue Writing', 'Story Writing'],
+  'Computer Science': ['Computer System Overview', 'Data Representation', 'Boolean Logic', 'Computer Networks', 'Programming Fundamentals', 'Data Structures', 'Object-Oriented Programming', 'Database Management Systems', 'SQL', 'Number System', 'Encoding Schemes', 'Emerging Trends', 'Computational Thinking', 'Python Programming', 'Functions', 'File Handling', 'Exception Handling', 'Data Science Basics', 'Cyber Security', 'Project Work'],
+};
+
+let selectedChapters = [];
+
+function updateChapterList() {
+  const subject = subjectVal.value;
+  const list = document.getElementById('chapterList');
+  const chapters = chapterData[subject] || [];
+
+  if (!subject || chapters.length === 0) {
+    list.innerHTML = '<div class="ss-empty">Select a subject first</div>';
+    return;
+  }
+
+  selectedChapters = selectedChapters.filter(ch => chapters.includes(ch));
+
+  list.innerHTML = chapters.map(ch => {
+    const checked = selectedChapters.includes(ch);
+    return `<div class="ms-opt ${checked ? 'checked' : ''}" data-ch="${ch}">
+      <div class="ms-cb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span>${ch}</span>
+    </div>`;
+  }).join('');
+
+  list.querySelectorAll('.ms-opt').forEach(opt => {
+    opt.addEventListener('click', function() {
+      const ch = this.dataset.ch;
+      const idx = selectedChapters.indexOf(ch);
+      if (idx > -1) {
+        selectedChapters.splice(idx, 1);
+        this.classList.remove('checked');
+      } else {
+        selectedChapters.push(ch);
+        this.classList.add('checked');
+      }
+      renderChapterBadges();
+      updateSummary();
+    });
+  });
+
+  renderChapterBadges();
+}
+
+const chapterTrigger = document.getElementById('chapterTrigger');
+const chapterDrop = document.getElementById('chapterDrop');
+const chapterFilter = document.getElementById('chapterFilter');
+
+chapterTrigger.addEventListener('click', function(e) {
+  if (e.target.closest('.ms-badge-remove')) return;
+  chapterDrop.classList.toggle('open');
+  if (chapterDrop.classList.contains('open')) {
+    chapterFilter.focus();
+    filterChapterOptions();
+  }
+});
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#chapterWrap')) {
+    chapterDrop.classList.remove('open');
+  }
+});
+
+chapterFilter.addEventListener('input', filterChapterOptions);
+
+function filterChapterOptions() {
+  const q = chapterFilter.value.toLowerCase();
+  document.querySelectorAll('#chapterList .ms-opt').forEach(opt => {
+    opt.style.display = opt.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+}
+
+function renderChapterBadges() {
+  const container = document.getElementById('chapterBadges');
+  if (selectedChapters.length === 0) {
+    container.innerHTML = '<span class="ms-placeholder">Select chapters...</span>';
+    updateSummary();
+    return;
+  }
+  container.innerHTML = selectedChapters.map(ch =>
+    `<span class="ms-badge">${ch} <button class="ms-badge-remove" data-ch="${ch}">&times;</button></span>`
+  ).join('');
+
+  container.querySelectorAll('.ms-badge-remove').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const ch = this.dataset.ch;
+      selectedChapters = selectedChapters.filter(c => c !== ch);
+      renderChapterBadges();
+      document.querySelectorAll('#chapterList .ms-opt').forEach(opt => {
+        if (opt.dataset.ch === ch) opt.classList.remove('checked');
+      });
+      updateSummary();
+    });
+  });
+}
+
+// ===== DIFFICULTY DISTRIBUTION =====
+function updateDifficulty() {
+  const easy = parseInt(document.getElementById('diffEasy').value) || 0;
+  const medium = parseInt(document.getElementById('diffMedium').value) || 0;
+  const hard = parseInt(document.getElementById('diffHard').value) || 0;
+  const total = easy + medium + hard;
+
+  document.getElementById('easyBar').style.width = easy + '%';
+  document.getElementById('mediumBar').style.width = medium + '%';
+  document.getElementById('hardBar').style.width = hard + '%';
+
+  document.getElementById('diffTotalVal').textContent = total + '%';
+
+  const status = document.getElementById('diffStatus');
+  if (total === 100) {
+    status.className = 'diff-total-status ok';
+    status.textContent = '\u2713 Balanced';
+  } else {
+    status.className = 'diff-total-status err';
+    status.textContent = total > 100 ? '\u2717 Exceeds 100%' : '\u2717 Needs ' + (100 - total) + '% more';
+  }
+
+  updateSummary();
+}
+
+document.querySelectorAll('.diff-input').forEach(inp => {
+  inp.addEventListener('input', updateDifficulty);
+});
+
+// ===== QUESTION TYPE DISTRIBUTION =====
+function updateQT() {
+  const vals = ['qtMCQ', 'qtShort', 'qtLong', 'qtCase', 'qtNumerical'].map(id => parseInt(document.getElementById(id).value) || 0);
+  const total = vals.reduce((a, b) => a + b, 0);
+
+  document.getElementById('qtTotalVal').textContent = total + '%';
+  const status = document.getElementById('qtStatus');
+  if (total === 100) {
+    status.className = 'diff-total-status ok';
+    status.textContent = '\u2713 Balanced';
+  } else {
+    status.className = 'diff-total-status err';
+    status.textContent = total > 100 ? '\u2717 Exceeds 100%' : '\u2717 Needs ' + (100 - total) + '% more';
+  }
+
+  updateSummary();
+}
+
+document.querySelectorAll('.qt-input').forEach(inp => {
+  inp.addEventListener('input', updateQT);
+});
+
+// ===== VARIANT TOGGLE =====
+const variantToggle = document.getElementById('variantToggle');
+const variantCountWrap = document.getElementById('variantCountWrap');
+
+variantToggle.addEventListener('change', function() {
+  variantCountWrap.style.display = this.checked ? 'flex' : 'none';
+  updateSummary();
+});
+
+document.querySelectorAll('.v-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.v-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('variantCount').value = this.dataset.v;
+    updateSummary();
+  });
+});
+
+// ===== SUMMARY UPDATE =====
+function updateSummary() {
+  const board = document.getElementById('boardSelect').value;
+  const cls = document.getElementById('classSelect').value;
+  const subject = subjectVal.value || '—';
+  const marks = document.getElementById('totalMarks').value || '—';
+  const dur = document.getElementById('examDuration').value || '—';
+  const qs = document.getElementById('numQuestions').value || '—';
+  const chCount = selectedChapters.length;
+  const vars = variantToggle.checked ? (document.getElementById('variantCount').value || '3') + ' variants' : 'None';
+
+  const easy = document.getElementById('diffEasy').value || '0';
+  const medium = document.getElementById('diffMedium').value || '0';
+  const hard = document.getElementById('diffHard').value || '0';
+
+  document.getElementById('sumBoard').textContent = board;
+  document.getElementById('sumClass').textContent = cls ? 'Class ' + cls : '—';
+  document.getElementById('sumSubject').textContent = subject;
+  document.getElementById('sumChapters').textContent = chCount > 0 ? chCount + ' selected' : '—';
+  document.getElementById('sumMarks').textContent = marks;
+  document.getElementById('sumDuration').textContent = dur + ' min';
+  document.getElementById('sumQuestions').textContent = qs;
+  document.getElementById('sumDifficulty').textContent = easy + ' / ' + medium + ' / ' + hard;
+}
+
+[
+  'boardSelect', 'classSelect', 'totalMarks', 'examDuration', 'numQuestions',
+  'diffEasy', 'diffMedium', 'diffHard',
+  'qtMCQ', 'qtShort', 'qtLong', 'qtCase', 'qtNumerical'
+].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', updateSummary);
+});
+
+document.getElementById('boardSelect')?.addEventListener('change', updateSummary);
+
+// ===== GENERATE BUTTON =====
+const genBtn = document.getElementById('genSubmitBtn');
+let progressOverlay = null;
+
+genBtn.addEventListener('click', function() {
+  if (!subjectVal.value) {
+    subjectInput.focus();
+    subjectInput.style.borderColor = 'var(--red-500)';
+    setTimeout(() => subjectInput.style.borderColor = '', 2000);
+    return;
+  }
+  if (!document.getElementById('classSelect').value) {
+    document.getElementById('classSelect').focus();
+    return;
+  }
+
+  this.disabled = true;
+  this.classList.add('loading');
+  this.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Generating...';
+
+  // Create progress overlay
+  if (!progressOverlay) {
+    progressOverlay = document.createElement('div');
+    progressOverlay.className = 'gen-progress';
+    progressOverlay.innerHTML = `
+      <div class="gen-progress-ring"></div>
+      <h3>Generating Your Exam</h3>
+      <p>AI is crafting questions based on your configuration</p>
+      <div class="gen-progress-bar"><div class="gen-progress-fill" id="progressFill"></div></div>
+    `;
+    document.body.appendChild(progressOverlay);
+  }
+  progressOverlay.classList.add('show');
+
+  const fill = document.getElementById('progressFill');
+  let pct = 0;
+  const steps = [
+    'Analyzing curriculum requirements...',
+    'Generating questions from chapter bank...',
+    'Applying difficulty distribution...',
+    'Balancing question types...',
+    'Creating exam variants...',
+    'Preparing answer key & marking scheme...',
+    'Finalizing output...',
+  ];
+
+  let stepIdx = 0;
+  const progP = progressOverlay.querySelector('p');
+
+  const interval = setInterval(() => {
+    pct += Math.random() * 8 + 3;
+    if (pct > 100) pct = 100;
+    fill.style.width = pct + '%';
+
+    if (pct > (stepIdx + 1) * 14 && stepIdx < steps.length - 1) {
+      stepIdx++;
+      progP.textContent = steps[stepIdx];
+    }
+
+    if (pct >= 100) {
+      clearInterval(interval);
+      progP.textContent = 'Exam generated successfully!';
+      setTimeout(() => {
+        progressOverlay.classList.remove('show');
+        this.disabled = false;
+        this.classList.remove('loading');
+        this.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Generate Exam with AI';
+        fill.style.width = '0%';
+        navigateTo('dashboard');
+      }, 800);
+    }
+  }, 300);
+});
+
+// ===== GENERATE EXAM INIT =====
+(function initGenerateExam() {
+  updateDifficulty();
+  updateQT();
+  updateSummary();
+  updateChapterList();
+})();
 
 // ===== Init =====
 (function init() {
@@ -1642,7 +2935,7 @@ document.querySelectorAll('.nav-item').forEach(item => {
     return;
   }
 
-  if (CLIENT_ID && CLIENT_ID !== '492689243532-dj5cn2lt9l7e69jid0v7b1noi4b0vu6a.apps.googleusercontent.com') {
+  if (CLIENT_ID && CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
     window.google?.accounts?.id?.initialize({
       client_id: CLIENT_ID,
       callback: handleCredentialResponse,
@@ -1658,7 +2951,7 @@ document.querySelectorAll('.nav-item').forEach(item => {
       width: 320,
     });
   } else {
-    googleBtn.innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;padding:14px 0;">Google Sign-In requires a valid OAuth Client ID.<br>See README for setup instructions.</p>';
+    googleBtn.innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;padding:14px 0;">Google Sign-In requires a valid OAuth Client ID.<br>See README for setup instructions, or use Demo mode below.</p>';
   }
 })();
 </script>
