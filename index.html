@@ -49,6 +49,54 @@
   --sidebar-width: 260px;
   --topnav-height: 64px;
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --bg-page: var(--gray-50);
+  --bg-surface: #fff;
+  --bg-topnav: rgba(255,255,255,0.85);
+  --bg-inset: var(--gray-50);
+  --border-color: var(--gray-100);
+  --border-strong: var(--gray-200);
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-500);
+  --text-tertiary: var(--gray-400);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-lg: 0 4px 24px rgba(0,0,0,0.04);
+  --shadow-drop: 0 8px 24px rgba(0,0,0,0.08);
+  --bg-overlay: rgba(255,255,255,0.92);
+  --thumb-bg: #fff;
+}
+
+html.dark-mode {
+  --bg-page: #0f1117;
+  --bg-surface: #1a1d27;
+  --bg-topnav: rgba(15,17,23,0.85);
+  --bg-inset: #252836;
+  --border-color: #252836;
+  --border-strong: #2d3041;
+  --bg-dots: #252836;
+  --text-primary: #EDEDEE;
+  --text-secondary: #9CA3AF;
+  --text-tertiary: #6B7280;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 4px 24px rgba(0,0,0,0.3);
+  --shadow-drop: 0 8px 24px rgba(0,0,0,0.4);
+  --bg-overlay: rgba(15,17,23,0.92);
+  --gray-50: #1a1d27;
+  --gray-100: #252836;
+  --gray-200: #2d3041;
+  --gray-300: #4B5563;
+  --gray-400: #6B7280;
+  --gray-500: #9CA3AF;
+  --gray-600: #D1D5DB;
+  --gray-700: #E5E7EB;
+  --gray-800: #F3F4F6;
+  --gray-900: #EDEDEE;
+  --green-50: #064E3B;
+  --yellow-50: #78350F;
+  --blue-50: #1E3A5F;
+  --red-50: #7F1D1D;
+  --indigo-50: #1E1B4B;
 }
 
 html {
@@ -57,8 +105,8 @@ html {
 
 body {
   font-family: var(--font);
-  background: var(--gray-50);
-  color: var(--gray-900);
+  background: var(--bg-page);
+  color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -71,7 +119,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   padding: 24px;
-  background: var(--gray-50);
+  background: var(--bg-page);
   position: relative;
 }
 
@@ -83,15 +131,38 @@ body {
   opacity: 0.5;
 }
 
+html.dark-mode .login-bg-dots {
+  background-image: radial-gradient(var(--bg-dots) 1px, transparent 1px);
+}
+
+html.dark-mode .search-box:focus-within {
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.25);
+}
+
+html.dark-mode ::-webkit-scrollbar-thumb {
+  background: var(--gray-200);
+}
+
+html.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-300);
+}
+
+html.dark-mode .gen-select:focus,
+html.dark-mode .gen-input:focus,
+html.dark-mode .ss-input:focus,
+html.dark-mode .ms-trigger:focus-within {
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.25);
+}
+
 .login-card {
   position: relative;
-  background: #fff;
-  border: 1px solid var(--gray-100);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 48px 40px 40px;
   width: 100%;
   max-width: 400px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+  box-shadow: var(--shadow-lg);
   text-align: center;
 }
 
@@ -121,7 +192,7 @@ body {
   font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.5px;
-  color: var(--gray-900);
+  color: var(--text-primary);
 }
 
 .login-logo .logo-text span {
@@ -131,19 +202,19 @@ body {
 .login-card h2 {
   font-size: 1.2rem;
   font-weight: 650;
-  color: var(--gray-900);
+  color: var(--text-primary);
   margin-bottom: 6px;
   letter-spacing: -0.3px;
 }
 
 .login-card .login-subtitle {
   font-size: 0.867rem;
-  color: var(--gray-400);
+  color: var(--text-tertiary);
   margin-bottom: 32px;
 }
 
 .login-card .login-subtitle strong {
-  color: var(--gray-500);
+  color: var(--text-secondary);
   font-weight: 600;
 }
 
@@ -241,8 +312,8 @@ body.authenticated .app-view {
   left: 0;
   width: var(--sidebar-width);
   height: 100vh;
-  background: #fff;
-  border-right: 1px solid var(--gray-100);
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   z-index: 100;
@@ -253,7 +324,7 @@ body.authenticated .app-view {
   align-items: center;
   gap: 12px;
   padding: 20px 20px 24px;
-  border-bottom: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .logo-mark {
@@ -275,7 +346,7 @@ body.authenticated .app-view {
   font-size: 20px;
   font-weight: 700;
   letter-spacing: -0.5px;
-  color: var(--gray-900);
+  color: var(--text-primary);
 }
 
 .logo-text span {
@@ -297,7 +368,7 @@ body.authenticated .app-view {
   padding: 10px 12px;
   border-radius: 8px;
   text-decoration: none;
-  color: var(--gray-500);
+  color: var(--text-secondary);
   font-size: 0.933rem;
   font-weight: 500;
   transition: all 0.15s ease;
@@ -313,8 +384,8 @@ body.authenticated .app-view {
 }
 
 .nav-item:hover {
-  color: var(--gray-700);
-  background: var(--gray-50);
+  color: var(--text-primary);
+  background: var(--bg-inset);
 }
 
 .nav-item.active {
@@ -329,7 +400,7 @@ body.authenticated .app-view {
 
 .sidebar-footer {
   padding: 8px 14px;
-  border-top: 1px solid var(--gray-100);
+  border-top: 1px solid var(--border-color);
 }
 
 .user-card {
@@ -388,7 +459,7 @@ body.authenticated .app-view {
 .user-name {
   font-size: 0.867rem;
   font-weight: 600;
-  color: var(--gray-800);
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -396,7 +467,7 @@ body.authenticated .app-view {
 
 .user-role {
   font-size: 0.733rem;
-  color: var(--gray-400);
+  color: var(--text-tertiary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -412,7 +483,7 @@ body.authenticated .app-view {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--gray-300);
+  color: var(--text-tertiary);
   flex-shrink: 0;
   transition: all 0.15s ease;
   opacity: 0;
@@ -440,10 +511,10 @@ body.authenticated .app-view {
   left: var(--sidebar-width);
   right: 0;
   height: var(--topnav-height);
-  background: rgba(255,255,255,0.85);
+  background: var(--bg-topnav);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -460,7 +531,7 @@ body.authenticated .app-view {
 .nav-left h1 {
   font-size: 1.133rem;
   font-weight: 600;
-  color: var(--gray-900);
+  color: var(--text-primary);
   letter-spacing: -0.3px;
 }
 
@@ -474,8 +545,8 @@ body.authenticated .app-view {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--gray-50);
-  border: 1px solid var(--gray-200);
+  background: var(--bg-inset);
+  border: 1px solid var(--border-strong);
   border-radius: 8px;
   padding: 0 14px;
   width: 260px;
@@ -486,13 +557,13 @@ body.authenticated .app-view {
 .search-box:focus-within {
   border-color: var(--indigo-300);
   box-shadow: 0 0 0 3px var(--indigo-100);
-  background: #fff;
+  background: var(--bg-surface);
 }
 
 .search-box svg {
   width: 16px;
   height: 16px;
-  color: var(--gray-400);
+  color: var(--text-tertiary);
   flex-shrink: 0;
 }
 
@@ -502,18 +573,47 @@ body.authenticated .app-view {
   outline: none;
   font-family: var(--font);
   font-size: 0.8rem;
-  color: var(--gray-700);
+  color: var(--text-primary);
   width: 100%;
 }
 
 .search-box input::placeholder {
-  color: var(--gray-400);
+  color: var(--text-tertiary);
 }
+
+.theme-btn {
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.theme-btn:hover {
+  background: var(--bg-inset);
+  border-color: var(--border-color);
+}
+
+.theme-btn svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text-tertiary);
+}
+
+.theme-btn .sun-icon { display: block; }
+.theme-btn .moon-icon { display: none; }
+html.dark-mode .theme-btn .sun-icon { display: none; }
+html.dark-mode .theme-btn .moon-icon { display: block; }
 
 .notification-btn {
   position: relative;
   background: none;
-  border: 1px solid var(--gray-200);
+  border: 1px solid var(--border-strong);
   border-radius: 8px;
   width: 36px;
   height: 36px;
@@ -525,14 +625,14 @@ body.authenticated .app-view {
 }
 
 .notification-btn:hover {
-  background: var(--gray-50);
-  border-color: var(--gray-300);
+  background: var(--bg-inset);
+  border-color: var(--border-color);
 }
 
 .notification-btn svg {
   width: 18px;
   height: 18px;
-  color: var(--gray-500);
+  color: var(--text-tertiary);
 }
 
 .notification-badge {
@@ -549,7 +649,7 @@ body.authenticated .app-view {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #fff;
+  border: 2px solid var(--bg-surface);
 }
 
 /* ===== MAIN CONTENT ===== */
@@ -586,7 +686,7 @@ body.authenticated .app-view {
   color: var(--gray-400);
   font-weight: 500;
   padding: 6px 14px;
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid var(--gray-200);
   border-radius: 8px;
 }
@@ -600,7 +700,7 @@ body.authenticated .app-view {
 }
 
 .stat-card {
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid var(--gray-100);
   border-radius: 12px;
   padding: 20px 24px;
@@ -612,7 +712,7 @@ body.authenticated .app-view {
 
 .stat-card:hover {
   border-color: var(--gray-200);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  box-shadow: var(--shadow-md);
 }
 
 .stat-card-top {
@@ -724,7 +824,7 @@ body.authenticated .app-view {
 }
 
 .action-card {
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid var(--gray-100);
   border-radius: 12px;
   padding: 20px;
@@ -734,7 +834,7 @@ body.authenticated .app-view {
 
 .action-card:hover {
   border-color: var(--gray-200);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 
@@ -770,7 +870,7 @@ body.authenticated .app-view {
 
 /* Recent Exams Table */
 .recent-exams {
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid var(--gray-100);
   border-radius: 12px;
   padding: 20px 24px;
@@ -867,7 +967,7 @@ tbody td .subject {
 
 /* AI Insights */
 .ai-insights {
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid var(--gray-100);
   border-radius: 12px;
   padding: 20px 24px;
@@ -956,7 +1056,7 @@ tbody td .subject {
 
 /* Upcoming Exams */
 .upcoming-exams {
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid var(--gray-100);
   border-radius: 12px;
   padding: 20px 24px;
@@ -1129,7 +1229,7 @@ tbody td .subject {
 }
 /* Cards */
 .gen-card {
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid var(--gray-100);
   border-radius: 12px;
   padding: 24px;
@@ -1190,7 +1290,7 @@ tbody td .subject {
   padding: 0 12px;
   border: 1px solid var(--gray-200);
   border-radius: 8px;
-  background: #fff;
+  background: var(--bg-surface);
   font-family: var(--font);
   font-size: 0.867rem;
   color: var(--gray-800);
@@ -1215,7 +1315,7 @@ tbody td .subject {
   padding: 0 12px;
   border: 1px solid var(--gray-200);
   border-radius: 8px;
-  background: #fff;
+  background: var(--bg-surface);
   font-family: var(--font);
   font-size: 0.867rem;
   color: var(--gray-800);
@@ -1246,7 +1346,7 @@ tbody td .subject {
   padding: 0 36px 0 12px;
   border: 1px solid var(--gray-200);
   border-radius: 8px;
-  background: #fff;
+  background: var(--bg-surface);
   font-family: var(--font);
   font-size: 0.867rem;
   color: var(--gray-800);
@@ -1274,10 +1374,10 @@ tbody td .subject {
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid var(--gray-200);
   border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-drop);
   z-index: 50;
   display: none;
   max-height: 220px;
@@ -1310,7 +1410,7 @@ tbody td .subject {
   padding: 4px 36px 4px 8px;
   border: 1px solid var(--gray-200);
   border-radius: 8px;
-  background: #fff;
+  background: var(--bg-surface);
   cursor: pointer;
   transition: all 0.15s ease;
   flex-wrap: wrap;
@@ -1372,10 +1472,10 @@ tbody td .subject {
   top: calc(100% + 4px);
   left: 0;
   right: 0;
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid var(--gray-200);
   border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-drop);
   z-index: 50;
   display: none;
   max-height: 260px;
@@ -1500,7 +1600,7 @@ tbody td .subject {
   left: 3px;
   width: 18px;
   height: 18px;
-  background: #fff;
+  background: var(--thumb-bg);
   border-radius: 50%;
   box-shadow: 0 1px 3px rgba(0,0,0,0.15);
   transition: transform 0.2s;
@@ -1526,7 +1626,7 @@ tbody td .subject {
   padding: 8px 16px;
   border: 1px solid var(--gray-200);
   border-radius: 8px;
-  background: #fff;
+  background: var(--bg-surface);
   font-family: var(--font);
   font-size: 0.8rem;
   font-weight: 500;
@@ -1603,7 +1703,7 @@ tbody td .subject {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(255,255,255,0.92);
+  background: var(--bg-overlay);
   backdrop-filter: blur(8px);
   z-index: 200;
   align-items: center;
@@ -1650,7 +1750,7 @@ tbody td .subject {
   top: calc(var(--topnav-height) + 32px);
 }
 .gen-summary-card {
-  background: #fff;
+  background: var(--bg-surface);
   border: 1px solid var(--gray-100);
   border-radius: 12px;
   padding: 20px;
@@ -1709,6 +1809,405 @@ tbody td .subject {
   .gen-row.five > * { flex: 1 1 45%; }
   .checkbox-grid.four { grid-template-columns: 1fr; }
   .gen-card { padding: 16px; }
+}
+
+/* ===== EXAM PREVIEW PAGE ===== */
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.preview-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.preview-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+  background: none;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.preview-back-btn:hover {
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+  background: var(--bg-inset);
+}
+.preview-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.preview-json-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+  background: none;
+  font-family: var(--font);
+  font-size: 0.733rem;
+  font-weight: 500;
+  color: var(--gray-400);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.preview-json-btn:hover {
+  border-color: var(--gray-300);
+  color: var(--gray-600);
+  background: var(--bg-inset);
+}
+.preview-json-btn svg { width: 14px; height: 14px; }
+.preview-gen-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  background: var(--indigo-600);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.preview-gen-btn:hover {
+  background: var(--indigo-700);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(79,70,229,0.25);
+}
+.preview-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.preview-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 24px;
+}
+.preview-card-title {
+  font-size: 0.867rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  letter-spacing: -0.2px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.preview-card-title svg {
+  width: 18px;
+  height: 18px;
+  color: var(--indigo-500);
+  flex-shrink: 0;
+}
+/* Overview Card */
+.preview-ov-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.preview-ov-item {}
+.preview-ov-item .ov-label {
+  font-size: 0.733rem;
+  font-weight: 500;
+  color: var(--gray-400);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.preview-ov-item .ov-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+.preview-chapter-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.preview-chapter-badge {
+  padding: 4px 10px;
+  background: var(--indigo-50);
+  color: var(--indigo-700);
+  font-size: 0.733rem;
+  font-weight: 500;
+  border-radius: 6px;
+}
+.preview-ov-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gray-100);
+}
+.preview-ov-meta-item {}
+.preview-ov-meta-item .meta-label {
+  font-size: 0.733rem;
+  font-weight: 500;
+  color: var(--gray-400);
+  margin-bottom: 2px;
+}
+.preview-ov-meta-item .meta-value {
+  font-size: 1.2rem;
+  font-weight: 650;
+  color: var(--gray-900);
+  letter-spacing: -0.3px;
+}
+.preview-ov-meta-item .meta-unit {
+  font-size: 0.733rem;
+  font-weight: 500;
+  color: var(--gray-400);
+  margin-left: 2px;
+}
+/* Distribution Cards */
+.preview-dist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.preview-dist-group {}
+.preview-dist-group h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 16px;
+}
+.preview-dist-item {
+  margin-bottom: 14px;
+}
+.preview-dist-item:last-child { margin-bottom: 0; }
+.preview-dist-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.preview-dist-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-600);
+}
+.preview-dist-pct {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gray-800);
+}
+.preview-dist-track {
+  height: 6px;
+  background: var(--gray-100);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.preview-dist-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+.preview-dist-fill.easy { background: var(--green-500); }
+.preview-dist-fill.medium { background: var(--blue-500); }
+.preview-dist-fill.hard { background: var(--red-500); }
+.preview-dist-fill.mcq { background: var(--indigo-500); }
+.preview-dist-fill.short { background: var(--green-500); }
+.preview-dist-fill.long { background: var(--blue-500); }
+.preview-dist-fill.case { background: var(--yellow-500); }
+.preview-dist-fill.num { background: var(--red-500); }
+/* Validation Card */
+.preview-validation-card {
+  position: sticky;
+  top: calc(var(--topnav-height) + 32px);
+}
+.preview-val-all {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--green-50);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+.preview-val-all svg {
+  width: 18px;
+  height: 18px;
+  color: var(--green-600);
+  flex-shrink: 0;
+}
+.preview-val-all span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--green-700);
+}
+.preview-val-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.preview-val-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.preview-val-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.preview-val-icon.pass { background: var(--green-50); color: var(--green-600); }
+.preview-val-icon.fail { background: var(--red-50); color: var(--red-600); }
+.preview-val-icon svg { width: 12px; height: 12px; stroke-width: 3; }
+.preview-val-text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-700);
+}
+/* Metadata */
+.preview-meta-block {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--gray-50);
+  border-radius: 8px;
+}
+.preview-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+.preview-meta-label {
+  font-size: 0.733rem;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+.preview-meta-val {
+  font-size: 0.733rem;
+  color: var(--gray-600);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+/* JSON Overlay */
+.preview-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.preview-overlay.open { display: flex; }
+.preview-overlay-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--gray-100);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 760px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.15);
+}
+.preview-overlay-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--gray-100);
+}
+.preview-overlay-head h3 {
+  font-size: 0.933rem;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+.preview-overlay-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--gray-400);
+  transition: all 0.15s;
+}
+.preview-overlay-close:hover {
+  background: var(--gray-100);
+  color: var(--gray-600);
+}
+.preview-overlay-body {
+  flex: 1;
+  overflow: auto;
+  padding: 20px 24px;
+}
+.preview-overlay-body pre {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--gray-800);
+  white-space: pre;
+  tab-size: 2;
+}
+.preview-overlay-foot {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 24px;
+  border-top: 1px solid var(--gray-100);
+  gap: 8px;
+}
+.preview-overlay-foot button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--gray-200);
+  background: none;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.preview-overlay-foot button:hover {
+  border-color: var(--gray-300);
+  color: var(--gray-800);
+}
+@media (max-width: 1100px) {
+  .preview-layout { grid-template-columns: 1fr; }
+  .preview-validation-card { position: static; }
+  .preview-dist-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .preview-ov-grid { grid-template-columns: 1fr; }
+  .preview-ov-meta { grid-template-columns: 1fr 1fr; }
+  .preview-header { flex-direction: column; align-items: stretch; }
+  .preview-header-right { justify-content: flex-end; }
 }
 
 /* Scrollbar */
@@ -1820,6 +2319,10 @@ tbody td .subject {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" placeholder="Search exams, students...">
     </div>
+    <button class="theme-btn" id="themeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">
+      <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
     <button class="notification-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
       <span class="notification-badge">3</span>
@@ -2347,22 +2850,22 @@ tbody td .subject {
         </div>
         <div class="checkbox-grid four">
           <label class="custom-checkbox">
-            <input type="checkbox" checked>
+            <input type="checkbox" id="outputQuestionPaper" checked>
             <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
             <span>Question Paper</span>
           </label>
           <label class="custom-checkbox">
-            <input type="checkbox" checked>
+            <input type="checkbox" id="outputAnswerKey" checked>
             <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
             <span>Answer Key</span>
           </label>
           <label class="custom-checkbox">
-            <input type="checkbox">
+            <input type="checkbox" id="outputMarkingScheme">
             <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
             <span>Marking Scheme</span>
           </label>
           <label class="custom-checkbox">
-            <input type="checkbox" checked>
+            <input type="checkbox" id="outputPdf" checked>
             <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
             <span>PDF Format</span>
           </label>
@@ -2402,6 +2905,101 @@ tbody td .subject {
   </div><!-- /gen-layout -->
 
 </div><!-- /page-generate-exam -->
+
+<!-- ===== PAGE: EXAM PREVIEW ===== -->
+<div id="page-exam-preview" style="display:none;">
+  <div class="gen-header">
+    <div>
+      <h2>Exam Blueprint Preview</h2>
+      <p>Review your exam configuration before generating questions</p>
+    </div>
+  </div>
+
+  <div class="preview-header">
+    <div class="preview-header-left">
+      <button class="preview-back-btn" id="previewBackBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+        Back to Form
+      </button>
+    </div>
+    <div class="preview-header-right">
+      <button class="preview-json-btn" id="viewRawJsonBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        View Raw Blueprint JSON
+      </button>
+      <button class="preview-gen-btn" id="previewGenerateBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 2v20M2 12h20"/></svg>
+        Generate Question Paper
+      </button>
+    </div>
+  </div>
+
+  <div class="preview-layout" id="previewLayout">
+    <!-- Left Column -->
+    <div>
+      <!-- Overview Card -->
+      <div class="preview-card" style="margin-bottom:24px;" id="previewOverviewCard">
+        <div class="preview-card-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+          Blueprint Overview
+        </div>
+        <div id="previewOvGrid" class="preview-ov-grid"></div>
+        <div id="previewChapterBadges" class="preview-chapter-badges"></div>
+        <div id="previewOvMeta" class="preview-ov-meta"></div>
+      </div>
+
+      <!-- Distribution Cards -->
+      <div class="preview-dist-grid">
+        <div class="preview-card">
+          <div class="preview-card-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            Difficulty Distribution
+          </div>
+          <div id="previewDifficultyGroup" class="preview-dist-group"></div>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Question Types
+          </div>
+          <div id="previewQtypeGroup" class="preview-dist-group"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div>
+      <!-- Validation Card -->
+      <div class="preview-card preview-validation-card" id="previewValidationCard">
+        <div class="preview-card-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Validation Status
+        </div>
+        <div id="previewValidationBody"></div>
+        <div id="previewMetadata" class="preview-meta-block"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JSON Overlay -->
+  <div class="preview-overlay" id="blueprintJsonOverlay">
+    <div class="preview-overlay-card">
+      <div class="preview-overlay-head">
+        <h3>Raw Blueprint JSON</h3>
+        <button class="preview-overlay-close" id="blueprintJsonClose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="preview-overlay-body">
+        <pre id="blueprintJsonPre">Loading...</pre>
+      </div>
+      <div class="preview-overlay-foot">
+        <button id="blueprintJsonCopy">Copy to Clipboard</button>
+        <button id="blueprintJsonCloseBtn">Close</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-exam-preview -->
 
 </main>
 
@@ -2541,16 +3139,19 @@ overlay.addEventListener('click', toggleMenu);
 // ===== PAGE ROUTING =====
 const pageDashboard = document.getElementById('page-dashboard');
 const pageGenerateExam = document.getElementById('page-generate-exam');
+const pageExamPreview = document.getElementById('page-exam-preview');
 const pageTitleEl = document.querySelector('.nav-left h1');
 const pageNames = {
   dashboard: 'Dashboard',
   'generate-exam': 'Generate Exam',
+  'exam-preview': 'Exam Blueprint',
 };
 
 function navigateTo(page) {
   document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
   pageDashboard.style.display = 'none';
   pageGenerateExam.style.display = 'none';
+  pageExamPreview.style.display = 'none';
 
   if (page === 'dashboard') {
     pageDashboard.style.display = 'block';
@@ -2560,6 +3161,16 @@ function navigateTo(page) {
     pageGenerateExam.style.display = 'block';
     document.querySelector('.nav-item[data-page="generate-exam"]')?.classList.add('active');
     pageTitleEl.textContent = 'Generate Exam';
+  } else if (page === 'exam-preview') {
+    if (!currentBlueprint) {
+      pageGenerateExam.style.display = 'block';
+      document.querySelector('.nav-item[data-page="generate-exam"]')?.classList.add('active');
+      pageTitleEl.textContent = 'Generate Exam';
+      return;
+    }
+    pageExamPreview.style.display = 'block';
+    document.querySelector('.nav-item[data-page="generate-exam"]')?.classList.add('active');
+    pageTitleEl.textContent = 'Exam Blueprint';
   }
 
   if (window.innerWidth <= 768) {
@@ -2845,78 +3456,358 @@ function updateSummary() {
 
 document.getElementById('boardSelect')?.addEventListener('change', updateSummary);
 
+// ===== BLUEPRINT ENGINE =====
+const BLUEPRINT_KEY = 'edint_blueprint';
+let currentBlueprint = null;
+
+/**
+ * Collect all form values into a plain object.
+ */
+function collectFormValues() {
+  return {
+    board: document.getElementById('boardSelect').value,
+    class: document.getElementById('classSelect').value,
+    subject: subjectVal.value,
+    chapters: [...selectedChapters],
+    totalMarks: parseInt(document.getElementById('totalMarks').value) || 0,
+    duration: parseInt(document.getElementById('examDuration').value) || 0,
+    numQuestions: parseInt(document.getElementById('numQuestions').value) || 0,
+    difficulty: {
+      easy: parseInt(document.getElementById('diffEasy').value) || 0,
+      medium: parseInt(document.getElementById('diffMedium').value) || 0,
+      hard: parseInt(document.getElementById('diffHard').value) || 0,
+    },
+    questionTypes: {
+      mcq: parseInt(document.getElementById('qtMCQ').value) || 0,
+      short: parseInt(document.getElementById('qtShort').value) || 0,
+      long: parseInt(document.getElementById('qtLong').value) || 0,
+      caseStudy: parseInt(document.getElementById('qtCase').value) || 0,
+      numerical: parseInt(document.getElementById('qtNumerical').value) || 0,
+    },
+    variants: {
+      enabled: document.getElementById('variantToggle').checked,
+      count: parseInt(document.getElementById('variantCount').value) || 3,
+    },
+    output: {
+      questionPaper: document.getElementById('outputQuestionPaper').checked,
+      answerKey: document.getElementById('outputAnswerKey').checked,
+      markingScheme: document.getElementById('outputMarkingScheme').checked,
+      pdf: document.getElementById('outputPdf').checked,
+    },
+  };
+}
+
+/**
+ * @typedef {Object} ExamBlueprint
+ * @property {Object} curriculum
+ * @property {string} curriculum.board
+ * @property {string} curriculum.class
+ * @property {string} curriculum.subject
+ * @property {string[]} curriculum.chapters
+ * @property {Object} config
+ * @property {number} config.totalMarks
+ * @property {number} config.duration
+ * @property {number} config.numQuestions
+ * @property {Object} difficulty
+ * @property {number} difficulty.easy
+ * @property {number} difficulty.medium
+ * @property {number} difficulty.hard
+ * @property {Object} questionTypes
+ * @property {number} questionTypes.mcq
+ * @property {number} questionTypes.short
+ * @property {number} questionTypes.long
+ * @property {number} questionTypes.caseStudy
+ * @property {number} questionTypes.numerical
+ * @property {Object} variants
+ * @property {boolean} variants.enabled
+ * @property {number} variants.count
+ * @property {Object} output
+ * @property {boolean} output.questionPaper
+ * @property {boolean} output.answerKey
+ * @property {boolean} output.markingScheme
+ * @property {boolean} output.pdf
+ * @property {Object} metadata
+ * @property {string} metadata.id
+ * @property {string} metadata.createdAt
+ * @property {string} metadata.status
+ */
+
+/**
+ * Build a structured ExamBlueprint from current form values.
+ * @returns {ExamBlueprint}
+ */
+function buildBlueprint() {
+  const raw = collectFormValues();
+  return {
+    curriculum: {
+      board: raw.board,
+      class: raw.class,
+      subject: raw.subject,
+      chapters: raw.chapters,
+    },
+    config: {
+      totalMarks: raw.totalMarks,
+      duration: raw.duration,
+      numQuestions: raw.numQuestions,
+    },
+    difficulty: { ...raw.difficulty },
+    questionTypes: { ...raw.questionTypes },
+    variants: { ...raw.variants },
+    output: { ...raw.output },
+    metadata: {
+      id: 'bp_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 6),
+      createdAt: new Date().toISOString(),
+      status: 'blueprint',
+    },
+  };
+}
+
+/**
+ * Validate the blueprint. Returns { valid: boolean, errors: string[] }.
+ * @param {ExamBlueprint} bp
+ * @returns {{ valid: boolean, errors: string[] }}
+ */
+function validateBlueprint(bp) {
+  const errors = [];
+
+  if (!bp.curriculum.subject) errors.push('Subject is required.');
+  if (!bp.curriculum.class) errors.push('Class is required.');
+  if (!bp.curriculum.chapters.length) errors.push('At least one chapter must be selected.');
+  if (bp.config.totalMarks < 1) errors.push('Total marks must be greater than 0.');
+  if (bp.config.duration < 1) errors.push('Duration must be greater than 0.');
+  if (bp.config.numQuestions < 1) errors.push('Number of questions must be greater than 0.');
+
+  const diffTotal = bp.difficulty.easy + bp.difficulty.medium + bp.difficulty.hard;
+  if (diffTotal !== 100) {
+    errors.push('Difficulty distribution must sum to 100% (currently ' + diffTotal + '%).');
+  }
+
+  const qtTotal = bp.questionTypes.mcq + bp.questionTypes.short + bp.questionTypes.long
+    + bp.questionTypes.caseStudy + bp.questionTypes.numerical;
+  if (qtTotal !== 100) {
+    errors.push('Question type distribution must sum to 100% (currently ' + qtTotal + '%).');
+  }
+
+  return { valid: errors.length === 0, errors };
+}
+
+/**
+ * Store blueprint in app state and localStorage.
+ * @param {ExamBlueprint} bp
+ */
+function storeBlueprint(bp) {
+  currentBlueprint = bp;
+  try {
+    localStorage.setItem(BLUEPRINT_KEY, JSON.stringify(bp));
+  } catch (e) {
+    // localStorage may be full or unavailable
+  }
+}
+
+/**
+ * Load stored blueprint from localStorage.
+ * @returns {ExamBlueprint|null}
+ */
+function loadStoredBlueprint() {
+  try {
+    const raw = localStorage.getItem(BLUEPRINT_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+
+/**
+ * Render the blueprint preview page (production-ready card layout).
+ * @param {ExamBlueprint} bp
+ */
+function renderBlueprintPreview(bp) {
+  // Store JSON for overlay
+  const jsonStr = JSON.stringify(bp, null, 2);
+  document.getElementById('blueprintJsonPre').textContent = jsonStr;
+
+  // --- Overview Grid: Board / Class / Subject ---
+  document.getElementById('previewOvGrid').innerHTML = `
+    <div class="preview-ov-item">
+      <div class="ov-label">Board</div>
+      <div class="ov-value">${escHtml(bp.curriculum.board)}</div>
+    </div>
+    <div class="preview-ov-item">
+      <div class="ov-label">Class</div>
+      <div class="ov-value">${bp.curriculum.class ? 'Class ' + escHtml(bp.curriculum.class) : '—'}</div>
+    </div>
+    <div class="preview-ov-item">
+      <div class="ov-label">Subject</div>
+      <div class="ov-value">${escHtml(bp.curriculum.subject)}</div>
+    </div>
+  `;
+
+  // --- Chapter Badges ---
+  const badgeContainer = document.getElementById('previewChapterBadges');
+  if (bp.curriculum.chapters.length > 0) {
+    badgeContainer.innerHTML = bp.curriculum.chapters.map(ch =>
+      '<span class="preview-chapter-badge">' + escHtml(ch) + '</span>'
+    ).join('');
+  } else {
+    badgeContainer.innerHTML = '<span style="font-size:0.8rem;color:var(--gray-400)">No chapters selected</span>';
+  }
+
+  // --- Meta Row: Marks / Duration / Questions ---
+  document.getElementById('previewOvMeta').innerHTML = `
+    <div class="preview-ov-meta-item">
+      <div class="meta-label">Total Marks</div>
+      <div class="meta-value">${bp.config.totalMarks}<span class="meta-unit">marks</span></div>
+    </div>
+    <div class="preview-ov-meta-item">
+      <div class="meta-label">Duration</div>
+      <div class="meta-value">${bp.config.duration}<span class="meta-unit">min</span></div>
+    </div>
+    <div class="preview-ov-meta-item">
+      <div class="meta-label">Questions</div>
+      <div class="meta-value">${bp.config.numQuestions}<span class="meta-unit">total</span></div>
+    </div>
+  `;
+
+  // --- Difficulty Distribution ---
+  const diffItems = [
+    { key: 'Easy', val: bp.difficulty.easy, cls: 'easy' },
+    { key: 'Medium', val: bp.difficulty.medium, cls: 'medium' },
+    { key: 'Hard', val: bp.difficulty.hard, cls: 'hard' }
+  ];
+  document.getElementById('previewDifficultyGroup').innerHTML = diffItems.map(d => `
+    <div class="preview-dist-item">
+      <div class="preview-dist-top">
+        <span class="preview-dist-name">${d.key}</span>
+        <span class="preview-dist-pct">${d.val}%</span>
+      </div>
+      <div class="preview-dist-track">
+        <div class="preview-dist-fill ${d.cls}" style="width:${d.val}%"></div>
+      </div>
+    </div>
+  `).join('');
+
+  // --- Question Types Distribution ---
+  const qtItems = [
+    { key: 'MCQ', val: bp.questionTypes.mcq, cls: 'mcq' },
+    { key: 'Short Answer', val: bp.questionTypes.short, cls: 'short' },
+    { key: 'Long Answer', val: bp.questionTypes.long, cls: 'long' },
+    { key: 'Case Study', val: bp.questionTypes.caseStudy, cls: 'case' },
+    { key: 'Numerical', val: bp.questionTypes.numerical, cls: 'num' }
+  ];
+  document.getElementById('previewQtypeGroup').innerHTML = qtItems.map(q => `
+    <div class="preview-dist-item">
+      <div class="preview-dist-top">
+        <span class="preview-dist-name">${q.key}</span>
+        <span class="preview-dist-pct">${q.val}%</span>
+      </div>
+      <div class="preview-dist-track">
+        <div class="preview-dist-fill ${q.cls}" style="width:${q.val}%"></div>
+      </div>
+    </div>
+  `).join('');
+
+  // --- Validation Status ---
+  const diffTotal = bp.difficulty.easy + bp.difficulty.medium + bp.difficulty.hard;
+  const qtTotal = bp.questionTypes.mcq + bp.questionTypes.short + bp.questionTypes.long
+    + bp.questionTypes.caseStudy + bp.questionTypes.numerical;
+  const checks = [
+    { label: 'Marks & Configuration Valid', pass: bp.config.totalMarks > 0 && bp.config.duration > 0 && bp.config.numQuestions > 0 },
+    { label: 'Difficulty Sum = 100%', pass: diffTotal === 100 },
+    { label: 'Question Types Sum = 100%', pass: qtTotal === 100 },
+    { label: 'Chapters Selected', pass: bp.curriculum.chapters.length > 0 },
+    { label: 'Blueprint Ready', pass: true }
+  ];
+  const allPass = checks.every(c => c.pass);
+
+  document.getElementById('previewValidationBody').innerHTML = `
+    <div class="preview-val-all" style="${allPass ? '' : 'background:var(--yellow-50);'}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        ${allPass ? '<polyline points="20 6 9 17 4 12"/>' : '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>'}
+      </svg>
+      <span>${allPass ? 'All checks passed' : 'Some checks require attention'}</span>
+    </div>
+    <div class="preview-val-items">
+      ${checks.map(c => `
+        <div class="preview-val-item">
+          <div class="preview-val-icon ${c.pass ? 'pass' : 'fail'}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              ${c.pass ? '<polyline points="20 6 9 17 4 12"/>' : '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'}
+            </svg>
+          </div>
+          <span class="preview-val-text">${c.label}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  // --- Metadata ---
+  document.getElementById('previewMetadata').innerHTML = `
+    <div class="preview-meta-row">
+      <span class="preview-meta-label">Blueprint ID</span>
+      <span class="preview-meta-val">${escHtml(bp.metadata.id)}</span>
+    </div>
+    <div class="preview-meta-row">
+      <span class="preview-meta-label">Created</span>
+      <span class="preview-meta-val">${new Date(bp.metadata.createdAt).toLocaleString()}</span>
+    </div>
+  `;
+}
+
+/** Toggle the raw blueprint JSON overlay. */
+function toggleBlueprintJSON() {
+  const overlay = document.getElementById('blueprintJsonOverlay');
+  overlay.classList.toggle('open');
+}
+
+function escHtml(s) {
+  const div = document.createElement('div');
+  div.appendChild(document.createTextNode(String(s)));
+  return div.innerHTML;
+}
+
 // ===== GENERATE BUTTON =====
 const genBtn = document.getElementById('genSubmitBtn');
-let progressOverlay = null;
 
 genBtn.addEventListener('click', function() {
-  if (!subjectVal.value) {
-    subjectInput.focus();
-    subjectInput.style.borderColor = 'var(--red-500)';
-    setTimeout(() => subjectInput.style.borderColor = '', 2000);
+  const bp = buildBlueprint();
+  const { valid, errors } = validateBlueprint(bp);
+
+  if (!valid) {
+    const msg = errors.join('\n');
+    alert('Please fix the following:\n\n' + msg);
     return;
   }
-  if (!document.getElementById('classSelect').value) {
-    document.getElementById('classSelect').focus();
+
+  storeBlueprint(bp);
+  renderBlueprintPreview(bp);
+  navigateTo('exam-preview');
+});
+
+// ===== PREVIEW PAGE BUTTONS =====
+document.getElementById('previewBackBtn').addEventListener('click', function() {
+  navigateTo('generate-exam');
+});
+
+document.getElementById('previewGenerateBtn').addEventListener('click', function() {
+  if (!currentBlueprint) {
+    navigateTo('generate-exam');
     return;
   }
+  alert('Question generation will be available in Phase 2.\n\nBlueprint ID: ' + currentBlueprint.metadata.id);
+});
 
-  this.disabled = true;
-  this.classList.add('loading');
-  this.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Generating...';
-
-  // Create progress overlay
-  if (!progressOverlay) {
-    progressOverlay = document.createElement('div');
-    progressOverlay.className = 'gen-progress';
-    progressOverlay.innerHTML = `
-      <div class="gen-progress-ring"></div>
-      <h3>Generating Your Exam</h3>
-      <p>AI is crafting questions based on your configuration</p>
-      <div class="gen-progress-bar"><div class="gen-progress-fill" id="progressFill"></div></div>
-    `;
-    document.body.appendChild(progressOverlay);
-  }
-  progressOverlay.classList.add('show');
-
-  const fill = document.getElementById('progressFill');
-  let pct = 0;
-  const steps = [
-    'Analyzing curriculum requirements...',
-    'Generating questions from chapter bank...',
-    'Applying difficulty distribution...',
-    'Balancing question types...',
-    'Creating exam variants...',
-    'Preparing answer key & marking scheme...',
-    'Finalizing output...',
-  ];
-
-  let stepIdx = 0;
-  const progP = progressOverlay.querySelector('p');
-
-  const interval = setInterval(() => {
-    pct += Math.random() * 8 + 3;
-    if (pct > 100) pct = 100;
-    fill.style.width = pct + '%';
-
-    if (pct > (stepIdx + 1) * 14 && stepIdx < steps.length - 1) {
-      stepIdx++;
-      progP.textContent = steps[stepIdx];
-    }
-
-    if (pct >= 100) {
-      clearInterval(interval);
-      progP.textContent = 'Exam generated successfully!';
-      setTimeout(() => {
-        progressOverlay.classList.remove('show');
-        this.disabled = false;
-        this.classList.remove('loading');
-        this.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Generate Exam with AI';
-        fill.style.width = '0%';
-        navigateTo('dashboard');
-      }, 800);
-    }
-  }, 300);
+// ===== JSON OVERLAY =====
+document.getElementById('viewRawJsonBtn').addEventListener('click', toggleBlueprintJSON);
+document.getElementById('blueprintJsonClose').addEventListener('click', toggleBlueprintJSON);
+document.getElementById('blueprintJsonCloseBtn').addEventListener('click', toggleBlueprintJSON);
+document.getElementById('blueprintJsonOverlay').addEventListener('click', function(e) {
+  if (e.target === this) toggleBlueprintJSON();
+});
+document.getElementById('blueprintJsonCopy').addEventListener('click', function() {
+  const text = document.getElementById('blueprintJsonPre').textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById('blueprintJsonCopy');
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.textContent = 'Copy to Clipboard'; }, 1500);
+  });
 });
 
 // ===== GENERATE EXAM INIT =====
@@ -2927,13 +3818,42 @@ genBtn.addEventListener('click', function() {
   updateChapterList();
 })();
 
+// ===== DARK MODE TOGGLE =====
+const themeToggle = document.getElementById('themeToggle');
+const THEME_KEY = 'edint_theme';
+
+function setTheme(dark) {
+  document.documentElement.classList.toggle('dark-mode', dark);
+  localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light');
+}
+
+themeToggle.addEventListener('click', function() {
+  const isDark = document.documentElement.classList.contains('dark-mode');
+  setTheme(!isDark);
+});
+
+(function initTheme() {
+  const stored = localStorage.getItem(THEME_KEY);
+  if (stored === 'dark') {
+    setTheme(true);
+  } else if (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    setTheme(true);
+  }
+})();
+
 // ===== Init =====
 (function init() {
   const existing = getStoredSession();
   if (existing) {
     enterDashboard(existing);
-    return;
   }
+
+  const stored = loadStoredBlueprint();
+  if (stored) {
+    currentBlueprint = stored;
+  }
+
+  if (existing) return;
 
   if (CLIENT_ID && CLIENT_ID !== 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
     window.google?.accounts?.id?.initialize({
