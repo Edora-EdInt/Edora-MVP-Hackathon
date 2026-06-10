@@ -9,7 +9,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the SI unit of velocity?",
-    "options": ["m/s", "m/s²", "km/h", "cm/s"]
+    "options": ["m/s", "m/s²", "km/h", "cm/s"],
+    "correctAnswer": "A"
   },
   {
     "id": 2,
@@ -20,7 +21,8 @@
     "difficulty": "Medium",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "Define uniform acceleration. A car accelerates uniformly from 0 to 20 m/s in 10 seconds. Calculate its acceleration."
+    "question": "Define uniform acceleration. A car accelerates uniformly from 0 to 20 m/s in 10 seconds. Calculate its acceleration.",
+    "answer": "Uniform acceleration is the constant rate of change of velocity with time. Using a = (v - u) / t, where v = 20 m/s, u = 0 m/s, t = 10 s, we get a = (20 - 0) / 10 = 2 m/s²."
   },
   {
     "id": 3,
@@ -31,7 +33,8 @@
     "difficulty": "Hard",
     "marks": 5,
     "questionType": "Long Answer",
-    "question": "Derive the three equations of motion using the graphical method. Explain the relationship between displacement, velocity, acceleration, and time."
+    "question": "Derive the three equations of motion using the graphical method. Explain the relationship between displacement, velocity, acceleration, and time.",
+    "answer": "The three equations of motion are derived from velocity-time graphs. (1) v = u + at: slope of v-t graph gives acceleration. (2) s = ut + ½at²: area under v-t graph gives displacement. (3) v² = u² + 2as: combining the first two equations."
   },
   {
     "id": 4,
@@ -43,7 +46,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "Who formulated the three fundamental laws of motion?",
-    "options": ["Newton", "Einstein", "Galileo", "Archimedes"]
+    "options": ["Newton", "Einstein", "Galileo", "Archimedes"],
+    "correctAnswer": "A"
   },
   {
     "id": 5,
@@ -54,7 +58,8 @@
     "difficulty": "Medium",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "State Newton's second law of motion and write its mathematical formulation."
+    "question": "State Newton's second law of motion and write its mathematical formulation.",
+    "answer": "Newton's second law states that the rate of change of momentum of a body is directly proportional to the applied force and takes place in the direction of the force. Mathematically, F = ma, where F is force, m is mass, and a is acceleration."
   },
   {
     "id": 6,
@@ -65,7 +70,8 @@
     "difficulty": "Hard",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "Explain the law of conservation of momentum with the help of an example involving two colliding objects."
+    "question": "Explain the law of conservation of momentum with the help of an example involving two colliding objects.",
+    "answer": "The law of conservation of momentum states that the total momentum of an isolated system remains constant before and after a collision. For example, when two billiard balls collide, the total momentum before collision equals total momentum after collision: m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂."
   },
   {
     "id": 7,
@@ -77,7 +83,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the approximate value of acceleration due to gravity on the surface of Earth?",
-    "options": ["9.8 m/s²", "8.9 m/s²", "10.2 m/s²", "7.6 m/s²"]
+    "options": ["9.8 m/s²", "8.9 m/s²", "10.2 m/s²", "7.6 m/s²"],
+    "correctAnswer": "A"
   },
   {
     "id": 8,
@@ -88,7 +95,8 @@
     "difficulty": "Medium",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "State the universal law of gravitation and write the formula for the gravitational force between two masses."
+    "question": "State the universal law of gravitation and write the formula for the gravitational force between two masses.",
+    "answer": "The universal law of gravitation states that every mass in the universe attracts every other mass with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between them. F = G × m₁m₂ / r², where G = 6.67 × 10⁻¹¹ N·m²/kg²."
   },
   {
     "id": 9,
@@ -99,7 +107,8 @@
     "difficulty": "Easy",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "Define kinetic energy. Write the formula for the kinetic energy of an object of mass m moving with velocity v."
+    "question": "Define kinetic energy. Write the formula for the kinetic energy of an object of mass m moving with velocity v.",
+    "answer": "Kinetic energy is the energy possessed by a body by virtue of its motion. The formula for kinetic energy is KE = ½mv², where m is the mass of the object and v is its velocity."
   },
   {
     "id": 10,
@@ -111,7 +120,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the SI unit of frequency?",
-    "options": ["Hertz", "Decibel", "Watt", "Newton"]
+    "options": ["Hertz", "Decibel", "Watt", "Newton"],
+    "correctAnswer": "A"
   },
   {
     "id": 11,
@@ -122,7 +132,8 @@
     "difficulty": "Easy",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "Define an echo. What is the minimum distance required between the source and the reflecting surface for an echo to be heard clearly?"
+    "question": "Define an echo. What is the minimum distance required between the source and the reflecting surface for an echo to be heard clearly?",
+    "answer": "An echo is the reflection of sound that arrives at the listener after a delay, typically more than 0.1 seconds after the original sound. The minimum distance required is approximately 17 meters, calculated using the speed of sound (340 m/s) and the minimum echo delay of 0.1 s."
   },
   {
     "id": 12,
@@ -134,7 +145,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the SI unit of electric charge?",
-    "options": ["Coulomb", "Ampere", "Volt", "Ohm"]
+    "options": ["Coulomb", "Ampere", "Volt", "Ohm"],
+    "correctAnswer": "A"
   },
   {
     "id": 13,
@@ -145,7 +157,8 @@
     "difficulty": "Medium",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "State Ohm's Law. A conductor has a resistance of 5 Ω and a potential difference of 15 V is applied across it. Calculate the current flowing through it."
+    "question": "State Ohm's Law. A conductor has a resistance of 5 Ω and a potential difference of 15 V is applied across it. Calculate the current flowing through it.",
+    "answer": "Ohm's Law states that the current flowing through a conductor is directly proportional to the potential difference across its ends, provided the physical conditions remain constant: V = IR. Given R = 5 Ω and V = 15 V, current I = V/R = 15/5 = 3 A."
   },
   {
     "id": 14,
@@ -156,7 +169,8 @@
     "difficulty": "Hard",
     "marks": 5,
     "questionType": "Long Answer",
-    "question": "Explain the series and parallel combination of resistors with circuit diagrams. Derive the equivalent resistance for both combinations."
+    "question": "Explain the series and parallel combination of resistors with circuit diagrams. Derive the equivalent resistance for both combinations.",
+    "answer": "In series combination, resistors are connected end-to-end. The equivalent resistance Rₛ = R₁ + R₂ + R₃ + ... Current is same through all resistors, voltage divides. In parallel combination, resistors are connected across the same two points. The reciprocal of equivalent resistance 1/Rₚ = 1/R₁ + 1/R₂ + 1/R₃ + ... Voltage is same across all resistors, current divides."
   },
   {
     "id": 15,
@@ -168,7 +182,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the power consumed by a device drawing 2 A current at a potential difference of 10 V?",
-    "options": ["20 W", "10 W", "5 W", "40 W"]
+    "options": ["20 W", "10 W", "5 W", "40 W"],
+    "correctAnswer": "A"
   },
   {
     "id": 16,
@@ -179,7 +194,8 @@
     "difficulty": "Medium",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "State the two laws of reflection of light."
+    "question": "State the two laws of reflection of light.",
+    "answer": "The two laws of reflection are: (1) The incident ray, the reflected ray, and the normal at the point of incidence all lie in the same plane. (2) The angle of incidence is equal to the angle of reflection (∠i = ∠r)."
   },
   {
     "id": 17,
@@ -190,7 +206,8 @@
     "difficulty": "Medium",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "Derive the mirror formula for a concave mirror. Define the terms focal length and radius of curvature."
+    "question": "Derive the mirror formula for a concave mirror. Define the terms focal length and radius of curvature.",
+    "answer": "The mirror formula is 1/f = 1/u + 1/v, where f is focal length, u is object distance, and v is image distance. Focal length (f) is the distance from the pole to the principal focus where parallel rays converge. Radius of curvature (R) is the radius of the spherical mirror surface. For spherical mirrors, f = R/2."
   },
   {
     "id": 18,
@@ -202,7 +219,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the chemical symbol of sodium?",
-    "options": ["Na", "So", "S", "Nd"]
+    "options": ["Na", "So", "S", "Nd"],
+    "correctAnswer": "A"
   },
   {
     "id": 19,
@@ -213,7 +231,8 @@
     "difficulty": "Medium",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "Describe Bohr's model of the atom. Explain the concept of energy levels and how electrons transition between them."
+    "question": "Describe Bohr's model of the atom. Explain the concept of energy levels and how electrons transition between them.",
+    "answer": "Bohr's model proposes that electrons revolve around the nucleus in fixed, circular paths called energy levels or shells (K, L, M, N). Electrons can jump from a lower to a higher energy level by absorbing energy, and from a higher to a lower level by emitting energy as radiation. Each energy level has a fixed amount of energy."
   },
   {
     "id": 20,
@@ -225,7 +244,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the atomic number of carbon?",
-    "options": ["6", "12", "14", "8"]
+    "options": ["6", "12", "14", "8"],
+    "correctAnswer": "A"
   },
   {
     "id": 21,
@@ -236,7 +256,8 @@
     "difficulty": "Medium",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "Explain the formation of an ionic bond with the example of sodium chloride (NaCl)."
+    "question": "Explain the formation of an ionic bond with the example of sodium chloride (NaCl).",
+    "answer": "An ionic bond is formed by the complete transfer of electrons from one atom to another. In NaCl, sodium (Na) has 1 valence electron and chlorine (Cl) has 7 valence electrons. Na loses one electron to form Na⁺, and Cl gains that electron to form Cl⁻. The electrostatic attraction between Na⁺ and Cl⁻ forms the ionic bond."
   },
   {
     "id": 22,
@@ -247,7 +268,8 @@
     "difficulty": "Hard",
     "marks": 5,
     "questionType": "Long Answer",
-    "question": "Explain the different types of chemical bonds — ionic, covalent, and metallic. Provide examples and describe their properties."
+    "question": "Explain the different types of chemical bonds — ionic, covalent, and metallic. Provide examples and describe their properties.",
+    "answer": "Ionic bonds (e.g., NaCl) involve electron transfer between metals and non-metals; they form crystalline solids with high melting points. Covalent bonds (e.g., H₂, O₂) involve electron sharing between non-metals; they form molecules with lower melting points. Metallic bonds (e.g., Fe, Cu) involve delocalized electrons shared among metal atoms; metals are malleable, ductile, and conduct electricity."
   },
   {
     "id": 23,
@@ -259,7 +281,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What type of reaction is the burning of wood?",
-    "options": ["Oxidation", "Reduction", "Neutralization", "Precipitation"]
+    "options": ["Oxidation", "Reduction", "Neutralization", "Precipitation"],
+    "correctAnswer": "A"
   },
   {
     "id": 24,
@@ -270,7 +293,8 @@
     "difficulty": "Medium",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "Define oxidation and reduction in terms of electron transfer. Give one example of each."
+    "question": "Define oxidation and reduction in terms of electron transfer. Give one example of each.",
+    "answer": "Oxidation is the loss of electrons by a substance. Example: Mg → Mg²⁺ + 2e⁻ (magnesium is oxidized). Reduction is the gain of electrons by a substance. Example: Cl₂ + 2e⁻ → 2Cl⁻ (chlorine is reduced). In a redox reaction, both processes occur simultaneously."
   },
   {
     "id": 25,
@@ -281,7 +305,8 @@
     "difficulty": "Easy",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "State the law of conservation of mass. Provide an example to illustrate this law."
+    "question": "State the law of conservation of mass. Provide an example to illustrate this law.",
+    "answer": "The law of conservation of mass states that mass can neither be created nor destroyed in a chemical reaction. For example, when 12 g of carbon burns in 32 g of oxygen to form 44 g of carbon dioxide, the total mass of reactants (12 + 32 = 44 g) equals the mass of the product (44 g CO₂)."
   },
   {
     "id": 26,
@@ -293,7 +318,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the molecular formula of methane?",
-    "options": ["CH₄", "C₂H₆", "C₂H₄", "CO₂"]
+    "options": ["CH₄", "C₂H₆", "C₂H₄", "CO₂"],
+    "correctAnswer": "A"
   },
   {
     "id": 27,
@@ -304,7 +330,8 @@
     "difficulty": "Medium",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "Define functional groups in organic chemistry. Give two examples of functional groups and their general formulas."
+    "question": "Define functional groups in organic chemistry. Give two examples of functional groups and their general formulas.",
+    "answer": "A functional group is an atom or group of atoms that determines the chemical properties of an organic compound. Examples: (1) Hydroxyl group (-OH) found in alcohols, general formula R-OH. (2) Carboxyl group (-COOH) found in carboxylic acids, general formula R-COOH."
   },
   {
     "id": 28,
@@ -315,7 +342,8 @@
     "difficulty": "Hard",
     "marks": 5,
     "questionType": "Long Answer",
-    "question": "Explain the concept of homologous series in organic chemistry. Describe the homologous series of alkanes, alkenes, and alkynes with examples and general formulas."
+    "question": "Explain the concept of homologous series in organic chemistry. Describe the homologous series of alkanes, alkenes, and alkynes with examples and general formulas.",
+    "answer": "A homologous series is a family of organic compounds with the same functional group and similar chemical properties, where successive members differ by a CH₂ group. Alkanes: CₙH₂ₙ₊₂ (e.g., CH₄, C₂H₆, C₃H₈). Alkenes: CₙH₂ₙ (e.g., C₂H₄, C₃H₆). Alkynes: CₙH₂ₙ₋₂ (e.g., C₂H₂, C₃H₄). As the chain length increases, melting/boiling points increase gradually."
   },
   {
     "id": 29,
@@ -327,7 +355,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "Which of the following gases is commonly used in welding?",
-    "options": ["Acetylene", "Methane", "Ethane", "Propane"]
+    "options": ["Acetylene", "Methane", "Ethane", "Propane"],
+    "correctAnswer": "A"
   },
   {
     "id": 30,
@@ -338,7 +367,8 @@
     "difficulty": "Medium",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "Distinguish between saturated and unsaturated hydrocarbons with examples. Draw the structural formula of ethane and ethene."
+    "question": "Distinguish between saturated and unsaturated hydrocarbons with examples. Draw the structural formula of ethane and ethene.",
+    "answer": "Saturated hydrocarbons have only single bonds between carbon atoms (e.g., alkanes like ethane C₂H₆, all C-C single bonds). Unsaturated hydrocarbons have one or more double or triple bonds (e.g., alkenes like ethene C₂H₄ with C=C double bond). Ethane structure: H₃C-CH₃. Ethene structure: H₂C=CH₂."
   },
   {
     "id": 31,
@@ -350,7 +380,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the pH of pure water at 25°C?",
-    "options": ["7", "1", "14", "0"]
+    "options": ["7", "1", "14", "0"],
+    "correctAnswer": "A"
   },
   {
     "id": 32,
@@ -361,7 +392,8 @@
     "difficulty": "Medium",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "What happens when an acid reacts with a base? Write the general equation for a neutralization reaction."
+    "question": "What happens when an acid reacts with a base? Write the general equation for a neutralization reaction.",
+    "answer": "When an acid reacts with a base, a neutralization reaction occurs, producing salt and water. The general equation is: Acid + Base → Salt + Water. For example, HCl + NaOH → NaCl + H₂O. The H⁺ from the acid combines with the OH⁻ from the base to form water."
   },
   {
     "id": 33,
@@ -372,7 +404,8 @@
     "difficulty": "Hard",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "Explain the factors affecting the solubility of a solute in a solvent. How does temperature and pressure affect solubility?"
+    "question": "Explain the factors affecting the solubility of a solute in a solvent. How does temperature and pressure affect solubility?",
+    "answer": "Factors affecting solubility include: (1) Nature of solute and solvent — like dissolves like. (2) Temperature — for most solids, solubility increases with temperature; for gases, solubility decreases with increasing temperature. (3) Pressure — affects solubility of gases (Henry's Law: solubility of a gas is directly proportional to the partial pressure above the solution)."
   },
   {
     "id": 34,
@@ -384,7 +417,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the general formula of alkanes?",
-    "options": ["CₙH₂ₙ₊₂", "CₙH₂ₙ", "CₙH₂ₙ₋₂", "CₙH₂ₙ₊₁"]
+    "options": ["CₙH₂ₙ₊₂", "CₙH₂ₙ", "CₙH₂ₙ₋₂", "CₙH₂ₙ₊₁"],
+    "correctAnswer": "A"
   },
   {
     "id": 35,
@@ -396,7 +430,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the cardinality of the set A = {1, 2, 3}?",
-    "options": ["3", "2", "1", "0"]
+    "options": ["3", "2", "1", "0"],
+    "correctAnswer": "A"
   },
   {
     "id": 36,
@@ -407,7 +442,8 @@
     "difficulty": "Medium",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "Define mean, median, and mode. Calculate the mean of the data set: 12, 15, 18, 20, 25."
+    "question": "Define mean, median, and mode. Calculate the mean of the data set: 12, 15, 18, 20, 25.",
+    "answer": "Mean is the average of all values (sum divided by count). Median is the middle value when data is arranged in order. Mode is the most frequently occurring value. Mean of {12, 15, 18, 20, 25} = (12 + 15 + 18 + 20 + 25) / 5 = 90 / 5 = 18."
   },
   {
     "id": 37,
@@ -418,7 +454,8 @@
     "difficulty": "Hard",
     "marks": 5,
     "questionType": "Long Answer",
-    "question": "The marks obtained by 30 students in a test are given. Calculate the mean, median, and mode of the data. Explain which measure of central tendency is most appropriate for this data."
+    "question": "The marks obtained by 30 students in a test are given. Calculate the mean, median, and mode of the data. Explain which measure of central tendency is most appropriate for this data.",
+    "answer": "The mean is the arithmetic average useful for symmetric distributions. The median is the middle value, robust to outliers. The mode is the most frequent value, useful for categorical data. For test scores that may have outliers (very high or low scores), the median is often most appropriate as it is not affected by extreme values."
   },
   {
     "id": 38,
@@ -430,7 +467,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the probability of a certain event?",
-    "options": ["1", "0", "0.5", "Cannot be determined"]
+    "options": ["1", "0", "0.5", "Cannot be determined"],
+    "correctAnswer": "A"
   },
   {
     "id": 39,
@@ -441,7 +479,8 @@
     "difficulty": "Medium",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "A fair coin is tossed twice. Find the probability of getting at least one head. Show all possible outcomes."
+    "question": "A fair coin is tossed twice. Find the probability of getting at least one head. Show all possible outcomes.",
+    "answer": "Sample space: {HH, HT, TH, TT} — 4 equally likely outcomes. At least one head means outcomes with one or more heads: {HH, HT, TH} — 3 favorable outcomes. Probability = 3/4 = 0.75 or 75%."
   },
   {
     "id": 40,
@@ -452,7 +491,8 @@
     "difficulty": "Medium",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "Solve the inequality 2x - 3 < 7 for real x. Represent the solution on a number line."
+    "question": "Solve the inequality 2x - 3 < 7 for real x. Represent the solution on a number line.",
+    "answer": "2x - 3 < 7 → 2x < 10 → x < 5. The solution is all real numbers less than 5. On a number line, draw an open circle at 5 and shade the region extending to the left (toward negative infinity)."
   },
   {
     "id": 41,
@@ -464,7 +504,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the value of sin 90°?",
-    "options": ["1", "0", "0.5", "undefined"]
+    "options": ["1", "0", "0.5", "undefined"],
+    "correctAnswer": "A"
   },
   {
     "id": 42,
@@ -475,7 +516,8 @@
     "difficulty": "Medium",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "Prove the trigonometric identity: sin²θ + cos²θ = 1. Using this identity, find the value of sin θ if cos θ = 0.6."
+    "question": "Prove the trigonometric identity: sin²θ + cos²θ = 1. Using this identity, find the value of sin θ if cos θ = 0.6.",
+    "answer": "Using the unit circle, by Pythagoras theorem: x² + y² = r² where x = r cos θ, y = r sin θ. Dividing by r²: cos²θ + sin²θ = 1. If cos θ = 0.6, then sin²θ = 1 - cos²θ = 1 - 0.36 = 0.64. Therefore sin θ = ±0.8."
   },
   {
     "id": 43,
@@ -486,7 +528,8 @@
     "difficulty": "Hard",
     "marks": 5,
     "questionType": "Long Answer",
-    "question": "A vertical tower stands on horizontal ground. From a point on the ground 30 m away from the foot of the tower, the angle of elevation of the top of the tower is 60°. Find the height of the tower. Also find the angle of elevation from a point 10 m closer."
+    "question": "A vertical tower stands on horizontal ground. From a point on the ground 30 m away from the foot of the tower, the angle of elevation of the top of the tower is 60°. Find the height of the tower. Also find the angle of elevation from a point 10 m closer.",
+    "answer": "Height of tower: tan 60° = h/30 → h = 30 × tan 60° = 30 × √3 ≈ 51.96 m. From a point 20 m away (10 m closer): tan θ = h/20 = 51.96/20 = 2.598 → θ = tan⁻¹(2.598) ≈ 68.9°."
   },
   {
     "id": 44,
@@ -498,7 +541,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "A fair six-sided die is rolled. What is the probability of getting an even number?",
-    "options": ["1/2", "1/3", "1/6", "2/3"]
+    "options": ["1/2", "1/3", "1/6", "2/3"],
+    "correctAnswer": "A"
   },
   {
     "id": 45,
@@ -509,7 +553,8 @@
     "difficulty": "Medium",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "Find the distance between the points A(0, 0) and B(3, 4) using the distance formula."
+    "question": "Find the distance between the points A(0, 0) and B(3, 4) using the distance formula.",
+    "answer": "Distance formula: d = √[(x₂ - x₁)² + (y₂ - y₁)²]. Substituting A(0, 0) and B(3, 4): d = √[(3 - 0)² + (4 - 0)²] = √(9 + 16) = √25 = 5 units."
   },
   {
     "id": 46,
@@ -520,7 +565,8 @@
     "difficulty": "Hard",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "Find the equation of a straight line passing through the point (1, 2) with slope 3. Also find the x-intercept and y-intercept of this line."
+    "question": "Find the equation of a straight line passing through the point (1, 2) with slope 3. Also find the x-intercept and y-intercept of this line.",
+    "answer": "Using point-slope form: y - y₁ = m(x - x₁) → y - 2 = 3(x - 1) → y = 3x - 1. To find y-intercept, set x = 0: y = -1. y-intercept is (0, -1). To find x-intercept, set y = 0: 0 = 3x - 1 → x = 1/3. x-intercept is (1/3, 0)."
   },
   {
     "id": 47,
@@ -532,7 +578,8 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the arithmetic mean of the numbers 1, 2, 3, 4, 5?",
-    "options": ["3", "2.5", "3.5", "4"]
+    "options": ["3", "2.5", "3.5", "4"],
+    "correctAnswer": "A"
   },
   {
     "id": 48,
@@ -543,7 +590,8 @@
     "difficulty": "Medium",
     "marks": 3,
     "questionType": "Short Answer",
-    "question": "Calculate the median of the following data set: 3, 7, 1, 9, 5, 11, 8. Arrange the data in ascending order and find the median."
+    "question": "Calculate the median of the following data set: 3, 7, 1, 9, 5, 11, 8. Arrange the data in ascending order and find the median.",
+    "answer": "Arranging in ascending order: 1, 3, 5, 7, 8, 9, 11. There are 7 values (odd count), so the median is the middle value. The 4th value is 7. Therefore, the median is 7."
   },
   {
     "id": 49,
@@ -554,7 +602,8 @@
     "difficulty": "Medium",
     "marks": 2,
     "questionType": "Short Answer",
-    "question": "If A = {1, 2, 3} and B = {3, 4, 5}, find A ∪ B (union) and A ∩ B (intersection). Represent the sets using a Venn diagram."
+    "question": "If A = {1, 2, 3} and B = {3, 4, 5}, find A ∪ B (union) and A ∩ B (intersection). Represent the sets using a Venn diagram.",
+    "answer": "Union A ∪ B = {1, 2, 3, 4, 5} — all elements in either set. Intersection A ∩ B = {3} — elements common to both sets. In a Venn diagram, two overlapping circles represent A and B, with 3 in the overlapping region."
   },
   {
     "id": 50,
@@ -566,6 +615,7 @@
     "marks": 1,
     "questionType": "MCQ",
     "question": "What is the reciprocal of the sine function?",
-    "options": ["Cosecant", "Cosine", "Secant", "Cotangent"]
+    "options": ["Cosecant", "Cosine", "Secant", "Cotangent"],
+    "correctAnswer": "A"
   }
 ]
