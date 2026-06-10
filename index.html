@@ -2210,6 +2210,288 @@ tbody td .subject {
   .preview-header-right { justify-content: flex-end; }
 }
 
+/* ===== EXAM PAPER (Phase 2) ===== */
+.exam-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.exam-summary-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.exam-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+.exam-summary-item {}
+.exam-summary-label {
+  font-size: 0.733rem;
+  font-weight: 500;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.exam-summary-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+.exam-paper-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 32px;
+}
+.exam-paper-title {
+  font-size: 1.133rem;
+  font-weight: 650;
+  color: var(--gray-900);
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+}
+.exam-paper-subtitle {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  margin-bottom: 28px;
+}
+.exam-section {
+  margin-bottom: 28px;
+}
+.exam-section:last-child {
+  margin-bottom: 0;
+}
+.exam-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--gray-100);
+  margin-bottom: 16px;
+}
+.exam-section-header h4 {
+  font-size: 0.933rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  letter-spacing: -0.2px;
+}
+.exam-section-marks {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-400);
+}
+.exam-question {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-50);
+}
+.exam-question:last-child {
+  border-bottom: none;
+}
+.exam-question-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.exam-q-num {
+  font-size: 0.867rem;
+  font-weight: 600;
+  color: var(--indigo-600);
+  min-width: 28px;
+  flex-shrink: 0;
+}
+.exam-q-text {
+  font-size: 0.867rem;
+  color: var(--gray-700);
+  line-height: 1.6;
+  flex: 1;
+}
+.exam-q-marks {
+  font-size: 0.733rem;
+  font-weight: 600;
+  color: var(--gray-400);
+  background: var(--gray-50);
+  padding: 2px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.exam-q-options {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  margin-left: 40px;
+}
+.exam-q-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+}
+.exam-q-opt-letter {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.733rem;
+  font-weight: 600;
+  color: var(--gray-500);
+  flex-shrink: 0;
+}
+.exam-total-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 2px solid var(--gray-100);
+}
+.exam-total-label {
+  font-size: 0.933rem;
+  font-weight: 600;
+  color: var(--gray-700);
+}
+.exam-total-value {
+  font-size: 1.067rem;
+  font-weight: 650;
+  color: var(--gray-900);
+  letter-spacing: -0.3px;
+}
+/* Compliance Card */
+.compliance-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 24px;
+}
+.compliance-title {
+  font-size: 0.867rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  letter-spacing: -0.2px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.compliance-title svg {
+  width: 18px;
+  height: 18px;
+  color: var(--indigo-500);
+}
+.compliance-item {
+  margin-bottom: 16px;
+}
+.compliance-item:last-child {
+  margin-bottom: 0;
+}
+.compliance-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.compliance-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-600);
+}
+.compliance-score {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gray-800);
+}
+.compliance-track {
+  height: 8px;
+  background: var(--gray-100);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.compliance-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+.compliance-fill.indigo { background: var(--indigo-500); }
+.compliance-fill.green { background: var(--green-500); }
+.compliance-fill.blue { background: var(--blue-500); }
+.compliance-fill.yellow { background: var(--yellow-500); }
+.compliance-detail {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gray-100);
+}
+.compliance-detail h5 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 12px;
+}
+.compliance-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.compliance-detail-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.733rem;
+}
+.compliance-detail-item .cd-label {
+  color: var(--gray-400);
+  font-weight: 500;
+}
+.compliance-detail-item .cd-value {
+  color: var(--gray-700);
+  font-weight: 600;
+}
+/* Exam empty state */
+.exam-empty {
+  text-align: center;
+  padding: 80px 40px;
+  background: var(--bg-surface);
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+}
+.exam-empty svg {
+  width: 48px;
+  height: 48px;
+  color: var(--gray-300);
+  margin-bottom: 16px;
+}
+.exam-empty h3 {
+  font-size: 1.067rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 6px;
+}
+.exam-empty p {
+  font-size: 0.867rem;
+  color: var(--gray-400);
+}
+@media (max-width: 1400px) {
+  .exam-summary-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 1100px) {
+  .exam-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .exam-summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .exam-paper-card { padding: 20px; }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -2904,79 +3186,81 @@ tbody td .subject {
 
   </div><!-- /gen-layout -->
 
+  <!-- Progress Overlay -->
+  <div class="gen-progress" id="genProgress">
+    <div class="gen-progress-ring"></div>
+    <h3>Generating Question Paper</h3>
+    <p>Selecting questions to match your blueprint...</p>
+    <div class="gen-progress-bar">
+      <div class="gen-progress-fill" id="genProgressFill" style="width:60%"></div>
+    </div>
+  </div>
+
 </div><!-- /page-generate-exam -->
 
 <!-- ===== PAGE: EXAM PREVIEW ===== -->
 <div id="page-exam-preview" style="display:none;">
-  <div class="gen-header">
-    <div>
-      <h2>Exam Blueprint Preview</h2>
-      <p>Review your exam configuration before generating questions</p>
-    </div>
+
+  <!-- Empty State (shown when no exam generated) -->
+  <div id="examEmptyState" class="exam-empty">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    <h3>No Exam Generated</h3>
+    <p>Go to Generate Exam to create a new question paper.</p>
   </div>
 
-  <div class="preview-header">
-    <div class="preview-header-left">
-      <button class="preview-back-btn" id="previewBackBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
-        Back to Form
-      </button>
-    </div>
-    <div class="preview-header-right">
-      <button class="preview-json-btn" id="viewRawJsonBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        View Raw Blueprint JSON
-      </button>
-      <button class="preview-gen-btn" id="previewGenerateBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M12 2v20M2 12h20"/></svg>
-        Generate Question Paper
-      </button>
-    </div>
-  </div>
-
-  <div class="preview-layout" id="previewLayout">
-    <!-- Left Column -->
-    <div>
-      <!-- Overview Card -->
-      <div class="preview-card" style="margin-bottom:24px;" id="previewOverviewCard">
-        <div class="preview-card-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-          Blueprint Overview
-        </div>
-        <div id="previewOvGrid" class="preview-ov-grid"></div>
-        <div id="previewChapterBadges" class="preview-chapter-badges"></div>
-        <div id="previewOvMeta" class="preview-ov-meta"></div>
-      </div>
-
-      <!-- Distribution Cards -->
-      <div class="preview-dist-grid">
-        <div class="preview-card">
-          <div class="preview-card-title">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-            Difficulty Distribution
-          </div>
-          <div id="previewDifficultyGroup" class="preview-dist-group"></div>
-        </div>
-        <div class="preview-card">
-          <div class="preview-card-title">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            Question Types
-          </div>
-          <div id="previewQtypeGroup" class="preview-dist-group"></div>
-        </div>
+  <!-- Exam Content (shown after generation) -->
+  <div id="examContent" style="display:none;">
+    <div class="gen-header">
+      <div>
+        <h2>Generated Question Paper</h2>
+        <p id="examPaperSubtitle">Review your generated examination paper below</p>
       </div>
     </div>
 
-    <!-- Right Column -->
-    <div>
-      <!-- Validation Card -->
-      <div class="preview-card preview-validation-card" id="previewValidationCard">
-        <div class="preview-card-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Validation Status
+    <div class="preview-header">
+      <div class="preview-header-left">
+        <button class="preview-back-btn" id="previewBackBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+          Back to Form
+        </button>
+      </div>
+      <div class="preview-header-right">
+        <button class="preview-json-btn" id="viewRawJsonBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          View Raw Blueprint JSON
+        </button>
+      </div>
+    </div>
+
+    <!-- Top Summary Card -->
+    <div class="exam-summary-card" id="examSummaryCard">
+      <div class="exam-summary-grid" id="examSummaryGrid"></div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="exam-layout" id="examLayout">
+      <div>
+        <!-- Question Paper Card -->
+        <div class="exam-paper-card" id="examPaperCard">
+          <div class="exam-paper-title">Question Paper</div>
+          <div class="exam-paper-subtitle"><span id="examQuestionCount">0</span> questions &middot; <span id="examTotalMarksDisplay">0</span> marks</div>
+          <div id="examPaperContent">
+            <p style="text-align:center;padding:40px 0;color:var(--gray-400);">No questions selected yet.</p>
+          </div>
         </div>
-        <div id="previewValidationBody"></div>
-        <div id="previewMetadata" class="preview-meta-block"></div>
+      </div>
+
+      <div>
+        <!-- Compliance Card -->
+        <div class="compliance-card" id="complianceCard">
+          <div class="compliance-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Blueprint Compliance
+          </div>
+          <div id="complianceContent">
+            <p style="text-align:center;padding:20px 0;color:var(--gray-400);">Compliance data will appear after generation.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -3005,6 +3289,9 @@ tbody td .subject {
 
 </div><!-- /app-view -->
 
+<script src="data/questions.js"></script>
+<script src="services/questionBank.js"></script>
+<script src="services/questionSelector.js"></script>
 <script>
 const CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
 const STORAGE_KEY = 'edint_auth';
@@ -3144,7 +3431,7 @@ const pageTitleEl = document.querySelector('.nav-left h1');
 const pageNames = {
   dashboard: 'Dashboard',
   'generate-exam': 'Generate Exam',
-  'exam-preview': 'Exam Blueprint',
+  'exam-preview': 'Exam Preview',
 };
 
 function navigateTo(page) {
@@ -3162,15 +3449,19 @@ function navigateTo(page) {
     document.querySelector('.nav-item[data-page="generate-exam"]')?.classList.add('active');
     pageTitleEl.textContent = 'Generate Exam';
   } else if (page === 'exam-preview') {
-    if (!currentBlueprint) {
-      pageGenerateExam.style.display = 'block';
+    if (!currentExamResult) {
+      document.getElementById('examEmptyState').style.display = 'block';
+      document.getElementById('examContent').style.display = 'none';
+      pageExamPreview.style.display = 'block';
       document.querySelector('.nav-item[data-page="generate-exam"]')?.classList.add('active');
-      pageTitleEl.textContent = 'Generate Exam';
+      pageTitleEl.textContent = 'Exam Preview';
       return;
     }
+    document.getElementById('examEmptyState').style.display = 'none';
+    document.getElementById('examContent').style.display = 'block';
     pageExamPreview.style.display = 'block';
     document.querySelector('.nav-item[data-page="generate-exam"]')?.classList.add('active');
-    pageTitleEl.textContent = 'Exam Blueprint';
+    pageTitleEl.textContent = 'Exam Preview';
   }
 
   if (window.innerWidth <= 768) {
@@ -3458,7 +3749,10 @@ document.getElementById('boardSelect')?.addEventListener('change', updateSummary
 
 // ===== BLUEPRINT ENGINE =====
 const BLUEPRINT_KEY = 'edint_blueprint';
+const EXAM_RESULT_KEY = 'edint_exam_result';
 let currentBlueprint = null;
+let questionBank = null;
+let currentExamResult = null;
 
 /**
  * Collect all form values into a plain object.
@@ -3616,139 +3910,11 @@ function loadStoredBlueprint() {
 }
 
 /**
- * Render the blueprint preview page (production-ready card layout).
+ * Populate the blueprint JSON overlay.
  * @param {ExamBlueprint} bp
  */
 function renderBlueprintPreview(bp) {
-  // Store JSON for overlay
-  const jsonStr = JSON.stringify(bp, null, 2);
-  document.getElementById('blueprintJsonPre').textContent = jsonStr;
-
-  // --- Overview Grid: Board / Class / Subject ---
-  document.getElementById('previewOvGrid').innerHTML = `
-    <div class="preview-ov-item">
-      <div class="ov-label">Board</div>
-      <div class="ov-value">${escHtml(bp.curriculum.board)}</div>
-    </div>
-    <div class="preview-ov-item">
-      <div class="ov-label">Class</div>
-      <div class="ov-value">${bp.curriculum.class ? 'Class ' + escHtml(bp.curriculum.class) : '—'}</div>
-    </div>
-    <div class="preview-ov-item">
-      <div class="ov-label">Subject</div>
-      <div class="ov-value">${escHtml(bp.curriculum.subject)}</div>
-    </div>
-  `;
-
-  // --- Chapter Badges ---
-  const badgeContainer = document.getElementById('previewChapterBadges');
-  if (bp.curriculum.chapters.length > 0) {
-    badgeContainer.innerHTML = bp.curriculum.chapters.map(ch =>
-      '<span class="preview-chapter-badge">' + escHtml(ch) + '</span>'
-    ).join('');
-  } else {
-    badgeContainer.innerHTML = '<span style="font-size:0.8rem;color:var(--gray-400)">No chapters selected</span>';
-  }
-
-  // --- Meta Row: Marks / Duration / Questions ---
-  document.getElementById('previewOvMeta').innerHTML = `
-    <div class="preview-ov-meta-item">
-      <div class="meta-label">Total Marks</div>
-      <div class="meta-value">${bp.config.totalMarks}<span class="meta-unit">marks</span></div>
-    </div>
-    <div class="preview-ov-meta-item">
-      <div class="meta-label">Duration</div>
-      <div class="meta-value">${bp.config.duration}<span class="meta-unit">min</span></div>
-    </div>
-    <div class="preview-ov-meta-item">
-      <div class="meta-label">Questions</div>
-      <div class="meta-value">${bp.config.numQuestions}<span class="meta-unit">total</span></div>
-    </div>
-  `;
-
-  // --- Difficulty Distribution ---
-  const diffItems = [
-    { key: 'Easy', val: bp.difficulty.easy, cls: 'easy' },
-    { key: 'Medium', val: bp.difficulty.medium, cls: 'medium' },
-    { key: 'Hard', val: bp.difficulty.hard, cls: 'hard' }
-  ];
-  document.getElementById('previewDifficultyGroup').innerHTML = diffItems.map(d => `
-    <div class="preview-dist-item">
-      <div class="preview-dist-top">
-        <span class="preview-dist-name">${d.key}</span>
-        <span class="preview-dist-pct">${d.val}%</span>
-      </div>
-      <div class="preview-dist-track">
-        <div class="preview-dist-fill ${d.cls}" style="width:${d.val}%"></div>
-      </div>
-    </div>
-  `).join('');
-
-  // --- Question Types Distribution ---
-  const qtItems = [
-    { key: 'MCQ', val: bp.questionTypes.mcq, cls: 'mcq' },
-    { key: 'Short Answer', val: bp.questionTypes.short, cls: 'short' },
-    { key: 'Long Answer', val: bp.questionTypes.long, cls: 'long' },
-    { key: 'Case Study', val: bp.questionTypes.caseStudy, cls: 'case' },
-    { key: 'Numerical', val: bp.questionTypes.numerical, cls: 'num' }
-  ];
-  document.getElementById('previewQtypeGroup').innerHTML = qtItems.map(q => `
-    <div class="preview-dist-item">
-      <div class="preview-dist-top">
-        <span class="preview-dist-name">${q.key}</span>
-        <span class="preview-dist-pct">${q.val}%</span>
-      </div>
-      <div class="preview-dist-track">
-        <div class="preview-dist-fill ${q.cls}" style="width:${q.val}%"></div>
-      </div>
-    </div>
-  `).join('');
-
-  // --- Validation Status ---
-  const diffTotal = bp.difficulty.easy + bp.difficulty.medium + bp.difficulty.hard;
-  const qtTotal = bp.questionTypes.mcq + bp.questionTypes.short + bp.questionTypes.long
-    + bp.questionTypes.caseStudy + bp.questionTypes.numerical;
-  const checks = [
-    { label: 'Marks & Configuration Valid', pass: bp.config.totalMarks > 0 && bp.config.duration > 0 && bp.config.numQuestions > 0 },
-    { label: 'Difficulty Sum = 100%', pass: diffTotal === 100 },
-    { label: 'Question Types Sum = 100%', pass: qtTotal === 100 },
-    { label: 'Chapters Selected', pass: bp.curriculum.chapters.length > 0 },
-    { label: 'Blueprint Ready', pass: true }
-  ];
-  const allPass = checks.every(c => c.pass);
-
-  document.getElementById('previewValidationBody').innerHTML = `
-    <div class="preview-val-all" style="${allPass ? '' : 'background:var(--yellow-50);'}">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        ${allPass ? '<polyline points="20 6 9 17 4 12"/>' : '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>'}
-      </svg>
-      <span>${allPass ? 'All checks passed' : 'Some checks require attention'}</span>
-    </div>
-    <div class="preview-val-items">
-      ${checks.map(c => `
-        <div class="preview-val-item">
-          <div class="preview-val-icon ${c.pass ? 'pass' : 'fail'}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              ${c.pass ? '<polyline points="20 6 9 17 4 12"/>' : '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'}
-            </svg>
-          </div>
-          <span class="preview-val-text">${c.label}</span>
-        </div>
-      `).join('')}
-    </div>
-  `;
-
-  // --- Metadata ---
-  document.getElementById('previewMetadata').innerHTML = `
-    <div class="preview-meta-row">
-      <span class="preview-meta-label">Blueprint ID</span>
-      <span class="preview-meta-val">${escHtml(bp.metadata.id)}</span>
-    </div>
-    <div class="preview-meta-row">
-      <span class="preview-meta-label">Created</span>
-      <span class="preview-meta-val">${new Date(bp.metadata.createdAt).toLocaleString()}</span>
-    </div>
-  `;
+  document.getElementById('blueprintJsonPre').textContent = JSON.stringify(bp, null, 2);
 }
 
 /** Toggle the raw blueprint JSON overlay. */
@@ -3777,21 +3943,175 @@ genBtn.addEventListener('click', function() {
   }
 
   storeBlueprint(bp);
-  renderBlueprintPreview(bp);
-  navigateTo('exam-preview');
+
+  if (!questionBank) {
+    alert('Question bank is not loaded yet. Please try again.');
+    return;
+  }
+
+  const progress = document.getElementById('genProgress');
+  progress.classList.add('show');
+  document.querySelector('.gen-progress h3').textContent = 'Building Question Paper';
+  document.querySelector('.gen-progress p').textContent = 'Selecting questions to match your blueprint...';
+
+  setTimeout(function() {
+    renderBlueprintPreview(bp);
+
+    const selector = new QuestionSelector(questionBank);
+    const result = selector.select(bp);
+
+    currentExamResult = result;
+    try {
+      localStorage.setItem(EXAM_RESULT_KEY, JSON.stringify(result));
+    } catch (e) {}
+
+    renderExamPaper(bp, result);
+
+    progress.classList.remove('show');
+    navigateTo('exam-preview');
+  }, 300);
 });
+
+// ===== EXAM PAPER RENDER =====
+function renderExamPaper(bp, result) {
+  const { sections, compliance, totalMarksSelected, totalQuestionsSelected } = result;
+
+  document.getElementById('examQuestionCount').textContent = totalQuestionsSelected;
+  document.getElementById('examTotalMarksDisplay').textContent = totalMarksSelected;
+
+  // Summary Grid
+  document.getElementById('examSummaryGrid').innerHTML = `
+    <div class="exam-summary-item">
+      <div class="exam-summary-label">Board</div>
+      <div class="exam-summary-value">${escHtml(bp.curriculum.board)}</div>
+    </div>
+    <div class="exam-summary-item">
+      <div class="exam-summary-label">Class</div>
+      <div class="exam-summary-value">${bp.curriculum.class ? 'Class ' + escHtml(bp.curriculum.class) : '—'}</div>
+    </div>
+    <div class="exam-summary-item">
+      <div class="exam-summary-label">Subject</div>
+      <div class="exam-summary-value">${escHtml(bp.curriculum.subject)}</div>
+    </div>
+    <div class="exam-summary-item">
+      <div class="exam-summary-label">Chapters</div>
+      <div class="exam-summary-value">${bp.curriculum.chapters.length}</div>
+    </div>
+    <div class="exam-summary-item">
+      <div class="exam-summary-label">Total Marks</div>
+      <div class="exam-summary-value">${totalMarksSelected} / ${bp.config.totalMarks}</div>
+    </div>
+    <div class="exam-summary-item">
+      <div class="exam-summary-label">Duration</div>
+      <div class="exam-summary-value">${bp.config.duration} min</div>
+    </div>
+  `;
+
+  // Question Paper
+  const sectionConfig = [
+    { type: 'MCQ', label: 'SECTION A — Multiple Choice Questions' },
+    { type: 'Short Answer', label: 'SECTION B — Short Answer Questions' },
+    { type: 'Long Answer', label: 'SECTION C — Long Answer Questions' },
+  ];
+
+  let qNum = 1;
+  let paperHtml = '';
+
+  for (const { type, label } of sectionConfig) {
+    const questions = sections[type] || [];
+    if (questions.length === 0) continue;
+
+    const sectionMarks = questions.reduce((s, q) => s + q.marks, 0);
+    paperHtml += `
+      <div class="exam-section">
+        <div class="exam-section-header">
+          <h4>${label}</h4>
+          <span class="exam-section-marks">${sectionMarks} marks</span>
+        </div>
+    `;
+
+    for (const q of questions) {
+      paperHtml += `
+        <div class="exam-question">
+          <div class="exam-question-row">
+            <span class="exam-q-num">${qNum}.</span>
+            <span class="exam-q-text">${escHtml(q.question)}</span>
+            <span class="exam-q-marks">[${q.marks} mark${q.marks > 1 ? 's' : ''}]</span>
+          </div>
+          ${q.options ? `
+          <div class="exam-q-options">
+            ${q.options.map(function(opt, i) {
+              return '<div class="exam-q-option"><span class="exam-q-opt-letter">' + 'ABCD'[i] + '</span><span>' + escHtml(opt) + '</span></div>';
+            }).join('')}
+          </div>` : ''}
+        </div>
+      `;
+      qNum++;
+    }
+
+    paperHtml += `</div>`;
+  }
+
+  paperHtml += `
+    <div class="exam-total-row">
+      <span class="exam-total-label">Total</span>
+      <span class="exam-total-value">${totalMarksSelected} marks</span>
+    </div>
+  `;
+
+  document.getElementById('examPaperContent').innerHTML = paperHtml;
+
+  // Compliance
+  renderCompliance(compliance);
+}
+
+function renderCompliance(compliance) {
+  const items = [
+    { label: 'Marks Match', score: compliance.marksMatch, color: 'indigo' },
+    { label: 'Difficulty Distribution', score: compliance.difficultyMatch, color: 'green' },
+    { label: 'Question Type Distribution', score: compliance.typeMatch, color: 'blue' },
+  ];
+
+  const diffKeys = { Easy: 'Easy', Medium: 'Medium', Hard: 'Hard' };
+  const typeKeys = { 'MCQ': 'MCQ', 'Short Answer': 'Short', 'Long Answer': 'Long' };
+
+  document.getElementById('complianceContent').innerHTML = items.map(function(item) {
+    return `
+      <div class="compliance-item">
+        <div class="compliance-top">
+          <span class="compliance-label">${item.label}</span>
+          <span class="compliance-score">${item.score}%</span>
+        </div>
+        <div class="compliance-track">
+          <div class="compliance-fill ${item.color}" style="width:${item.score}%"></div>
+        </div>
+      </div>
+    `;
+  }).join('') + `
+    <div class="compliance-detail">
+      <h5>Actual Distribution</h5>
+      <div class="compliance-detail-grid">
+        ${Object.entries(compliance.actualDifficulty).map(function(kv) {
+          return '<div class="compliance-detail-item"><span class="cd-label">' + kv[0] + '</span><span class="cd-value">' + kv[1] + '%</span></div>';
+        }).join('')}
+        ${Object.entries(compliance.actualTypes).map(function(kv) {
+          return '<div class="compliance-detail-item"><span class="cd-label">' + kv[0] + '</span><span class="cd-value">' + kv[1] + '%</span></div>';
+        }).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function loadStoredExamResult() {
+  try {
+    const raw = localStorage.getItem(EXAM_RESULT_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
 
 // ===== PREVIEW PAGE BUTTONS =====
 document.getElementById('previewBackBtn').addEventListener('click', function() {
   navigateTo('generate-exam');
-});
-
-document.getElementById('previewGenerateBtn').addEventListener('click', function() {
-  if (!currentBlueprint) {
-    navigateTo('generate-exam');
-    return;
-  }
-  alert('Question generation will be available in Phase 2.\n\nBlueprint ID: ' + currentBlueprint.metadata.id);
 });
 
 // ===== JSON OVERLAY =====
@@ -3841,6 +4161,13 @@ themeToggle.addEventListener('click', function() {
   }
 })();
 
+// ===== Load Question Bank =====
+try {
+  questionBank = new QuestionBank(QUESTIONS_DATA);
+} catch (e) {
+  console.warn('Question bank data not available.', e);
+}
+
 // ===== Init =====
 (function init() {
   const existing = getStoredSession();
@@ -3851,6 +4178,16 @@ themeToggle.addEventListener('click', function() {
   const stored = loadStoredBlueprint();
   if (stored) {
     currentBlueprint = stored;
+  }
+
+  const storedResult = loadStoredExamResult();
+  if (storedResult) {
+    currentExamResult = storedResult;
+  }
+
+  if (currentBlueprint && currentExamResult && questionBank) {
+    renderBlueprintPreview(currentBlueprint);
+    renderExamPaper(currentBlueprint, currentExamResult);
   }
 
   if (existing) return;
