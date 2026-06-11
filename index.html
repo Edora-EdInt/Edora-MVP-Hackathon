@@ -6444,6 +6444,11 @@ function handlePublishExam() {
   exams.unshift(examInstance);
   savePublishedExams(exams);
 
+  // Save to Firestore for cross-device access
+  if (window.__saveExamToFirestore) {
+    window.__saveExamToFirestore(examInstance);
+  }
+
   // Debug: verify storage
   var _verifyExams = getPublishedExams();
   console.log('[Publish] Stored exam code:', JSON.stringify(code));
@@ -6871,7 +6876,7 @@ function closeStudentPortal() {
   studentExamData = null;
 }
 
-function handleStudentCodeEntry() {
+async function handleStudentCodeEntry() {
   var code = document.getElementById('studentCodeInput').value.trim().toUpperCase();
   var errorEl = document.getElementById('studentCodeError');
 
@@ -6880,31 +6885,35 @@ function handleStudentCodeEntry() {
     return;
   }
 
-  var exams = getPublishedExams();
-  var examCodes = exams.map(function(e) { return e.code; });
-  console.log('===== EXAM CODE VALIDATION =====');
-  console.log('Entered Code:', JSON.stringify(code));
-  console.log('Stored exam codes:', JSON.stringify(examCodes));
-  console.log('Total stored exams:', exams.length);
-
   var exam = null;
-  for (var i = 0; i < exams.length; i++) {
-    var storedCode = (exams[i].code || '').toString().trim().toUpperCase();
-    console.log('Compare: stored=' + JSON.stringify(storedCode) + ' entered=' + JSON.stringify(code) + ' match=' + (storedCode === code));
-    if (storedCode === code) {
-      exam = exams[i];
-      break;
-    }
+
+  // Try Firestore first (cross-device)
+  if (window.__getExamFromFirestore) {
+    exam = await window.__getExamFromFirestore(code);
+    console.log('[StudentPortal] Firestore lookup result:', exam ? 'found' : 'not found');
   }
 
-  console.log('Match Found:', exam !== null);
+  // Fall back to localStorage (cache / same-device)
+  if (!exam) {
+    var exams = getPublishedExams();
+    console.log('===== EXAM CODE VALIDATION (localStorage fallback) =====');
+    console.log('Entered Code:', JSON.stringify(code));
+    console.log('Total cached exams:', exams.length);
+
+    for (var i = 0; i < exams.length; i++) {
+      var storedCode = (exams[i].code || '').toString().trim().toUpperCase();
+      console.log('Compare: stored=' + JSON.stringify(storedCode) + ' entered=' + JSON.stringify(code) + ' match=' + (storedCode === code));
+      if (storedCode === code) {
+        exam = exams[i];
+        break;
+      }
+    }
+
+    console.log('Match Found:', exam !== null);
+  }
 
   if (!exam) {
-    if (exams.length === 0) {
-      errorEl.textContent = 'No exams available. Please publish an exam first.';
-    } else {
-      errorEl.textContent = 'Invalid exam code. Please check and try again.';
-    }
+    errorEl.textContent = 'Invalid exam code. Please check and try again.';
     return;
   }
 
