@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
-import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, addDoc, collection } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAAZjia-jnYHvzIADGkISYUjreoSqT_iwE",
@@ -58,6 +58,15 @@ window.__getExamFromFirestore = async function(code) {
   } catch(e) {
     console.error("[Firestore] Retrieval failed:", e.message);
     return null;
+  }
+};
+
+window.__saveSubmissionToFirestore = async function(submissionData) {
+  try {
+    var docRef = await addDoc(collection(db, "submissions"), submissionData);
+    console.log("[Firestore] Submission saved:", docRef.id, "for exam:", submissionData.examCode);
+  } catch(e) {
+    console.error("[Firestore] Submission save failed:", e.message);
   }
 };
 
