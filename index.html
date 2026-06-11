@@ -3639,6 +3639,130 @@ tbody td .subject {
   color: var(--indigo-600);
 }
 
+/* ===== Score Display (Phase 5.1) ===== */
+.student-score-section {
+  margin: 16px 0 20px;
+  padding: 20px;
+  background: var(--bg-inset);
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+  text-align: center;
+}
+.student-score-main {
+  margin-bottom: 6px;
+}
+.student-score-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--indigo-600);
+}
+.student-score-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.student-score-percent {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+.student-percent-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.student-percent-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.student-score-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  border-top: 1px solid var(--gray-200);
+  padding-top: 14px;
+}
+.student-stat-item {
+  text-align: center;
+}
+.student-stat-value {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.student-stat-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.student-stat-item.correct .student-stat-value { color: var(--green-600); }
+.student-stat-item.incorrect .student-stat-value { color: var(--red-600); }
+.student-stat-item.unanswered .student-stat-value { color: var(--gray-400); }
+.student-view-details-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-family: var(--font);
+  color: var(--indigo-600);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.student-view-details-btn:hover {
+  border-color: var(--indigo-300);
+  background: var(--indigo-50);
+}
+.student-detailed-results {
+  width: 100%;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+.student-detailed-results.hidden { display: none; }
+.student-results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  text-align: left;
+}
+.student-results-table th {
+  padding: 8px 10px;
+  background: var(--bg-inset);
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--gray-200);
+}
+.student-results-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--gray-100);
+  color: var(--text-primary);
+}
+.student-results-table tr:last-child td { border-bottom: none; }
+.student-result-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.student-result-badge.correct {
+  background: var(--green-50);
+  color: var(--green-700);
+}
+.student-result-badge.incorrect {
+  background: var(--red-50);
+  color: var(--red-700);
+}
+
 /* Confirm dialog overlay */
 .student-confirm-overlay {
   position: fixed;
@@ -4777,8 +4901,52 @@ tbody td .subject {
       <div class="student-complete-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
       </div>
-      <h2>Exam Submitted Successfully</h2>
-      <p class="subtitle">Your responses have been recorded.</p>
+      <h2>Exam Completed</h2>
+
+      <div class="student-score-section" id="studentScoreSection" style="display:none;">
+        <div class="student-score-main">
+          <span class="student-score-value" id="studentScoreDisplay">—</span>
+          <span class="student-score-label">Score</span>
+        </div>
+        <div class="student-score-percent">
+          <span class="student-percent-value" id="studentPercentDisplay">—</span>
+          <span class="student-percent-label">Percentage</span>
+        </div>
+        <div class="student-score-stats">
+          <div class="student-stat-item correct">
+            <span class="student-stat-value" id="studentCorrectCount">0</span>
+            <span class="student-stat-label">Correct</span>
+          </div>
+          <div class="student-stat-item incorrect">
+            <span class="student-stat-value" id="studentIncorrectCount">0</span>
+            <span class="student-stat-label">Incorrect</span>
+          </div>
+          <div class="student-stat-item unanswered">
+            <span class="student-stat-value" id="studentUnansweredCount">0</span>
+            <span class="student-stat-label">Unanswered</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="student-view-details-btn hidden" id="studentViewDetailsBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        View Detailed Results
+      </button>
+
+      <div class="student-detailed-results hidden" id="studentDetailedResults">
+        <table class="student-results-table">
+          <thead>
+            <tr>
+              <th>Q</th>
+              <th>Your Answer</th>
+              <th>Correct Answer</th>
+              <th>Result</th>
+            </tr>
+          </thead>
+          <tbody id="studentResultsBody"></tbody>
+        </table>
+      </div>
+
       <div class="student-complete-details">
         <div class="student-complete-row">
           <span class="student-complete-row-label">Exam Name</span>
@@ -6917,29 +7085,59 @@ async function handleStudentCodeEntry() {
     return;
   }
 
+  // ===== DEBUG: Log retrieved exam structure =====
+  console.log('[DEBUG] Exam retrieved from Firestore. Fields:', Object.keys(exam));
+  console.log('[DEBUG] exam.code:', exam.code, 'type:', typeof exam.code);
+  console.log('[DEBUG] exam.name:', exam.name, 'type:', typeof exam.name);
+  console.log('[DEBUG] exam.startTime:', exam.startTime, 'type:', typeof exam.startTime);
+  console.log('[DEBUG] exam.endTime:', exam.endTime, 'type:', typeof exam.endTime);
+  console.log('[DEBUG] exam.duration:', exam.duration, 'type:', typeof exam.duration);
+  console.log('[DEBUG] exam.paper type:', typeof exam.paper);
+  console.log('[DEBUG] exam.paper:', exam.paper ? 'exists' : 'UNDEFINED');
+  console.log('[DEBUG] exam.paper.sections:', exam.paper ? (typeof exam.paper.sections) : 'N/A');
+  if (exam.paper && exam.paper.sections) {
+    console.log('[DEBUG] paper.sections keys:', Object.keys(exam.paper.sections));
+    console.log('[DEBUG] MCQ count:', (exam.paper.sections.MCQ || []).length);
+    console.log('[DEBUG] Short Answer count:', (exam.paper.sections['Short Answer'] || []).length);
+    console.log('[DEBUG] Long Answer count:', (exam.paper.sections['Long Answer'] || []).length);
+    if (exam.paper.sections.MCQ && exam.paper.sections.MCQ.length > 0) {
+      var firstQ = exam.paper.sections.MCQ[0];
+      console.log('[DEBUG] First MCQ question fields:', Object.keys(firstQ));
+      console.log('[DEBUG] First MCQ id:', firstQ.id, 'correctAnswer:', firstQ.correctAnswer);
+    }
+  }
+
   // Check if exam is accessible
   var now = new Date();
   var startTime = new Date(exam.startTime);
   var endTime = new Date(exam.endTime);
+  console.log('[DEBUG] Time check - now:', now.toISOString(), 'start:', startTime.toISOString(), 'end:', endTime.toISOString());
+  console.log('[DEBUG] start valid:', !isNaN(startTime.getTime()), 'end valid:', !isNaN(endTime.getTime()));
 
-  if (now < startTime) {
+  if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
+    console.log('[DEBUG] TIME CHECK SKIPPED - invalid dates');
+  } else if (now < startTime) {
+    console.log('[DEBUG] TIME CHECK FAILED - exam not started yet');
     errorEl.textContent = 'This exam has not started yet. Please come back at the scheduled time.';
     return;
-  }
-
-  if (now > endTime) {
+  } else if (now > endTime) {
+    console.log('[DEBUG] TIME CHECK FAILED - exam already ended');
     errorEl.textContent = 'This exam has already ended.';
     return;
+  } else {
+    console.log('[DEBUG] TIME CHECK PASSED - exam is accessible');
   }
 
   // Check if there's a completed submission for this code
   var existingSession = getStudentSession();
   if (existingSession && existingSession.submitted && existingSession.examCode === code) {
+    console.log('[DEBUG] Found existing completed submission, showing completion screen');
     showCompletionScreen(existingSession);
     return;
   }
 
   // Initialize session
+  console.log('[DEBUG] Creating student session...');
   studentExamData = {
     examCode: code,
     examData: exam,
@@ -6952,10 +7150,12 @@ async function handleStudentCodeEntry() {
   };
 
   // Flatten questions into an ordered list with section info
+  console.log('[DEBUG] Flattening questions...');
   var allQuestions = [];
   var sectionKeys = ['MCQ', 'Short Answer', 'Long Answer'];
   for (var si = 0; si < sectionKeys.length; si++) {
-    var sectionQs = exam.paper.sections[sectionKeys[si]];
+    var sectionQs = exam.paper && exam.paper.sections ? exam.paper.sections[sectionKeys[si]] : null;
+    console.log('[DEBUG] Section', sectionKeys[si], ':', sectionQs ? sectionQs.length + ' questions' : 'MISSING');
     if (sectionQs && sectionQs.length > 0) {
       for (var qi = 0; qi < sectionQs.length; qi++) {
         allQuestions.push({
@@ -6966,24 +7166,44 @@ async function handleStudentCodeEntry() {
     }
   }
   studentExamData.questionOrder = allQuestions;
+  console.log('[DEBUG] Total flattened questions:', allQuestions.length);
 
+  console.log('[DEBUG] Saving session and showing instructions...');
   saveStudentSession(studentExamData);
   showInstructions();
+  console.log('[DEBUG] showInstructions() called successfully');
 }
 
 function showInstructions() {
+  console.log('[DEBUG] showInstructions() entered');
+  console.log('[DEBUG] studentExamData:', studentExamData ? 'exists' : 'null');
+  console.log('[DEBUG] studentExamData.examData:', studentExamData && studentExamData.examData ? 'exists' : 'null');
+
   document.getElementById('studentCodeScreen').style.display = 'none';
   document.getElementById('studentInstructionsScreen').style.display = 'block';
   document.getElementById('studentLiveScreen').style.display = 'none';
   document.getElementById('studentCompletionScreen').style.display = 'none';
 
   var exam = studentExamData.examData;
-  document.getElementById('studentInstExamName').textContent = exam.name;
-  document.getElementById('studentInstExamSubtitle').textContent = exam.subject + ' — ' + exam.board + ', Class ' + exam.class;
-  document.getElementById('studentInstSubject').textContent = exam.subject;
-  document.getElementById('studentInstDuration').textContent = exam.duration + ' minutes';
-  document.getElementById('studentInstMarks').textContent = exam.totalMarks + ' marks';
-  document.getElementById('studentInstQuestions').textContent = studentExamData.questionOrder.length + ' questions';
+  console.log('[DEBUG] Setting instructions fields...');
+  console.log('[DEBUG] exam.name:', exam ? exam.name : 'N/A');
+  console.log('[DEBUG] exam.subject:', exam ? exam.subject : 'N/A');
+  console.log('[DEBUG] exam.board:', exam ? exam.board : 'N/A');
+  console.log('[DEBUG] exam.class:', exam ? exam.class : 'N/A');
+  console.log('[DEBUG] exam.duration:', exam ? exam.duration : 'N/A');
+  console.log('[DEBUG] exam.totalMarks:', exam ? exam.totalMarks : 'N/A');
+
+  try {
+    document.getElementById('studentInstExamName').textContent = exam.name;
+    document.getElementById('studentInstExamSubtitle').textContent = exam.subject + ' \u2014 ' + exam.board + ', Class ' + exam.class;
+    document.getElementById('studentInstSubject').textContent = exam.subject;
+    document.getElementById('studentInstDuration').textContent = exam.duration + ' minutes';
+    document.getElementById('studentInstMarks').textContent = exam.totalMarks + ' marks';
+    document.getElementById('studentInstQuestions').textContent = studentExamData.questionOrder.length + ' questions';
+    console.log('[DEBUG] Instructions fields populated successfully');
+  } catch(e) {
+    console.error('[DEBUG] ERROR in showInstructions:', e.message);
+  }
 }
 
 function startExam() {
@@ -7242,6 +7462,83 @@ function handleAutoSubmit() {
   showCompletionScreen(studentExamData);
 }
 
+// ===== Phase 5.1: MCQ Evaluation Engine =====
+function evaluateExam(session) {
+  var questions = session.questionOrder || [];
+  var answers = session.answers || {};
+
+  var totalMCQ = 0;
+  var attempted = 0;
+  var correct = 0;
+  var incorrect = 0;
+  var unanswered = 0;
+  var marksObtained = 0;
+  var maxMarks = 0;
+  var details = [];
+
+  for (var i = 0; i < questions.length; i++) {
+    var q = questions[i];
+    var qd = q.data;
+    if (q.sectionType !== 'MCQ') continue;
+
+    totalMCQ++;
+    maxMarks += (qd.marks || 1);
+    var studentAnswer = (answers[qd.id] || '').toString().trim().toUpperCase();
+    var correctAnswer = (qd.correctAnswer || '').toString().trim().toUpperCase();
+    var isCorrect = studentAnswer === correctAnswer && studentAnswer !== '';
+
+    if (!studentAnswer) {
+      unanswered++;
+    } else if (isCorrect) {
+      attempted++;
+      correct++;
+      marksObtained += (qd.marks || 1);
+    } else {
+      attempted++;
+      incorrect++;
+    }
+
+    details.push({
+      num: details.length + 1,
+      question: qd.question,
+      studentAnswer: studentAnswer || '—',
+      correctAnswer: correctAnswer || '—',
+      correct: isCorrect,
+    });
+  }
+
+  var percentage = maxMarks > 0 ? Math.round((marksObtained / maxMarks) * 100) : 0;
+
+  return {
+    totalMCQ: totalMCQ,
+    attempted: attempted,
+    correct: correct,
+    incorrect: incorrect,
+    unanswered: unanswered,
+    marksObtained: marksObtained,
+    maxMarks: maxMarks,
+    percentage: percentage,
+    details: details,
+  };
+}
+
+function renderDetailedResults(result) {
+  var tbody = document.getElementById('studentResultsBody');
+  var html = '';
+  for (var i = 0; i < result.details.length; i++) {
+    var d = result.details[i];
+    var badgeClass = d.correct ? 'correct' : 'incorrect';
+    var badgeText = d.correct ? 'Correct' : 'Incorrect';
+    html += '<tr>'
+      + '<td>' + d.num + '</td>'
+      + '<td>' + escHtml(d.studentAnswer) + '</td>'
+      + '<td>' + escHtml(d.correctAnswer) + '</td>'
+      + '<td><span class="student-result-badge ' + badgeClass + '">' + badgeText + '</span></td>'
+      + '</tr>';
+  }
+  tbody.innerHTML = html || '<tr><td colspan="4" style="text-align:center;color:var(--text-secondary);padding:20px;">No MCQ questions to evaluate.</td></tr>';
+}
+
 function showCompletionScreen(session) {
   document.getElementById('studentCodeScreen').style.display = 'none';
   document.getElementById('studentInstructionsScreen').style.display = 'none';
@@ -7259,6 +7556,36 @@ function showCompletionScreen(session) {
   });
 
   document.getElementById('studentCompleteCode').textContent = session.examCode;
+
+  // Evaluate and display score
+  var result = evaluateExam(session);
+  if (result.totalMCQ > 0) {
+    document.getElementById('studentScoreDisplay').textContent = result.marksObtained + ' / ' + result.maxMarks;
+    document.getElementById('studentPercentDisplay').textContent = result.percentage + '%';
+    document.getElementById('studentCorrectCount').textContent = result.correct;
+    document.getElementById('studentIncorrectCount').textContent = result.incorrect;
+    document.getElementById('studentUnansweredCount').textContent = result.unanswered;
+    document.getElementById('studentScoreSection').style.display = 'block';
+    document.getElementById('studentViewDetailsBtn').classList.remove('hidden');
+
+    renderDetailedResults(result);
+
+    // Save submission to Firestore
+    if (window.__saveSubmissionToFirestore) {
+      window.__saveSubmissionToFirestore({
+        examCode: session.examCode,
+        examName: exam.name,
+        studentAnswers: session.answers || {},
+        score: result.marksObtained,
+        maxMarks: result.maxMarks,
+        percentage: result.percentage,
+        correct: result.correct,
+        incorrect: result.incorrect,
+        unanswered: result.unanswered,
+        submittedAt: session.submittedAt || new Date().toISOString(),
+      });
+    }
+  }
 }
 
 // ===== STUDENT EVENT BINDINGS =====
@@ -7287,6 +7614,16 @@ document.getElementById('studentConfirmCancel').addEventListener('click', functi
   document.getElementById('studentConfirmOverlay').classList.add('hidden');
 });
 document.getElementById('studentConfirmSubmit').addEventListener('click', handleSubmitExam);
+
+// Detailed results toggle
+var _detailedResultsOpen = false;
+document.getElementById('studentViewDetailsBtn').addEventListener('click', function() {
+  _detailedResultsOpen = !_detailedResultsOpen;
+  document.getElementById('studentDetailedResults').classList.toggle('hidden');
+  this.innerHTML = _detailedResultsOpen
+    ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Hide Detailed Results'
+    : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> View Detailed Results';
+});
 
 // Auto-resume on page load
 (function checkStudentSession() {
