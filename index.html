@@ -3132,6 +3132,596 @@ tbody td .subject {
   flex-wrap: wrap;
   gap: 8px;
 }
+
+/* ===== STUDENT EXAM VIEW ===== */
+.student-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: var(--bg-page);
+  overflow-y: auto;
+  font-family: var(--font);
+}
+.student-overlay.hidden { display: none; }
+
+.student-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.student-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.student-header-logo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.student-header-logo span { color: var(--indigo-600); }
+.student-header-exam-name {
+  font-size: 0.867rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding-left: 12px;
+  border-left: 1px solid var(--border-color);
+}
+.student-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.student-timer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.067rem;
+  font-weight: 650;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.student-timer svg { width: 18px; height: 18px; color: var(--indigo-600); }
+.student-timer.warning { color: var(--yellow-600); }
+.student-timer.warning svg { color: var(--yellow-500); }
+.student-timer.critical { color: var(--red-600); }
+.student-timer.critical svg { color: var(--red-500); }
+.student-save-status {
+  font-size: 0.733rem;
+  color: var(--gray-400);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.student-save-status.saved { color: var(--green-600); }
+
+.student-body {
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+  gap: 24px;
+  min-height: calc(100vh - 56px);
+}
+.student-main {
+  flex: 1;
+  min-width: 0;
+}
+.student-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+}
+
+.student-q-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+.student-q-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.student-q-number {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--indigo-600);
+  background: var(--indigo-50);
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+.student-q-marks {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-500);
+}
+.student-q-type {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-400);
+}
+.student-q-chapter {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+}
+.student-q-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.student-q-options { display: flex; flex-direction: column; gap: 8px; }
+.student-q-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: var(--bg-surface);
+}
+.student-q-option:hover {
+  border-color: var(--gray-300);
+  background: var(--bg-inset);
+}
+.student-q-option.selected {
+  border-color: var(--indigo-400);
+  background: var(--indigo-50);
+}
+.student-q-option-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--gray-300);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+.student-q-option.selected .student-q-option-radio {
+  border-color: var(--indigo-600);
+}
+.student-q-option-radio-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 0.15s ease;
+}
+.student-q-option.selected .student-q-option-radio-inner {
+  background: var(--indigo-600);
+}
+.student-q-option-label {
+  font-size: 0.933rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.student-q-textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 0.933rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  resize: vertical;
+  transition: border-color 0.15s ease;
+}
+.student-q-textarea:focus {
+  outline: none;
+  border-color: var(--indigo-400);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+}
+.student-q-textarea::placeholder { color: var(--gray-400); }
+
+.student-nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.student-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.867rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid var(--gray-200);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+}
+.student-nav-btn:hover:not(:disabled) {
+  border-color: var(--gray-300);
+  color: var(--text-primary);
+  background: var(--bg-inset);
+}
+.student-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.student-nav-btn svg { width: 16px; height: 16px; }
+.student-nav-btn.primary {
+  background: var(--indigo-600);
+  border-color: var(--indigo-600);
+  color: #fff;
+}
+.student-nav-btn.primary:hover:not(:disabled) {
+  background: var(--indigo-700);
+  border-color: var(--indigo-700);
+}
+.student-nav-btn.danger {
+  color: var(--red-600);
+  border-color: var(--red-200);
+}
+.student-nav-btn.danger:hover:not(:disabled) {
+  background: var(--red-50);
+  border-color: var(--red-300);
+}
+.student-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.student-palette {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  position: sticky;
+  top: 80px;
+}
+.student-palette-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
+.student-palette-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.student-palette-num {
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid var(--gray-200);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+}
+.student-palette-num:hover {
+  border-color: var(--gray-300);
+  background: var(--bg-inset);
+}
+.student-palette-num.current {
+  border-color: var(--indigo-600);
+  background: var(--indigo-50);
+  color: var(--indigo-600);
+}
+.student-palette-num.answered {
+  background: var(--green-50);
+  border-color: var(--green-500);
+  color: var(--green-600);
+}
+.student-palette-num.current.answered {
+  border-color: var(--indigo-600);
+  background: var(--indigo-50);
+  color: var(--indigo-600);
+}
+.student-palette-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+}
+.student-palette-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.733rem;
+  color: var(--text-secondary);
+}
+.student-palette-legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid var(--gray-200);
+  flex-shrink: 0;
+}
+.student-palette-legend-swatch.current {
+  border-color: var(--indigo-600);
+  background: var(--indigo-50);
+}
+.student-palette-legend-swatch.answered {
+  background: var(--green-50);
+  border-color: var(--green-500);
+}
+.student-palette-legend-swatch.not-answered {
+  background: var(--bg-surface);
+  border-color: var(--gray-200);
+}
+
+/* Instructions screen */
+.student-center-card {
+  max-width: 600px;
+  margin: 60px auto;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+.student-center-card h2 {
+  font-size: 1.333rem;
+  font-weight: 650;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.student-center-card .subtitle {
+  font-size: 0.867rem;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+}
+.student-inst-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  text-align: left;
+  margin-bottom: 28px;
+}
+.student-inst-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--bg-inset);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+.student-inst-item svg { width: 18px; height: 18px; color: var(--indigo-600); flex-shrink: 0; }
+.student-inst-item-label {
+  font-size: 0.733rem;
+  color: var(--gray-400);
+}
+.student-inst-item-value {
+  font-size: 0.933rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.student-start-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 40px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+  background: var(--indigo-600);
+  color: #fff;
+}
+.student-start-btn:hover { background: var(--indigo-700); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.student-start-btn svg { width: 20px; height: 20px; }
+
+/* Code entry */
+.student-code-input {
+  width: 100%;
+  max-width: 320px;
+  padding: 14px 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-family: monospace;
+  text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  transition: border-color 0.15s ease;
+  margin-bottom: 16px;
+}
+.student-code-input:focus {
+  outline: none;
+  border-color: var(--indigo-400);
+  box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+}
+.student-code-input::placeholder { letter-spacing: normal; font-weight: 400; color: var(--gray-400); font-size: 0.933rem; }
+.student-code-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border-radius: 10px;
+  font-size: 0.933rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+  background: var(--indigo-600);
+  color: #fff;
+}
+.student-code-btn:hover { background: var(--indigo-700); }
+.student-code-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.student-code-error {
+  font-size: 0.8rem;
+  color: var(--red-600);
+  margin-bottom: 12px;
+  min-height: 1.2em;
+}
+.student-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  cursor: pointer;
+  transition: color 0.15s ease;
+  margin-top: 20px;
+  background: none;
+  border: none;
+  font-family: var(--font);
+}
+.student-back-link:hover { color: var(--text-secondary); }
+.student-back-link svg { width: 14px; height: 14px; }
+
+/* Completion screen */
+.student-complete-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--green-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.student-complete-icon svg { width: 32px; height: 32px; color: var(--green-600); }
+.student-complete-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+.student-complete-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--bg-inset);
+  border-radius: 8px;
+  font-size: 0.867rem;
+}
+.student-complete-row-label { color: var(--text-secondary); }
+.student-complete-row-value { font-weight: 600; color: var(--text-primary); }
+.student-complete-code {
+  font-family: monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--indigo-600);
+}
+
+/* Confirm dialog overlay */
+.student-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.student-confirm-overlay.hidden { display: none; }
+.student-confirm-card {
+  background: var(--bg-surface);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: var(--shadow-drop);
+  text-align: center;
+}
+.student-confirm-card h3 {
+  font-size: 1.133rem;
+  font-weight: 650;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.student-confirm-card p {
+  font-size: 0.867rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+.student-confirm-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.student-confirm-btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 0.867rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid var(--gray-200);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+}
+.student-confirm-btn:hover {
+  border-color: var(--gray-300);
+  color: var(--text-primary);
+}
+.student-confirm-btn.danger {
+  background: var(--red-600);
+  border-color: var(--red-600);
+  color: #fff;
+}
+.student-confirm-btn.danger:hover {
+  background: var(--red-700);
+  border-color: var(--red-700);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .student-body { flex-direction: column; padding: 16px; }
+  .student-sidebar { width: 100%; }
+  .student-palette { position: static; }
+  .student-palette-grid { grid-template-columns: repeat(6, 1fr); }
+  .student-inst-grid { grid-template-columns: 1fr; }
+  .student-nav-row { flex-wrap: wrap; }
+  .student-header { padding: 0 16px; }
+  .student-header-exam-name { display: none; }
+}
+
+/* Transitions */
+.student-fade-in {
+  animation: studentFadeIn 0.25s ease;
+}
+@keyframes studentFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 </style>
 </head>
 <body>
@@ -3156,6 +3746,13 @@ tbody td .subject {
     <button class="demo-btn" id="demoBtn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10h-10V2z"/><path d="M22 12a10 10 0 0 0-10-10v10h10z"/></svg>
       Continue as Guest (Demo)
+    </button>
+
+    <div class="login-divider">student?</div>
+
+    <button class="demo-btn" id="studentPortalBtn" style="margin-top:0;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Take an Exam
     </button>
 
     <p class="login-footer">By signing in, you agree to our Terms of Service and Privacy Policy.</p>
@@ -4050,9 +4647,184 @@ tbody td .subject {
 
 </div><!-- /app-view -->
 
+<!-- ===== STUDENT EXAM VIEW ===== -->
+<div class="student-overlay hidden" id="studentExamOverlay">
+
+  <!-- Code Entry Screen -->
+  <div id="studentCodeScreen">
+    <div class="student-center-card student-fade-in" style="margin-top:80px;">
+      <div class="student-header-logo" style="font-size:1.333rem;margin-bottom:6px;">Ed<span>Int</span></div>
+      <p class="subtitle">Enter the exam code provided by your instructor</p>
+      <div style="margin-bottom:8px;">
+        <input type="text" class="student-code-input" id="studentCodeInput" placeholder="e.g. PHYS9281" maxlength="10" autocomplete="off" spellcheck="false" style="text-transform:uppercase;">
+      </div>
+      <div class="student-code-error" id="studentCodeError"></div>
+      <button class="student-code-btn" id="studentCodeSubmitBtn">Join Exam</button>
+      <div>
+        <button class="student-back-link" id="studentBackToLoginBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to login
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instructions Screen -->
+  <div id="studentInstructionsScreen" style="display:none;">
+    <div class="student-center-card student-fade-in" style="margin-top:60px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:40px;height:40px;color:var(--indigo-600);margin-bottom:12px;">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+      </svg>
+      <h2 id="studentInstExamName">Examination</h2>
+      <p class="subtitle" id="studentInstExamSubtitle">Read the instructions carefully before starting</p>
+      <div class="student-inst-grid">
+        <div class="student-inst-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <div><div class="student-inst-item-label">Subject</div><div class="student-inst-item-value" id="studentInstSubject">—</div></div>
+        </div>
+        <div class="student-inst-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div><div class="student-inst-item-label">Duration</div><div class="student-inst-item-value" id="studentInstDuration">—</div></div>
+        </div>
+        <div class="student-inst-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <div><div class="student-inst-item-label">Total Marks</div><div class="student-inst-item-value" id="studentInstMarks">—</div></div>
+        </div>
+        <div class="student-inst-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <div><div class="student-inst-item-label">Questions</div><div class="student-inst-item-value" id="studentInstQuestions">—</div></div>
+        </div>
+      </div>
+      <div style="text-align:left;background:var(--yellow-50);border:1px solid var(--yellow-500);border-radius:8px;padding:12px 16px;margin-bottom:24px;">
+        <p style="font-size:0.8rem;color:var(--yellow-600);font-weight:500;">
+          <strong>Note:</strong> Once you start, the timer will begin counting down. Your answers are saved automatically. You cannot pause the exam once started.
+        </p>
+      </div>
+      <button class="student-start-btn" id="studentStartExamBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Start Exam
+      </button>
+    </div>
+  </div>
+
+  <!-- Live Exam Screen -->
+  <div id="studentLiveScreen" style="display:none;">
+    <div class="student-header">
+      <div class="student-header-left">
+        <div class="student-header-logo">Ed<span>Int</span></div>
+        <div class="student-header-exam-name" id="studentLiveExamName">Examination</div>
+      </div>
+      <div class="student-header-right">
+        <div class="student-save-status" id="studentSaveStatus">All changes saved</div>
+        <div class="student-timer" id="studentTimer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="studentTimerDisplay">00:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="student-body">
+      <div class="student-main">
+        <div class="student-q-card student-fade-in" id="studentQuestionCard">
+          <div class="student-q-meta">
+            <span class="student-q-number" id="studentQNumber">Q1</span>
+            <span class="student-q-marks" id="studentQMarks">[1 mark]</span>
+            <span class="student-q-type" id="studentQType">MCQ</span>
+            <span class="student-q-chapter" id="studentQChapter">Chapter</span>
+          </div>
+          <div class="student-q-text" id="studentQText">Question text goes here.</div>
+          <div id="studentQInput"></div>
+        </div>
+        <div class="student-nav-row">
+          <button class="student-nav-btn" id="studentPrevBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Previous
+          </button>
+          <div class="student-nav-right">
+            <button class="student-nav-btn danger" id="studentSubmitBtn">Submit Exam</button>
+            <button class="student-nav-btn primary" id="studentNextBtn">
+              Next
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="student-sidebar">
+        <div class="student-palette">
+          <div class="student-palette-title">Question Palette</div>
+          <div class="student-palette-grid" id="studentPaletteGrid"></div>
+          <div class="student-palette-legend">
+            <div class="student-palette-legend-item">
+              <div class="student-palette-legend-swatch current"></div>
+              <span>Current</span>
+            </div>
+            <div class="student-palette-legend-item">
+              <div class="student-palette-legend-swatch answered"></div>
+              <span>Answered</span>
+            </div>
+            <div class="student-palette-legend-item">
+              <div class="student-palette-legend-swatch not-answered"></div>
+              <span>Not Answered</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Completion Screen -->
+  <div id="studentCompletionScreen" style="display:none;">
+    <div class="student-center-card student-fade-in" style="margin-top:80px;">
+      <div class="student-complete-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      </div>
+      <h2>Exam Submitted Successfully</h2>
+      <p class="subtitle">Your responses have been recorded.</p>
+      <div class="student-complete-details">
+        <div class="student-complete-row">
+          <span class="student-complete-row-label">Exam Name</span>
+          <span class="student-complete-row-value" id="studentCompleteExamName">—</span>
+        </div>
+        <div class="student-complete-row">
+          <span class="student-complete-row-label">Subject</span>
+          <span class="student-complete-row-value" id="studentCompleteSubject">—</span>
+        </div>
+        <div class="student-complete-row">
+          <span class="student-complete-row-label">Submission Time</span>
+          <span class="student-complete-row-value" id="studentCompleteTime">—</span>
+        </div>
+        <div class="student-complete-row">
+          <span class="student-complete-row-label">Exam Code</span>
+          <span class="student-complete-row-value student-complete-code" id="studentCompleteCode">—</span>
+        </div>
+      </div>
+      <button class="student-back-link" id="studentCompleteCloseBtn" style="font-size:0.867rem;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Submit Confirmation Dialog -->
+  <div class="student-confirm-overlay hidden" id="studentConfirmOverlay">
+    <div class="student-confirm-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:36px;height:36px;color:var(--yellow-500);margin-bottom:12px;">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <h3>Submit Exam?</h3>
+      <p id="studentConfirmText">Are you sure you want to submit?</p>
+      <div class="student-confirm-actions">
+        <button class="student-confirm-btn" id="studentConfirmCancel">Cancel</button>
+        <button class="student-confirm-btn danger" id="studentConfirmSubmit">Submit</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 <script src="data/questions.js"></script>
 <script src="services/questionBank.js"></script>
 <script src="services/questionSelector.js"></script>
+<script type="module" src="services/firebase.js"></script>
 <script>
 const CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
 const STORAGE_KEY = 'edint_auth';
@@ -5983,6 +6755,495 @@ themeToggle.addEventListener('click', function() {
     setTheme(true);
   } else if (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     setTheme(true);
+  }
+})();
+
+// ===== STUDENT EXAM PORTAL (Phase 4C.3) =====
+var STUDENT_SESSION_KEY = 'edint_student_exam_session';
+var studentExamData = null;
+var studentTimerInterval = null;
+var studentAutoSaveTimer = null;
+
+function getStudentSession() {
+  try {
+    var raw = localStorage.getItem(STUDENT_SESSION_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+
+function saveStudentSession(data) {
+  try {
+    localStorage.setItem(STUDENT_SESSION_KEY, JSON.stringify(data));
+  } catch (e) { /* localStorage may be full */ }
+}
+
+function clearStudentSession() {
+  localStorage.removeItem(STUDENT_SESSION_KEY);
+}
+
+function openStudentPortal() {
+  // Clear any existing session that is completed
+  var session = getStudentSession();
+  if (session && session.submitted) {
+    clearStudentSession();
+    session = null;
+  }
+
+  document.getElementById('studentExamOverlay').classList.remove('hidden');
+  document.getElementById('studentCodeScreen').style.display = 'block';
+  document.getElementById('studentInstructionsScreen').style.display = 'none';
+  document.getElementById('studentLiveScreen').style.display = 'none';
+  document.getElementById('studentCompletionScreen').style.display = 'none';
+  document.getElementById('studentCodeInput').value = '';
+  document.getElementById('studentCodeError').textContent = '';
+  document.getElementById('studentCodeSubmitBtn').disabled = false;
+
+  // If there's an active (non-submitted) session, resume
+  if (session && !session.submitted && session.examData && session.startTimestamp) {
+    studentExamData = session;
+    showLiveExam();
+    return;
+  }
+
+  // Focus the code input
+  setTimeout(function() {
+    document.getElementById('studentCodeInput').focus();
+  }, 300);
+}
+
+function closeStudentPortal() {
+  if (studentTimerInterval) {
+    clearInterval(studentTimerInterval);
+    studentTimerInterval = null;
+  }
+  if (studentAutoSaveTimer) {
+    clearInterval(studentAutoSaveTimer);
+    studentAutoSaveTimer = null;
+  }
+  document.getElementById('studentExamOverlay').classList.add('hidden');
+  studentExamData = null;
+}
+
+function handleStudentCodeEntry() {
+  var code = document.getElementById('studentCodeInput').value.trim().toUpperCase();
+  var errorEl = document.getElementById('studentCodeError');
+
+  if (!code) {
+    errorEl.textContent = 'Please enter an exam code.';
+    return;
+  }
+
+  var exams = getPublishedExams();
+  var exam = null;
+  for (var i = 0; i < exams.length; i++) {
+    if (exams[i].code.toUpperCase() === code) {
+      exam = exams[i];
+      break;
+    }
+  }
+
+  if (!exam) {
+    errorEl.textContent = 'Invalid exam code. Please check and try again.';
+    return;
+  }
+
+  // Check if exam is accessible
+  var now = new Date();
+  var startTime = new Date(exam.startTime);
+  var endTime = new Date(exam.endTime);
+
+  if (now < startTime) {
+    errorEl.textContent = 'This exam has not started yet. Please come back at the scheduled time.';
+    return;
+  }
+
+  if (now > endTime) {
+    errorEl.textContent = 'This exam has already ended.';
+    return;
+  }
+
+  // Check if there's a completed submission for this code
+  var existingSession = getStudentSession();
+  if (existingSession && existingSession.submitted && existingSession.examCode === code) {
+    showCompletionScreen(existingSession);
+    return;
+  }
+
+  // Initialize session
+  studentExamData = {
+    examCode: code,
+    examData: exam,
+    answers: {},
+    currentIndex: 0,
+    startTimestamp: null,
+    submitted: false,
+    submittedAt: null,
+    questionOrder: [],
+  };
+
+  // Flatten questions into an ordered list with section info
+  var allQuestions = [];
+  var sectionKeys = ['MCQ', 'Short Answer', 'Long Answer'];
+  for (var si = 0; si < sectionKeys.length; si++) {
+    var sectionQs = exam.paper.sections[sectionKeys[si]];
+    if (sectionQs && sectionQs.length > 0) {
+      for (var qi = 0; qi < sectionQs.length; qi++) {
+        allQuestions.push({
+          sectionType: sectionKeys[si],
+          data: sectionQs[qi],
+        });
+      }
+    }
+  }
+  studentExamData.questionOrder = allQuestions;
+
+  saveStudentSession(studentExamData);
+  showInstructions();
+}
+
+function showInstructions() {
+  document.getElementById('studentCodeScreen').style.display = 'none';
+  document.getElementById('studentInstructionsScreen').style.display = 'block';
+  document.getElementById('studentLiveScreen').style.display = 'none';
+  document.getElementById('studentCompletionScreen').style.display = 'none';
+
+  var exam = studentExamData.examData;
+  document.getElementById('studentInstExamName').textContent = exam.name;
+  document.getElementById('studentInstExamSubtitle').textContent = exam.subject + ' — ' + exam.board + ', Class ' + exam.class;
+  document.getElementById('studentInstSubject').textContent = exam.subject;
+  document.getElementById('studentInstDuration').textContent = exam.duration + ' minutes';
+  document.getElementById('studentInstMarks').textContent = exam.totalMarks + ' marks';
+  document.getElementById('studentInstQuestions').textContent = studentExamData.questionOrder.length + ' questions';
+}
+
+function startExam() {
+  studentExamData.startTimestamp = Date.now();
+  studentExamData.submitted = false;
+  saveStudentSession(studentExamData);
+  showLiveExam();
+}
+
+function showLiveExam() {
+  document.getElementById('studentCodeScreen').style.display = 'none';
+  document.getElementById('studentInstructionsScreen').style.display = 'none';
+  document.getElementById('studentLiveScreen').style.display = 'block';
+  document.getElementById('studentCompletionScreen').style.display = 'none';
+
+  var exam = studentExamData.examData;
+  document.getElementById('studentLiveExamName').textContent = exam.name;
+
+  renderQuestionByIndex(studentExamData.currentIndex);
+  renderPalette();
+  updateNavButtons();
+
+  // Start timer if not already running
+  if (studentTimerInterval) {
+    clearInterval(studentTimerInterval);
+  }
+  updateTimerDisplay();
+  studentTimerInterval = setInterval(updateTimerDisplay, 1000);
+
+  // Start auto-save
+  if (studentAutoSaveTimer) {
+    clearInterval(studentAutoSaveTimer);
+  }
+  studentAutoSaveTimer = setInterval(autoSave, 5000);
+
+  updateSaveStatus('All changes saved');
+}
+
+function renderQuestionByIndex(index) {
+  var questions = studentExamData.questionOrder;
+  if (index < 0 || index >= questions.length) return;
+
+  var q = questions[index];
+  var qd = q.data;
+  var qNum = index + 1;
+
+  document.getElementById('studentQNumber').textContent = 'Q' + qNum;
+  document.getElementById('studentQMarks').textContent = '[' + qd.marks + ' mark' + (qd.marks > 1 ? 's' : '') + ']';
+  document.getElementById('studentQType').textContent = qd.questionType || q.sectionType;
+  document.getElementById('studentQChapter').textContent = qd.chapter || '';
+  document.getElementById('studentQText').textContent = qd.question;
+
+  var inputContainer = document.getElementById('studentQInput');
+  var savedAnswer = studentExamData.answers[qd.id] || '';
+
+  if (q.sectionType === 'MCQ' && qd.options && qd.options.length > 0) {
+    var optionsHtml = '<div class="student-q-options">';
+    var labels = ['A', 'B', 'C', 'D'];
+    for (var i = 0; i < qd.options.length; i++) {
+      var selected = savedAnswer === labels[i] ? ' selected' : '';
+      optionsHtml += '<div class="student-q-option' + selected + '" data-opt-value="' + labels[i] + '" onclick="selectMCQ(this, ' + qd.id + ', \'' + labels[i] + '\')">'
+        + '<div class="student-q-option-radio"><div class="student-q-option-radio-inner"></div></div>'
+        + '<span class="student-q-option-label">' + labels[i] + '. ' + escHtml(qd.options[i]) + '</span>'
+        + '</div>';
+    }
+    optionsHtml += '</div>';
+    inputContainer.innerHTML = optionsHtml;
+  } else {
+    inputContainer.innerHTML = '<textarea class="student-q-textarea" id="studentTextAnswer" placeholder="Type your answer here..." oninput="onTextInput(' + qd.id + ', this.value)">' + escHtml(savedAnswer) + '</textarea>';
+  }
+}
+
+function selectMCQ(el, qId, value) {
+  // Deselect all options in this question
+  var parent = el.parentElement;
+  var options = parent.querySelectorAll('.student-q-option');
+  for (var i = 0; i < options.length; i++) {
+    options[i].classList.remove('selected');
+  }
+  el.classList.add('selected');
+
+  // Save answer immediately
+  studentExamData.answers[qId] = value;
+  saveStudentSession(studentExamData);
+  renderPalette();
+  updateSaveStatus('All changes saved');
+}
+
+function onTextInput(qId, value) {
+  studentExamData.answers[qId] = value;
+  saveStudentSession(studentExamData);
+  renderPalette();
+}
+
+function goToPrevQuestion() {
+  if (studentExamData.currentIndex > 0) {
+    studentExamData.currentIndex--;
+    saveStudentSession(studentExamData);
+    renderQuestionByIndex(studentExamData.currentIndex);
+    renderPalette();
+    updateNavButtons();
+  }
+}
+
+function goToNextQuestion() {
+  if (studentExamData.currentIndex >= studentExamData.questionOrder.length - 1) {
+    showConfirmSubmit();
+    return;
+  }
+  studentExamData.currentIndex++;
+  saveStudentSession(studentExamData);
+  renderQuestionByIndex(studentExamData.currentIndex);
+  renderPalette();
+  updateNavButtons();
+}
+
+function jumpToQuestion(index) {
+  if (index >= 0 && index < studentExamData.questionOrder.length) {
+    studentExamData.currentIndex = index;
+    saveStudentSession(studentExamData);
+    renderQuestionByIndex(index);
+    renderPalette();
+    updateNavButtons();
+  }
+}
+
+function renderPalette() {
+  var grid = document.getElementById('studentPaletteGrid');
+  var questions = studentExamData.questionOrder;
+  var current = studentExamData.currentIndex;
+  var answers = studentExamData.answers;
+
+  var html = '';
+  for (var i = 0; i < questions.length; i++) {
+    var qd = questions[i].data;
+    var isCurrent = i === current;
+    var isAnswered = answers[qd.id] && answers[qd.id].trim() !== '';
+
+    var cls = 'student-palette-num';
+    if (isCurrent && isAnswered) cls += ' current answered';
+    else if (isCurrent) cls += ' current';
+    else if (isAnswered) cls += ' answered';
+
+    html += '<div class="' + cls + '" onclick="jumpToQuestion(' + i + ')" title="Q' + (i + 1) + '">' + (i + 1) + '</div>';
+  }
+  grid.innerHTML = html;
+}
+
+function updateNavButtons() {
+  var prevBtn = document.getElementById('studentPrevBtn');
+  var nextBtn = document.getElementById('studentNextBtn');
+  var current = studentExamData.currentIndex;
+  var total = studentExamData.questionOrder.length;
+
+  prevBtn.disabled = current === 0;
+  nextBtn.textContent = current === total - 1 ? 'Finish' : 'Next';
+}
+
+function updateTimerDisplay() {
+  var display = document.getElementById('studentTimerDisplay');
+  var timerEl = document.getElementById('studentTimer');
+
+  if (!studentExamData || !studentExamData.startTimestamp || studentExamData.submitted) {
+    return;
+  }
+
+  var duration = studentExamData.examData.duration * 60 * 1000;
+  var elapsed = Date.now() - studentExamData.startTimestamp;
+  var remaining = Math.max(0, duration - elapsed);
+
+  var totalSeconds = Math.floor(remaining / 1000);
+  var mins = Math.floor(totalSeconds / 60);
+  var secs = totalSeconds % 60;
+
+  display.textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+
+  // Warning states
+  timerEl.classList.remove('warning', 'critical');
+  if (totalSeconds <= 60) {
+    timerEl.classList.add('critical');
+  } else if (totalSeconds <= 300) {
+    timerEl.classList.add('warning');
+  }
+
+  if (remaining <= 0) {
+    clearInterval(studentTimerInterval);
+    studentTimerInterval = null;
+    handleAutoSubmit();
+  }
+}
+
+function updateSaveStatus(text) {
+  var el = document.getElementById('studentSaveStatus');
+  el.textContent = text;
+  el.classList.remove('saved');
+}
+
+function autoSave() {
+  if (studentExamData && !studentExamData.submitted) {
+    saveStudentSession(studentExamData);
+    var el = document.getElementById('studentSaveStatus');
+    el.textContent = 'All changes saved';
+    el.classList.add('saved');
+    setTimeout(function() {
+      el.classList.remove('saved');
+    }, 2000);
+  }
+}
+
+function showConfirmSubmit() {
+  var totalQ = studentExamData.questionOrder.length;
+  var answered = 0;
+  for (var i = 0; i < totalQ; i++) {
+    var qd = studentExamData.questionOrder[i].data;
+    if (studentExamData.answers[qd.id] && studentExamData.answers[qd.id].trim() !== '') {
+      answered++;
+    }
+  }
+  var unanswered = totalQ - answered;
+  var confirmText = unanswered > 0
+    ? 'You have <strong>' + unanswered + '</strong> unanswered question' + (unanswered > 1 ? 's' : '') + '.<br>Submit anyway?'
+    : 'Are you sure you want to submit your exam?';
+
+  document.getElementById('studentConfirmText').innerHTML = confirmText;
+  document.getElementById('studentConfirmOverlay').classList.remove('hidden');
+}
+
+function handleSubmitExam() {
+  document.getElementById('studentConfirmOverlay').classList.add('hidden');
+  // Stop timer
+  if (studentTimerInterval) {
+    clearInterval(studentTimerInterval);
+    studentTimerInterval = null;
+  }
+  if (studentAutoSaveTimer) {
+    clearInterval(studentAutoSaveTimer);
+    studentAutoSaveTimer = null;
+  }
+
+  studentExamData.submitted = true;
+  studentExamData.submittedAt = new Date().toISOString();
+  saveStudentSession(studentExamData);
+
+  showCompletionScreen(studentExamData);
+}
+
+function handleAutoSubmit() {
+  if (studentExamData.submitted) return;
+  if (studentAutoSaveTimer) {
+    clearInterval(studentAutoSaveTimer);
+    studentAutoSaveTimer = null;
+  }
+  studentExamData.submitted = true;
+  studentExamData.submittedAt = new Date().toISOString();
+  saveStudentSession(studentExamData);
+  showCompletionScreen(studentExamData);
+}
+
+function showCompletionScreen(session) {
+  document.getElementById('studentCodeScreen').style.display = 'none';
+  document.getElementById('studentInstructionsScreen').style.display = 'none';
+  document.getElementById('studentLiveScreen').style.display = 'none';
+  document.getElementById('studentCompletionScreen').style.display = 'block';
+
+  var exam = session.examData;
+  document.getElementById('studentCompleteExamName').textContent = exam.name;
+  document.getElementById('studentCompleteSubject').textContent = exam.subject;
+
+  var submittedAt = session.submittedAt ? new Date(session.submittedAt) : new Date();
+  document.getElementById('studentCompleteTime').textContent = submittedAt.toLocaleString('en-US', {
+    month: 'short', day: 'numeric', year: 'numeric',
+    hour: '2-digit', minute: '2-digit',
+  });
+
+  document.getElementById('studentCompleteCode').textContent = session.examCode;
+}
+
+// ===== STUDENT EVENT BINDINGS =====
+document.getElementById('studentPortalBtn').addEventListener('click', openStudentPortal);
+document.getElementById('studentBackToLoginBtn').addEventListener('click', closeStudentPortal);
+document.getElementById('studentCompleteCloseBtn').addEventListener('click', closeStudentPortal);
+
+document.getElementById('studentCodeInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    handleStudentCodeEntry();
+  }
+});
+
+document.getElementById('studentCodeSubmitBtn').addEventListener('click', handleStudentCodeEntry);
+document.getElementById('studentStartExamBtn').addEventListener('click', startExam);
+document.getElementById('studentPrevBtn').addEventListener('click', goToPrevQuestion);
+document.getElementById('studentNextBtn').addEventListener('click', goToNextQuestion);
+document.getElementById('studentSubmitBtn').addEventListener('click', showConfirmSubmit);
+document.getElementById('studentConfirmOverlay').addEventListener('click', function(e) {
+  if (e.target === this) {
+    document.getElementById('studentConfirmOverlay').classList.add('hidden');
+  }
+});
+document.getElementById('studentConfirmCancel').addEventListener('click', function() {
+  document.getElementById('studentConfirmOverlay').classList.add('hidden');
+});
+document.getElementById('studentConfirmSubmit').addEventListener('click', handleSubmitExam);
+
+// Auto-resume on page load
+(function checkStudentSession() {
+  var session = getStudentSession();
+  if (session && !session.submitted && session.examData && session.startTimestamp) {
+    // Check if exam is still within time window
+    var now = Date.now();
+    var duration = session.examData.duration * 60 * 1000;
+    var deadline = session.startTimestamp + duration;
+    if (now >= deadline) {
+      // Time expired - auto-submit
+      session.submitted = true;
+      session.submittedAt = new Date().toISOString();
+      saveStudentSession(session);
+      studentExamData = session;
+      showCompletionScreen(session);
+      return;
+    }
+    // Resume exam
+    studentExamData = session;
+    document.getElementById('studentExamOverlay').classList.remove('hidden');
+    showLiveExam();
+  } else if (session && session.submitted) {
+    // Show completion screen if they come back
+    studentExamData = session;
+    document.getElementById('studentExamOverlay').classList.remove('hidden');
+    showCompletionScreen(session);
   }
 })();
 
