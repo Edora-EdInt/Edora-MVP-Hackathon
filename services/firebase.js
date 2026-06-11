@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAAZjia-jnYHvzIADGkISYUjreoSqT_iwE",
@@ -13,8 +14,51 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const db = getFirestore(app);
 
 window.__firebaseApp = app;
 window.__firebaseAnalytics = analytics;
+window.__firebaseDb = db;
 
-console.log('Firebase Connected Successfully');
+window.__saveExamToFirestore = async function(examData) {
+  try {
+    await setDoc(doc(db, "exams", examData.code), {
+      name: examData.name,
+      code: examData.code,
+      subject: examData.subject,
+      board: examData.board,
+      class: examData.class,
+      chapters: examData.chapters || [],
+      startTime: examData.startTime,
+      endTime: examData.endTime,
+      duration: examData.duration,
+      totalMarks: examData.totalMarks,
+      id: examData.id || "",
+      variantLabel: examData.variantLabel || "",
+      paper: examData.paper,
+      status: examData.status || "scheduled",
+      publishedAt: examData.publishedAt || new Date().toISOString(),
+      blueprint: examData.blueprint || null,
+    });
+    console.log("[Firestore] Exam saved successfully:", examData.code);
+  } catch(e) {
+    console.error("[Firestore] Save failed:", e.message);
+  }
+};
+
+window.__getExamFromFirestore = async function(code) {
+  try {
+    var snap = await getDoc(doc(db, "exams", code));
+    if (snap.exists()) {
+      console.log("[Firestore] Exam retrieved successfully:", code);
+      return snap.data();
+    }
+    console.log("[Firestore] Exam not found:", code);
+    return null;
+  } catch(e) {
+    console.error("[Firestore] Retrieval failed:", e.message);
+    return null;
+  }
+};
+
+console.log("Firebase Connected Successfully");
