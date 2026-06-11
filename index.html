@@ -6335,14 +6335,31 @@ var _publishBp = null;
 function getPublishedExams() {
   try {
     var raw = localStorage.getItem(PUBLISHED_EXAMS_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch { return []; }
+    if (!raw) {
+      console.log('[getPublishedExams] No data found for key:', PUBLISHED_EXAMS_KEY);
+      return [];
+    }
+    var parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) {
+      console.warn('[getPublishedExams] Stored data is not an array:', typeof parsed);
+      return [];
+    }
+    console.log('[getPublishedExams] Successfully retrieved', parsed.length, 'exams');
+    return parsed;
+  } catch(e) {
+    console.error('[getPublishedExams] PARSE FAILED:', e.message);
+    console.log('[getPublishedExams] Raw data:', localStorage.getItem(PUBLISHED_EXAMS_KEY));
+    return [];
+  }
 }
 
 function savePublishedExams(exams) {
   try {
     localStorage.setItem(PUBLISHED_EXAMS_KEY, JSON.stringify(exams));
-  } catch (e) { /* localStorage may be full */ }
+  } catch (e) {
+    console.error('Failed to save published exams:', e);
+    showNotification('Failed to save exam. localStorage may be full.', 'info');
+  }
 }
 
 function generateExamCode(subject) {
@@ -6427,6 +6444,18 @@ function handlePublishExam() {
   exams.unshift(examInstance);
   savePublishedExams(exams);
 
+  // Debug: verify storage
+  var _verifyExams = getPublishedExams();
+  console.log('[Publish] Stored exam code:', JSON.stringify(code));
+  console.log('[Publish] Verification - getPublishedExams count:', _verifyExams.length);
+  if (_verifyExams.length > 0) {
+    console.log('[Publish] First stored code:', JSON.stringify(_verifyExams[0].code));
+    console.log('[Publish] Code match:', _verifyExams[0].code === code);
+  } else {
+    console.error('[Publish] VERIFICATION FAILED - exam not found after save!');
+    showNotification('Warning: Exam may not have been saved correctly.', 'info');
+  }
+
   // Show success screen
   document.getElementById('publishFormScreen').style.display = 'none';
   document.getElementById('pubSuccessCodeDisplay').textContent = code;
@@ -6453,6 +6482,13 @@ function copyExamCode() {
 
 function renderPublishedExams() {
   var exams = getPublishedExams();
+  console.log('[PublishedExams] Rendered with', exams.length, 'exams');
+  if (exams.length > 0) {
+    exams.forEach(function(e, i) {
+      console.log('[PublishedExams] Exam', i, ': code=' + JSON.stringify(e.code), 'name=' + JSON.stringify(e.name));
+    });
+  }
+
   var emptyEl = document.getElementById('pubExamsEmpty');
   var gridEl = document.getElementById('pubExamsGrid');
 
@@ -6789,6 +6825,17 @@ function openStudentPortal() {
     session = null;
   }
 
+  // Debug: check if published exams are available
+  var _debugExams = getPublishedExams();
+  console.log('[StudentPortal] Published exams available:', _debugExams.length);
+  console.log('[StudentPortal] Keys in localStorage:', Object.keys(localStorage).filter(function(k) { return k.indexOf('edint') === 0; }));
+  if (_debugExams.length > 0) {
+    console.log('[StudentPortal] First exam code:', _debugExams[0].code, 'type:', typeof _debugExams[0].code);
+  } else {
+    console.warn('[StudentPortal] No published exams found! Checking raw localStorage...');
+    console.log('[StudentPortal] Raw localStorage edint_published_exams:', localStorage.getItem('edint_published_exams'));
+  }
+
   document.getElementById('studentExamOverlay').classList.remove('hidden');
   document.getElementById('studentCodeScreen').style.display = 'block';
   document.getElementById('studentInstructionsScreen').style.display = 'none';
@@ -6834,16 +6881,30 @@ function handleStudentCodeEntry() {
   }
 
   var exams = getPublishedExams();
+  var examCodes = exams.map(function(e) { return e.code; });
+  console.log('===== EXAM CODE VALIDATION =====');
+  console.log('Entered Code:', JSON.stringify(code));
+  console.log('Stored exam codes:', JSON.stringify(examCodes));
+  console.log('Total stored exams:', exams.length);
+
   var exam = null;
   for (var i = 0; i < exams.length; i++) {
-    if (exams[i].code.toUpperCase() === code) {
+    var storedCode = (exams[i].code || '').toString().trim().toUpperCase();
+    console.log('Compare: stored=' + JSON.stringify(storedCode) + ' entered=' + JSON.stringify(code) + ' match=' + (storedCode === code));
+    if (storedCode === code) {
       exam = exams[i];
       break;
     }
   }
 
+  console.log('Match Found:', exam !== null);
+
   if (!exam) {
-    errorEl.textContent = 'Invalid exam code. Please check and try again.';
+    if (exams.length === 0) {
+      errorEl.textContent = 'No exams available. Please publish an exam first.';
+    } else {
+      errorEl.textContent = 'Invalid exam code. Please check and try again.';
+    }
     return;
   }
 
