@@ -6973,6 +6973,40 @@ var studentExamData = null;
 var studentTimerInterval = null;
 var studentAutoSaveTimer = null;
 
+// ===== Phase 5.2A: Attempt Identity Layer =====
+function generateAttemptId() {
+  var now = new Date();
+  var dateStr = now.getFullYear()
+    + String(now.getMonth() + 1).padStart(2, '0')
+    + String(now.getDate()).padStart(2, '0');
+  var random = Math.random().toString(36).substring(2, 6).toUpperCase();
+  return 'ATT-' + dateStr + '-' + random;
+}
+
+function generateSessionId() {
+  var random = Math.random().toString(16).substring(2, 8).toUpperCase();
+  return 'SES-' + random;
+}
+
+function generateDeviceFingerprint() {
+  var parts = [
+    navigator.userAgent || '',
+    navigator.platform || '',
+    screen.width + 'x' + screen.height,
+    Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+    navigator.language || '',
+  ];
+  var raw = parts.join('||');
+  var hash = 0;
+  for (var i = 0; i < raw.length; i++) {
+    var chr = raw.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0;
+  }
+  var hex = Math.abs(hash).toString(16).toUpperCase().padStart(8, '0');
+  return 'FP-' + hex;
+}
+
 function getStudentSession() {
   try {
     var raw = localStorage.getItem(STUDENT_SESSION_KEY);
@@ -7021,6 +7055,7 @@ function openStudentPortal() {
   // If there's an active (non-submitted) session, resume
   if (session && !session.submitted && session.examData && session.startTimestamp) {
     studentExamData = session;
+    console.log('[Attempt] Restored ID=' + (session.attemptId || 'N/A') + ' Session=' + (session.sessionId || 'N/A') + ' Device=' + (session.deviceFingerprint || 'N/A'));
     showLiveExam();
     return;
   }
@@ -7136,11 +7171,22 @@ async function handleStudentCodeEntry() {
     return;
   }
 
-  // Initialize session
+  // Initialize session with attempt identity
+  var attemptId = generateAttemptId();
+  var sessionId = generateSessionId();
+  var deviceFingerprint = generateDeviceFingerprint();
+  console.log('[Attempt] Created ID=' + attemptId + ' Session=' + sessionId + ' Device=' + deviceFingerprint);
+
   console.log('[DEBUG] Creating student session...');
   studentExamData = {
     examCode: code,
     examData: exam,
+    attemptId: attemptId,
+    sessionId: sessionId,
+    deviceFingerprint: deviceFingerprint,
+    examStartTime: null,
+    submissionTime: null,
+    timeTakenMinutes: null,
     answers: {},
     currentIndex: 0,
     startTimestamp: null,
@@ -7208,7 +7254,9 @@ function showInstructions() {
 
 function startExam() {
   studentExamData.startTimestamp = Date.now();
+  studentExamData.examStartTime = new Date().toISOString();
   studentExamData.submitted = false;
+  console.log('[Attempt] Started ID=' + studentExamData.attemptId + ' at=' + studentExamData.examStartTime);
   saveStudentSession(studentExamData);
   showLiveExam();
 }
@@ -7445,6 +7493,13 @@ function handleSubmitExam() {
 
   studentExamData.submitted = true;
   studentExamData.submittedAt = new Date().toISOString();
+  studentExamData.submissionTime = studentExamData.submittedAt;
+  if (studentExamData.examStartTime) {
+    var start = new Date(studentExamData.examStartTime).getTime();
+    var end = new Date(studentExamData.submittedAt).getTime();
+    studentExamData.timeTakenMinutes = Math.round((end - start) / 60000);
+  }
+  console.log('[Attempt] Submitted ID=' + studentExamData.attemptId + ' Session=' + studentExamData.sessionId + ' Device=' + studentExamData.deviceFingerprint);
   saveStudentSession(studentExamData);
 
   showCompletionScreen(studentExamData);
@@ -7458,6 +7513,13 @@ function handleAutoSubmit() {
   }
   studentExamData.submitted = true;
   studentExamData.submittedAt = new Date().toISOString();
+  studentExamData.submissionTime = studentExamData.submittedAt;
+  if (studentExamData.examStartTime) {
+    var start = new Date(studentExamData.examStartTime).getTime();
+    var end = new Date(studentExamData.submittedAt).getTime();
+    studentExamData.timeTakenMinutes = Math.round((end - start) / 60000);
+  }
+  console.log('[Attempt] Submitted ID=' + studentExamData.attemptId + ' Session=' + studentExamData.sessionId + ' Device=' + studentExamData.deviceFingerprint);
   saveStudentSession(studentExamData);
   showCompletionScreen(studentExamData);
 }
@@ -7570,9 +7632,15 @@ function showCompletionScreen(session) {
 
     renderDetailedResults(result);
 
-    // Save submission to Firestore
+    // Save submission to Firestore with attempt identity
     if (window.__saveSubmissionToFirestore) {
       window.__saveSubmissionToFirestore({
+        attemptId: session.attemptId || '',
+        sessionId: session.sessionId || '',
+        deviceFingerprint: session.deviceFingerprint || '',
+        examStartTime: session.examStartTime || '',
+        submissionTime: session.submissionTime || session.submittedAt || new Date().toISOString(),
+        timeTakenMinutes: session.timeTakenMinutes || null,
         examCode: session.examCode,
         examName: exam.name,
         studentAnswers: session.answers || {},
@@ -7629,6 +7697,7 @@ document.getElementById('studentViewDetailsBtn').addEventListener('click', funct
 (function checkStudentSession() {
   var session = getStudentSession();
   if (session && !session.submitted && session.examData && session.startTimestamp) {
+    console.log('[Attempt] Restored (page refresh) ID=' + (session.attemptId || 'N/A') + ' Session=' + (session.sessionId || 'N/A') + ' Device=' + (session.deviceFingerprint || 'N/A'));
     // Check if exam is still within time window
     var now = Date.now();
     var duration = session.examData.duration * 60 * 1000;
@@ -7649,6 +7718,7 @@ document.getElementById('studentViewDetailsBtn').addEventListener('click', funct
   } else if (session && session.submitted) {
     // Show completion screen if they come back
     studentExamData = session;
+    console.log('[Attempt] Restored (completed) ID=' + (session.attemptId || 'N/A') + ' Session=' + (session.sessionId || 'N/A'));
     document.getElementById('studentExamOverlay').classList.remove('hidden');
     showCompletionScreen(session);
   }
