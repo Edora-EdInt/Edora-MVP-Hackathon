@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
 import { getFirestore, doc, setDoc, getDoc, addDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAAZjia-jnYHvzIADGkISYUjreoSqT_iwE",
@@ -15,11 +16,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 window.__firebaseApp = app;
 window.__firebaseAnalytics = analytics;
 window.__firebaseDb = db;
+window.__firebaseStorage = storage;
 window.__firestore = { collection, getDocs };
+
+window.__uploadPhoto = async function(base64Data, examCode, attemptId, type) {
+  try {
+    var path = 'photo-verification/' + examCode + '/' + attemptId + '/' + type + '.jpg';
+    var storageRef = ref(storage, path);
+    var snapshot = await uploadString(storageRef, base64Data, 'data_url');
+    var downloadUrl = await getDownloadURL(snapshot.ref);
+    console.log('[Photo] Uploaded', type, 'photo for attempt', attemptId, 'at', downloadUrl);
+    return downloadUrl;
+  } catch(e) {
+    console.error('[Photo] Upload failed:', e.message);
+    return null;
+  }
+};
 
 window.__saveExamToFirestore = async function(examData) {
   try {

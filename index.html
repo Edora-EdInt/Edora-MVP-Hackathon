@@ -3826,7 +3826,48 @@ tbody td .subject {
   border-color: var(--red-700);
 }
 
+/* ===== PHOTO VERIFICATION (Phase 5.2D) ===== */
+.student-photo-preview {
+  width: 320px;
+  height: 240px;
+  margin: 16px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--gray-200);
+}
+.student-photo-preview video,
+.student-photo-preview img,
+.student-photo-preview canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.student-photo-preview img {
+  object-fit: contain;
+}
+.student-photo-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 12px;
+}
+html.dark-mode .student-photo-preview {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+}
+
 /* Mobile responsive */
+@media (max-width: 768px) {
+  .student-photo-preview {
+    width: 100%;
+    max-width: 320px;
+    height: 200px;
+  }
+}
 @media (max-width: 768px) {
   .student-body { flex-direction: column; padding: 16px; }
   .student-sidebar { width: 100%; }
@@ -5222,17 +5263,41 @@ tbody td .subject {
   <div id="studentCodeScreen">
     <div class="student-center-card student-fade-in" style="margin-top:80px;">
       <div class="student-header-logo" style="font-size:1.333rem;margin-bottom:6px;">Ed<span>Int</span></div>
-      <p class="subtitle">Enter the exam code provided by your instructor</p>
+      <p class="subtitle">Enter your name and exam code to begin</p>
+      <div style="margin-bottom:8px;">
+        <input type="text" class="student-code-input" id="studentNameInput" placeholder="Your full name" maxlength="100" autocomplete="off" spellcheck="false" style="margin-bottom:8px;">
+      </div>
       <div style="margin-bottom:8px;">
         <input type="text" class="student-code-input" id="studentCodeInput" placeholder="e.g. PHYS9281" maxlength="10" autocomplete="off" spellcheck="false" style="text-transform:uppercase;">
       </div>
       <div class="student-code-error" id="studentCodeError"></div>
-      <button class="student-code-btn" id="studentCodeSubmitBtn">Join Exam</button>
+      <button class="student-code-btn" id="studentCodeSubmitBtn">Next</button>
       <div>
         <button class="student-back-link" id="studentBackToLoginBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
           Back to login
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photo Capture Screen -->
+  <div id="studentPhotoScreen" style="display:none;">
+    <div class="student-center-card student-fade-in" style="margin-top:60px;">
+      <h2 id="studentPhotoTitle">Capture Verification Photo</h2>
+      <p class="subtitle" id="studentPhotoSubtitle">Position your face clearly in the frame</p>
+      <div class="student-photo-preview" id="studentPhotoPreview">
+        <video id="studentCameraPreview" autoplay playsinline muted></video>
+        <canvas id="studentPhotoCanvas" style="display:none;"></canvas>
+        <img id="studentPhotoResult" style="display:none;" alt="Captured photo">
+      </div>
+      <div class="student-photo-actions">
+        <button class="student-code-btn" id="studentCaptureBtn">Capture Photo</button>
+        <button class="student-code-btn" id="studentRetakeBtn" style="display:none;">Retake</button>
+      </div>
+      <div class="student-code-error" id="studentPhotoError"></div>
+      <div id="studentPhotoSkipArea" style="display:none;margin-top:12px;">
+        <button class="student-back-link" id="studentPhotoSkipBtn">Skip — camera unavailable</button>
       </div>
     </div>
   </div>
@@ -7405,9 +7470,24 @@ function openIntegrityDrawer(firestoreId) {
   var body = document.getElementById('intDashDrawerBody');
   body.innerHTML = ''
     + '<div class="int-drawer-section">'
+      + '<h4>Student Information</h4>'
+      + '<div class="int-drawer-grid">'
+        + '<div class="int-drawer-field"><span class="int-drawer-label">Name</span><span class="int-drawer-value">' + escHtml(sub.studentName || '-') + '</span></div>'
+        + '<div class="int-drawer-field"><span class="int-drawer-label">Attempt ID</span><span class="int-drawer-value mono">' + escHtml(sub.attemptId || '-') + '</span></div>'
+        + '<div class="int-drawer-field"><span class="int-drawer-label">Integrity Score</span><span class="int-drawer-value"><strong>' + integrity + '</strong></span></div>'
+      + '</div>'
+    + '</div>'
+    + '<div class="int-drawer-section">'
+      + '<h4>Photo Verification</h4>'
+      + '<div class="int-drawer-grid">'
+        + '<div class="int-drawer-field full"><span class="int-drawer-label">Status</span><span class="int-drawer-value">' + renderPhotoStatus(sub.photoVerificationStatus) + '</span></div>'
+        + '<div class="int-drawer-field full"><span class="int-drawer-label">Start Photo</span><span class="int-drawer-value">' + renderPhotoThumb(sub.startPhotoUrl, 'Start') + '</span></div>'
+        + '<div class="int-drawer-field full"><span class="int-drawer-label">End Photo</span><span class="int-drawer-value">' + renderPhotoThumb(sub.endPhotoUrl, 'End') + '</span></div>'
+      + '</div>'
+    + '</div>'
+    + '<div class="int-drawer-section">'
       + '<h4>Attempt Information</h4>'
       + '<div class="int-drawer-grid">'
-        + '<div class="int-drawer-field"><span class="int-drawer-label">Attempt ID</span><span class="int-drawer-value mono">' + escHtml(sub.attemptId || '-') + '</span></div>'
         + '<div class="int-drawer-field"><span class="int-drawer-label">Session ID</span><span class="int-drawer-value mono">' + escHtml(sub.sessionId || '-') + '</span></div>'
         + '<div class="int-drawer-field full"><span class="int-drawer-label">Device Fingerprint</span><span class="int-drawer-value mono">' + escHtml(sub.deviceFingerprint || '-') + '</span></div>'
         + '<div class="int-drawer-field"><span class="int-drawer-label">Exam Name</span><span class="int-drawer-value">' + escHtml(sub.examName || '-') + '</span></div>'
@@ -7427,7 +7507,6 @@ function openIntegrityDrawer(firestoreId) {
     + '<div class="int-drawer-section">'
       + '<h4>Integrity Metrics</h4>'
       + '<div class="int-drawer-grid">'
-        + '<div class="int-drawer-field"><span class="int-drawer-label">Integrity Score</span><span class="int-drawer-value"><strong>' + integrity + '</strong></span></div>'
         + '<div class="int-drawer-field"><span class="int-drawer-label">Risk Level</span><span class="int-drawer-value"><span class="risk-badge ' + riskClass + '"><span class="risk-badge-dot"></span>' + risk + '</span></span></div>'
         + '<div class="int-drawer-field"><span class="int-drawer-label">Tab Switches</span><span class="int-drawer-value">' + tabSwitches + '</span></div>'
         + '<div class="int-drawer-field"><span class="int-drawer-label">Page Refreshes</span><span class="int-drawer-value">' + refreshCount + '</span></div>'
@@ -7472,6 +7551,17 @@ function renderIntegrityTimeline(events) {
   }
   html += '</div>';
   return html;
+}
+
+function renderPhotoStatus(status) {
+  if (!status) return '<span style="color:var(--gray-400);">Not attempted</span>';
+  if (status === 'COMPLETED') return '<span style="color:var(--green-600);font-weight:600;">Completed</span>';
+  return '<span style="color:var(--red-600);font-weight:600;">Failed</span>';
+}
+
+function renderPhotoThumb(url, label) {
+  if (!url) return '<span style="color:var(--gray-400);">No ' + label.toLowerCase() + ' photo</span>';
+  return '<a href="' + escHtml(url) + '" target="_blank" rel="noopener" style="display:inline-block;"><img src="' + escHtml(url) + '" alt="' + label + ' photo" style="width:120px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--gray-200);cursor:pointer;transition:transform 0.15s;" onmouseover="this.style.transform=\'scale(1.05)\'" onmouseout="this.style.transform=\'scale(1)\'"></a>';
 }
 
 // ===== INTEGRITY DASHBOARD EVENT BINDINGS =====
@@ -7999,10 +8089,12 @@ function openStudentPortal() {
 
   document.getElementById('studentExamOverlay').classList.remove('hidden');
   document.getElementById('studentCodeScreen').style.display = 'block';
+  document.getElementById('studentPhotoScreen').style.display = 'none';
   document.getElementById('studentInstructionsScreen').style.display = 'none';
   document.getElementById('studentLiveScreen').style.display = 'none';
   document.getElementById('studentCompletionScreen').style.display = 'none';
   document.getElementById('studentCodeInput').value = '';
+  document.getElementById('studentNameInput').value = '';
   document.getElementById('studentCodeError').textContent = '';
   document.getElementById('studentCodeSubmitBtn').disabled = false;
 
@@ -8027,7 +8119,13 @@ function closeStudentPortal() {
 
 async function handleStudentCodeEntry() {
   var code = document.getElementById('studentCodeInput').value.trim().toUpperCase();
+  var name = document.getElementById('studentNameInput').value.trim();
   var errorEl = document.getElementById('studentCodeError');
+
+  if (!name) {
+    errorEl.textContent = 'Please enter your full name.';
+    return;
+  }
 
   if (!code) {
     errorEl.textContent = 'Please enter an exam code.';
@@ -8126,6 +8224,10 @@ async function handleStudentCodeEntry() {
   studentExamData = {
     examCode: code,
     examData: exam,
+    studentName: '',
+    photoVerificationStatus: '',
+    startPhotoUrl: '',
+    endPhotoUrl: '',
     attemptId: attemptId,
     sessionId: sessionId,
     deviceFingerprint: deviceFingerprint,
@@ -8160,10 +8262,173 @@ async function handleStudentCodeEntry() {
   studentExamData.questionOrder = allQuestions;
   console.log('[DEBUG] Total flattened questions:', allQuestions.length);
 
-  console.log('[DEBUG] Saving session and showing instructions...');
+  // Save name from input
+  studentExamData.studentName = document.getElementById('studentNameInput').value.trim();
+
+  console.log('[DEBUG] Saving session and showing photo capture...');
   saveStudentSession(studentExamData);
-  showInstructions();
-  console.log('[DEBUG] showInstructions() called successfully');
+  showPhotoCapture('start');
+}
+
+// ===== Phase 5.2D: Photo Verification =====
+var _mediaStream = null;
+var _capturedPhotoBase64 = null;
+var _photoCaptureMode = null;
+var _photoUploading = false;
+
+function showPhotoCapture(mode) {
+  _photoCaptureMode = mode;
+  _capturedPhotoBase64 = null;
+  _photoUploading = false;
+
+  document.getElementById('studentCodeScreen').style.display = 'none';
+  document.getElementById('studentPhotoScreen').style.display = 'block';
+  document.getElementById('studentInstructionsScreen').style.display = 'none';
+  document.getElementById('studentLiveScreen').style.display = 'none';
+  document.getElementById('studentCompletionScreen').style.display = 'none';
+
+  var title = document.getElementById('studentPhotoTitle');
+  var subtitle = document.getElementById('studentPhotoSubtitle');
+  var skipArea = document.getElementById('studentPhotoSkipArea');
+  var errorEl = document.getElementById('studentPhotoError');
+  errorEl.textContent = '';
+
+  if (mode === 'start') {
+    title.textContent = 'Capture Start Verification Photo';
+    subtitle.textContent = 'Position your face clearly in the frame before starting the exam';
+  } else {
+    title.textContent = 'Capture End Verification Photo';
+    subtitle.textContent = 'Position your face clearly in the frame to confirm your identity';
+  }
+
+  document.getElementById('studentCameraPreview').style.display = 'block';
+  document.getElementById('studentPhotoCanvas').style.display = 'none';
+  document.getElementById('studentPhotoResult').style.display = 'none';
+  document.getElementById('studentCaptureBtn').textContent = 'Capture Photo';
+  document.getElementById('studentCaptureBtn').style.display = '';
+  document.getElementById('studentCaptureBtn').disabled = false;
+  document.getElementById('studentRetakeBtn').style.display = 'none';
+  skipArea.style.display = 'none';
+
+  startCamera().catch(function(err) {
+    console.error('[Photo] Camera error:', err.message);
+    errorEl.textContent = 'Camera unavailable: ' + err.message + '. You may skip this step.';
+    skipArea.style.display = 'block';
+  });
+}
+
+async function startCamera() {
+  stopCamera();
+  var video = document.getElementById('studentCameraPreview');
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    throw new Error('Camera not supported in this browser');
+  }
+  _mediaStream = await navigator.mediaDevices.getUserMedia({
+    video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
+    audio: false,
+  });
+  video.srcObject = _mediaStream;
+  return new Promise(function(resolve) {
+    video.onloadedmetadata = function() { resolve(); };
+  });
+}
+
+function stopCamera() {
+  if (_mediaStream) {
+    _mediaStream.getTracks().forEach(function(t) { t.stop(); });
+    _mediaStream = null;
+  }
+  var video = document.getElementById('studentCameraPreview');
+  if (video) video.srcObject = null;
+}
+
+function capturePhoto() {
+  var video = document.getElementById('studentCameraPreview');
+  var canvas = document.getElementById('studentPhotoCanvas');
+  var img = document.getElementById('studentPhotoResult');
+  var errorEl = document.getElementById('studentPhotoError');
+  var captureBtn = document.getElementById('studentCaptureBtn');
+
+  if (!video.videoWidth || !video.videoHeight) {
+    errorEl.textContent = 'Camera not ready. Please wait and try again.';
+    return;
+  }
+
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  var ctx = canvas.getContext('2d');
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  _capturedPhotoBase64 = canvas.toDataURL('image/jpeg', 0.85);
+
+  img.src = _capturedPhotoBase64;
+  img.style.display = 'block';
+  video.style.display = 'none';
+  canvas.style.display = 'none';
+
+  captureBtn.style.display = 'none';
+  document.getElementById('studentRetakeBtn').style.display = '';
+  errorEl.textContent = '';
+
+  stopCamera();
+  uploadPhotoAndProceed();
+}
+
+async function uploadPhotoAndProceed() {
+  if (_photoUploading) return;
+  _photoUploading = true;
+
+  var captureBtn = document.getElementById('studentCaptureBtn');
+  var errorEl = document.getElementById('studentPhotoError');
+
+  if (window.__uploadPhoto) {
+    captureBtn.textContent = 'Uploading...';
+
+    var uploadPromise = window.__uploadPhoto(
+      _capturedPhotoBase64,
+      studentExamData.examCode,
+      studentExamData.attemptId,
+      _photoCaptureMode
+    );
+
+    var timeoutPromise = new Promise(function(_, reject) {
+      setTimeout(function() { reject(new Error('Upload timed out after 8s')); }, 8000);
+    });
+
+    try {
+      var url = await Promise.race([uploadPromise, timeoutPromise]);
+      if (url) {
+        var key = _photoCaptureMode === 'start' ? 'startPhotoUrl' : 'endPhotoUrl';
+        studentExamData[key] = url;
+        if (_photoCaptureMode === 'end') {
+          studentExamData.photoVerificationStatus = 'COMPLETED';
+        }
+        saveStudentSession(studentExamData);
+        console.log('[Photo] URL stored in session:', key, url);
+      } else {
+        console.warn('[Photo] Upload returned empty URL, proceeding');
+      }
+    } catch(e) {
+      console.warn('[Photo] Upload error/timeout:', e.message || e);
+    }
+    captureBtn.textContent = 'Capture Photo';
+  }
+
+  _photoUploading = false;
+  if (_photoCaptureMode === 'start') {
+    showInstructions();
+  } else {
+    showCompletionScreen(studentExamData);
+  }
+}
+
+function skipPhoto() {
+  stopCamera();
+  studentExamData.photoVerificationStatus = 'FAILED';
+  saveStudentSession(studentExamData);
+  if (_photoCaptureMode === 'start') {
+    showInstructions();
+  }
 }
 
 function showInstructions() {
@@ -8172,6 +8437,7 @@ function showInstructions() {
   console.log('[DEBUG] studentExamData.examData:', studentExamData && studentExamData.examData ? 'exists' : 'null');
 
   document.getElementById('studentCodeScreen').style.display = 'none';
+  document.getElementById('studentPhotoScreen').style.display = 'none';
   document.getElementById('studentInstructionsScreen').style.display = 'block';
   document.getElementById('studentLiveScreen').style.display = 'none';
   document.getElementById('studentCompletionScreen').style.display = 'none';
@@ -8210,6 +8476,7 @@ function startExam() {
 
 function showLiveExam() {
   document.getElementById('studentCodeScreen').style.display = 'none';
+  document.getElementById('studentPhotoScreen').style.display = 'none';
   document.getElementById('studentInstructionsScreen').style.display = 'none';
   document.getElementById('studentLiveScreen').style.display = 'block';
   document.getElementById('studentCompletionScreen').style.display = 'none';
@@ -8459,7 +8726,7 @@ function handleSubmitExam() {
   IntegrityMonitor.stop();
 
   saveStudentSession(studentExamData);
-  showCompletionScreen(studentExamData);
+  showPhotoCapture('end');
 }
 
 function handleAutoSubmit() {
@@ -8471,6 +8738,7 @@ function handleAutoSubmit() {
   studentExamData.submitted = true;
   studentExamData.submittedAt = new Date().toISOString();
   studentExamData.submissionTime = studentExamData.submittedAt;
+  studentExamData.photoVerificationStatus = 'FAILED';
   if (studentExamData.examStartTime) {
     var start = new Date(studentExamData.examStartTime).getTime();
     var end = new Date(studentExamData.submittedAt).getTime();
@@ -8567,6 +8835,7 @@ function renderDetailedResults(result) {
 
 function showCompletionScreen(session) {
   document.getElementById('studentCodeScreen').style.display = 'none';
+  document.getElementById('studentPhotoScreen').style.display = 'none';
   document.getElementById('studentInstructionsScreen').style.display = 'none';
   document.getElementById('studentLiveScreen').style.display = 'none';
   document.getElementById('studentCompletionScreen').style.display = 'block';
@@ -8621,6 +8890,10 @@ function showCompletionScreen(session) {
         refreshCount: (session.integrity && session.integrity.refreshCount) || 0,
         fullscreenExitCount: (session.integrity && session.integrity.fullscreenExitCount) || 0,
         integrityEvents: (session.integrity && session.integrity.integrityEvents) || [],
+        studentName: session.studentName || '',
+        startPhotoUrl: session.startPhotoUrl || '',
+        endPhotoUrl: session.endPhotoUrl || '',
+        photoVerificationStatus: session.photoVerificationStatus || '',
       });
     }
   }
@@ -8638,7 +8911,20 @@ document.getElementById('studentCodeInput').addEventListener('keydown', function
   }
 });
 
+document.getElementById('studentNameInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    document.getElementById('studentCodeInput').focus();
+  }
+});
+
 document.getElementById('studentCodeSubmitBtn').addEventListener('click', handleStudentCodeEntry);
+document.getElementById('studentCaptureBtn').addEventListener('click', capturePhoto);
+document.getElementById('studentRetakeBtn').addEventListener('click', function() {
+  stopCamera();
+  showPhotoCapture(_photoCaptureMode);
+});
+document.getElementById('studentPhotoSkipBtn').addEventListener('click', skipPhoto);
 document.getElementById('studentStartExamBtn').addEventListener('click', startExam);
 document.getElementById('studentPrevBtn').addEventListener('click', goToPrevQuestion);
 document.getElementById('studentNextBtn').addEventListener('click', goToNextQuestion);
@@ -8699,6 +8985,7 @@ document.getElementById('studentViewDetailsBtn').addEventListener('click', funct
       // Time expired - auto-submit
       session.submitted = true;
       session.submittedAt = new Date().toISOString();
+      session.photoVerificationStatus = 'FAILED';
       saveStudentSession(session);
       studentExamData = session;
       showCompletionScreen(session);
