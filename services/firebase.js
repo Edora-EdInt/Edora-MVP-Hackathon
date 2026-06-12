@@ -25,19 +25,18 @@ window.__firebaseStorage = storage;
 window.__firestore = { collection, getDocs };
 
 window.__uploadPhoto = async function(base64Data, examCode, attemptId, type) {
-  try {
-    var path = 'photo-verification/' + examCode + '/' + attemptId + '/' + type + '.jpg';
-    console.log('[Photo] Upload started — path:', path, 'data length:', base64Data.length);
-    var storageRef = ref(storage, path);
-    var snapshot = await uploadString(storageRef, base64Data, 'data_url');
-    console.log('[Photo] Upload successful — metadata:', snapshot.metadata ? 'exists' : 'none');
-    var downloadUrl = await getDownloadURL(snapshot.ref);
-    console.log('[Photo] URL generated —', downloadUrl);
-    return downloadUrl;
-  } catch(e) {
-    console.error('[Photo] Upload failed:', e.message);
+  // Store photo as inline base64 data URL in Firestore (no Firebase Storage needed)
+  if (!base64Data || typeof base64Data !== 'string') {
+    console.error('[Photo] Invalid photo data for', type);
     return null;
   }
+  if (!base64Data.startsWith('data:image/')) {
+    console.error('[Photo] Photo data is not an image for', type);
+    return null;
+  }
+  var sizeKB = Math.round((base64Data.length * 3) / 4 / 1024);
+  console.log('[Photo] Storing inline', type, 'photo — base64 size ~' + sizeKB + 'KB (Firestore-safe, 1MB limit)');
+  return base64Data;
 };
 
 window.__saveExamToFirestore = async function(examData) {
