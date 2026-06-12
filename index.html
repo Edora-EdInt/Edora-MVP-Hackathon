@@ -8360,6 +8360,7 @@ function capturePhoto() {
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
   _capturedPhotoBase64 = canvas.toDataURL('image/jpeg', 0.85);
+  console.log('[Photo] Start photo captured, base64 length:', _capturedPhotoBase64.length, 'bytes, image size:', canvas.width + 'x' + canvas.height);
 
   img.src = _capturedPhotoBase64;
   img.style.display = 'block';
@@ -8383,6 +8384,8 @@ async function uploadPhotoAndProceed() {
 
   if (window.__uploadPhoto) {
     captureBtn.textContent = 'Uploading...';
+    console.log('[Photo] Starting upload for', _photoCaptureMode, 'photo...');
+    console.log('[Photo] Storage path: photo-verification/' + studentExamData.examCode + '/' + studentExamData.attemptId + '/' + _photoCaptureMode + '.jpg');
 
     var uploadPromise = window.__uploadPhoto(
       _capturedPhotoBase64,
@@ -8397,6 +8400,7 @@ async function uploadPhotoAndProceed() {
 
     try {
       var url = await Promise.race([uploadPromise, timeoutPromise]);
+      console.log('[Photo] URL generated:', url ? 'yes (' + url.substring(0, 50) + '...)' : 'NO');
       if (url) {
         var key = _photoCaptureMode === 'start' ? 'startPhotoUrl' : 'endPhotoUrl';
         studentExamData[key] = url;
@@ -8426,8 +8430,11 @@ function skipPhoto() {
   stopCamera();
   studentExamData.photoVerificationStatus = 'FAILED';
   saveStudentSession(studentExamData);
+  console.log('[Photo] Photo skipped for', _photoCaptureMode, '- status set to FAILED');
   if (_photoCaptureMode === 'start') {
     showInstructions();
+  } else {
+    showCompletionScreen(studentExamData);
   }
 }
 
@@ -8866,6 +8873,28 @@ function showCompletionScreen(session) {
     renderDetailedResults(result);
 
     // Save submission to Firestore with attempt identity
+    console.log('[Firestore] Preparing submission data:', JSON.stringify({
+      examCode: session.examCode,
+      examName: exam.name,
+      studentName: session.studentName,
+      attemptId: session.attemptId,
+      sessionId: session.sessionId,
+      deviceFingerprint: session.deviceFingerprint,
+      startPhotoUrl: session.startPhotoUrl || '(empty)',
+      endPhotoUrl: session.endPhotoUrl || '(empty)',
+      photoVerificationStatus: session.photoVerificationStatus || '(empty)',
+      score: result.marksObtained,
+      maxMarks: result.maxMarks,
+      percentage: result.percentage,
+      correct: result.correct,
+      incorrect: result.incorrect,
+      unanswered: result.unanswered,
+      integrityScore: (session.integrity && session.integrity.integrityScore) || 100,
+      riskLevel: (session.integrity && session.integrity.riskLevel) || 'Low Risk',
+      tabSwitches: (session.integrity && session.integrity.tabSwitches) || 0,
+      refreshCount: (session.integrity && session.integrity.refreshCount) || 0,
+      fullscreenExitCount: (session.integrity && session.integrity.fullscreenExitCount) || 0,
+    }));
     if (window.__saveSubmissionToFirestore) {
       window.__saveSubmissionToFirestore({
         attemptId: session.attemptId || '',

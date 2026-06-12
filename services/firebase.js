@@ -27,10 +27,12 @@ window.__firestore = { collection, getDocs };
 window.__uploadPhoto = async function(base64Data, examCode, attemptId, type) {
   try {
     var path = 'photo-verification/' + examCode + '/' + attemptId + '/' + type + '.jpg';
+    console.log('[Photo] Upload started — path:', path, 'data length:', base64Data.length);
     var storageRef = ref(storage, path);
     var snapshot = await uploadString(storageRef, base64Data, 'data_url');
+    console.log('[Photo] Upload successful — metadata:', snapshot.metadata ? 'exists' : 'none');
     var downloadUrl = await getDownloadURL(snapshot.ref);
-    console.log('[Photo] Uploaded', type, 'photo for attempt', attemptId, 'at', downloadUrl);
+    console.log('[Photo] URL generated —', downloadUrl);
     return downloadUrl;
   } catch(e) {
     console.error('[Photo] Upload failed:', e.message);
