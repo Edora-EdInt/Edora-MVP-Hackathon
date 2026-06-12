@@ -7167,6 +7167,21 @@ function saveStudentSession(data) {
   } catch (e) { /* localStorage may be full */ }
 }
 
+function clearExamSession() {
+  clearStudentSession();
+  sessionStorage.removeItem('edint_exam_active');
+  if (studentTimerInterval) {
+    clearInterval(studentTimerInterval);
+    studentTimerInterval = null;
+  }
+  if (studentAutoSaveTimer) {
+    clearInterval(studentAutoSaveTimer);
+    studentAutoSaveTimer = null;
+  }
+  IntegrityMonitor.stop();
+  studentExamData = null;
+}
+
 function clearStudentSession() {
   localStorage.removeItem(STUDENT_SESSION_KEY);
 }
@@ -7175,7 +7190,7 @@ function openStudentPortal() {
   // Clear any existing session that is completed
   var session = getStudentSession();
   if (session && session.submitted) {
-    clearStudentSession();
+    clearExamSession();
     session = null;
   }
 
@@ -7214,19 +7229,8 @@ function openStudentPortal() {
 }
 
 function closeStudentPortal() {
-  if (studentTimerInterval) {
-    clearInterval(studentTimerInterval);
-    studentTimerInterval = null;
-  }
-  if (studentAutoSaveTimer) {
-    clearInterval(studentAutoSaveTimer);
-    studentAutoSaveTimer = null;
-  }
-  // Cleanup integrity monitoring
-  IntegrityMonitor.stop();
-
+  clearExamSession();
   document.getElementById('studentExamOverlay').classList.add('hidden');
-  studentExamData = null;
 }
 
 async function handleStudentCodeEntry() {
@@ -7313,12 +7317,11 @@ async function handleStudentCodeEntry() {
     console.log('[DEBUG] TIME CHECK PASSED - exam is accessible');
   }
 
-  // Check if there's a completed submission for this code
+  // Clear stale completed session for this code before starting fresh
   var existingSession = getStudentSession();
   if (existingSession && existingSession.submitted && existingSession.examCode === code) {
-    console.log('[DEBUG] Found existing completed submission, showing completion screen');
-    showCompletionScreen(existingSession);
-    return;
+    console.log('[DEBUG] Found existing completed submission, clearing for fresh start');
+    clearExamSession();
   }
 
   // Initialize session with attempt identity
@@ -7913,11 +7916,9 @@ document.getElementById('studentViewDetailsBtn').addEventListener('click', funct
     document.getElementById('studentExamOverlay').classList.remove('hidden');
     showLiveExam();
   } else if (session && session.submitted) {
-    // Show completion screen if they come back
-    studentExamData = session;
-    console.log('[Attempt] Restored (completed) ID=' + (session.attemptId || 'N/A') + ' Session=' + (session.sessionId || 'N/A'));
-    document.getElementById('studentExamOverlay').classList.remove('hidden');
-    showCompletionScreen(session);
+    // Silently clear completed exam sessions — never restore results screen
+    console.log('[Session] Clearing completed exam session');
+    clearExamSession();
   }
 })();
 
