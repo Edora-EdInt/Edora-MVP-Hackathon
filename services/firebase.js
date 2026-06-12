@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
-import { getFirestore, doc, setDoc, getDoc, addDoc, collection } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc, addDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAAZjia-jnYHvzIADGkISYUjreoSqT_iwE",
@@ -19,6 +19,7 @@ const db = getFirestore(app);
 window.__firebaseApp = app;
 window.__firebaseAnalytics = analytics;
 window.__firebaseDb = db;
+window.__firestore = { collection, getDocs };
 
 window.__saveExamToFirestore = async function(examData) {
   try {
