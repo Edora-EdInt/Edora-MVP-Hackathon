@@ -4845,6 +4845,398 @@ html.dark-mode .student-photo-preview {
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== ANALYTICS DASHBOARD CSS ===== */
+.analytics-page {
+  max-width: 1200px;
+}
+.analytics-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+}
+.analytics-header h2 {
+  margin: 0 0 4px;
+}
+.analytics-header p {
+  margin: 0;
+  color: var(--gray-400);
+  font-size: 0.867rem;
+}
+.analytics-header-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.analytics-export-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--gray-100);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.analytics-export-btn:hover {
+  border-color: var(--indigo-300);
+  color: var(--indigo-600);
+}
+.analytics-loading, .analytics-error, .analytics-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  gap: 12px;
+}
+.analytics-loading .spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--gray-100);
+  border-top-color: var(--indigo-500);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+.analytics-loading span {
+  color: var(--gray-400);
+  font-size: 0.867rem;
+}
+.analytics-error svg, .analytics-empty svg {
+  width: 48px;
+  height: 48px;
+  color: var(--gray-300);
+  margin-bottom: 8px;
+}
+.analytics-error h3, .analytics-empty h3 {
+  margin: 0;
+  font-size: 1.067rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.analytics-error p, .analytics-empty p {
+  margin: 0;
+  font-size: 0.867rem;
+  color: var(--gray-400);
+  max-width: 380px;
+}
+.analytics-retry-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--indigo-500);
+  color: #fff;
+  font-size: 0.867rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+.analytics-retry-btn:hover {
+  background: var(--indigo-600);
+}
+.analytics-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.analytics-section-title {
+  font-size: 0.867rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+.analytics-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.analytics-row-2col .analytics-section {
+  margin-bottom: 0;
+}
+.analytics-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+.analytics-ov-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--gray-100);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.analytics-ov-card .ov-value {
+  font-size: 1.6rem;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+  color: var(--gray-900);
+  line-height: 1.1;
+}
+.analytics-ov-card .ov-label {
+  font-size: 0.733rem;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+.analytics-ov-card.ov-exams { border-left: 3px solid var(--indigo-400); }
+.analytics-ov-card.ov-students { border-left: 3px solid var(--blue-400); }
+.analytics-ov-card.ov-submissions { border-left: 3px solid var(--green-400); }
+.analytics-ov-card.ov-score { border-left: 3px solid var(--yellow-500); }
+.analytics-ov-card.ov-integrity { border-left: 3px solid var(--indigo-400); }
+.analytics-ov-card.ov-passrate { border-left: 3px solid var(--green-500); }
+
+.analytics-bar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.analytics-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.analytics-bar-label {
+  width: 70px;
+  font-size: 0.767rem;
+  color: var(--gray-500);
+  font-weight: 500;
+  flex-shrink: 0;
+  text-align: right;
+}
+.analytics-bar-track {
+  flex: 1;
+  height: 24px;
+  background: var(--gray-50);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.analytics-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.4s ease;
+  min-width: 2px;
+}
+.analytics-bar-fill.green { background: var(--green-400); }
+.analytics-bar-fill.yellow { background: var(--yellow-400); }
+.analytics-bar-fill.orange { background: var(--yellow-500); }
+.analytics-bar-fill.red { background: var(--red-400); }
+.analytics-bar-fill.indigo { background: var(--indigo-400); }
+.analytics-bar-fill.blue { background: var(--blue-400); }
+.analytics-bar-count {
+  width: 40px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: right;
+  flex-shrink: 0;
+}
+.analytics-table-wrap {
+  overflow-x: auto;
+}
+.analytics-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.analytics-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 0.733rem;
+  font-weight: 600;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--gray-100);
+}
+.analytics-table td {
+  padding: 10px 12px;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--gray-50);
+}
+.analytics-table tr:last-child td {
+  border-bottom: none;
+}
+.analytics-table .rank-num {
+  font-weight: 600;
+  color: var(--gray-400);
+  font-size: 0.767rem;
+}
+.analytics-trend-controls {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.analytics-trend-btn {
+  padding: 5px 14px;
+  border: 1px solid var(--gray-100);
+  border-radius: 6px;
+  background: var(--bg-surface);
+  color: var(--gray-500);
+  font-size: 0.767rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.analytics-trend-btn:hover {
+  border-color: var(--gray-200);
+  color: var(--text-primary);
+}
+.analytics-trend-btn.active {
+  background: var(--indigo-50);
+  border-color: var(--indigo-300);
+  color: var(--indigo-600);
+}
+.analytics-attention-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--gray-100);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+.analytics-attention-item:last-child {
+  margin-bottom: 0;
+}
+.analytics-attention-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 140px;
+}
+.analytics-attention-exam {
+  font-size: 0.767rem;
+  color: var(--gray-400);
+  flex: 1;
+}
+.analytics-attention-risk {
+  font-size: 0.733rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.analytics-attention-risk.high {
+  background: var(--red-50);
+  color: var(--red-600);
+}
+.analytics-attention-risk.medium {
+  background: var(--yellow-50);
+  color: var(--yellow-700);
+}
+.analytics-attention-reason {
+  font-size: 0.733rem;
+  color: var(--gray-400);
+  font-style: italic;
+}
+.analytics-eval-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.analytics-eval-card {
+  text-align: center;
+  padding: 16px;
+  background: var(--gray-50);
+  border-radius: 10px;
+}
+.analytics-eval-card .eval-value {
+  font-size: 1.6rem;
+  font-weight: 650;
+  color: var(--gray-900);
+}
+.analytics-eval-card .eval-label {
+  font-size: 0.733rem;
+  color: var(--gray-400);
+  font-weight: 500;
+  margin-top: 4px;
+}
+.analytics-q-section {
+  margin-bottom: 20px;
+}
+.analytics-q-section:last-child {
+  margin-bottom: 0;
+}
+.analytics-q-section h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 10px;
+}
+.analytics-q-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--gray-100);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 0.767rem;
+}
+.analytics-q-item:last-child {
+  margin-bottom: 0;
+}
+.analytics-q-rank {
+  font-weight: 600;
+  color: var(--gray-400);
+  min-width: 24px;
+  flex-shrink: 0;
+}
+.analytics-q-text {
+  flex: 1;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.analytics-q-stat {
+  font-weight: 600;
+  flex-shrink: 0;
+  min-width: 50px;
+  text-align: right;
+}
+.analytics-q-stat.hard { color: var(--red-500); }
+.analytics-q-stat.easy { color: var(--green-500); }
+.analytics-chart-svg {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 1100px) {
+  .analytics-overview-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .analytics-row-2col {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .analytics-overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .analytics-header {
+    flex-direction: column;
+  }
+  .analytics-eval-grid {
+    grid-template-columns: 1fr;
+  }
+  .analytics-attention-item {
+    flex-wrap: wrap;
+  }
+}
 </style>
 </head>
 <body>
@@ -4919,7 +5311,7 @@ html.dark-mode .student-photo-preview {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
       <span>Integrity</span>
     </a>
-    <a href="#" class="nav-item">
+    <a href="#" class="nav-item" data-page="analytics">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       <span>Analytics</span>
     </a>
@@ -5935,6 +6327,115 @@ html.dark-mode .student-photo-preview {
   <div class="stu-drawer-body" id="stuDrawerBody"></div>
 </div>
 
+<!-- ===== PAGE: ANALYTICS ===== -->
+<div id="page-analytics" style="display:none;">
+  <div class="analytics-page">
+    <div class="analytics-header">
+      <div>
+        <h2>Analytics</h2>
+        <p>Comprehensive exam performance, integrity, and question analytics</p>
+      </div>
+      <div class="analytics-header-actions">
+        <button class="analytics-export-btn" id="analyticsExportBtn" onclick="exportAnalyticsCSV()">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+
+    <div class="analytics-loading" id="analyticsLoading">
+      <div class="spinner"></div>
+      <span>Loading analytics data...</span>
+    </div>
+
+    <div class="analytics-error" id="analyticsError" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <h3>Failed to Load</h3>
+      <p id="analyticsErrorMsg">Could not fetch analytics data. Check your connection and try again.</p>
+      <button class="analytics-retry-btn" onclick="loadAnalyticsDashboard()">Retry</button>
+    </div>
+
+    <div class="analytics-empty" id="analyticsEmpty" style="display:none;">
+      <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      <h3>Insufficient Data</h3>
+      <p id="analyticsEmptyMsg">More submissions required for meaningful analytics.</p>
+    </div>
+
+    <div class="analytics-content" id="analyticsContent" style="display:none;">
+      <!-- Section 1: Overview Cards -->
+      <section class="analytics-section">
+        <h3 class="analytics-section-title">Overview</h3>
+        <div class="analytics-overview-grid" id="analyticsOverviewGrid"></div>
+      </section>
+
+      <!-- Section 2: Score Distribution + Integrity Distribution -->
+      <div class="analytics-row-2col">
+        <section class="analytics-section">
+          <h3 class="analytics-section-title">Score Distribution</h3>
+          <div id="analyticsScoreDist"></div>
+        </section>
+        <section class="analytics-section">
+          <h3 class="analytics-section-title">Integrity Distribution</h3>
+          <div id="analyticsIntegrityDist"></div>
+        </section>
+      </div>
+
+      <!-- Section 3: Exam Performance Ranking -->
+      <section class="analytics-section">
+        <h3 class="analytics-section-title">Exam Performance Ranking</h3>
+        <div class="analytics-table-wrap" id="analyticsExamRanking"></div>
+      </section>
+
+      <!-- Section 4: Submission Trend -->
+      <section class="analytics-section">
+        <h3 class="analytics-section-title">Submission Trends</h3>
+        <div class="analytics-trend-controls">
+          <button class="analytics-trend-btn active" data-group="day" onclick="switchTrendGroup('day')">Day</button>
+          <button class="analytics-trend-btn" data-group="week" onclick="switchTrendGroup('week')">Week</button>
+          <button class="analytics-trend-btn" data-group="month" onclick="switchTrendGroup('month')">Month</button>
+        </div>
+        <div id="analyticsTrendChart"></div>
+      </section>
+
+      <!-- Section 5: Time Taken + Top Students -->
+      <div class="analytics-row-2col">
+        <section class="analytics-section">
+          <h3 class="analytics-section-title">Time Taken Analysis</h3>
+          <div id="analyticsTimeTaken"></div>
+        </section>
+        <section class="analytics-section">
+          <h3 class="analytics-section-title">Top Performing Students</h3>
+          <div id="analyticsTopStudents"></div>
+        </section>
+      </div>
+
+      <!-- Section 6: Students Requiring Attention -->
+      <section class="analytics-section">
+        <h3 class="analytics-section-title">Students Requiring Attention</h3>
+        <div id="analyticsAttentionStudents"></div>
+      </section>
+
+      <!-- Section 7: Evaluation Status -->
+      <section class="analytics-section">
+        <h3 class="analytics-section-title">Evaluation Status</h3>
+        <div id="analyticsEvalStatus"></div>
+      </section>
+
+      <!-- Section 8: Question Analytics -->
+      <section class="analytics-section">
+        <h3 class="analytics-section-title">Question Analytics</h3>
+        <div id="analyticsQuestionAnalytics"></div>
+      </section>
+
+      <!-- Section 9: Subject Analytics -->
+      <section class="analytics-section">
+        <h3 class="analytics-section-title">Subject Performance</h3>
+        <div id="analyticsSubjectPerf"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
 </main>
 
 </div><!-- /app-view -->
@@ -6323,6 +6824,7 @@ const pageExamPreview = document.getElementById('page-exam-preview');
 const pagePublishedExams = document.getElementById('page-published-exams');
 const pageIntegrityDashboard = document.getElementById('page-integrity-dashboard');
 const pageStudents = document.getElementById('page-students');
+const pageAnalytics = document.getElementById('page-analytics');
 const pageTitleEl = document.querySelector('.nav-left h1');
 const pageNames = {
   dashboard: 'Dashboard',
@@ -6331,6 +6833,7 @@ const pageNames = {
   'published-exams': 'Published Exams',
   'integrity-dashboard': 'Integrity Dashboard',
   students: 'Students',
+  analytics: 'Analytics',
 };
 
 function navigateTo(page) {
@@ -6341,6 +6844,7 @@ function navigateTo(page) {
   pagePublishedExams.style.display = 'none';
   pageIntegrityDashboard.style.display = 'none';
   pageStudents.style.display = 'none';
+  pageAnalytics.style.display = 'none';
 
   if (page === 'dashboard') {
     pageDashboard.style.display = 'block';
@@ -6379,6 +6883,11 @@ function navigateTo(page) {
     document.querySelector('.nav-item[data-page="students"]')?.classList.add('active');
     pageTitleEl.textContent = 'Students';
     loadStudentsPage();
+  } else if (page === 'analytics') {
+    pageAnalytics.style.display = 'block';
+    document.querySelector('.nav-item[data-page="analytics"]')?.classList.add('active');
+    pageTitleEl.textContent = 'Analytics';
+    loadAnalyticsDashboard();
   }
 
   if (window.innerWidth <= 768) {
@@ -10362,6 +10871,598 @@ document.getElementById('stuSearch').addEventListener('input', function() {
 document.getElementById('stuDrawerOverlay').addEventListener('click', closeStudentDrawer);
 document.getElementById('stuDrawerClose').addEventListener('click', closeStudentDrawer);
 document.getElementById('stuRetryBtn').addEventListener('click', loadStudentsPage);
+
+// ===== PHASE 5.4: ANALYTICS DASHBOARD =====
+var _analyticsSubmissions = [];
+var _analyticsExamsCache = {};
+var _analyticsTrendGroup = 'day';
+
+function loadAnalyticsDashboard() {
+  var loadingEl = document.getElementById('analyticsLoading');
+  var errorEl = document.getElementById('analyticsError');
+  var emptyEl = document.getElementById('analyticsEmpty');
+  var contentEl = document.getElementById('analyticsContent');
+
+  loadingEl.style.display = 'flex';
+  errorEl.style.display = 'none';
+  emptyEl.style.display = 'none';
+  contentEl.style.display = 'none';
+
+  if (!window.__firebaseDb) {
+    loadingEl.style.display = 'none';
+    errorEl.style.display = 'block';
+    document.getElementById('analyticsErrorMsg').textContent = 'Firebase not connected.';
+    return;
+  }
+
+  fetchAllSubmissions(function(submissions) {
+    loadingEl.style.display = 'none';
+    if (!submissions) {
+      errorEl.style.display = 'block';
+      document.getElementById('analyticsErrorMsg').textContent = 'Failed to fetch submissions. Check your connection.';
+      return;
+    }
+    if (submissions.length < 2) {
+      emptyEl.style.display = 'block';
+      document.getElementById('analyticsEmptyMsg').textContent = 'More submissions required for meaningful analytics.';
+      return;
+    }
+    _analyticsSubmissions = submissions;
+
+    var seen = {};
+    var examCodes = [];
+    for (var ei = 0; ei < submissions.length; ei++) {
+      var c = submissions[ei].examCode;
+      if (c && !seen[c]) { seen[c] = true; examCodes.push(c); }
+    }
+
+    var fetches = [];
+    for (var fi = 0; fi < examCodes.length; fi++) {
+      (function(code) {
+        if (_analyticsExamsCache[code]) return;
+        fetches.push(
+          (window.__getExamFromFirestore(code) || Promise.resolve(null))
+            .then(function(data) { if (data) _analyticsExamsCache[code] = data; })
+            .catch(function() {})
+        );
+      })(examCodes[fi]);
+    }
+
+    if (fetches.length === 0) {
+      renderAnalyticsDashboard();
+      contentEl.style.display = 'block';
+    } else {
+      Promise.all(fetches).then(function() {
+        renderAnalyticsDashboard();
+        contentEl.style.display = 'block';
+      });
+    }
+  });
+}
+
+function renderAnalyticsDashboard() {
+  renderAnalyticsOverview();
+  renderScoreDistribution();
+  renderIntegrityDistribution();
+  renderExamPerformanceRanking();
+  renderSubmissionTrends(_analyticsTrendGroup);
+  renderTimeTakenAnalysis();
+  renderTopStudents();
+  renderStudentsRequiringAttention();
+  renderEvalStatus();
+  renderQuestionAnalytics();
+  renderSubjectAnalytics();
+}
+
+function renderAnalyticsOverview() {
+  var subs = _analyticsSubmissions;
+  var examNames = {};
+  var studentNames = {};
+  var scoreSum = 0, scoreCount = 0;
+  var intSum = 0, intCount = 0;
+  var passCount = 0;
+  for (var i = 0; i < subs.length; i++) {
+    var s = subs[i];
+    if (s.examName) examNames[s.examName] = true;
+    if (s.studentName) studentNames[s.studentName] = true;
+    if (s.score !== undefined && s.maxMarks) {
+      scoreSum += s.score;
+      scoreCount++;
+      if ((s.score / s.maxMarks) >= 0.4) passCount++;
+    }
+    if (s.integrityScore !== undefined) {
+      intSum += s.integrityScore;
+      intCount++;
+    }
+  }
+  var totalExams = Object.keys(examNames).length;
+  var totalStudents = Object.keys(studentNames).length;
+  var totalSubs = subs.length;
+  var avgScore = scoreCount > 0 ? (scoreSum / scoreCount) : 0;
+  var avgInt = intCount > 0 ? Math.round(intSum / intCount) : 100;
+  var passRate = scoreCount > 0 ? Math.round((passCount / scoreCount) * 100) : 0;
+
+  document.getElementById('analyticsOverviewGrid').innerHTML = ''
+    + '<div class="analytics-ov-card ov-exams"><div class="ov-value">' + totalExams + '</div><div class="ov-label">Total Exams</div></div>'
+    + '<div class="analytics-ov-card ov-students"><div class="ov-value">' + totalStudents + '</div><div class="ov-label">Total Students</div></div>'
+    + '<div class="analytics-ov-card ov-submissions"><div class="ov-value">' + totalSubs + '</div><div class="ov-label">Total Submissions</div></div>'
+    + '<div class="analytics-ov-card ov-score"><div class="ov-value">' + avgScore.toFixed(1) + '</div><div class="ov-label">Average Score</div></div>'
+    + '<div class="analytics-ov-card ov-integrity"><div class="ov-value">' + avgInt + '%</div><div class="ov-label">Avg Integrity Score</div></div>'
+    + '<div class="analytics-ov-card ov-passrate"><div class="ov-value">' + passRate + '%</div><div class="ov-label">Pass Rate</div></div>';
+}
+
+function renderScoreDistribution() {
+  var bins = { '0–20%': 0, '21–40%': 0, '41–60%': 0, '61–80%': 0, '81–100%': 0 };
+  var subs = _analyticsSubmissions;
+  for (var i = 0; i < subs.length; i++) {
+    var s = subs[i];
+    if (s.percentage === undefined) continue;
+    var pct = s.percentage;
+    if (pct <= 20) bins['0–20%']++;
+    else if (pct <= 40) bins['21–40%']++;
+    else if (pct <= 60) bins['41–60%']++;
+    else if (pct <= 80) bins['61–80%']++;
+    else bins['81–100%']++;
+  }
+  var maxVal = 0;
+  for (var key in bins) { if (bins[key] > maxVal) maxVal = bins[key]; }
+
+  var colors = ['red', 'orange', 'yellow', 'green', 'indigo'];
+  var labels = ['0–20%', '21–40%', '41–60%', '61–80%', '81–100%'];
+  var html = '<div class="analytics-bar-container">';
+  for (var ci = 0; ci < labels.length; ci++) {
+    var count = bins[labels[ci]];
+    var pct = maxVal > 0 ? (count / maxVal) * 100 : 0;
+    html += '<div class="analytics-bar-row">'
+      + '<span class="analytics-bar-label">' + labels[ci] + '</span>'
+      + '<div class="analytics-bar-track"><div class="analytics-bar-fill ' + colors[ci] + '" style="width:' + pct + '%"></div></div>'
+      + '<span class="analytics-bar-count">' + count + '</span>'
+      + '</div>';
+  }
+  html += '</div>';
+  document.getElementById('analyticsScoreDist').innerHTML = html;
+}
+
+function renderIntegrityDistribution() {
+  var low = 0, medium = 0, high = 0;
+  var subs = _analyticsSubmissions;
+  for (var i = 0; i < subs.length; i++) {
+    var r = (subs[i].riskLevel || '').toLowerCase();
+    if (r.indexOf('low') !== -1) low++;
+    else if (r.indexOf('medium') !== -1) medium++;
+    else if (r.indexOf('high') !== -1) high++;
+  }
+  var total = low + medium + high;
+  var lowPct = total > 0 ? Math.round((low / total) * 100) : 0;
+  var medPct = total > 0 ? Math.round((medium / total) * 100) : 0;
+  var highPct = total > 0 ? Math.round((high / total) * 100) : 0;
+
+  var maxVal = Math.max(low, medium, high, 1);
+  var html = '<div class="analytics-bar-container">'
+    + '<div class="analytics-bar-row"><span class="analytics-bar-label">Low Risk</span><div class="analytics-bar-track"><div class="analytics-bar-fill green" style="width:' + (low / maxVal * 100) + '%"></div></div><span class="analytics-bar-count">' + low + ' (' + lowPct + '%)</span></div>'
+    + '<div class="analytics-bar-row"><span class="analytics-bar-label">Medium Risk</span><div class="analytics-bar-track"><div class="analytics-bar-fill yellow" style="width:' + (medium / maxVal * 100) + '%"></div></div><span class="analytics-bar-count">' + medium + ' (' + medPct + '%)</span></div>'
+    + '<div class="analytics-bar-row"><span class="analytics-bar-label">High Risk</span><div class="analytics-bar-track"><div class="analytics-bar-fill red" style="width:' + (high / maxVal * 100) + '%"></div></div><span class="analytics-bar-count">' + high + ' (' + highPct + '%)</span></div>'
+    + '</div>';
+  document.getElementById('analyticsIntegrityDist').innerHTML = html;
+}
+
+function renderExamPerformanceRanking() {
+  var examData = {};
+  var subs = _analyticsSubmissions;
+  for (var i = 0; i < subs.length; i++) {
+    var s = subs[i];
+    var name = s.examName || 'Unknown';
+    if (!examData[name]) examData[name] = { scores: [], intScores: [], count: 0 };
+    if (s.percentage !== undefined) examData[name].scores.push(s.percentage);
+    if (s.integrityScore !== undefined) examData[name].intScores.push(s.integrityScore);
+    examData[name].count++;
+  }
+
+  var ranking = [];
+  for (var key in examData) {
+    var d = examData[key];
+    var avgScore = d.scores.length > 0 ? (d.scores.reduce(function(a, b) { return a + b; }, 0) / d.scores.length) : 0;
+    var avgInt = d.intScores.length > 0 ? (d.intScores.reduce(function(a, b) { return a + b; }, 0) / d.intScores.length) : 100;
+    ranking.push({ name: key, avgScore: avgScore, avgInt: Math.round(avgInt), attempts: d.count });
+  }
+  ranking.sort(function(a, b) { return b.avgScore - a.avgScore; });
+
+  var html = '<table class="analytics-table"><thead><tr><th>#</th><th>Exam Name</th><th>Average Score</th><th>Avg Integrity</th><th>Attempts</th></tr></thead><tbody>';
+  for (var ri = 0; ri < ranking.length; ri++) {
+    var r = ranking[ri];
+    html += '<tr><td><span class="rank-num">' + (ri + 1) + '</span></td><td>' + escHtml(r.name) + '</td><td>' + r.avgScore.toFixed(1) + '%</td><td>' + r.avgInt + '</td><td>' + r.attempts + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  document.getElementById('analyticsExamRanking').innerHTML = html;
+}
+
+function renderSubmissionTrends(group) {
+  var subs = _analyticsSubmissions;
+  var buckets = {};
+  for (var i = 0; i < subs.length; i++) {
+    var ts = subs[i].submittedAt;
+    if (!ts) continue;
+    var d = new Date(ts);
+    if (isNaN(d.getTime())) continue;
+    var key;
+    if (group === 'day') key = d.toISOString().slice(0, 10);
+    else if (group === 'week') {
+      var start = new Date(d);
+      start.setDate(d.getDate() - d.getDay());
+      key = start.toISOString().slice(0, 10);
+    } else {
+      key = d.toISOString().slice(0, 7);
+    }
+    if (!buckets[key]) buckets[key] = 0;
+    buckets[key]++;
+  }
+
+  var sorted = Object.keys(buckets).sort();
+  if (sorted.length === 0) {
+    document.getElementById('analyticsTrendChart').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No submission timing data available.</p>';
+    return;
+  }
+
+  var maxCount = 0;
+  for (var bi = 0; bi < sorted.length; bi++) {
+    if (buckets[sorted[bi]] > maxCount) maxCount = buckets[sorted[bi]];
+  }
+  maxCount = Math.max(maxCount, 1);
+
+  var chartW = 600, chartH = 200, barPad = 2;
+  var barW = Math.max(6, Math.min(40, (chartW - 40) / sorted.length - barPad));
+  var svg = '<svg viewBox="0 0 ' + chartW + ' ' + (chartH + 30) + '" class="analytics-chart-svg">';
+
+  // Y axis gridlines
+  for (var gi = 0; gi <= 4; gi++) {
+    var y = chartH - (chartH * gi / 4);
+    svg += '<line x1="30" y1="' + y + '" x2="' + (chartW - 10) + '" y2="' + y + '" stroke="var(--gray-100)" stroke-width="1"/>';
+    svg += '<text x="25" y="' + (y + 4) + '" text-anchor="end" fill="var(--gray-400)" font-size="10">' + Math.round(maxCount * gi / 4) + '</text>';
+  }
+
+  // Bars
+  for (var si = 0; si < sorted.length; si++) {
+    var val = buckets[sorted[si]];
+    var barH = (val / maxCount) * chartH;
+    var x = 35 + si * (barW + barPad);
+    var y = chartH - barH;
+    svg += '<rect x="' + x + '" y="' + y + '" width="' + barW + '" height="' + barH + '" rx="2" fill="var(--indigo-400)"/>';
+    // X label
+    var label = sorted[si];
+    if (group === 'week') label = 'W' + sorted[si].slice(5);
+    else if (group === 'month') label = sorted[si].slice(0, 7);
+    else label = sorted[si].slice(5);
+    svg += '<text x="' + (x + barW / 2) + '" y="' + (chartH + 16) + '" text-anchor="end" fill="var(--gray-400)" font-size="8" transform="rotate(-45,' + (x + barW / 2) + ',' + (chartH + 16) + ')">' + label + '</text>';
+  }
+
+  svg += '</svg>';
+  document.getElementById('analyticsTrendChart').innerHTML = svg;
+}
+
+function switchTrendGroup(group) {
+  _analyticsTrendGroup = group;
+  document.querySelectorAll('.analytics-trend-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.group === group);
+  });
+  renderSubmissionTrends(group);
+}
+
+function renderTimeTakenAnalysis() {
+  var subs = _analyticsSubmissions;
+  var times = [];
+  for (var i = 0; i < subs.length; i++) {
+    var t = subs[i].timeTakenMinutes;
+    if (t !== undefined && t !== null && !isNaN(t)) times.push(t);
+  }
+  if (times.length === 0) {
+    document.getElementById('analyticsTimeTaken').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No timing data available.</p>';
+    return;
+  }
+  var sorted = times.slice().sort(function(a, b) { return a - b; });
+  var fastest = sorted[0];
+  var slowest = sorted[sorted.length - 1];
+  var avg = times.reduce(function(a, b) { return a + b; }, 0) / times.length;
+
+  document.getElementById('analyticsTimeTaken').innerHTML = ''
+    + '<div class="analytics-eval-grid">'
+    + '<div class="analytics-eval-card"><div class="eval-value">' + fastest.toFixed(1) + 'm</div><div class="eval-label">Fastest</div></div>'
+    + '<div class="analytics-eval-card"><div class="eval-value">' + slowest.toFixed(1) + 'm</div><div class="eval-label">Slowest</div></div>'
+    + '<div class="analytics-eval-card"><div class="eval-value">' + avg.toFixed(1) + 'm</div><div class="eval-label">Average</div></div>'
+    + '</div>';
+}
+
+function renderTopStudents() {
+  var subs = _analyticsSubmissions;
+  var scored = [];
+  for (var i = 0; i < subs.length; i++) {
+    var s = subs[i];
+    if (s.percentage === undefined) continue;
+    scored.push({
+      name: s.studentName || 'Unknown',
+      exam: s.examName || '',
+      score: s.percentage,
+      integrity: s.integrityScore || 100,
+    });
+  }
+  scored.sort(function(a, b) { return b.score - a.score; });
+  var top = scored.slice(0, 10);
+
+  if (top.length === 0) {
+    document.getElementById('analyticsTopStudents').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No scored submissions.</p>';
+    return;
+  }
+
+  var html = '<table class="analytics-table"><thead><tr><th>#</th><th>Student</th><th>Exam</th><th>Score</th><th>Integrity</th></tr></thead><tbody>';
+  for (var ti = 0; ti < top.length; ti++) {
+    var t = top[ti];
+    html += '<tr><td><span class="rank-num">' + (ti + 1) + '</span></td><td>' + escHtml(t.name) + '</td><td>' + escHtml(t.exam) + '</td><td>' + t.score + '%</td><td>' + t.integrity + '</td></tr>';
+  }
+  html += '</tbody></table>';
+  document.getElementById('analyticsTopStudents').innerHTML = html;
+}
+
+function renderStudentsRequiringAttention() {
+  var subs = _analyticsSubmissions;
+  var items = [];
+  for (var i = 0; i < subs.length; i++) {
+    var s = subs[i];
+    var reasons = [];
+    var risk = (s.riskLevel || '').toLowerCase();
+    if (risk.indexOf('high') !== -1) reasons.push('High Risk');
+    if (s.percentage !== undefined && s.percentage < 20) reasons.push('Very Low Score (' + s.percentage + '%)');
+    if (s.timeTakenMinutes !== undefined && s.timeTakenMinutes < 5) reasons.push('Rapid Submission (' + s.timeTakenMinutes + 'm)');
+    if (reasons.length > 0) {
+      items.push({
+        name: s.studentName || 'Unknown',
+        exam: s.examName || '',
+        risk: s.riskLevel || 'Low Risk',
+        reason: reasons.join(', '),
+      });
+    }
+  }
+
+  if (items.length === 0) {
+    document.getElementById('analyticsAttentionStudents').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No students currently require attention.</p>';
+    return;
+  }
+
+  var html = '';
+  for (var ai = 0; ai < items.length; ai++) {
+    var a = items[ai];
+    var riskClass = a.risk.toLowerCase().indexOf('high') !== -1 ? 'high' : a.risk.toLowerCase().indexOf('medium') !== -1 ? 'medium' : 'low';
+    html += '<div class="analytics-attention-item">'
+      + '<span class="analytics-attention-name">' + escHtml(a.name) + '</span>'
+      + '<span class="analytics-attention-exam">' + escHtml(a.exam) + '</span>'
+      + '<span class="analytics-attention-risk ' + riskClass + '">' + a.risk + '</span>'
+      + '<span class="analytics-attention-reason">' + escHtml(a.reason) + '</span>'
+      + '</div>';
+  }
+  document.getElementById('analyticsAttentionStudents').innerHTML = html;
+}
+
+function renderEvalStatus() {
+  var subs = _analyticsSubmissions;
+  var pending = 0, completed = 0;
+  for (var i = 0; i < subs.length; i++) {
+    var status = getEvaluationStatus(subs[i]);
+    if (status === 'completed') completed++;
+    else pending++;
+  }
+  var total = subs.length;
+  var pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+  document.getElementById('analyticsEvalStatus').innerHTML = ''
+    + '<div class="analytics-eval-grid">'
+    + '<div class="analytics-eval-card"><div class="eval-value">' + pending + '</div><div class="eval-label">Pending Evaluations</div></div>'
+    + '<div class="analytics-eval-card"><div class="eval-value">' + completed + '</div><div class="eval-label">Completed Evaluations</div></div>'
+    + '<div class="analytics-eval-card"><div class="eval-value">' + pct + '%</div><div class="eval-label">Completion Percentage</div></div>'
+    + '</div>';
+}
+
+function renderQuestionAnalytics() {
+  // Aggregate per-question stats across all submissions using exam data
+  var qStats = {};
+
+  for (var i = 0; i < _analyticsSubmissions.length; i++) {
+    var sub = _analyticsSubmissions[i];
+    var exam = _analyticsExamsCache[sub.examCode];
+    if (!exam || !exam.paper || !exam.paper.sections) continue;
+    var answers = sub.studentAnswers || {};
+    var sections = exam.paper.sections;
+    var sectionKeys = ['MCQ', 'Short Answer', 'Long Answer'];
+
+    for (var sk = 0; sk < sectionKeys.length; sk++) {
+      var key = sectionKeys[sk];
+      var qs = sections[key] || [];
+      for (var qi = 0; qi < qs.length; qi++) {
+        var q = qs[qi];
+        if (!qStats[q.id]) {
+          qStats[q.id] = { id: q.id, text: q.question || q.id, total: 0, correct: 0, incorrect: 0, unanswered: 0 };
+        }
+        var ans = answers[q.id];
+        qStats[q.id].total++;
+        if (ans === undefined || ans === null || ans === '') {
+          qStats[q.id].unanswered++;
+        } else if (key === 'MCQ' && q.correctAnswer) {
+          if (ans.toUpperCase().trim() === q.correctAnswer.toUpperCase().trim()) {
+            qStats[q.id].correct++;
+          } else {
+            qStats[q.id].incorrect++;
+          }
+        } else if (key !== 'MCQ') {
+          // For subjective, we just track attempt (no auto correct/incorrect)
+          qStats[q.id].correct++;
+        } else {
+          qStats[q.id].incorrect++;
+        }
+      }
+    }
+  }
+
+  var qList = [];
+  for (var qid in qStats) qList.push(qStats[qid]);
+  if (qList.length === 0) {
+    document.getElementById('analyticsQuestionAnalytics').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No question data available. Submissions may lack linked exam data.</p>';
+    return;
+  }
+
+  // Calculate percentages
+  for (var qi2 = 0; qi2 < qList.length; qi2++) {
+    var qq = qList[qi2];
+    qq.correctPct = qq.total > 0 ? Math.round((qq.correct / qq.total) * 100) : 0;
+    qq.incorrectPct = qq.total > 0 ? Math.round((qq.incorrect / qq.total) * 100) : 0;
+    qq.unansweredPct = qq.total > 0 ? Math.round((qq.unanswered / qq.total) * 100) : 0;
+  }
+
+  // Hardest = lowest correct %, easiest = highest correct %
+  var hardest = qList.slice().sort(function(a, b) { return a.correctPct - b.correctPct; }).slice(0, 5);
+  var easiest = qList.slice().sort(function(a, b) { return b.correctPct - a.correctPct; }).slice(0, 5);
+
+  function renderQList(arr, isHard) {
+    var h = '';
+    for (var idx = 0; idx < arr.length; idx++) {
+      var qd = arr[idx];
+      h += '<div class="analytics-q-item">'
+        + '<span class="analytics-q-rank">#' + (idx + 1) + '</span>'
+        + '<span class="analytics-q-text" title="' + escHtml(qd.text) + '">' + escHtml(qd.text.length > 60 ? qd.text.slice(0, 60) + '...' : qd.text) + '</span>'
+        + '<span class="analytics-q-stat ' + (isHard ? 'hard' : 'easy') + '">' + qd.correctPct + '%</span>'
+        + '</div>';
+    }
+    return h;
+  }
+
+  var html = '<div class="analytics-q-section"><h4>Hardest Questions (Lowest Correct %)</h4>';
+  html += renderQList(hardest, true);
+  html += '</div><div class="analytics-q-section"><h4>Easiest Questions (Highest Correct %)</h4>';
+  html += renderQList(easiest, false);
+  html += '</div>';
+  document.getElementById('analyticsQuestionAnalytics').innerHTML = html;
+}
+
+function renderSubjectAnalytics() {
+  var subjectData = {};
+  for (var i = 0; i < _analyticsSubmissions.length; i++) {
+    var sub = _analyticsSubmissions[i];
+    var exam = _analyticsExamsCache[sub.examCode];
+    var subject = (exam && exam.subject) || 'Unknown';
+    if (!subjectData[subject]) subjectData[subject] = { scores: [], count: 0, passCount: 0 };
+    subjectData[subject].count++;
+    if (sub.percentage !== undefined) {
+      subjectData[subject].scores.push(sub.percentage);
+      if (sub.percentage >= 40) subjectData[subject].passCount++;
+    }
+  }
+
+  var subjects = [];
+  for (var sk in subjectData) {
+    var d = subjectData[sk];
+    var avgScore = d.scores.length > 0 ? (d.scores.reduce(function(a, b) { return a + b; }, 0) / d.scores.length) : 0;
+    var passRate = d.scores.length > 0 ? Math.round((d.passCount / d.scores.length) * 100) : 0;
+    subjects.push({ name: sk, attempts: d.count, avgScore: avgScore, passRate: passRate });
+  }
+
+  if (subjects.length === 0) {
+    document.getElementById('analyticsSubjectPerf').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No subject data available.</p>';
+    return;
+  }
+
+  var html = '<table class="analytics-table"><thead><tr><th>Subject</th><th>Attempts</th><th>Average Score</th><th>Pass Rate</th></tr></thead><tbody>';
+  for (var si = 0; si < subjects.length; si++) {
+    var subj = subjects[si];
+    html += '<tr><td>' + escHtml(subj.name) + '</td><td>' + subj.attempts + '</td><td>' + subj.avgScore.toFixed(1) + '%</td><td>' + subj.passRate + '%</td></tr>';
+  }
+  html += '</tbody></table>';
+
+  // Subject performance bar chart
+  var maxAttempts = 1;
+  for (var m = 0; m < subjects.length; m++) { if (subjects[m].attempts > maxAttempts) maxAttempts = subjects[m].attempts; }
+  var barHtml = '<div class="analytics-bar-container" style="margin-top:12px;">';
+  for (var bi = 0; bi < subjects.length; bi++) {
+    var s2 = subjects[bi];
+    var barPct = (s2.attempts / maxAttempts) * 100;
+    barHtml += '<div class="analytics-bar-row">'
+      + '<span class="analytics-bar-label">' + escHtml(s2.name) + '</span>'
+      + '<div class="analytics-bar-track"><div class="analytics-bar-fill indigo" style="width:' + barPct + '%"></div></div>'
+      + '<span class="analytics-bar-count">' + s2.attempts + '</span>'
+      + '</div>';
+  }
+  barHtml += '</div>';
+
+  html += barHtml;
+  document.getElementById('analyticsSubjectPerf').innerHTML = html;
+}
+
+function exportAnalyticsCSV() {
+  var subs = _analyticsSubmissions;
+  if (!subs || subs.length === 0) {
+    showNotification('No analytics data to export.', 'info');
+    return;
+  }
+
+  // Student Results
+  var studentRows = [['Student Name', 'Exam Name', 'Exam Code', 'Score', 'Max Marks', 'Percentage', 'Correct', 'Incorrect', 'Unanswered', 'Integrity Score', 'Risk Level', 'Time Taken (min)', 'Submitted At']];
+  for (var i = 0; i < subs.length; i++) {
+    var s = subs[i];
+    studentRows.push([
+      s.studentName || '', s.examName || '', s.examCode || '',
+      s.score !== undefined ? s.score : '', s.maxMarks !== undefined ? s.maxMarks : '',
+      s.percentage !== undefined ? s.percentage : '',
+      s.correct || 0, s.incorrect || 0, s.unanswered || 0,
+      s.integrityScore || 100, s.riskLevel || 'Low Risk',
+      s.timeTakenMinutes !== undefined ? s.timeTakenMinutes : '',
+      s.submittedAt || ''
+    ]);
+  }
+
+  // Integrity Data
+  var intRows = [['Student Name', 'Exam Name', 'Integrity Score', 'Risk Level', 'Tab Switches', 'Refresh Count', 'Fullscreen Exits']];
+  for (var j = 0; j < subs.length; j++) {
+    var s2 = subs[j];
+    intRows.push([
+      s2.studentName || '', s2.examName || '',
+      s2.integrityScore || 100, s2.riskLevel || 'Low Risk',
+      s2.tabSwitches || 0, s2.refreshCount || 0, s2.fullscreenExitCount || 0
+    ]);
+  }
+
+  // Analytics Summary
+  var total = subs.length;
+  var avgScore = 0, scoreCount = 0, passCount = 0;
+  for (var k = 0; k < subs.length; k++) {
+    if (subs[k].percentage !== undefined) { avgScore += subs[k].percentage; scoreCount++; if (subs[k].percentage >= 40) passCount++; }
+  }
+  var sumRows = [
+    ['Metric', 'Value'],
+    ['Total Submissions', total],
+    ['Average Score', scoreCount > 0 ? (avgScore / scoreCount).toFixed(1) + '%' : 'N/A'],
+    ['Pass Rate', scoreCount > 0 ? Math.round((passCount / scoreCount) * 100) + '%' : 'N/A'],
+  ];
+
+  function csvEscape(val) {
+    var str = String(val);
+    if (str.indexOf(',') !== -1 || str.indexOf('"') !== -1 || str.indexOf('\n') !== -1) {
+      return '"' + str.replace(/"/g, '""') + '"';
+    }
+    return str;
+  }
+
+  function downloadCSV(rows, filename) {
+    var csv = rows.map(function(row) { return row.map(csvEscape).join(','); }).join('\n');
+    var BOM = '\uFEFF';
+    var blob = new Blob([BOM + csv], { type: 'text/csv;charset=utf-8;' });
+    var link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }
+
+  downloadCSV(studentRows, 'EdInt_Student_Results.csv');
+  downloadCSV(intRows, 'EdInt_Integrity_Data.csv');
+  downloadCSV(sumRows, 'EdInt_Analytics_Summary.csv');
+
+  showNotification('Analytics exported as 3 CSV files.', 'success');
+}
 </script>
 
 </body>
