@@ -22,7 +22,7 @@ window.__firebaseApp = app;
 window.__firebaseAnalytics = analytics;
 window.__firebaseDb = db;
 window.__firebaseStorage = storage;
-window.__firestore = { collection, getDocs };
+window.__firestore = { collection, getDocs, doc, setDoc, getDoc };
 
 window.__uploadPhoto = async function(base64Data, examCode, attemptId, type) {
   // Store photo as inline base64 data URL in Firestore (no Firebase Storage needed)
