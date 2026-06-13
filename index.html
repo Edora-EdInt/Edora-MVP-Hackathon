@@ -5430,6 +5430,95 @@ html.dark-mode .student-photo-preview {
   .ci-header { flex-direction:column; }
   .ci-table-controls { flex-direction:column; align-items:stretch; }
 }
+
+/* ===== PHASE 5.7: REPORTS ===== */
+.rp-page { max-width:1200px; }
+.rp-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:28px; gap:16px; }
+.rp-header h2 { margin:0 0 4px; }
+.rp-header p { margin:0; color:var(--gray-400); font-size:0.867rem; }
+.rp-loading,.rp-error,.rp-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; text-align:center; gap:12px; }
+.rp-loading .spinner { width:32px; height:32px; border:3px solid var(--gray-100); border-top-color:var(--indigo-500); border-radius:50%; animation:spin 0.7s linear infinite; }
+.rp-loading span { color:var(--gray-400); font-size:0.867rem; }
+.rp-error svg,.rp-empty svg { width:48px; height:48px; color:var(--gray-300); margin-bottom:8px; }
+.rp-error h3,.rp-empty h3 { margin:0; font-size:1.067rem; font-weight:600; color:var(--text-primary); }
+.rp-error p,.rp-empty p { margin:0; font-size:0.867rem; color:var(--gray-400); max-width:420px; }
+.rp-retry-btn { padding:8px 20px; border:none; border-radius:8px; background:var(--indigo-500); color:#fff; font-size:0.867rem; font-weight:500; cursor:pointer; font-family:inherit; }
+.rp-retry-btn:hover { background:var(--indigo-600); }
+
+.rp-section { background:var(--bg-surface); border:1px solid var(--gray-100); border-radius:12px; padding:24px; margin-bottom:20px; }
+.rp-section-title { font-size:0.867rem; font-weight:600; color:var(--text-primary); margin:0 0 16px; }
+
+.rp-type-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.rp-type-card { border:1px solid var(--gray-100); border-radius:12px; padding:20px; cursor:pointer; transition:all 0.15s ease; background:var(--bg-surface); }
+.rp-type-card:hover { border-color:var(--indigo-300); box-shadow:0 2px 8px rgba(79,70,229,0.06); transform:translateY(-1px); }
+.rp-type-card.active { border-color:var(--indigo-500); background:var(--indigo-50); }
+.rp-type-card .rp-type-icon { width:36px; height:36px; color:var(--indigo-500); margin-bottom:10px; }
+.rp-type-card h4 { margin:0 0 4px; font-size:0.867rem; font-weight:600; color:var(--text-primary); }
+.rp-type-card p { margin:0; font-size:0.733rem; color:var(--gray-400); line-height:1.4; }
+.rp-type-card .rp-type-check { display:none; margin-top:10px; width:20px; height:20px; border-radius:50%; background:var(--indigo-500); color:#fff; align-items:center; justify-content:center; font-size:0.7rem; font-weight:600; }
+.rp-type-card.active .rp-type-check { display:flex; }
+
+.rp-params { margin-bottom:20px; }
+.rp-param-row { display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap; }
+.rp-param-row label { font-size:0.8rem; font-weight:500; color:var(--text-primary); min-width:80px; }
+.rp-param-row select,.rp-param-row input { flex:1; min-width:160px; padding:8px 12px; border:1px solid var(--gray-100); border-radius:8px; font-size:0.8rem; font-family:inherit; background:var(--bg-surface); color:var(--text-primary); outline:none; }
+.rp-param-row select:focus,.rp-param-row input:focus { border-color:var(--indigo-400); }
+
+.rp-preview-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:20px; }
+.rp-preview-modal.open { display:flex; }
+.rp-preview-content { background:var(--bg-surface); border-radius:16px; width:100%; max-width:800px; max-height:90vh; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.15); }
+.rp-preview-header { display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border-bottom:1px solid var(--gray-100); flex-shrink:0; }
+.rp-preview-header h3 { margin:0; font-size:1.067rem; font-weight:600; color:var(--text-primary); }
+.rp-preview-close { width:32px; height:32px; border:none; background:var(--gray-50); border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--gray-500); font-size:1.2rem; }
+.rp-preview-close:hover { background:var(--gray-100); }
+.rp-preview-body { flex:1; overflow-y:auto; padding:24px; font-size:0.8rem; line-height:1.5; color:var(--text-primary); }
+.rp-preview-footer { display:flex; gap:10px; justify-content:flex-end; padding:16px 24px; border-top:1px solid var(--gray-100); flex-shrink:0; }
+.rp-preview-footer button { padding:8px 20px; border-radius:8px; font-size:0.8rem; font-weight:500; cursor:pointer; font-family:inherit; border:none; }
+.rp-btn-pdf { background:var(--indigo-500); color:#fff; }
+.rp-btn-pdf:hover { background:var(--indigo-600); }
+.rp-btn-csv { background:var(--green-500); color:#fff; }
+.rp-btn-csv:hover { background:var(--green-600); }
+.rp-btn-close { background:var(--gray-50); color:var(--gray-600); }
+.rp-btn-close:hover { background:var(--gray-100); }
+.rp-btn-gen { padding:10px 28px; border:none; border-radius:8px; background:var(--indigo-500); color:#fff; font-size:0.867rem; font-weight:500; cursor:pointer; font-family:inherit; transition:all 0.15s ease; }
+.rp-btn-gen:hover { background:var(--indigo-600); }
+.rp-btn-gen:disabled { opacity:0.5; cursor:default; }
+.rp-empty-state { text-align:center; padding:40px 20px; color:var(--gray-400); font-size:0.867rem; }
+
+/* Report preview body styling */
+.rp-report-preview { font-family:'Inter',sans-serif; }
+.rp-report-preview .rp-brand { text-align:center; margin-bottom:20px; padding-bottom:16px; border-bottom:2px solid var(--indigo-500); }
+.rp-report-preview .rp-brand .rp-logo { font-size:1.333rem; font-weight:700; color:var(--indigo-600); }
+.rp-report-preview .rp-brand .rp-logo span { color:var(--gray-900); }
+.rp-report-preview .rp-brand .rp-sub { font-size:0.7rem; color:var(--gray-400); }
+.rp-report-preview .rp-brand .rp-ts { font-size:0.667rem; color:var(--gray-400); margin-top:4px; }
+.rp-report-preview h4 { font-size:0.867rem; font-weight:600; color:var(--text-primary); margin:16px 0 8px; }
+.rp-report-preview table { width:100%; border-collapse:collapse; font-size:0.767rem; margin-bottom:12px; }
+.rp-report-preview th { text-align:left; padding:6px 8px; font-size:0.667rem; font-weight:600; color:var(--gray-400); text-transform:uppercase; border-bottom:1px solid var(--gray-100); }
+.rp-report-preview td { padding:6px 8px; color:var(--text-primary); border-bottom:1px solid var(--gray-50); }
+.rp-report-preview .rp-sec { background:var(--gray-50); padding:6px 8px; font-size:0.733rem; font-weight:600; color:var(--text-primary); border-radius:4px; margin:10px 0 6px; }
+.rp-report-preview .rp-score { color:var(--indigo-600); font-weight:650; font-size:1.2rem; }
+.rp-report-preview .rp-stat-row { display:flex; gap:16px; flex-wrap:wrap; margin:8px 0; }
+.rp-report-preview .rp-stat-item { flex:1; min-width:100px; padding:10px; border:1px solid var(--gray-100); border-radius:8px; text-align:center; }
+.rp-report-preview .rp-stat-item .rp-stat-val { font-size:1.067rem; font-weight:600; color:var(--text-primary); }
+.rp-report-preview .rp-stat-item .rp-stat-lbl { font-size:0.667rem; color:var(--gray-400); }
+.rp-report-preview .rp-photo-row { display:flex; gap:12px; margin:8px 0; }
+.rp-report-preview .rp-photo-box { flex:1; border:1px solid var(--gray-100); border-radius:8px; padding:8px; text-align:center; }
+.rp-report-preview .rp-photo-box img { max-width:100%; max-height:120px; border-radius:4px; }
+.rp-report-preview .rp-photo-box .rp-photo-label { font-size:0.667rem; color:var(--gray-400); margin-top:4px; }
+.rp-report-preview .rp-warn { color:var(--red-500); font-weight:500; }
+.rp-report-preview .rp-ok { color:var(--green-500); font-weight:500; }
+.rp-report-preview .rp-rec { padding:10px; background:var(--indigo-50); border-radius:8px; font-size:0.767rem; color:var(--indigo-700); margin:8px 0; }
+
+@media (max-width:1100px) {
+  .rp-type-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:768px) {
+  .rp-type-grid { grid-template-columns:1fr; }
+  .rp-header { flex-direction:column; }
+  .rp-param-row { flex-direction:column; align-items:stretch; }
+  .rp-param-row label { min-width:auto; }
+}
 </style>
 </head>
 <body>
@@ -5511,6 +5600,10 @@ html.dark-mode .student-photo-preview {
     <a href="#" class="nav-item" data-page="chapter-intelligence">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
       <span>Chapter Intelligence</span>
+    </a>
+    <a href="#" class="nav-item" data-page="reports">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <span>Reports</span>
     </a>
     <a href="#" class="nav-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -6850,6 +6943,74 @@ html.dark-mode .student-photo-preview {
   </div>
 </div>
 
+<!-- ===== REPORTS PAGE ===== -->
+<div id="page-reports" style="display:none;">
+  <div class="rp-page">
+    <div class="rp-header">
+      <div>
+        <h2>Reports</h2>
+        <p>Generate professional reports for students, exams, integrity, analytics, and chapter intelligence</p>
+      </div>
+    </div>
+
+    <div class="rp-loading" id="rpLoading">
+      <div class="spinner"></div>
+      <span>Loading report data...</span>
+    </div>
+
+    <div class="rp-error" id="rpError" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <h3>Failed to Load</h3>
+      <p id="rpErrorMsg">Could not fetch report data.</p>
+      <button class="rp-retry-btn" onclick="loadReportsPage()">Retry</button>
+    </div>
+
+    <div class="rp-empty" id="rpEmpty" style="display:none;">
+      <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <h3>Insufficient Data</h3>
+      <p id="rpEmptyMsg">Not enough data available for report generation.</p>
+    </div>
+
+    <div id="rpContent" style="display:none;">
+      <section class="rp-section">
+        <h3 class="rp-section-title">Select Report Type</h3>
+        <div class="rp-type-grid" id="rpTypeGrid"></div>
+      </section>
+
+      <div id="rpParams" style="display:none;">
+        <section class="rp-section">
+          <h3 class="rp-section-title">Report Parameters</h3>
+          <div id="rpParamFields"></div>
+        </section>
+        <button class="rp-btn-gen" id="rpGenerateBtn" onclick="generateReport()">Generate Report</button>
+      </div>
+
+      <div id="rpPreviewArea" style="display:none;">
+        <section class="rp-section">
+          <h3 class="rp-section-title">Preview</h3>
+          <div id="rpPreviewContent"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Report Preview Modal -->
+<div class="rp-preview-modal" id="rpPreviewModal">
+  <div class="rp-preview-content">
+    <div class="rp-preview-header">
+      <h3 id="rpModalTitle">Report Preview</h3>
+      <button class="rp-preview-close" onclick="closeReportPreview()">&times;</button>
+    </div>
+    <div class="rp-preview-body" id="rpModalBody"></div>
+    <div class="rp-preview-footer">
+      <button class="rp-btn-close" onclick="closeReportPreview()">Close</button>
+      <button class="rp-btn-pdf" id="rpPdfBtn" onclick="downloadReportPDF()" style="display:none;">Download PDF</button>
+      <button class="rp-btn-csv" id="rpCsvBtn" onclick="downloadReportCSV()" style="display:none;">Download CSV</button>
+    </div>
+  </div>
+</div>
+
 <!-- Question Detail Drawer -->
 <div class="qi-drawer-overlay" id="qiDrawerOverlay"></div>
 <div class="qi-drawer" id="qiDrawer">
@@ -7251,6 +7412,7 @@ const pageStudents = document.getElementById('page-students');
 const pageAnalytics = document.getElementById('page-analytics');
 const pageQuestionIntel = document.getElementById('page-question-intelligence');
 const pageChapterIntel = document.getElementById('page-chapter-intelligence');
+const pageReports = document.getElementById('page-reports');
 const pageTitleEl = document.querySelector('.nav-left h1');
 const pageNames = {
   dashboard: 'Dashboard',
@@ -7262,6 +7424,7 @@ const pageNames = {
   analytics: 'Analytics',
   'question-intelligence': 'Question Intelligence',
   'chapter-intelligence': 'Chapter Intelligence',
+  reports: 'Reports',
 };
 
 function navigateTo(page) {
@@ -7328,6 +7491,11 @@ function navigateTo(page) {
     document.querySelector('.nav-item[data-page="chapter-intelligence"]')?.classList.add('active');
     pageTitleEl.textContent = 'Chapter Intelligence';
     loadChapterIntelligence();
+  } else if (page === 'reports') {
+    pageReports.style.display = 'block';
+    document.querySelector('.nav-item[data-page="reports"]')?.classList.add('active');
+    pageTitleEl.textContent = 'Reports';
+    loadReportsPage();
   }
 
   if (window.innerWidth <= 768) {
@@ -12888,6 +13056,1345 @@ function renderInsights() {
     html += '<div class="ci-insight-card"><div class="ci-insight-icon">' + icon + '</div><div><div class="ci-insight-type">' + ins.type + '</div><div class="ci-insight-text">' + escHtml(ins.text) + '</div></div></div>';
   }
   document.getElementById('ciInsights').innerHTML = html;
+}
+
+// ===== PHASE 5.7: REPORT GENERATION & EXPORT =====
+var _rpSubmissions = [];
+var _rpExamsCache = {};
+var _rpSelectedType = null;
+var _rpGeneratedData = null;
+var _rpTypeLabels = {
+  student: 'Student Report',
+  exam: 'Exam Report',
+  integrity: 'Integrity Report',
+  analytics: 'Analytics Report',
+  chapter: 'Chapter Intelligence Report',
+  csv: 'CSV Export'
+};
+var _rpTypeIcons = {
+  student: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  exam: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>',
+  integrity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+  analytics: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+  chapter: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>',
+  csv: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
+};
+var _rpTypeDescs = {
+  student: 'Comprehensive report for individual student performance including integrity and evaluation data.',
+  exam: 'Summary report for an exam covering all students, scores, and intelligence insights.',
+  integrity: 'Detailed integrity report with risk analysis, events timeline, and photo verification.',
+  analytics: 'Complete analytics export including score distribution, trends, and subject performance.',
+  chapter: 'Chapter-level intelligence report with strongest/weakest chapters and recommendations.',
+  csv: 'Export raw data as CSV files for students, submissions, integrity, or evaluations.'
+};
+
+function loadReportsPage() {
+  document.getElementById('rpLoading').style.display = 'flex';
+  document.getElementById('rpError').style.display = 'none';
+  document.getElementById('rpEmpty').style.display = 'none';
+  document.getElementById('rpContent').style.display = 'none';
+
+  if (!window.__firebaseDb) {
+    document.getElementById('rpLoading').style.display = 'none';
+    document.getElementById('rpError').style.display = 'flex';
+    document.getElementById('rpErrorMsg').textContent = 'Firebase not connected.';
+    return;
+  }
+
+  fetchAllSubmissions(function(submissions) {
+    _rpSubmissions = submissions || [];
+
+    var seen = {};
+    var examCodes = [];
+    for (var ei = 0; ei < _rpSubmissions.length; ei++) {
+      var c = _rpSubmissions[ei].examCode;
+      if (c && !seen[c]) { seen[c] = true; examCodes.push(c); }
+    }
+
+    var fetches = [];
+    for (var fi = 0; fi < examCodes.length; fi++) {
+      (function(code) {
+        if (_rpExamsCache[code]) return;
+        fetches.push(
+          (window.__getExamFromFirestore(code) || Promise.resolve(null))
+            .then(function(data) { if (data) _rpExamsCache[code] = data; })
+            .catch(function() {})
+        );
+      })(examCodes[fi]);
+    }
+
+    function done() {
+      setTimeout(function() {
+        document.getElementById('rpLoading').style.display = 'none';
+        if (_rpSubmissions.length === 0) {
+          document.getElementById('rpEmpty').style.display = 'flex';
+          document.getElementById('rpEmptyMsg').textContent = 'No submissions found. Conduct exams to generate reports.';
+          return;
+        }
+        document.getElementById('rpContent').style.display = 'block';
+        renderReportTypes();
+      }, 100);
+    }
+
+    if (fetches.length === 0) done();
+    else Promise.all(fetches).then(done).catch(done);
+  });
+}
+
+function renderReportTypes() {
+  var types = ['student', 'exam', 'integrity', 'analytics', 'chapter', 'csv'];
+  var html = '';
+  for (var i = 0; i < types.length; i++) {
+    var t = types[i];
+    html += '<div class="rp-type-card" id="rpType_' + t + '" onclick="selectReportType(\'' + t + '\')">'
+      + '<div class="rp-type-icon">' + _rpTypeIcons[t] + '</div>'
+      + '<h4>' + _rpTypeLabels[t] + '</h4>'
+      + '<p>' + _rpTypeDescs[t] + '</p>'
+      + '<div class="rp-type-check">✓</div>'
+      + '</div>';
+  }
+  document.getElementById('rpTypeGrid').innerHTML = html;
+}
+
+function selectReportType(type) {
+  _rpSelectedType = type;
+  var cards = document.querySelectorAll('.rp-type-card');
+  for (var i = 0; i < cards.length; i++) cards[i].classList.remove('active');
+  var card = document.getElementById('rpType_' + type);
+  if (card) card.classList.add('active');
+
+  document.getElementById('rpPreviewArea').style.display = 'none';
+  _rpGeneratedData = null;
+
+  renderReportParams(type);
+}
+
+function renderReportParams(type) {
+  var container = document.getElementById('rpParams');
+  var fields = document.getElementById('rpParamFields');
+
+  if (type === 'csv') {
+    // No params for CSV
+    container.style.display = 'none';
+    document.getElementById('rpGenerateBtn').style.display = 'none';
+    // Auto-generate CSV type selector
+    var csvTypes = [
+      { id: 'csv-student', label: 'Student Results' },
+      { id: 'csv-submission', label: 'Submission Records' },
+      { id: 'csv-integrity', label: 'Integrity Data' },
+      { id: 'csv-evaluation', label: 'Evaluation Data' }
+    ];
+    var html = '<div class="rp-param-row"><label>Data Type:</label><select id="rpCsvType">';
+    for (var i = 0; i < csvTypes.length; i++) {
+      html += '<option value="' + csvTypes[i].id + '">' + csvTypes[i].label + '</option>';
+    }
+    html += '</select></div>';
+    html += '<button class="rp-btn-gen" onclick="generateCSVExport()">Generate CSV</button>';
+    fields.innerHTML = html;
+    container.style.display = 'block';
+    document.getElementById('rpGenerateBtn').style.display = 'none';
+    return;
+  }
+
+  container.style.display = 'block';
+  document.getElementById('rpGenerateBtn').style.display = 'inline-block';
+
+  if (type === 'student') {
+    // Student selector
+    var students = {};
+    for (var si = 0; si < _rpSubmissions.length; si++) {
+      var s = _rpSubmissions[si];
+      var name = s.studentName || 'Unknown';
+      if (!students[name]) students[name] = [];
+      students[name].push(s);
+    }
+    var names = Object.keys(students).sort();
+    var html = '<div class="rp-param-row"><label>Student:</label><select id="rpStudentSelect">';
+    for (var ni = 0; ni < names.length; ni++) {
+      var count = students[names[ni]].length;
+      html += '<option value="' + escHtml(names[ni]) + '">' + escHtml(names[ni]) + ' (' + count + ' attempts)</option>';
+    }
+    html += '</select></div>';
+    html += '<div class="rp-param-row"><label>Attempt:</label><select id="rpAttemptSelect"></select></div>';
+    fields.innerHTML = html;
+
+    // Populate attempts on student change
+    document.getElementById('rpStudentSelect').onchange = function() {
+      populateAttempts(students);
+    };
+    populateAttempts(students);
+
+  } else if (type === 'exam') {
+    // Exam selector
+    var exams = {};
+    for (var si2 = 0; si2 < _rpSubmissions.length; si2++) {
+      var code = _rpSubmissions[si2].examCode;
+      if (code && !exams[code]) {
+        exams[code] = _rpExamsCache[code] || { name: code, subject: '' };
+      }
+    }
+    var codes = Object.keys(exams).sort();
+    var html2 = '<div class="rp-param-row"><label>Exam:</label><select id="rpExamSelect">';
+    for (var ci = 0; ci < codes.length; ci++) {
+      var exam = exams[codes[ci]];
+      html2 += '<option value="' + codes[ci] + '">' + escHtml(exam.name || codes[ci]) + ' (' + codes[ci] + ')</option>';
+    }
+    html2 += '</select></div>';
+    fields.innerHTML = html2;
+
+  } else if (type === 'integrity') {
+    // Exam selector for integrity
+    var exams2 = {};
+    for (var si3 = 0; si3 < _rpSubmissions.length; si3++) {
+      var code2 = _rpSubmissions[si3].examCode;
+      if (code2 && !exams2[code2]) {
+        exams2[code2] = _rpExamsCache[code2] || { name: code2, subject: '' };
+      }
+    }
+    var codes2 = Object.keys(exams2).sort();
+    var html3 = '<div class="rp-param-row"><label>Exam:</label><select id="rpIntegrityExam">';
+    html3 += '<option value="all">All Exams</option>';
+    for (var ci2 = 0; ci2 < codes2.length; ci2++) {
+      var exam2 = exams2[codes2[ci2]];
+      html3 += '<option value="' + codes2[ci2] + '">' + escHtml(exam2.name || codes2[ci2]) + ' (' + codes2[ci2] + ')</option>';
+    }
+    html3 += '</select></div>';
+    fields.innerHTML = html3;
+
+  } else {
+    // analytics or chapter - no params needed
+    fields.innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">Using data from all available submissions. Click Generate to create the report.</p>';
+  }
+}
+
+function populateAttempts(students) {
+  var name = document.getElementById('rpStudentSelect').value;
+  var subs = students[name] || [];
+  var sel = document.getElementById('rpAttemptSelect');
+  var html = '';
+  for (var i = 0; i < subs.length; i++) {
+    var sub = subs[i];
+    var date = sub.submittedAt ? new Date(sub.submittedAt).toLocaleDateString() : 'N/A';
+    var exam = _rpExamsCache[sub.examCode];
+    var examName = exam ? (exam.name || sub.examCode) : sub.examCode;
+    html += '<option value="' + i + '">' + escHtml(examName) + ' — ' + date + ' (Score: ' + (sub.score || 0) + '/' + (sub.maxMarks || 0) + ')</option>';
+  }
+  sel.innerHTML = html;
+}
+
+function generateReport() {
+  var type = _rpSelectedType;
+  if (!type) return;
+
+  var data = null;
+
+  if (type === 'student') {
+    var name = document.getElementById('rpStudentSelect').value;
+    var idx = parseInt(document.getElementById('rpAttemptSelect').value);
+    var subs = _rpSubmissions.filter(function(s) { return (s.studentName || 'Unknown') === name; });
+    var sub = subs[idx];
+    if (!sub) { alert('No submission selected.'); return; }
+    var exam = _rpExamsCache[sub.examCode] || null;
+    data = buildStudentReportData(sub, exam);
+  } else if (type === 'exam') {
+    var examCode = document.getElementById('rpExamSelect').value;
+    var examSubs = _rpSubmissions.filter(function(s) { return s.examCode === examCode; });
+    var examData = _rpExamsCache[examCode] || null;
+    data = buildExamReportData(examCode, examData, examSubs);
+  } else if (type === 'integrity') {
+    var examCode2 = document.getElementById('rpIntegrityExam').value;
+    var integSubs = examCode2 === 'all' ? _rpSubmissions : _rpSubmissions.filter(function(s) { return s.examCode === examCode2; });
+    data = buildIntegrityReportData(integSubs, examCode2);
+  } else if (type === 'analytics') {
+    data = buildAnalyticsReportData(_rpSubmissions, _rpExamsCache);
+  } else if (type === 'chapter') {
+    data = buildCIReportData(_rpSubmissions, _rpExamsCache);
+  }
+
+  if (!data || data.empty) {
+    document.getElementById('rpPreviewArea').style.display = 'block';
+    document.getElementById('rpPreviewContent').innerHTML = '<div class="rp-empty-state">Insufficient data available for report generation.</div>';
+    _rpGeneratedData = null;
+    return;
+  }
+
+  _rpGeneratedData = data;
+  _rpGeneratedData.type = type;
+
+  // Render preview in modal
+  var html = '';
+  if (type === 'student') html = buildStudentReportPreview(data);
+  else if (type === 'exam') html = buildExamReportPreview(data);
+  else if (type === 'integrity') html = buildIntegrityReportPreview(data);
+  else if (type === 'analytics') html = buildAnalyticsReportPreview(data);
+  else if (type === 'chapter') html = buildCIReportPreview(data);
+
+  // Set modal title
+  document.getElementById('rpModalTitle').textContent = _rpTypeLabels[type] || 'Report Preview';
+  document.getElementById('rpModalBody').innerHTML = html;
+
+  // Show PDF download button for all except CSV
+  document.getElementById('rpPdfBtn').style.display = 'block';
+  document.getElementById('rpCsvBtn').style.display = 'none';
+
+  // Open modal
+  document.getElementById('rpPreviewModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // Also show inline preview below
+  document.getElementById('rpPreviewArea').style.display = 'block';
+  document.getElementById('rpPreviewContent').innerHTML = html;
+}
+
+// ===== DATA BUILDERS =====
+function buildStudentReportData(sub, exam) {
+  if (!sub) return { empty: true };
+  var answers = sub.studentAnswers || {};
+  var sections = exam && exam.paper ? exam.paper.sections : {};
+  var sectionKeys = ['MCQ', 'Short Answer', 'Long Answer'];
+  var totalQ = 0, answeredQ = 0;
+  for (var sk = 0; sk < sectionKeys.length; sk++) {
+    var qs = sections[sectionKeys[sk]] || [];
+    totalQ += qs.length;
+    for (var qi = 0; qi < qs.length; qi++) {
+      if (answers[qs[qi].id] !== undefined && answers[qs[qi].id] !== null && answers[qs[qi].id] !== '') answeredQ++;
+    }
+  }
+
+  return {
+    empty: false,
+    studentName: sub.studentName || 'Unknown',
+    examName: exam ? (exam.name || sub.examCode) : sub.examCode,
+    examCode: sub.examCode || 'N/A',
+    subject: exam ? (exam.subject || 'N/A') : 'N/A',
+    submissionDate: sub.submittedAt ? new Date(sub.submittedAt).toLocaleString() : 'N/A',
+    score: sub.score || 0,
+    maxMarks: sub.maxMarks || 0,
+    percentage: sub.percentage !== undefined ? sub.percentage : (sub.maxMarks > 0 ? Math.round((sub.score / sub.maxMarks) * 100) : 0),
+    correct: sub.correct || 0,
+    incorrect: sub.incorrect || 0,
+    unanswered: sub.unanswered || 0,
+    attempted: answeredQ,
+    totalQuestions: totalQ,
+    integrityScore: sub.integrityScore !== undefined ? sub.integrityScore : 'N/A',
+    riskLevel: sub.riskLevel || 'Unknown',
+    tabSwitches: sub.tabSwitches || 0,
+    fullscreenExits: sub.fullscreenExits || 0,
+    refreshCount: sub.refreshCount || 0,
+    startPhoto: sub.startPhotoUrl || null,
+    endPhoto: sub.endPhotoUrl || null,
+    photoVerified: sub.photoVerificationStatus || 'N/A',
+    teacherMarks: sub.teacherMarksAwarded !== undefined ? sub.teacherMarksAwarded : null,
+    teacherFeedback: sub.teacherFeedback || null,
+    attemptId: sub.attemptId || 'N/A',
+    sessionId: sub.sessionId || 'N/A',
+    timeTaken: sub.timeTakenMinutes || 0
+  };
+}
+
+function buildExamReportData(examCode, exam, submissions) {
+  if (!submissions || submissions.length === 0) return { empty: true };
+
+  var total = submissions.length;
+  var scoreSum = 0, passCount = 0, integSum = 0, integCount = 0;
+  var top = [], atRisk = [];
+  var qStats = {};
+
+  for (var i = 0; i < submissions.length; i++) {
+    var s = submissions[i];
+    scoreSum += s.score || 0;
+    if (s.percentage >= 40) passCount++;
+    if (s.integrityScore !== undefined) { integSum += s.integrityScore; integCount++; }
+
+    top.push({ name: s.studentName || 'Unknown', score: s.score || 0, maxMarks: s.maxMarks || 0, pct: s.percentage || 0 });
+    if (s.percentage < 40) {
+      atRisk.push({ name: s.studentName || 'Unknown', score: s.score || 0, pct: s.percentage || 0 });
+    }
+
+    // Q stats
+    var answers = s.studentAnswers || {};
+    var examSections = exam && exam.paper ? exam.paper.sections : {};
+    var sectionKeys = ['MCQ', 'Short Answer', 'Long Answer'];
+    for (var sk = 0; sk < sectionKeys.length; sk++) {
+      var qs = examSections[sectionKeys[sk]] || [];
+      for (var qi = 0; qi < qs.length; qi++) {
+        var q = qs[qi];
+        var qId = q.id;
+        if (!qStats[qId]) qStats[qId] = { text: q.question || q.text || '', correct: 0, total: 0 };
+        qStats[qId].total++;
+        if (sectionKeys[sk] === 'MCQ' && q.correctAnswer) {
+          var ans = answers[qId];
+          if (ans && ans.toUpperCase().trim() === q.correctAnswer.toUpperCase().trim()) {
+            qStats[qId].correct++;
+          }
+        } else {
+          if (answers[qId] !== undefined && answers[qId] !== null && answers[qId] !== '') {
+            qStats[qId].correct++;
+          }
+        }
+      }
+    }
+  }
+
+  top.sort(function(a, b) { return b.pct - a.pct; });
+  atRisk.sort(function(a, b) { return a.pct - b.pct; });
+
+  // Chapter stats
+  var chStats = {};
+  for (var si2 = 0; si2 < submissions.length; si2++) {
+    var sub2 = submissions[si2];
+    var answers2 = sub2.studentAnswers || {};
+    var examSections2 = exam && exam.paper ? exam.paper.sections : {};
+    for (var sk2 = 0; sk2 < sectionKeys.length; sk2++) {
+      var qs2 = examSections2[sectionKeys[sk2]] || [];
+      for (var qi2 = 0; qi2 < qs2.length; qi2++) {
+        var q2 = qs2[qi2];
+        var ch = q2.chapter || 'General';
+        if (!chStats[ch]) chStats[ch] = { correct: 0, total: 0 };
+        chStats[ch].total++;
+        var ans2 = answers2[q2.id];
+        if (sectionKeys[sk2] === 'MCQ' && q2.correctAnswer) {
+          if (ans2 && ans2.toUpperCase().trim() === q2.correctAnswer.toUpperCase().trim()) chStats[ch].correct++;
+        } else {
+          if (ans2 !== undefined && ans2 !== null && ans2 !== '') chStats[ch].correct++;
+        }
+      }
+    }
+  }
+
+  var chArr = [];
+  for (var ch in chStats) {
+    chArr.push({ name: ch, acc: chStats[ch].total > 0 ? Math.round((chStats[ch].correct / chStats[ch].total) * 100) : 0 });
+  }
+  chArr.sort(function(a, b) { return b.acc - a.acc; });
+
+  // Q perf
+  var qArr = [];
+  for (var qId2 in qStats) {
+    var st = qStats[qId2];
+    qArr.push({
+      text: st.text.length > 60 ? st.text.slice(0, 60) + '...' : st.text,
+      acc: st.total > 0 ? Math.round((st.correct / st.total) * 100) : 0
+    });
+  }
+  qArr.sort(function(a, b) { return b.acc - a.acc; });
+  var hardestQs = qArr.slice(-5).reverse();
+  var easiestQs = qArr.slice(0, 5);
+
+  return {
+    empty: false,
+    examName: exam ? (exam.name || examCode) : examCode,
+    examCode: examCode,
+    subject: exam ? (exam.subject || 'N/A') : 'N/A',
+    totalStudents: total,
+    avgScore: total > 0 ? Math.round(scoreSum / total) : 0,
+    avgPercentage: total > 0 ? Math.round(submissions.reduce(function(s, sub) { return s + (sub.percentage || 0); }, 0) / total) : 0,
+    passRate: total > 0 ? Math.round((passCount / total) * 100) : 0,
+    avgIntegrity: integCount > 0 ? Math.round((integSum / integCount) * 10) / 10 : 'N/A',
+    topPerformers: top.slice(0, 5),
+    atRiskStudents: atRisk.slice(0, 10),
+    hardestQuestions: hardestQs,
+    easiestQuestions: easiestQs,
+    chapterPerformance: chArr
+  };
+}
+
+function buildIntegrityReportData(submissions, examCode) {
+  if (!submissions || submissions.length === 0) return { empty: true };
+
+  var high = [], medium = [], low = [];
+  var events = [];
+
+  for (var i = 0; i < submissions.length; i++) {
+    var s = submissions[i];
+    var risk = (s.riskLevel || '').toLowerCase();
+    var integ = {
+      name: s.studentName || 'Unknown',
+      examCode: s.examCode,
+      riskLevel: s.riskLevel || 'Unknown',
+      integrityScore: s.integrityScore !== undefined ? s.integrityScore : 'N/A',
+      tabSwitches: s.tabSwitches || 0,
+      fullscreenExits: s.fullscreenExits || 0,
+      refreshCount: s.refreshCount || 0,
+      startPhoto: s.startPhotoUrl || null,
+      endPhoto: s.endPhotoUrl || null,
+      photoVerified: s.photoVerificationStatus || 'N/A',
+      timeTaken: s.timeTakenMinutes || 0,
+      score: s.score || 0,
+      pct: s.percentage || 0
+    };
+
+    if (risk === 'high') high.push(integ);
+    else if (risk === 'medium') medium.push(integ);
+    else low.push(integ);
+
+    // Build event timeline
+    if (s.tabSwitches > 0 || s.fullscreenExits > 0 || s.refreshCount > 0) {
+      events.push(integ);
+    }
+  }
+
+  events.sort(function(a, b) { return (b.tabSwitches + b.fullscreenExits + b.refreshCount) - (a.tabSwitches + a.fullscreenExits + a.refreshCount); });
+
+  return {
+    empty: submissions.length === 0,
+    totalAttempts: submissions.length,
+    highRisk: high,
+    mediumRisk: medium,
+    lowRisk: low,
+    highCount: high.length,
+    mediumCount: medium.length,
+    lowCount: low.length,
+    suspiciousEvents: events,
+    examCode: examCode === 'all' ? 'All Exams' : examCode
+  };
+}
+
+function buildAnalyticsReportData(submissions, examsCache) {
+  if (!submissions || submissions.length < 2) return { empty: true };
+
+  var scores = [];
+  var integScores = [];
+  var subjStats = {};
+  var totalScore = 0, passCount = 0;
+
+  for (var i = 0; i < submissions.length; i++) {
+    var s = submissions[i];
+    scores.push(s.percentage || 0);
+    if (s.integrityScore !== undefined) integScores.push(s.integrityScore);
+    totalScore += s.percentage || 0;
+    if ((s.percentage || 0) >= 40) passCount++;
+
+    var exam2 = examsCache[s.examCode];
+    var subj = exam2 ? (exam2.subject || 'Unknown') : 'Unknown';
+    if (!subjStats[subj]) subjStats[subj] = { count: 0, scoreSum: 0 };
+    subjStats[subj].count++;
+    subjStats[subj].scoreSum += s.percentage || 0;
+  }
+
+  scores.sort(function(a, b) { return a - b; });
+  integScores.sort(function(a, b) { return a - b; });
+
+  var avg = submissions.length > 0 ? Math.round(totalScore / submissions.length) : 0;
+
+  // Score distribution
+  var dist = { '0-20': 0, '21-40': 0, '41-60': 0, '61-80': 0, '81-100': 0 };
+  for (var di = 0; di < scores.length; di++) {
+    var s2 = scores[di];
+    if (s2 <= 20) dist['0-20']++;
+    else if (s2 <= 40) dist['21-40']++;
+    else if (s2 <= 60) dist['41-60']++;
+    else if (s2 <= 80) dist['61-80']++;
+    else dist['81-100']++;
+  }
+
+  // Integrity distribution
+  var integDist = { '0-40': 0, '41-70': 0, '71-100': 0 };
+  for (var ii = 0; ii < integScores.length; ii++) {
+    var is2 = integScores[ii];
+    if (is2 <= 40) integDist['0-40']++;
+    else if (is2 <= 70) integDist['41-70']++;
+    else integDist['71-100']++;
+  }
+
+  // Subject stats
+  var subjArr = [];
+  for (var subjName in subjStats) {
+    subjArr.push({ name: subjName, avgScore: Math.round(subjStats[subjName].scoreSum / subjStats[subjName].count), count: subjStats[subjName].count });
+  }
+
+  return {
+    empty: false,
+    totalSubmissions: submissions.length,
+    avgScore: avg,
+    passRate: Math.round((passCount / submissions.length) * 100),
+    medianScore: scores.length > 0 ? scores[Math.floor(scores.length / 2)] : 0,
+    avgIntegrity: integScores.length > 0 ? Math.round(integScores.reduce(function(a, b) { return a + b; }, 0) / integScores.length * 10) / 10 : 'N/A',
+    scoreDistribution: dist,
+    integrityDistribution: integDist,
+    subjectPerformance: subjArr
+  };
+}
+
+function buildCIReportData(submissions, examsCache) {
+  if (!submissions || submissions.length < 2) return { empty: true };
+
+  var chMap = {};
+  for (var si = 0; si < submissions.length; si++) {
+    var sub = submissions[si];
+    var exam = examsCache[sub.examCode];
+    if (!exam || !exam.paper || !exam.paper.sections) continue;
+    var answers = sub.studentAnswers || {};
+    var sections = exam.paper.sections;
+    var sectionKeys = ['MCQ', 'Short Answer', 'Long Answer'];
+    for (var sk = 0; sk < sectionKeys.length; sk++) {
+      var qs = sections[sectionKeys[sk]] || [];
+      for (var qi = 0; qi < qs.length; qi++) {
+        var q = qs[qi];
+        var ch = q.chapter || 'General';
+        if (!chMap[ch]) chMap[ch] = { name: ch, subject: exam.subject || 'Unknown', class: exam.class || '', correct: 0, total: 0, attempts: 0 };
+        chMap[ch].total++;
+        chMap[ch].attempts++;
+        var ans = answers[q.id];
+        if (sectionKeys[sk] === 'MCQ' && q.correctAnswer) {
+          if (ans && ans.toUpperCase().trim() === q.correctAnswer.toUpperCase().trim()) chMap[ch].correct++;
+        } else {
+          if (ans !== undefined && ans !== null && ans !== '') chMap[ch].correct++;
+        }
+      }
+    }
+  }
+
+  var chArr = [];
+  for (var chName in chMap) {
+    var d = chMap[chName];
+    chArr.push({
+      name: d.name,
+      subject: d.subject,
+      class: d.class,
+      accuracy: d.total > 0 ? Math.round((d.correct / d.total) * 100) : 0,
+      attempts: d.attempts
+    });
+  }
+
+  if (chArr.length === 0) return { empty: true };
+
+  chArr.sort(function(a, b) { return b.accuracy - a.accuracy; });
+  var strongest = chArr.filter(function(c) { return c.attempts >= 3; }).slice(0, 5);
+  var weakest = chArr.slice().sort(function(a, b) { return a.accuracy - b.accuracy; }).filter(function(c) { return c.attempts >= 3; }).slice(0, 5);
+  var atRisk = chArr.filter(function(c) { return c.accuracy < 50 && c.attempts >= 3; });
+
+  // Subject breakdown
+  var subjGroups = {};
+  for (var cj = 0; cj < chArr.length; cj++) {
+    var c2 = chArr[cj];
+    if (!subjGroups[c2.subject]) subjGroups[c2.subject] = [];
+    subjGroups[c2.subject].push(c2);
+  }
+  var subjBreakdown = [];
+  for (var subj in subjGroups) {
+    var arr = subjGroups[subj];
+    var avg = Math.round(arr.reduce(function(s, c) { return s + c.accuracy; }, 0) / arr.length);
+    subjBreakdown.push({ name: subj, avgAccuracy: avg, chapters: arr.length });
+  }
+
+  // Recommendations
+  var recs = [];
+  if (weakest.length > 0) {
+    recs.push('Focus on "' + weakest[0].name + '" (' + weakest[0].accuracy + '% accuracy) — students need additional practice and conceptual review.');
+    if (weakest.length > 1) {
+      recs.push('Reinforce understanding of ' + weakest.slice(0, 3).map(function(c) { return '"' + c.name + '" (' + c.accuracy + '%)'; }).join(', ') + ' with targeted exercises.');
+    }
+  }
+  if (atRisk.length > 0) {
+    recs.push(atRisk.length + ' chapter(s) require immediate attention with accuracy below 50%: ' + atRisk.slice(0, 3).map(function(c) { return '"' + c.name + '" (' + c.accuracy + '%)'; }).join(', ') + '.');
+  }
+  if (strongest.length > 0) {
+    recs.push('Leverage student strength in "' + strongest[0].name + '" (' + strongest[0].accuracy + '%) for peer learning and advanced assignments.');
+  }
+
+  return {
+    empty: false,
+    totalChapters: chArr.length,
+    strongest: strongest,
+    weakest: weakest,
+    atRisk: atRisk,
+    subjectBreakdown: subjBreakdown,
+    recommendations: recs,
+    allChapters: chArr
+  };
+}
+
+// ===== PREVIEW BUILDERS =====
+function timestamp() { return new Date().toLocaleString(); }
+
+function addBrandingHTML(title) {
+  return '<div class="rp-brand"><div class="rp-logo">Ed<span>Int</span></div><div class="rp-sub">AI Examination Platform</div><div class="rp-ts">' + title + ' — Generated: ' + timestamp() + '</div></div>';
+}
+
+function buildStudentReportPreview(d) {
+  var integrityColor = d.integrityScore === 'N/A' ? 'var(--gray-400)' : d.integrityScore >= 70 ? 'var(--green-500)' : d.integrityScore >= 40 ? 'var(--yellow-500)' : 'var(--red-500)';
+  var photoSection = '';
+  if (d.startPhoto || d.endPhoto) {
+    photoSection = '<h4>Photo Verification</h4><div class="rp-photo-row">';
+    if (d.startPhoto) photoSection += '<div class="rp-photo-box"><img src="' + d.startPhoto + '" alt="Start"><div class="rp-photo-label">Start Photo</div></div>';
+    if (d.endPhoto) photoSection += '<div class="rp-photo-box"><img src="' + d.endPhoto + '" alt="End"><div class="rp-photo-label">End Photo</div></div>';
+    photoSection += '</div><p style="font-size:0.733rem;color:var(--gray-400);">Status: ' + d.photoVerified + '</p>';
+  }
+
+  var teacherSection = '';
+  if (d.teacherMarks !== null) {
+    teacherSection = '<h4>Teacher Evaluation</h4>'
+      + '<table><tr><td>Marks Awarded</td><td>' + d.teacherMarks + '</td></tr>'
+      + (d.teacherFeedback ? '<tr><td>Feedback</td><td>' + escHtml(d.teacherFeedback) + '</td></tr>' : '')
+      + '</table>';
+  }
+
+  return '<div class="rp-report-preview">'
+    + addBrandingHTML('Student Report')
+    + '<h4>Student Information</h4>'
+    + '<table><tr><td>Name</td><td>' + escHtml(d.studentName) + '</td></tr>'
+    + '<tr><td>Exam</td><td>' + escHtml(d.examName) + '</td></tr>'
+    + '<tr><td>Exam Code</td><td>' + escHtml(d.examCode) + '</td></tr>'
+    + '<tr><td>Subject</td><td>' + escHtml(d.subject) + '</td></tr>'
+    + '<tr><td>Attempt ID</td><td>' + escHtml(d.attemptId) + '</td></tr>'
+    + '<tr><td>Submission Date</td><td>' + d.submissionDate + '</td></tr>'
+    + (d.timeTaken ? '<tr><td>Time Taken</td><td>' + d.timeTaken + ' min</td></tr>' : '')
+    + '</table>'
+
+    + '<h4>Performance</h4>'
+    + '<div class="rp-stat-row">'
+    + '<div class="rp-stat-item"><div class="rp-stat-val">' + d.score + ' / ' + d.maxMarks + '</div><div class="rp-stat-lbl">Score</div></div>'
+    + '<div class="rp-stat-item"><div class="rp-stat-val">' + d.percentage + '%</div><div class="rp-stat-lbl">Percentage</div></div>'
+    + '<div class="rp-stat-item"><div class="rp-stat-val rp-ok">' + d.correct + '</div><div class="rp-stat-lbl">Correct</div></div>'
+    + '<div class="rp-stat-item"><div class="rp-stat-val rp-warn">' + d.incorrect + '</div><div class="rp-stat-lbl">Incorrect</div></div>'
+    + '<div class="rp-stat-item"><div class="rp-stat-val">' + d.unanswered + '</div><div class="rp-stat-lbl">Unanswered</div></div>'
+    + '</div>'
+
+    + '<h4>Integrity</h4>'
+    + '<table><tr><td>Integrity Score</td><td style="color:' + integrityColor + ';font-weight:600;">' + d.integrityScore + '</td></tr>'
+    + '<tr><td>Risk Level</td><td>' + d.riskLevel + '</td></tr>'
+    + '<tr><td>Tab Switches</td><td>' + d.tabSwitches + '</td></tr>'
+    + '<tr><td>Fullscreen Exits</td><td>' + d.fullscreenExits + '</td></tr>'
+    + '<tr><td>Page Refreshes</td><td>' + d.refreshCount + '</td></tr>'
+    + '</table>'
+
+    + photoSection
+    + teacherSection
+    + '</div>';
+}
+
+function buildExamReportPreview(d) {
+  var topHtml = '';
+  for (var i = 0; i < d.topPerformers.length; i++) {
+    var t = d.topPerformers[i];
+    topHtml += '<tr><td>' + (i + 1) + '</td><td>' + escHtml(t.name) + '</td><td>' + t.pct + '%</td><td>' + t.score + '/' + t.maxMarks + '</td></tr>';
+  }
+  var riskHtml = '';
+  for (var j = 0; j < d.atRiskStudents.length; j++) {
+    var r = d.atRiskStudents[j];
+    riskHtml += '<tr><td>' + (j + 1) + '</td><td>' + escHtml(r.name) + '</td><td class="rp-warn">' + r.pct + '%</td></tr>';
+  }
+  var chHtml = '';
+  for (var ci = 0; ci < d.chapterPerformance.length; ci++) {
+    var ch = d.chapterPerformance[ci];
+    chHtml += '<tr><td>' + escHtml(ch.name) + '</td><td>' + ch.acc + '%</td></tr>';
+  }
+  var hqHtml = '';
+  for (var hi = 0; hi < d.hardestQuestions.length; hi++) {
+    hqHtml += '<tr><td>' + escHtml(d.hardestQuestions[hi].text) + '</td><td class="rp-warn">' + d.hardestQuestions[hi].acc + '%</td></tr>';
+  }
+  var eqHtml = '';
+  for (var ei = 0; ei < d.easiestQuestions.length; ei++) {
+    eqHtml += '<tr><td>' + escHtml(d.easiestQuestions[ei].text) + '</td><td class="rp-ok">' + d.easiestQuestions[ei].acc + '%</td></tr>';
+  }
+
+  return '<div class="rp-report-preview">'
+    + addBrandingHTML('Exam Report')
+    + '<h4>Overview</h4>'
+    + '<table><tr><td>Exam</td><td>' + escHtml(d.examName) + '</td></tr>'
+    + '<tr><td>Code</td><td>' + escHtml(d.examCode) + '</td></tr>'
+    + '<tr><td>Subject</td><td>' + escHtml(d.subject) + '</td></tr>'
+    + '<tr><td>Total Students</td><td>' + d.totalStudents + '</td></tr>'
+    + '<tr><td>Average Score</td><td>' + d.avgScore + '</td></tr>'
+    + '<tr><td>Average Percentage</td><td>' + d.avgPercentage + '%</td></tr>'
+    + '<tr><td>Pass Rate</td><td>' + d.passRate + '%</td></tr>'
+    + '<tr><td>Avg Integrity Score</td><td>' + d.avgIntegrity + '</td></tr>'
+    + '</table>'
+
+    + '<h4>Top Performers</h4>'
+    + '<table><thead><tr><th>#</th><th>Name</th><th>Percentage</th><th>Score</th></tr></thead><tbody>' + topHtml + '</tbody></table>'
+
+    + (d.atRiskStudents.length > 0 ? '<h4>At-Risk Students</h4><table><thead><tr><th>#</th><th>Name</th><th>Percentage</th></tr></thead><tbody>' + riskHtml + '</tbody></table>' : '')
+
+    + '<h4>Chapter Performance Summary</h4>'
+    + '<table><thead><tr><th>Chapter</th><th>Accuracy</th></tr></thead><tbody>' + chHtml + '</tbody></table>'
+
+    + '<h4>Question Intelligence</h4>'
+    + '<p style="font-size:0.733rem;color:var(--gray-400);">Hardest Questions (lowest accuracy):</p>'
+    + '<table><thead><tr><th>Question</th><th>Accuracy</th></tr></thead><tbody>' + hqHtml + '</tbody></table>'
+    + '<p style="font-size:0.733rem;color:var(--gray-400);">Easiest Questions (highest accuracy):</p>'
+    + '<table><thead><tr><th>Question</th><th>Accuracy</th></tr></thead><tbody>' + eqHtml + '</tbody></table>'
+    + '</div>';
+}
+
+function buildIntegrityReportPreview(d) {
+  var eventsHtml = '';
+  for (var i = 0; i < Math.min(d.suspiciousEvents.length, 20); i++) {
+    var e = d.suspiciousEvents[i];
+    eventsHtml += '<tr><td>' + escHtml(e.name) + '</td><td>' + e.tabSwitches + '</td><td>' + e.fullscreenExits + '</td><td>' + e.refreshCount + '</td><td>' + e.riskLevel + '</td></tr>';
+  }
+  var photoList = '';
+  var withPhoto = d.highRisk.concat(d.mediumRisk).concat(d.lowRisk).filter(function(s) { return s.startPhoto || s.endPhoto; });
+  for (var pi = 0; pi < Math.min(withPhoto.length, 10); pi++) {
+    var p = withPhoto[pi];
+    photoList += '<tr><td>' + escHtml(p.name) + '</td><td>' + (p.startPhoto ? '✓' : '✗') + '</td><td>' + (p.endPhoto ? '✓' : '✗') + '</td><td>' + p.photoVerified + '</td></tr>';
+  }
+
+  return '<div class="rp-report-preview">'
+    + addBrandingHTML('Integrity Report')
+    + '<h4>Risk Summary</h4>'
+    + '<div class="rp-stat-row">'
+    + '<div class="rp-stat-item"><div class="rp-stat-val rp-warn">' + d.highCount + '</div><div class="rp-stat-lbl">High Risk</div></div>'
+    + '<div class="rp-stat-item"><div class="rp-stat-val" style="color:var(--yellow-500);">' + d.mediumCount + '</div><div class="rp-stat-lbl">Medium Risk</div></div>'
+    + '<div class="rp-stat-item"><div class="rp-stat-val rp-ok">' + d.lowCount + '</div><div class="rp-stat-lbl">Low Risk</div></div>'
+    + '<div class="rp-stat-item"><div class="rp-stat-val">' + d.totalAttempts + '</div><div class="rp-stat-lbl">Total Attempts</div></div>'
+    + '</div>'
+    + '<p style="font-size:0.733rem;color:var(--gray-400);">Exam: ' + escHtml(d.examCode) + '</p>'
+
+    + '<h4>Suspicious Events Timeline</h4>'
+    + (d.suspiciousEvents.length > 0
+      ? '<table><thead><tr><th>Student</th><th>Tab Switches</th><th>Fullscreen Exits</th><th>Refreshes</th><th>Risk Level</th></tr></thead><tbody>' + eventsHtml + '</tbody></table>'
+      : '<p style="color:var(--gray-400);font-size:0.8rem;">No suspicious events recorded.</p>')
+
+    + '<h4>Photo Verification Status</h4>'
+    + (photoList
+      ? '<table><thead><tr><th>Student</th><th>Start Photo</th><th>End Photo</th><th>Status</th></tr></thead><tbody>' + photoList + '</tbody></table>'
+      : '<p style="color:var(--gray-400);font-size:0.8rem;">No photo data available.</p>')
+    + '</div>';
+}
+
+function buildAnalyticsReportPreview(d) {
+  var sdHtml = '';
+  var sdKeys = ['0-20', '21-40', '41-60', '61-80', '81-100'];
+  for (var i = 0; i < sdKeys.length; i++) {
+    sdHtml += '<tr><td>' + sdKeys[i] + '%</td><td>' + d.scoreDistribution[sdKeys[i]] + '</td></tr>';
+  }
+  var idHtml = '';
+  idHtml += '<tr><td>0-40%</td><td>' + d.integrityDistribution['0-40'] + '</td></tr>';
+  idHtml += '<tr><td>41-70%</td><td>' + d.integrityDistribution['41-70'] + '</td></tr>';
+  idHtml += '<tr><td>71-100%</td><td>' + d.integrityDistribution['71-100'] + '</td></tr>';
+
+  var subjHtml = '';
+  for (var si = 0; si < d.subjectPerformance.length; si++) {
+    var sp = d.subjectPerformance[si];
+    subjHtml += '<tr><td>' + escHtml(sp.name) + '</td><td>' + sp.avgScore + '%</td><td>' + sp.count + '</td></tr>';
+  }
+
+  return '<div class="rp-report-preview">'
+    + addBrandingHTML('Analytics Report')
+    + '<h4>Overview</h4>'
+    + '<div class="rp-stat-row">'
+    + '<div class="rp-stat-item"><div class="rp-stat-val">' + d.totalSubmissions + '</div><div class="rp-stat-lbl">Total Submissions</div></div>'
+    + '<div class="rp-stat-item"><div class="rp-stat-val">' + d.avgScore + '%</div><div class="rp-stat-lbl">Average Score</div></div>'
+    + '<div class="rp-stat-item"><div class="rp-stat-val">' + d.passRate + '%</div><div class="rp-stat-lbl">Pass Rate</div></div>'
+    + '<div class="rp-stat-item"><div class="rp-stat-val">' + d.medianScore + '%</div><div class="rp-stat-lbl">Median Score</div></div>'
+    + '<div class="rp-stat-item"><div class="rp-stat-val">' + d.avgIntegrity + '</div><div class="rp-stat-lbl">Avg Integrity</div></div>'
+    + '</div>'
+
+    + '<h4>Score Distribution</h4>'
+    + '<table><thead><tr><th>Range</th><th>Students</th></tr></thead><tbody>' + sdHtml + '</tbody></table>'
+
+    + '<h4>Integrity Distribution</h4>'
+    + '<table><thead><tr><th>Range</th><th>Students</th></tr></thead><tbody>' + idHtml + '</tbody></table>'
+
+    + '<h4>Subject Performance</h4>'
+    + '<table><thead><tr><th>Subject</th><th>Avg Score</th><th>Exams</th></tr></thead><tbody>' + subjHtml + '</tbody></table>'
+    + '</div>';
+}
+
+function buildCIReportPreview(d) {
+  var strHtml = '';
+  for (var i = 0; i < d.strongest.length; i++) {
+    var s = d.strongest[i];
+    strHtml += '<tr><td>' + (i + 1) + '</td><td>' + escHtml(s.name) + '</td><td>' + escHtml(s.subject) + '</td><td class="rp-ok">' + s.accuracy + '%</td></tr>';
+  }
+  var wkHtml = '';
+  for (var j = 0; j < d.weakest.length; j++) {
+    var w = d.weakest[j];
+    wkHtml += '<tr><td>' + (j + 1) + '</td><td>' + escHtml(w.name) + '</td><td>' + escHtml(w.subject) + '</td><td class="rp-warn">' + w.accuracy + '%</td></tr>';
+  }
+  var arHtml = '';
+  for (var ari = 0; ari < d.atRisk.length; ari++) {
+    var a = d.atRisk[ari];
+    arHtml += '<tr><td>' + (ari + 1) + '</td><td>' + escHtml(a.name) + '</td><td>' + escHtml(a.subject) + '</td><td class="rp-warn">' + a.accuracy + '%</td></tr>';
+  }
+  var sbHtml = '';
+  for (var si = 0; si < d.subjectBreakdown.length; si++) {
+    var sb = d.subjectBreakdown[si];
+    sbHtml += '<tr><td>' + escHtml(sb.name) + '</td><td>' + sb.avgAccuracy + '%</td><td>' + sb.chapters + '</td></tr>';
+  }
+  var recHtml = '';
+  for (var ri = 0; ri < d.recommendations.length; ri++) {
+    recHtml += '<div class="rp-rec">' + escHtml(d.recommendations[ri]) + '</div>';
+  }
+
+  return '<div class="rp-report-preview">'
+    + addBrandingHTML('Chapter Intelligence Report')
+    + '<h4>Overview</h4>'
+    + '<p>Total Chapters Analyzed: <strong>' + d.totalChapters + '</strong></p>'
+
+    + '<h4>Strongest Chapters</h4>'
+    + '<table><thead><tr><th>#</th><th>Chapter</th><th>Subject</th><th>Accuracy</th></tr></thead><tbody>' + strHtml + '</tbody></table>'
+
+    + '<h4>Weakest Chapters</h4>'
+    + '<table><thead><tr><th>#</th><th>Chapter</th><th>Subject</th><th>Accuracy</th></tr></thead><tbody>' + wkHtml + '</tbody></table>'
+
+    + (arHtml ? '<h4>At-Risk Chapters</h4><table><thead><tr><th>#</th><th>Chapter</th><th>Subject</th><th>Accuracy</th></tr></thead><tbody>' + arHtml + '</tbody></table>' : '')
+
+    + '<h4>Subject Breakdown</h4>'
+    + '<table><thead><tr><th>Subject</th><th>Avg Accuracy</th><th>Chapters</th></tr></thead><tbody>' + sbHtml + '</tbody></table>'
+
+    + '<h4>Teacher Recommendations</h4>'
+    + (recHtml || '<p style="color:var(--gray-400);font-size:0.8rem;">No recommendations available.</p>')
+    + '</div>';
+}
+
+// ===== PDF GENERATION =====
+function downloadReportPDF() {
+  var data = _rpGeneratedData;
+  if (!data) return;
+
+  var doc = new jspdf.jsPDF('p', 'mm', 'a4');
+  var pageW = 190; // A4 - 20mm margins
+  var margin = 20;
+  var y = margin;
+  var pageNum = 1;
+
+  function header() {
+    doc.setFontSize(18);
+    doc.setFont('Helvetica', 'bold');
+    doc.setTextColor(79, 70, 229);
+    doc.text('EdInt', margin, y);
+    doc.setFontSize(9);
+    doc.setFont('Helvetica', 'normal');
+    doc.setTextColor(150);
+    doc.text('AI Examination Platform', margin + 22, y - 2);
+    doc.setFontSize(7);
+    doc.setTextColor(180);
+    doc.text('Generated: ' + timestamp(), margin, y + 5);
+    y += 12;
+  }
+
+  function footer() {
+    doc.setFontSize(7);
+    doc.setTextColor(180);
+    doc.text('Generated by EdInt Examination Engine', margin, 290);
+    doc.text('Page ' + pageNum, pageW + margin - 10, 290, { align: 'right' });
+  }
+
+  function checkPage(h) {
+    if (y + h > 270) {
+      footer();
+      doc.addPage();
+      pageNum++;
+      y = margin + 20;
+      doc.setFontSize(7);
+      doc.setTextColor(180);
+      doc.text('EdInt — AI Examination Platform', margin, margin);
+      doc.text(timestamp(), pageW + margin - 10, margin, { align: 'right' });
+      y = margin + 12;
+    }
+  }
+
+  function sectionTitle(title) {
+    checkPage(10);
+    doc.setFontSize(12);
+    doc.setFont('Helvetica', 'bold');
+    doc.setTextColor(30);
+    doc.text(title, margin, y);
+    y += 8;
+  }
+
+  function bodyText(text, size, color) {
+    checkPage(6);
+    doc.setFontSize(size || 9);
+    doc.setFont('Helvetica', 'normal');
+    doc.setTextColor(color || 60);
+    var lines = doc.splitTextToSize(text, pageW - 4);
+    for (var li = 0; li < lines.length; li++) {
+      checkPage(5);
+      doc.text(lines[li], margin, y);
+      y += 4.5;
+    }
+  }
+
+  function kvRow(label, value, labelW) {
+    checkPage(6);
+    doc.setFontSize(9);
+    doc.setFont('Helvetica', 'bold');
+    doc.setTextColor(60);
+    doc.text(label, margin, y);
+    doc.setFont('Helvetica', 'normal');
+    doc.setTextColor(30);
+    doc.text(String(value), margin + (labelW || 50), y);
+    y += 5;
+  }
+
+  function drawLine() {
+    checkPage(2);
+    doc.setDrawColor(220);
+    doc.line(margin, y, pageW + margin, y);
+    y += 4;
+  }
+
+  // First page header
+  header();
+  drawLine();
+
+  if (data.type === 'student') {
+    sectionTitle('Student Report');
+    kvRow('Student Name:', data.studentName);
+    kvRow('Exam:', data.examName);
+    kvRow('Exam Code:', data.examCode);
+    kvRow('Subject:', data.subject);
+    kvRow('Attempt ID:', data.attemptId);
+    kvRow('Submission Date:', data.submissionDate);
+    kvRow('Time Taken:', data.timeTaken + ' min');
+    drawLine();
+
+    sectionTitle('Performance');
+    kvRow('Score:', data.score + ' / ' + data.maxMarks);
+    kvRow('Percentage:', data.percentage + '%');
+    kvRow('Correct:', data.correct.toString(), 30);
+    kvRow('Incorrect:', data.incorrect.toString(), 30);
+    kvRow('Unanswered:', data.unanswered.toString(), 30);
+    drawLine();
+
+    sectionTitle('Integrity');
+    kvRow('Integrity Score:', String(data.integrityScore));
+    kvRow('Risk Level:', data.riskLevel);
+    kvRow('Tab Switches:', String(data.tabSwitches));
+    kvRow('Fullscreen Exits:', String(data.fullscreenExits));
+    kvRow('Page Refreshes:', String(data.refreshCount));
+    drawLine();
+
+    if (data.teacherMarks !== null) {
+      sectionTitle('Teacher Evaluation');
+      kvRow('Marks Awarded:', String(data.teacherMarks));
+      if (data.teacherFeedback) bodyText('Feedback: ' + data.teacherFeedback, 9);
+      drawLine();
+    }
+  }
+
+  else if (data.type === 'exam') {
+    sectionTitle('Exam Report');
+    kvRow('Exam:', data.examName);
+    kvRow('Code:', data.examCode);
+    kvRow('Subject:', data.subject);
+    kvRow('Total Students:', String(data.totalStudents));
+    kvRow('Average Score:', String(data.avgScore));
+    kvRow('Average Percentage:', data.avgPercentage + '%');
+    kvRow('Pass Rate:', data.passRate + '%');
+    kvRow('Avg Integrity:', String(data.avgIntegrity));
+    drawLine();
+
+    if (data.topPerformers.length > 0) {
+      sectionTitle('Top Performers');
+      checkPage(8 + data.topPerformers.length * 5);
+      doc.setFontSize(8);
+      doc.setFont('Helvetica', 'bold');
+      doc.setTextColor(120);
+      doc.text('#', margin, y);
+      doc.text('Name', margin + 8, y);
+      doc.text('Percentage', margin + 70, y);
+      doc.text('Score', margin + 110, y);
+      y += 5;
+      doc.setFont('Helvetica', 'normal');
+      doc.setTextColor(30);
+      for (var ti = 0; ti < data.topPerformers.length; ti++) {
+        checkPage(5);
+        var t = data.topPerformers[ti];
+        doc.text(String(ti + 1), margin, y);
+        doc.text(t.name, margin + 8, y);
+        doc.text(t.pct + '%', margin + 70, y);
+        doc.text(t.score + '/' + t.maxMarks, margin + 110, y);
+        y += 5;
+      }
+      drawLine();
+    }
+
+    if (data.atRiskStudents.length > 0) {
+      sectionTitle('At-Risk Students');
+      doc.setFontSize(8);
+      doc.setFont('Helvetica', 'bold');
+      doc.setTextColor(200, 50, 50);
+      doc.text('#', margin, y);
+      doc.text('Name', margin + 8, y);
+      doc.text('Percentage', margin + 70, y);
+      y += 5;
+      doc.setFont('Helvetica', 'normal');
+      doc.setTextColor(30);
+      for (var ri = 0; ri < data.atRiskStudents.length; ri++) {
+        checkPage(5);
+        var r = data.atRiskStudents[ri];
+        doc.text(String(ri + 1), margin, y);
+        doc.text(r.name, margin + 8, y);
+        doc.text(r.pct + '%', margin + 70, y);
+        y += 5;
+      }
+      drawLine();
+    }
+
+    if (data.chapterPerformance.length > 0) {
+      sectionTitle('Chapter Performance');
+      doc.setFontSize(8);
+      doc.setFont('Helvetica', 'bold');
+      doc.setTextColor(120);
+      doc.text('Chapter', margin, y);
+      doc.text('Accuracy', margin + 80, y);
+      y += 5;
+      doc.setFont('Helvetica', 'normal');
+      doc.setTextColor(30);
+      for (var ci2 = 0; ci2 < data.chapterPerformance.length; ci2++) {
+        checkPage(5);
+        var ch = data.chapterPerformance[ci2];
+        doc.text(ch.name, margin, y);
+        doc.text(ch.acc + '%', margin + 80, y);
+        y += 5;
+      }
+      drawLine();
+    }
+  }
+
+  else if (data.type === 'integrity') {
+    sectionTitle('Integrity Report');
+    kvRow('Exam:', data.examCode);
+    kvRow('Total Attempts:', String(data.totalAttempts));
+    drawLine();
+
+    sectionTitle('Risk Distribution');
+    kvRow('High Risk:', String(data.highCount), 40);
+    kvRow('Medium Risk:', String(data.mediumCount), 40);
+    kvRow('Low Risk:', String(data.lowCount), 40);
+    drawLine();
+
+    if (data.suspiciousEvents.length > 0) {
+      sectionTitle('Suspicious Events');
+      doc.setFontSize(8);
+      doc.setFont('Helvetica', 'bold');
+      doc.setTextColor(120);
+      doc.text('Student', margin, y);
+      doc.text('Tab Switches', margin + 45, y);
+      doc.text('Fullscreen', margin + 85, y);
+      doc.text('Refreshes', margin + 120, y);
+      doc.text('Risk', margin + 150, y);
+      y += 5;
+      doc.setFont('Helvetica', 'normal');
+      doc.setTextColor(30);
+      var maxEvents = Math.min(data.suspiciousEvents.length, 25);
+      for (var ei2 = 0; ei2 < maxEvents; ei2++) {
+        checkPage(5);
+        var e = data.suspiciousEvents[ei2];
+        doc.text(e.name.length > 18 ? e.name.slice(0, 18) + '..' : e.name, margin, y);
+        doc.text(String(e.tabSwitches), margin + 45, y);
+        doc.text(String(e.fullscreenExits), margin + 85, y);
+        doc.text(String(e.refreshCount), margin + 120, y);
+        doc.text(e.riskLevel, margin + 150, y);
+        y += 5;
+      }
+      drawLine();
+    }
+  }
+
+  else if (data.type === 'analytics') {
+    sectionTitle('Analytics Report');
+    kvRow('Total Submissions:', String(data.totalSubmissions));
+    kvRow('Average Score:', data.avgScore + '%');
+    kvRow('Pass Rate:', data.passRate + '%');
+    kvRow('Median Score:', data.medianScore + '%');
+    kvRow('Avg Integrity:', String(data.avgIntegrity));
+    drawLine();
+
+    sectionTitle('Score Distribution');
+    var sdKeys2 = ['0-20', '21-40', '41-60', '61-80', '81-100'];
+    for (var sdi = 0; sdi < sdKeys2.length; sdi++) {
+      kvRow(sdKeys2[sdi] + '%:', String(data.scoreDistribution[sdKeys2[sdi]]), 25);
+    }
+    drawLine();
+
+    sectionTitle('Integrity Distribution');
+    kvRow('0-40%:', String(data.integrityDistribution['0-40']), 25);
+    kvRow('41-70%:', String(data.integrityDistribution['41-70']), 25);
+    kvRow('71-100%:', String(data.integrityDistribution['71-100']), 25);
+    drawLine();
+
+    if (data.subjectPerformance.length > 0) {
+      sectionTitle('Subject Performance');
+      for (var sbi = 0; sbi < data.subjectPerformance.length; sbi++) {
+        var sp = data.subjectPerformance[sbi];
+        kvRow(sp.name + ':', sp.avgScore + '%', 40);
+      }
+    }
+  }
+
+  else if (data.type === 'chapter') {
+    sectionTitle('Chapter Intelligence Report');
+    kvRow('Total Chapters:', String(data.totalChapters));
+    drawLine();
+
+    if (data.strongest.length > 0) {
+      sectionTitle('Strongest Chapters');
+      for (var si2 = 0; si2 < data.strongest.length; si2++) {
+        var s2 = data.strongest[si2];
+        kvRow(s2.name + ':', s2.accuracy + '%', 50);
+      }
+      drawLine();
+    }
+
+    if (data.weakest.length > 0) {
+      sectionTitle('Weakest Chapters');
+      for (var wi = 0; wi < data.weakest.length; wi++) {
+        var w2 = data.weakest[wi];
+        kvRow(w2.name + ':', w2.accuracy + '%', 50);
+      }
+      drawLine();
+    }
+
+    if (data.atRisk.length > 0) {
+      sectionTitle('At-Risk Chapters');
+      for (var ari2 = 0; ari2 < data.atRisk.length; ari2++) {
+        var a2 = data.atRisk[ari2];
+        kvRow(a2.name + ':', a2.accuracy + '%', 50);
+      }
+      drawLine();
+    }
+
+    if (data.recommendations.length > 0) {
+      sectionTitle('Teacher Recommendations');
+      for (var rei = 0; rei < data.recommendations.length; rei++) {
+        bodyText((rei + 1) + '. ' + data.recommendations[rei], 9, 50);
+      }
+    }
+  }
+
+  footer();
+  var filename = 'EdInt-' + data.type.charAt(0).toUpperCase() + data.type.slice(1) + '-Report-' + new Date().toISOString().slice(0, 10) + '.pdf';
+  doc.save(filename);
+  showNotification(data.type.charAt(0).toUpperCase() + data.type.slice(1) + ' report exported.', 'success');
+}
+
+// ===== CSV GENERATION =====
+function generateCSVExport() {
+  var csvType = document.getElementById('rpCsvType').value;
+  var rows = [];
+
+  if (csvType === 'csv-student') {
+    rows.push(['Student Name', 'Exam Code', 'Subject', 'Score', 'Max Marks', 'Percentage', 'Correct', 'Incorrect', 'Unanswered', 'Integrity Score', 'Risk Level', 'Tab Switches', 'Fullscreen Exits', 'Refresh Count', 'Time Taken (min)', 'Submission Date', 'Photo Verified']);
+    for (var i = 0; i < _rpSubmissions.length; i++) {
+      var s = _rpSubmissions[i];
+      var exam = _rpExamsCache[s.examCode];
+      rows.push([
+        s.studentName || 'Unknown', s.examCode || '', exam ? (exam.subject || '') : '',
+        s.score || 0, s.maxMarks || 0, s.percentage || 0,
+        s.correct || 0, s.incorrect || 0, s.unanswered || 0,
+        s.integrityScore !== undefined ? s.integrityScore : '', s.riskLevel || '',
+        s.tabSwitches || 0, s.fullscreenExits || 0, s.refreshCount || 0,
+        s.timeTakenMinutes || 0,
+        s.submittedAt ? new Date(s.submittedAt).toISOString() : '',
+        s.photoVerificationStatus || ''
+      ]);
+    }
+  } else if (csvType === 'csv-submission') {
+    rows.push(['Attempt ID', 'Session ID', 'Student Name', 'Exam Code', 'Exam Name', 'Score', 'Max Marks', 'Percentage', 'Correct', 'Incorrect', 'Unanswered', 'Time Taken (min)', 'Submitted At']);
+    for (var i2 = 0; i2 < _rpSubmissions.length; i2++) {
+      var s2 = _rpSubmissions[i2];
+      var exam2 = _rpExamsCache[s2.examCode];
+      rows.push([
+        s2.attemptId || '', s2.sessionId || '', s2.studentName || 'Unknown', s2.examCode || '',
+        exam2 ? (exam2.name || '') : '',
+        s2.score || 0, s2.maxMarks || 0, s2.percentage || 0,
+        s2.correct || 0, s2.incorrect || 0, s2.unanswered || 0,
+        s2.timeTakenMinutes || 0,
+        s2.submittedAt ? new Date(s2.submittedAt).toISOString() : ''
+      ]);
+    }
+  } else if (csvType === 'csv-integrity') {
+    rows.push(['Student Name', 'Exam Code', 'Integrity Score', 'Risk Level', 'Tab Switches', 'Fullscreen Exits', 'Refresh Count', 'Start Photo', 'End Photo', 'Photo Status', 'Score', 'Percentage']);
+    for (var i3 = 0; i3 < _rpSubmissions.length; i3++) {
+      var s3 = _rpSubmissions[i3];
+      rows.push([
+        s3.studentName || 'Unknown', s3.examCode || '',
+        s3.integrityScore !== undefined ? s3.integrityScore : '', s3.riskLevel || '',
+        s3.tabSwitches || 0, s3.fullscreenExits || 0, s3.refreshCount || 0,
+        s3.startPhotoUrl ? 'Yes' : 'No', s3.endPhotoUrl ? 'Yes' : 'No',
+        s3.photoVerificationStatus || '', s3.score || 0, s3.percentage || 0
+      ]);
+    }
+  } else if (csvType === 'csv-evaluation') {
+    rows.push(['Student Name', 'Exam Code', 'Exam Name', 'Marks Awarded', 'Feedback', 'Attempt ID', 'Session ID', 'Submitted At']);
+    for (var i4 = 0; i4 < _rpSubmissions.length; i4++) {
+      var s4 = _rpSubmissions[i4];
+      var exam4 = _rpExamsCache[s4.examCode];
+      rows.push([
+        s4.studentName || 'Unknown', s4.examCode || '',
+        exam4 ? (exam4.name || '') : '',
+        s4.teacherMarksAwarded !== undefined ? s4.teacherMarksAwarded : '',
+        s4.teacherFeedback || '', s4.attemptId || '', s4.sessionId || '',
+        s4.submittedAt ? new Date(s4.submittedAt).toISOString() : ''
+      ]);
+    }
+  }
+
+  if (rows.length <= 1) {
+    alert('No data available for export.');
+    return;
+  }
+
+  // Store CSV data for download
+  _rpGeneratedData = { type: 'csv', csvType: csvType, rows: rows, headers: rows[0] };
+
+  // Build preview
+  var previewHtml = '<div class="rp-report-preview">'
+    + addBrandingHTML('CSV Export — ' + _rpTypeLabels['csv'])
+    + '<h4>Data Preview</h4>'
+    + '<p style="font-size:0.733rem;color:var(--gray-400);">Showing first 10 of ' + (rows.length - 1) + ' data rows.</p>'
+    + '<table><thead><tr>';
+  for (var hi = 0; hi < rows[0].length; hi++) {
+    previewHtml += '<th>' + escHtml(rows[0][hi]) + '</th>';
+  }
+  previewHtml += '</tr></thead><tbody>';
+  var maxRows = Math.min(rows.length - 1, 10);
+  for (var dri = 1; dri <= maxRows; dri++) {
+    previewHtml += '<tr>';
+    for (var dci = 0; dci < rows[dri].length; dci++) {
+      previewHtml += '<td>' + escHtml(String(rows[dri][dci])) + '</td>';
+    }
+    previewHtml += '</tr>';
+  }
+  previewHtml += '</tbody></table></div>';
+
+  document.getElementById('rpModalTitle').textContent = 'CSV Export Preview';
+  document.getElementById('rpModalBody').innerHTML = previewHtml;
+  document.getElementById('rpPdfBtn').style.display = 'none';
+  document.getElementById('rpCsvBtn').style.display = 'inline-block';
+  document.getElementById('rpPreviewModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function downloadReportCSV() {
+  var data = _rpGeneratedData;
+  if (!data || data.type !== 'csv') return;
+
+  var rows = data.rows;
+  var csv = '';
+  for (var ri = 0; ri < rows.length; ri++) {
+    var row = rows[ri];
+    var escaped = [];
+    for (var ci = 0; ci < row.length; ci++) {
+      var val = String(row[ci]);
+      if (val.indexOf(',') !== -1 || val.indexOf('"') !== -1 || val.indexOf('\n') !== -1) {
+        val = '"' + val.replace(/"/g, '""') + '"';
+      }
+      escaped.push(val);
+    }
+    csv += escaped.join(',') + '\r\n';
+  }
+
+  var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  var link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'EdInt-' + data.csvType + '-' + new Date().toISOString().slice(0, 10) + '.csv';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(link.href);
+  showNotification('CSV exported successfully.', 'success');
+}
+
+function closeReportPreview() {
+  document.getElementById('rpPreviewModal').classList.remove('open');
+  document.body.style.overflow = '';
 }
 </script>
 
