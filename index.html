@@ -10085,15 +10085,35 @@ function openStudentDrawer(firestoreId) {
   calculateFinalScore(sub);
 }
 
-function renderAnswerReview(sub) {
+async function renderAnswerReview(sub) {
   var container = document.getElementById('stuAnswerReview');
   if (!container) return;
   container.innerHTML = '';
 
-  var examData = sub.examData;
+  console.log('[Evaluation] Submission loaded', sub._firestoreId);
+
+  var examData = sub.examData || sub._examData;
   if (!examData || !examData.paper || !examData.paper.sections) {
-    container.innerHTML = '<p style="color:var(--gray-400);font-size:0.867rem;">No exam data available for answer review.</p>';
-    return;
+    // Fetch exam from Firestore using examCode
+    if (sub.examCode && window.__getExamFromFirestore) {
+      container.innerHTML = '<p style="color:var(--gray-400);font-size:0.867rem;">Loading exam data...</p>';
+      try {
+        examData = await window.__getExamFromFirestore(sub.examCode);
+        if (examData && examData.paper && examData.paper.sections) {
+          sub._examData = examData;
+          sub.examData = examData;
+          console.log('[Evaluation] Exam retrieved for code:', sub.examCode);
+        } else {
+          console.warn('[Evaluation] Exam retrieved but no paper/sections for code:', sub.examCode);
+        }
+      } catch(e) {
+        console.error('[Evaluation] Failed to retrieve exam:', e.message);
+      }
+    }
+    if (!examData || !examData.paper || !examData.paper.sections) {
+      container.innerHTML = '<p style="color:var(--gray-400);font-size:0.867rem;">No exam data available for answer review.</p>';
+      return;
+    }
   }
 
   var sections = examData.paper.sections;
@@ -10103,6 +10123,12 @@ function renderAnswerReview(sub) {
     { type: 'Short Answer', label: 'Short Answer Questions' },
     { type: 'Long Answer', label: 'Long Answer Questions' },
   ];
+
+  var totalQ = 0;
+  for (var sci = 0; sci < sectionConfig.length; sci++) {
+    if (sections[sectionConfig[sci].type]) totalQ += sections[sectionConfig[sci].type].length;
+  }
+  console.log('[Evaluation] Questions found:', totalQ);
 
   var foundAny = false;
 
@@ -10187,6 +10213,8 @@ function renderAnswerReview(sub) {
 
   if (!foundAny) {
     container.innerHTML = '<p style="color:var(--gray-400);font-size:0.867rem;">No questions found in exam data.</p>';
+  } else {
+    console.log('[Evaluation] Answer Review generated');
   }
 }
 
