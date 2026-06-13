@@ -5237,6 +5237,115 @@ html.dark-mode .student-photo-preview {
     flex-wrap: wrap;
   }
 }
+
+/* ===== QUESTION INTELLIGENCE CSS ===== */
+.qi-page { max-width: 1200px; }
+.qi-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:28px; gap:16px; }
+.qi-header h2 { margin:0 0 4px; }
+.qi-header p { margin:0; color:var(--gray-400); font-size:0.867rem; }
+.qi-loading, .qi-error, .qi-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; text-align:center; gap:12px; }
+.qi-loading .spinner { width:32px; height:32px; border:3px solid var(--gray-100); border-top-color:var(--indigo-500); border-radius:50%; animation:spin 0.7s linear infinite; }
+.qi-loading span { color:var(--gray-400); font-size:0.867rem; }
+.qi-error svg, .qi-empty svg { width:48px; height:48px; color:var(--gray-300); margin-bottom:8px; }
+.qi-error h3, .qi-empty h3 { margin:0; font-size:1.067rem; font-weight:600; color:var(--text-primary); }
+.qi-error p, .qi-empty p { margin:0; font-size:0.867rem; color:var(--gray-400); max-width:420px; }
+.qi-retry-btn { padding:8px 20px; border:none; border-radius:8px; background:var(--indigo-500); color:#fff; font-size:0.867rem; font-weight:500; cursor:pointer; transition:background 0.15s; font-family:inherit; }
+.qi-retry-btn:hover { background:var(--indigo-600); }
+.qi-section { background:var(--bg-surface); border:1px solid var(--gray-100); border-radius:12px; padding:24px; margin-bottom:20px; }
+.qi-section-title { font-size:0.867rem; font-weight:600; color:var(--text-primary); margin:0 0 16px; }
+.qi-row-2col { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+.qi-row-2col .qi-section { margin-bottom:0; }
+.qi-row-3col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin-bottom:20px; }
+.qi-row-3col .qi-section { margin-bottom:0; }
+.qi-overview-grid { display:grid; grid-template-columns:repeat(5, 1fr); gap:12px; }
+.qi-ov-card { background:var(--bg-surface); border:1px solid var(--gray-100); border-radius:10px; padding:16px; display:flex; flex-direction:column; gap:4px; }
+.qi-ov-card .qi-ov-value { font-size:1.4rem; font-weight:650; letter-spacing:-0.3px; color:var(--gray-900); line-height:1.1; }
+.qi-ov-card .qi-ov-label { font-size:0.733rem; color:var(--gray-400); font-weight:500; }
+.qi-ov-card.qi-ov-total { border-left:3px solid var(--indigo-400); }
+.qi-ov-card.qi-ov-attempts { border-left:3px solid var(--blue-400); }
+.qi-ov-card.qi-ov-accuracy { border-left:3px solid var(--green-500); }
+.qi-ov-card.qi-ov-hardest { border-left:3px solid var(--red-400); }
+.qi-ov-card.qi-ov-easiest { border-left:3px solid var(--green-400); }
+.qi-table-controls { display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
+.qi-sort-label { font-size:0.767rem; color:var(--gray-400); font-weight:500; }
+.qi-sort-select { padding:6px 10px; border:1px solid var(--gray-100); border-radius:6px; font-size:0.8rem; font-family:inherit; background:var(--bg-surface); color:var(--text-primary); outline:none; cursor:pointer; }
+.qi-sort-select:focus { border-color:var(--indigo-400); }
+.qi-sort-dir { padding:4px 10px; border:1px solid var(--gray-100); border-radius:6px; background:var(--bg-surface); color:var(--text-primary); font-size:0.9rem; cursor:pointer; font-family:inherit; }
+.qi-sort-dir:hover { border-color:var(--indigo-300); }
+.qi-search-input { flex:1; min-width:160px; padding:6px 12px; border:1px solid var(--gray-100); border-radius:6px; font-size:0.8rem; font-family:inherit; background:var(--bg-surface); color:var(--text-primary); outline:none; }
+.qi-search-input:focus { border-color:var(--indigo-400); }
+.qi-table-wrap { overflow-x:auto; }
+.qi-table { width:100%; border-collapse:collapse; font-size:0.8rem; }
+.qi-table th { text-align:left; padding:9px 10px; font-size:0.7rem; font-weight:600; color:var(--gray-400); text-transform:uppercase; letter-spacing:0.04em; border-bottom:1px solid var(--gray-100); cursor:pointer; user-select:none; white-space:nowrap; }
+.qi-table th:hover { color:var(--text-primary); }
+.qi-table td { padding:9px 10px; color:var(--text-primary); border-bottom:1px solid var(--gray-50); }
+.qi-table tr:last-child td { border-bottom:none; }
+.qi-table tr:hover td { background:var(--gray-50); }
+.qi-table .qi-clickable { cursor:pointer; color:var(--indigo-600); font-weight:500; }
+.qi-table .qi-clickable:hover { text-decoration:underline; }
+.qi-table .qi-badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.7rem; font-weight:600; }
+.qi-badge-easy { background:var(--green-50); color:var(--green-600); }
+.qi-badge-medium { background:var(--yellow-50); color:var(--yellow-700); }
+.qi-badge-hard { background:var(--red-50); color:var(--red-600); }
+.qi-quality-badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:0.667rem; font-weight:600; margin:1px 2px; }
+.qi-quality-high { background:var(--green-50); color:var(--green-600); }
+.qi-quality-difficult { background:var(--red-50); color:var(--red-600); }
+.qi-quality-skipped { background:var(--yellow-50); color:var(--yellow-700); }
+.qi-quality-review { background:var(--blue-50); color:var(--blue-600); }
+.qi-quality-mismatch { background:var(--indigo-50); color:var(--indigo-600); }
+.qi-rank-list { }
+.qi-rank-item { display:flex; align-items:flex-start; gap:10px; padding:8px 10px; border:1px solid var(--gray-100); border-radius:6px; margin-bottom:6px; font-size:0.767rem; }
+.qi-rank-item:last-child { margin-bottom:0; }
+.qi-rank-num { font-weight:600; color:var(--gray-400); min-width:22px; flex-shrink:0; }
+.qi-rank-text { flex:1; color:var(--text-primary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.qi-rank-subject { font-size:0.7rem; color:var(--gray-400); flex-shrink:0; min-width:60px; text-align:right; }
+.qi-rank-pct { font-weight:600; flex-shrink:0; min-width:40px; text-align:right; }
+.qi-rank-pct.hard { color:var(--red-500); }
+.qi-rank-pct.easy { color:var(--green-500); }
+.qi-subject-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px; }
+.qi-subject-card { border:1px solid var(--gray-100); border-radius:10px; padding:16px; }
+.qi-subject-card h4 { margin:0 0 8px; font-size:0.867rem; font-weight:600; color:var(--text-primary); }
+.qi-subject-stat { display:flex; justify-content:space-between; padding:4px 0; font-size:0.767rem; }
+.qi-subject-stat .qi-stat-label { color:var(--gray-400); }
+.qi-subject-stat .qi-stat-value { font-weight:500; color:var(--text-primary); }
+.qi-chapter-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:10px; }
+.qi-chapter-card { border:1px solid var(--gray-100); border-radius:8px; padding:14px; }
+.qi-chapter-card h4 { margin:0 0 6px; font-size:0.8rem; font-weight:600; color:var(--text-primary); }
+.qi-chapter-stat { display:flex; justify-content:space-between; padding:3px 0; font-size:0.733rem; }
+.qi-chapter-stat .qi-stat-label { color:var(--gray-400); }
+.qi-chapter-stat .qi-stat-value { font-weight:500; color:var(--text-primary); }
+.qi-drawer-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.3); z-index:9999; opacity:0; pointer-events:none; transition:opacity 0.2s; }
+.qi-drawer-overlay.open { opacity:1; pointer-events:auto; }
+.qi-drawer { position:fixed; top:0; right:-480px; width:480px; max-width:100%; height:100%; background:var(--bg-surface); z-index:10000; box-shadow:-4px 0 24px rgba(0,0,0,0.08); transition:right 0.3s ease; overflow-y:auto; }
+.qi-drawer.open { right:0; }
+.qi-drawer-header { display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border-bottom:1px solid var(--gray-100); }
+.qi-drawer-header h3 { margin:0; font-size:1.067rem; font-weight:600; color:var(--text-primary); }
+.qi-drawer-close { background:none; border:none; font-size:1.4rem; color:var(--gray-400); cursor:pointer; padding:4px; line-height:1; }
+.qi-drawer-close:hover { color:var(--text-primary); }
+.qi-drawer-body { padding:24px; }
+.qi-detail-section { margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--gray-50); }
+.qi-detail-section:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.qi-detail-section h4 { font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color:var(--gray-400); margin:0 0 10px; }
+.qi-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px 16px; }
+.qi-detail-field { display:flex; flex-direction:column; gap:2px; }
+.qi-detail-field.full { grid-column:1/-1; }
+.qi-detail-label { font-size:0.733rem; color:var(--gray-400); font-weight:500; }
+.qi-detail-value { font-size:0.867rem; color:var(--text-primary); font-weight:500; }
+.qi-flag-btn { display:inline-flex; align-items:center; gap:4px; padding:6px 14px; border:1px solid var(--gray-100); border-radius:6px; background:var(--bg-surface); color:var(--text-primary); font-size:0.767rem; font-family:inherit; cursor:pointer; transition:all 0.15s; }
+.qi-flag-btn:hover { border-color:var(--indigo-300); color:var(--indigo-600); }
+.qi-flag-btn.active { background:var(--indigo-50); border-color:var(--indigo-300); color:var(--indigo-600); }
+.qi-flag-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:8px; }
+@media (max-width:1100px) {
+  .qi-overview-grid { grid-template-columns:repeat(3, 1fr); }
+  .qi-row-2col { grid-template-columns:1fr; }
+  .qi-row-3col { grid-template-columns:1fr; }
+}
+@media (max-width:768px) {
+  .qi-overview-grid { grid-template-columns:repeat(2, 1fr); }
+  .qi-header { flex-direction:column; }
+  .qi-table-controls { flex-direction:column; align-items:stretch; }
+  .qi-drawer { width:100%; right:-100%; max-width:none; }
+}
 </style>
 </head>
 <body>
@@ -5291,9 +5400,9 @@ html.dark-mode .student-photo-preview {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
       <span>Dashboard</span>
     </a>
-    <a href="#" class="nav-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-      <span>Question Bank</span>
+    <a href="#" class="nav-item" data-page="question-intelligence">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span>Question Intelligence</span>
     </a>
     <a href="#" class="nav-item" data-page="generate-exam">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
@@ -6436,6 +6545,124 @@ html.dark-mode .student-photo-preview {
   </div>
 </div>
 
+<!-- ===== PAGE: QUESTION INTELLIGENCE ===== -->
+<div id="page-question-intelligence" style="display:none;">
+  <div class="qi-page">
+    <div class="qi-header">
+      <div>
+        <h2>Question Intelligence</h2>
+        <p>Analyze question-level performance across all exam submissions</p>
+      </div>
+    </div>
+
+    <div class="qi-loading" id="qiLoading">
+      <div class="spinner"></div>
+      <span>Analyzing question data...</span>
+    </div>
+
+    <div class="qi-error" id="qiError" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <h3>Failed to Load</h3>
+      <p id="qiErrorMsg">Could not fetch question data. Check your connection and try again.</p>
+      <button class="qi-retry-btn" onclick="loadQuestionIntelligence()">Retry</button>
+    </div>
+
+    <div class="qi-empty" id="qiEmpty" style="display:none;">
+      <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <h3>Insufficient Data</h3>
+      <p id="qiEmptyMsg">More student submissions are required to generate reliable question intelligence.</p>
+    </div>
+
+    <div class="qi-content" id="qiContent" style="display:none;">
+      <!-- Section 1: Overview Metrics -->
+      <section class="qi-section">
+        <h3 class="qi-section-title">Overview</h3>
+        <div class="qi-overview-grid" id="qiOverviewGrid"></div>
+      </section>
+
+      <!-- Section 2: Visualizations Row -->
+      <div class="qi-row-2col">
+        <section class="qi-section">
+          <h3 class="qi-section-title">Accuracy Distribution</h3>
+          <div id="qiAccuracyDist"></div>
+        </section>
+        <section class="qi-section">
+          <h3 class="qi-section-title">Difficulty Distribution</h3>
+          <div id="qiDifficultyDist"></div>
+        </section>
+      </div>
+
+      <!-- Section 3: Rankings Row -->
+      <div class="qi-row-3col">
+        <section class="qi-section">
+          <h3 class="qi-section-title">Hardest Questions</h3>
+          <div id="qiHardestQs"></div>
+        </section>
+        <section class="qi-section">
+          <h3 class="qi-section-title">Easiest Questions</h3>
+          <div id="qiEasiestQs"></div>
+        </section>
+        <section class="qi-section">
+          <h3 class="qi-section-title">Most Skipped</h3>
+          <div id="qiSkippedQs"></div>
+        </section>
+      </div>
+
+      <!-- Section 4: Question Performance Table -->
+      <section class="qi-section">
+        <h3 class="qi-section-title">All Questions</h3>
+        <div class="qi-table-controls">
+          <label class="qi-sort-label">Sort by:</label>
+          <select class="qi-sort-select" id="qiSortBy" onchange="renderQuestionTable()">
+            <option value="correctPct">Correct %</option>
+            <option value="incorrectPct">Incorrect %</option>
+            <option value="unansweredPct">Unanswered %</option>
+            <option value="difficulty">Difficulty</option>
+            <option value="marks">Marks</option>
+          </select>
+          <button class="qi-sort-dir" id="qiSortDir" onclick="toggleSortDirection()">↓</button>
+          <input type="text" class="qi-search-input" id="qiSearchInput" placeholder="Search questions..." oninput="renderQuestionTable()">
+        </div>
+        <div class="qi-table-wrap" id="qiTableWrap"></div>
+      </section>
+
+      <!-- Section 5: Subject-Wise Intelligence -->
+      <section class="qi-section">
+        <h3 class="qi-section-title">Subject-Wise Intelligence</h3>
+        <div id="qiSubjectIntelligence"></div>
+      </section>
+
+      <!-- Section 6: Chapter-Wise Intelligence -->
+      <section class="qi-section">
+        <h3 class="qi-section-title">Chapter-Wise Intelligence</h3>
+        <div id="qiChapterIntelligence"></div>
+      </section>
+
+      <!-- Section 7: Subject & Chapter Performance Charts -->
+      <div class="qi-row-2col">
+        <section class="qi-section">
+          <h3 class="qi-section-title">Subject Performance Breakdown</h3>
+          <div id="qiSubjectChart"></div>
+        </section>
+        <section class="qi-section">
+          <h3 class="qi-section-title">Chapter Performance Breakdown</h3>
+          <div id="qiChapterChart"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Question Detail Drawer -->
+<div class="qi-drawer-overlay" id="qiDrawerOverlay"></div>
+<div class="qi-drawer" id="qiDrawer">
+  <div class="qi-drawer-header">
+    <h3>Question Details</h3>
+    <button class="qi-drawer-close" id="qiDrawerClose">&times;</button>
+  </div>
+  <div class="qi-drawer-body" id="qiDrawerBody"></div>
+</div>
+
 </main>
 
 </div><!-- /app-view -->
@@ -6825,6 +7052,7 @@ const pagePublishedExams = document.getElementById('page-published-exams');
 const pageIntegrityDashboard = document.getElementById('page-integrity-dashboard');
 const pageStudents = document.getElementById('page-students');
 const pageAnalytics = document.getElementById('page-analytics');
+const pageQuestionIntel = document.getElementById('page-question-intelligence');
 const pageTitleEl = document.querySelector('.nav-left h1');
 const pageNames = {
   dashboard: 'Dashboard',
@@ -6834,6 +7062,7 @@ const pageNames = {
   'integrity-dashboard': 'Integrity Dashboard',
   students: 'Students',
   analytics: 'Analytics',
+  'question-intelligence': 'Question Intelligence',
 };
 
 function navigateTo(page) {
@@ -6845,6 +7074,7 @@ function navigateTo(page) {
   pageIntegrityDashboard.style.display = 'none';
   pageStudents.style.display = 'none';
   pageAnalytics.style.display = 'none';
+  pageQuestionIntel.style.display = 'none';
 
   if (page === 'dashboard') {
     pageDashboard.style.display = 'block';
@@ -6888,6 +7118,11 @@ function navigateTo(page) {
     document.querySelector('.nav-item[data-page="analytics"]')?.classList.add('active');
     pageTitleEl.textContent = 'Analytics';
     loadAnalyticsDashboard();
+  } else if (page === 'question-intelligence') {
+    pageQuestionIntel.style.display = 'block';
+    document.querySelector('.nav-item[data-page="question-intelligence"]')?.classList.add('active');
+    pageTitleEl.textContent = 'Question Intelligence';
+    loadQuestionIntelligence();
   }
 
   if (window.innerWidth <= 768) {
@@ -11463,6 +11698,547 @@ function exportAnalyticsCSV() {
 
   showNotification('Analytics exported as 3 CSV files.', 'success');
 }
+
+// ===== PHASE 5.5: QUESTION INTELLIGENCE DASHBOARD =====
+var _qiSubmissions = [];
+var _qiExamsCache = {};
+var _qiQuestionStats = [];
+var _qiSortDesc = true;
+var _qiTeacherFlags = {};
+
+function loadQuestionIntelligence() {
+  var loadingEl = document.getElementById('qiLoading');
+  var errorEl = document.getElementById('qiError');
+  var emptyEl = document.getElementById('qiEmpty');
+  var contentEl = document.getElementById('qiContent');
+
+  loadingEl.style.display = 'flex';
+  errorEl.style.display = 'none';
+  emptyEl.style.display = 'none';
+  contentEl.style.display = 'none';
+
+  if (!window.__firebaseDb) {
+    loadingEl.style.display = 'none';
+    errorEl.style.display = 'block';
+    document.getElementById('qiErrorMsg').textContent = 'Firebase not connected.';
+    return;
+  }
+
+  // Reset teacher flags cache
+  _qiTeacherFlags = {};
+
+  fetchAllSubmissions(function(submissions) {
+    if (!submissions || submissions.length < 2) {
+      loadingEl.style.display = 'none';
+      emptyEl.style.display = 'block';
+      document.getElementById('qiEmptyMsg').textContent = 'More student submissions are required to generate reliable question intelligence.';
+      return;
+    }
+    _qiSubmissions = submissions;
+
+    // Collect unique exam codes
+    var seen = {};
+    var examCodes = [];
+    for (var ei = 0; ei < submissions.length; ei++) {
+      var c = submissions[ei].examCode;
+      if (c && !seen[c]) { seen[c] = true; examCodes.push(c); }
+    }
+
+    // Fetch exams and teacher flags in parallel
+    var fetches = [];
+    for (var fi = 0; fi < examCodes.length; fi++) {
+      (function(code) {
+        if (_qiExamsCache[code]) return;
+        fetches.push(
+          (window.__getExamFromFirestore(code) || Promise.resolve(null))
+            .then(function(data) { if (data) _qiExamsCache[code] = data; })
+            .catch(function() {})
+        );
+      })(examCodes[fi]);
+    }
+
+    // Fetch saved teacher flags
+    if (window.__firebaseDb && window.__firestore) {
+      fetches.push(
+        window.__firestore.getDocs(window.__firestore.collection(window.__firebaseDb, 'questionFlags'))
+          .then(function(snapshot) {
+            snapshot.forEach(function(doc) {
+              _qiTeacherFlags[doc.id] = doc.data();
+            });
+          })
+          .catch(function() {})
+      );
+    }
+
+    Promise.all(fetches).then(function() {
+      computeQuestionStats();
+      renderQuestionIntelligence();
+      contentEl.style.display = 'block';
+      loadingEl.style.display = 'none';
+    });
+  });
+}
+
+function computeQuestionStats() {
+  var qMap = {};
+
+  for (var si = 0; si < _qiSubmissions.length; si++) {
+    var sub = _qiSubmissions[si];
+    var exam = _qiExamsCache[sub.examCode];
+    if (!exam || !exam.paper || !exam.paper.sections) continue;
+    var answers = sub.studentAnswers || {};
+    var sections = exam.paper.sections;
+    var sectionKeys = ['MCQ', 'Short Answer', 'Long Answer'];
+
+    for (var sk = 0; sk < sectionKeys.length; sk++) {
+      var key = sectionKeys[sk];
+      var qs = sections[key] || [];
+      for (var qi = 0; qi < qs.length; qi++) {
+        var q = qs[qi];
+        if (!qMap[q.id]) {
+          qMap[q.id] = {
+            id: q.id, text: q.question || q.id,
+            subject: exam.subject || 'Unknown',
+            chapter: q.chapter || '',
+            marks: q.marks || 0,
+            difficulty: q.difficulty || 'Medium',
+            questionType: key,
+            totalAttempts: 0, correct: 0, incorrect: 0, unanswered: 0,
+            flags: {},
+          };
+        }
+        var ans = answers[q.id];
+        qMap[q.id].totalAttempts++;
+        if (ans === undefined || ans === null || ans === '') {
+          qMap[q.id].unanswered++;
+        } else if (key === 'MCQ' && q.correctAnswer) {
+          if (ans.toUpperCase().trim() === q.correctAnswer.toUpperCase().trim()) {
+            qMap[q.id].correct++;
+          } else {
+            qMap[q.id].incorrect++;
+          }
+        } else {
+          qMap[q.id].correct++;
+        }
+      }
+    }
+  }
+
+  // Calculate percentages
+  _qiQuestionStats = [];
+  for (var qid in qMap) {
+    var qq = qMap[qid];
+    qq.correctPct = qq.totalAttempts > 0 ? Math.round((qq.correct / qq.totalAttempts) * 100) : 0;
+    qq.incorrectPct = qq.totalAttempts > 0 ? Math.round((qq.incorrect / qq.totalAttempts) * 100) : 0;
+    qq.unansweredPct = qq.totalAttempts > 0 ? Math.round((qq.unanswered / qq.totalAttempts) * 100) : 0;
+    qq.flags = _qiTeacherFlags[qid] || {};
+    _qiQuestionStats.push(qq);
+  }
+}
+
+function renderQuestionIntelligence() {
+  renderQIOverview();
+  renderAccuracyDistribution();
+  renderDifficultyDistribution();
+  renderHardestQuestions();
+  renderEasiestQuestions();
+  renderSkippedQuestions();
+  renderQuestionTable();
+  renderSubjectIntelligence();
+  renderChapterIntelligence();
+  renderSubjectChart();
+  renderChapterChart();
+}
+
+function renderQIOverview() {
+  var totalQs = _qiQuestionStats.length;
+  var totalAttempts = 0;
+  var accSum = 0;
+  var hardestQ = null, hardestAcc = 101;
+  var easiestQ = null, easiestAcc = -1;
+
+  for (var i = 0; i < _qiQuestionStats.length; i++) {
+    var q = _qiQuestionStats[i];
+    totalAttempts += q.totalAttempts;
+    accSum += q.correctPct;
+    if (q.correctPct < hardestAcc && q.totalAttempts > 0) { hardestAcc = q.correctPct; hardestQ = q; }
+    if (q.correctPct > easiestAcc && q.totalAttempts > 0) { easiestAcc = q.correctPct; easiestQ = q; }
+  }
+  var avgAcc = totalQs > 0 ? Math.round(accSum / totalQs) : 0;
+
+  document.getElementById('qiOverviewGrid').innerHTML = ''
+    + '<div class="qi-ov-card qi-ov-total"><div class="qi-ov-value">' + totalQs + '</div><div class="qi-ov-label">Questions Analyzed</div></div>'
+    + '<div class="qi-ov-card qi-ov-attempts"><div class="qi-ov-value">' + totalAttempts + '</div><div class="qi-ov-label">Total Attempts</div></div>'
+    + '<div class="qi-ov-card qi-ov-accuracy"><div class="qi-ov-value">' + avgAcc + '%</div><div class="qi-ov-label">Avg Question Accuracy</div></div>'
+    + '<div class="qi-ov-card qi-ov-hardest"><div class="qi-ov-value">' + (hardestQ ? escHtml(hardestQ.text.slice(0, 30) + '...') : '-') + '</div><div class="qi-ov-label">Most Difficult: ' + hardestAcc + '%</div></div>'
+    + '<div class="qi-ov-card qi-ov-easiest"><div class="qi-ov-value">' + (easiestQ ? escHtml(easiestQ.text.slice(0, 30) + '...') : '-') + '</div><div class="qi-ov-label">Most Accurate: ' + easiestAcc + '%</div></div>';
+}
+
+function renderAccuracyDistribution() {
+  var bins = { '0–20%': 0, '21–40%': 0, '41–60%': 0, '61–80%': 0, '81–100%': 0 };
+  var labels = ['0–20%', '21–40%', '41–60%', '61–80%', '81–100%'];
+  var colors = ['red', 'orange', 'yellow', 'green', 'indigo'];
+  for (var i = 0; i < _qiQuestionStats.length; i++) {
+    var pct = _qiQuestionStats[i].correctPct;
+    if (pct <= 20) bins['0–20%']++;
+    else if (pct <= 40) bins['21–40%']++;
+    else if (pct <= 60) bins['41–60%']++;
+    else if (pct <= 80) bins['61–80%']++;
+    else bins['81–100%']++;
+  }
+  var maxVal = 0; for (var k in bins) { if (bins[k] > maxVal) maxVal = bins[k]; }
+  maxVal = Math.max(maxVal, 1);
+  var html = '<div class="analytics-bar-container">';
+  for (var ci = 0; ci < labels.length; ci++) {
+    var count = bins[labels[ci]];
+    html += '<div class="analytics-bar-row"><span class="analytics-bar-label">' + labels[ci] + '</span><div class="analytics-bar-track"><div class="analytics-bar-fill ' + colors[ci] + '" style="width:' + (count / maxVal * 100) + '%"></div></div><span class="analytics-bar-count">' + count + '</span></div>';
+  }
+  html += '</div>';
+  document.getElementById('qiAccuracyDist').innerHTML = html;
+}
+
+function renderDifficultyDistribution() {
+  var dist = { Easy: 0, Medium: 0, Hard: 0 };
+  for (var i = 0; i < _qiQuestionStats.length; i++) {
+    var d = _qiQuestionStats[i].difficulty;
+    if (dist[d] !== undefined) dist[d]++;
+    else dist[d] = 1;
+  }
+  var total = _qiQuestionStats.length || 1;
+  var html = '<div class="analytics-bar-container">'
+    + '<div class="analytics-bar-row"><span class="analytics-bar-label">Easy</span><div class="analytics-bar-track"><div class="analytics-bar-fill green" style="width:' + (dist.Easy / total * 100) + '%"></div></div><span class="analytics-bar-count">' + dist.Easy + ' (' + Math.round(dist.Easy / total * 100) + '%)</span></div>'
+    + '<div class="analytics-bar-row"><span class="analytics-bar-label">Medium</span><div class="analytics-bar-track"><div class="analytics-bar-fill yellow" style="width:' + (dist.Medium / total * 100) + '%"></div></div><span class="analytics-bar-count">' + dist.Medium + ' (' + Math.round(dist.Medium / total * 100) + '%)</span></div>'
+    + '<div class="analytics-bar-row"><span class="analytics-bar-label">Hard</span><div class="analytics-bar-track"><div class="analytics-bar-fill red" style="width:' + (dist.Hard / total * 100) + '%"></div></div><span class="analytics-bar-count">' + dist.Hard + ' (' + Math.round(dist.Hard / total * 100) + '%)</span></div>'
+    + '</div>';
+  document.getElementById('qiDifficultyDist').innerHTML = html;
+}
+
+function renderHardestQuestions() {
+  var sorted = _qiQuestionStats.slice().filter(function(q) { return q.totalAttempts > 0; }).sort(function(a, b) { return a.correctPct - b.correctPct; });
+  var top = sorted.slice(0, 10);
+  if (top.length === 0) { document.getElementById('qiHardestQs').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No data.</p>'; return; }
+  var html = '<div class="qi-rank-list">';
+  for (var i = 0; i < top.length; i++) {
+    var q = top[i];
+    html += '<div class="qi-rank-item"><span class="qi-rank-num">#' + (i + 1) + '</span><span class="qi-rank-text">' + escHtml(q.text.slice(0, 50)) + '</span><span class="qi-rank-subject">' + escHtml(q.subject) + '</span><span class="qi-rank-pct hard">' + q.correctPct + '%</span></div>';
+  }
+  html += '</div>';
+  document.getElementById('qiHardestQs').innerHTML = html;
+}
+
+function renderEasiestQuestions() {
+  var sorted = _qiQuestionStats.slice().filter(function(q) { return q.totalAttempts > 0; }).sort(function(a, b) { return b.correctPct - a.correctPct; });
+  var top = sorted.slice(0, 10);
+  if (top.length === 0) { document.getElementById('qiEasiestQs').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No data.</p>'; return; }
+  var html = '<div class="qi-rank-list">';
+  for (var i = 0; i < top.length; i++) {
+    var q = top[i];
+    html += '<div class="qi-rank-item"><span class="qi-rank-num">#' + (i + 1) + '</span><span class="qi-rank-text">' + escHtml(q.text.slice(0, 50)) + '</span><span class="qi-rank-subject">' + escHtml(q.subject) + '</span><span class="qi-rank-pct easy">' + q.correctPct + '%</span></div>';
+  }
+  html += '</div>';
+  document.getElementById('qiEasiestQs').innerHTML = html;
+}
+
+function renderSkippedQuestions() {
+  var sorted = _qiQuestionStats.slice().filter(function(q) { return q.totalAttempts > 0; }).sort(function(a, b) { return b.unansweredPct - a.unansweredPct; });
+  var top = sorted.slice(0, 10);
+  if (top.length === 0) { document.getElementById('qiSkippedQs').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No data.</p>'; return; }
+  var html = '<div class="qi-rank-list">';
+  for (var i = 0; i < top.length; i++) {
+    var q = top[i];
+    html += '<div class="qi-rank-item"><span class="qi-rank-num">#' + (i + 1) + '</span><span class="qi-rank-text">' + escHtml(q.text.slice(0, 50)) + '</span><span class="qi-rank-subject">' + escHtml(q.subject) + '</span><span class="qi-rank-pct hard">' + q.unansweredPct + '%</span></div>';
+  }
+  html += '</div>';
+  document.getElementById('qiSkippedQs').innerHTML = html;
+}
+
+function renderQuestionTable() {
+  var sortBy = document.getElementById('qiSortBy').value;
+  var query = document.getElementById('qiSearchInput').value.trim().toLowerCase();
+
+  var filtered = _qiQuestionStats.slice();
+  if (query) {
+    filtered = filtered.filter(function(q) { return q.text.toLowerCase().indexOf(query) !== -1 || q.subject.toLowerCase().indexOf(query) !== -1 || q.chapter.toLowerCase().indexOf(query) !== -1; });
+  }
+
+  if (sortBy === 'difficulty') {
+    var diffOrder = { Easy: 1, Medium: 2, Hard: 3 };
+    filtered.sort(function(a, b) { return _qiSortDesc ? (diffOrder[b.difficulty] || 0) - (diffOrder[a.difficulty] || 0) : (diffOrder[a.difficulty] || 0) - (diffOrder[b.difficulty] || 0); });
+  } else if (sortBy === 'marks') {
+    filtered.sort(function(a, b) { return _qiSortDesc ? b.marks - a.marks : a.marks - b.marks; });
+  } else {
+    filtered.sort(function(a, b) { return _qiSortDesc ? b[sortBy] - a[sortBy] : a[sortBy] - b[sortBy]; });
+  }
+
+  var html = '<table class="qi-table"><thead><tr>'
+    + '<th>ID</th><th>Question</th><th>Subject</th><th>Chapter</th><th>Marks</th><th>Correct %</th><th>Incorrect %</th><th>Unanswered %</th><th>Difficulty</th><th>Quality</th>'
+    + '</tr></thead><tbody>';
+
+  for (var i = 0; i < filtered.length; i++) {
+    var q = filtered[i];
+    var qid = escHtml(q.id);
+    var diffBadge = '<span class="qi-badge qi-badge-' + q.difficulty.toLowerCase() + '">' + q.difficulty + '</span>';
+    var qualityBadges = getQualityBadges(q);
+    html += '<tr>'
+      + '<td><span class="qi-clickable" onclick="openQuestionDrawer(\'' + qid + '\')">' + qid.slice(0, 8) + '</span></td>'
+      + '<td><span class="qi-clickable" onclick="openQuestionDrawer(\'' + qid + '\')">' + escHtml(q.text.slice(0, 60)) + (q.text.length > 60 ? '...' : '') + '</span></td>'
+      + '<td>' + escHtml(q.subject) + '</td>'
+      + '<td>' + escHtml(q.chapter) + '</td>'
+      + '<td>' + q.marks + '</td>'
+      + '<td>' + q.correctPct + '%</td>'
+      + '<td>' + q.incorrectPct + '%</td>'
+      + '<td>' + q.unansweredPct + '%</td>'
+      + '<td>' + diffBadge + '</td>'
+      + '<td>' + qualityBadges + '</td>'
+      + '</tr>';
+  }
+  html += '</tbody></table>';
+  document.getElementById('qiTableWrap').innerHTML = html;
+}
+
+function toggleSortDirection() {
+  _qiSortDesc = !_qiSortDesc;
+  document.getElementById('qiSortDir').textContent = _qiSortDesc ? '↓' : '↑';
+  renderQuestionTable();
+}
+
+function getQualityBadges(q) {
+  var badges = [];
+  if (q.correctPct >= 80 && q.totalAttempts >= 3) badges.push('<span class="qi-quality-badge qi-quality-high">High Perf</span>');
+  if (q.correctPct < 30 && q.totalAttempts >= 3) badges.push('<span class="qi-quality-badge qi-quality-difficult">Difficult</span>');
+  if (q.unansweredPct >= 40 && q.totalAttempts >= 3) badges.push('<span class="qi-quality-badge qi-quality-skipped">Freq Skipped</span>');
+  if (q.flags && q.flags.teacherFlag) badges.push('<span class="qi-quality-badge qi-quality-review">Needs Review</span>');
+  if (q.difficulty === 'Easy' && q.correctPct < 40 && q.totalAttempts >= 3) badges.push('<span class="qi-quality-badge qi-quality-mismatch">Diff Mismatch</span>');
+  if (q.difficulty === 'Hard' && q.correctPct > 80 && q.totalAttempts >= 3) badges.push('<span class="qi-quality-badge qi-quality-mismatch">Diff Mismatch</span>');
+  return badges.length > 0 ? badges.join(' ') : '<span style="color:var(--gray-300);font-size:0.7rem;">—</span>';
+}
+
+function openQuestionDrawer(qId) {
+  var q = null;
+  for (var i = 0; i < _qiQuestionStats.length; i++) {
+    if (_qiQuestionStats[i].id === qId) { q = _qiQuestionStats[i]; break; }
+  }
+  if (!q) return;
+
+  document.getElementById('qiDrawerOverlay').classList.add('open');
+  document.getElementById('qiDrawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  var body = document.getElementById('qiDrawerBody');
+  var isMismatch = (q.difficulty === 'Easy' && q.correctPct < 40) || (q.difficulty === 'Hard' && q.correctPct > 80);
+  var flag = q.flags.teacherFlag || '';
+  var flagActive = function(f) { return flag === f ? 'active' : ''; };
+
+  body.innerHTML = ''
+    + '<div class="qi-detail-section"><h4>Question Information</h4>'
+    + '<div class="qi-detail-grid">'
+    + '<div class="qi-detail-field full"><span class="qi-detail-label">Question</span><span class="qi-detail-value">' + escHtml(q.text) + '</span></div>'
+    + '<div class="qi-detail-field"><span class="qi-detail-label">Subject</span><span class="qi-detail-value">' + escHtml(q.subject) + '</span></div>'
+    + '<div class="qi-detail-field"><span class="qi-detail-label">Chapter</span><span class="qi-detail-value">' + escHtml(q.chapter || '-') + '</span></div>'
+    + '<div class="qi-detail-field"><span class="qi-detail-label">Marks</span><span class="qi-detail-value">' + q.marks + '</span></div>'
+    + '<div class="qi-detail-field"><span class="qi-detail-label">Difficulty</span><span class="qi-detail-value">' + q.difficulty + '</span></div>'
+    + '</div></div>'
+
+    + '<div class="qi-detail-section"><h4>Performance Metrics</h4>'
+    + '<div class="qi-detail-grid">'
+    + '<div class="qi-detail-field"><span class="qi-detail-label">Total Attempts</span><span class="qi-detail-value">' + q.totalAttempts + '</span></div>'
+    + '<div class="qi-detail-field"><span class="qi-detail-label">Correct</span><span class="qi-detail-value" style="color:var(--green-600);">' + q.correct + '</span></div>'
+    + '<div class="qi-detail-field"><span class="qi-detail-label">Incorrect</span><span class="qi-detail-value" style="color:var(--red-600);">' + q.incorrect + '</span></div>'
+    + '<div class="qi-detail-field"><span class="qi-detail-label">Unanswered</span><span class="qi-detail-value" style="color:var(--gray-400);">' + q.unanswered + '</span></div>'
+    + '<div class="qi-detail-field full"><span class="qi-detail-label">Accuracy</span><span class="qi-detail-value" style="font-size:1.2rem;font-weight:700;color:' + (q.correctPct >= 60 ? 'var(--green-600)' : q.correctPct >= 30 ? 'var(--yellow-600)' : 'var(--red-600)') + ';">' + q.correctPct + '%</span></div>'
+    + '</div></div>'
+
+    + '<div class="qi-detail-section"><h4>Difficulty Validation</h4>'
+    + '<div class="qi-detail-grid">'
+    + '<div class="qi-detail-field"><span class="qi-detail-label">Expected Difficulty</span><span class="qi-detail-value">' + q.difficulty + '</span></div>'
+    + '<div class="qi-detail-field"><span class="qi-detail-label">Actual Accuracy</span><span class="qi-detail-value">' + q.correctPct + '%</span></div>'
+    + '<div class="qi-detail-field full"><span class="qi-detail-label">Verdict</span><span class="qi-detail-value" style="font-weight:600;color:' + (isMismatch ? 'var(--red-600)' : 'var(--green-600)') + ';">' + (isMismatch ? '⚠ Difficulty Mismatch' : '✓ Appropriate') + '</span></div>'
+    + '</div></div>'
+
+    + '<div class="qi-detail-section"><h4>Teacher Flag</h4>'
+    + '<div style="display:flex;gap:6px;flex-wrap:wrap;">'
+    + '<button class="qi-flag-btn ' + flagActive('too-easy') + '" onclick="saveTeacherFlag(\'' + qId + '\',\'too-easy\')">Too Easy</button>'
+    + '<button class="qi-flag-btn ' + flagActive('too-hard') + '" onclick="saveTeacherFlag(\'' + qId + '\',\'too-hard\')">Too Hard</button>'
+    + '<button class="qi-flag-btn ' + flagActive('ambiguous') + '" onclick="saveTeacherFlag(\'' + qId + '\',\'ambiguous\')">Ambiguous</button>'
+    + '<button class="qi-flag-btn ' + flagActive('needs-review') + '" onclick="saveTeacherFlag(\'' + qId + '\',\'needs-review\')">Needs Review</button>'
+    + '<button class="qi-flag-btn ' + (flag ? '' : '') + '" onclick="clearTeacherFlag(\'' + qId + '\')" style="margin-left:auto;">Clear</button>'
+    + '</div>'
+    + '<p id="qiFlagStatus-' + qId + '" style="font-size:0.733rem;color:var(--green-600);margin:8px 0 0;font-weight:500;' + (flag ? '' : 'display:none;') + '">Flagged as: <strong>' + flag + '</strong></p>'
+    + '</div>';
+}
+
+function saveTeacherFlag(qId, flag) {
+  if (!window.__firebaseDb || !window.__firestore) {
+    showNotification('Firebase not available.', 'info');
+    return;
+  }
+  var db = window.__firebaseDb;
+  var fs = window.__firestore;
+  var docRef = fs.doc(db, 'questionFlags', qId);
+  fs.setDoc(docRef, { teacherFlag: flag, flaggedAt: new Date().toISOString() }, { merge: true })
+    .then(function() {
+      // Update local cache
+      if (!_qiTeacherFlags[qId]) _qiTeacherFlags[qId] = {};
+      _qiTeacherFlags[qId].teacherFlag = flag;
+      _qiTeacherFlags[qId].flaggedAt = new Date().toISOString();
+      // Update in-memory stats
+      for (var i = 0; i < _qiQuestionStats.length; i++) {
+        if (_qiQuestionStats[i].id === qId) {
+          _qiQuestionStats[i].flags = _qiTeacherFlags[qId];
+          break;
+        }
+      }
+      showNotification('Question flagged as "' + flag + '".', 'success');
+      // Refresh drawer and table
+      var statusEl = document.getElementById('qiFlagStatus-' + qId);
+      if (statusEl) { statusEl.style.display = 'block'; statusEl.innerHTML = 'Flagged as: <strong>' + flag + '</strong>'; }
+      renderQuestionTable();
+    })
+    .catch(function(err) {
+      console.error('[QI] Flag save failed:', err);
+      showNotification('Failed to save flag.', 'info');
+    });
+}
+
+function clearTeacherFlag(qId) {
+  if (!window.__firebaseDb || !window.__firestore) return;
+  var db = window.__firebaseDb;
+  var fs = window.__firestore;
+  var docRef = fs.doc(db, 'questionFlags', qId);
+  fs.setDoc(docRef, { teacherFlag: '', flaggedAt: '' }, { merge: true })
+    .then(function() {
+      if (_qiTeacherFlags[qId]) _qiTeacherFlags[qId].teacherFlag = '';
+      for (var i = 0; i < _qiQuestionStats.length; i++) {
+        if (_qiQuestionStats[i].id === qId) {
+          _qiQuestionStats[i].flags = _qiTeacherFlags[qId] || {};
+          break;
+        }
+      }
+      var statusEl = document.getElementById('qiFlagStatus-' + qId);
+      if (statusEl) statusEl.style.display = 'none';
+      renderQuestionTable();
+    })
+    .catch(function() {});
+}
+
+function renderSubjectIntelligence() {
+  var subjData = {};
+  for (var i = 0; i < _qiQuestionStats.length; i++) {
+    var q = _qiQuestionStats[i];
+    if (!subjData[q.subject]) subjData[q.subject] = { qs: [], accSum: 0, hardQ: null, hardAcc: 101, easyQ: null, easyAcc: -1 };
+    subjData[q.subject].qs.push(q);
+    subjData[q.subject].accSum += q.correctPct;
+    if (q.correctPct < subjData[q.subject].hardAcc && q.totalAttempts > 0) { subjData[q.subject].hardAcc = q.correctPct; subjData[q.subject].hardQ = q; }
+    if (q.correctPct > subjData[q.subject].easyAcc && q.totalAttempts > 0) { subjData[q.subject].easyAcc = q.correctPct; subjData[q.subject].easyQ = q; }
+  }
+
+  var html = '<div class="qi-subject-grid">';
+  for (var subj in subjData) {
+    var d = subjData[subj];
+    var avgAcc = d.qs.length > 0 ? Math.round(d.accSum / d.qs.length) : 0;
+    html += '<div class="qi-subject-card"><h4>' + escHtml(subj) + '</h4>'
+      + '<div class="qi-subject-stat"><span class="qi-stat-label">Questions</span><span class="qi-stat-value">' + d.qs.length + '</span></div>'
+      + '<div class="qi-subject-stat"><span class="qi-stat-label">Avg Accuracy</span><span class="qi-stat-value">' + avgAcc + '%</span></div>'
+      + '<div class="qi-subject-stat"><span class="qi-stat-label">Hardest</span><span class="qi-stat-value" style="color:var(--red-500);">' + (d.hardQ ? escHtml(d.hardQ.text.slice(0, 30) + '...') : '-') + ' (' + d.hardAcc + '%)</span></div>'
+      + '<div class="qi-subject-stat"><span class="qi-stat-label">Easiest</span><span class="qi-stat-value" style="color:var(--green-500);">' + (d.easyQ ? escHtml(d.easyQ.text.slice(0, 30) + '...') : '-') + ' (' + d.easyAcc + '%)</span></div>'
+      + '</div>';
+  }
+  html += '</div>';
+  document.getElementById('qiSubjectIntelligence').innerHTML = html;
+}
+
+function renderChapterIntelligence() {
+  var chData = {};
+  for (var i = 0; i < _qiQuestionStats.length; i++) {
+    var q = _qiQuestionStats[i];
+    var ch = q.chapter || 'General';
+    if (!chData[ch]) chData[ch] = { qs: [], accSum: 0, missedQ: null, missedPct: 0 };
+    chData[ch].qs.push(q);
+    chData[ch].accSum += q.correctPct;
+    if (q.incorrectPct + q.unansweredPct > chData[ch].missedPct && q.totalAttempts > 0) {
+      chData[ch].missedPct = q.incorrectPct + q.unansweredPct;
+      chData[ch].missedQ = q;
+    }
+  }
+
+  var html = '<div class="qi-chapter-grid">';
+  for (var ch in chData) {
+    var d = chData[ch];
+    var avgAcc = d.qs.length > 0 ? Math.round(d.accSum / d.qs.length) : 0;
+    var totalAttempts = 0;
+    for (var a = 0; a < d.qs.length; a++) totalAttempts += d.qs[a].totalAttempts;
+    html += '<div class="qi-chapter-card"><h4>' + escHtml(ch) + '</h4>'
+      + '<div class="qi-chapter-stat"><span class="qi-stat-label">Avg Accuracy</span><span class="qi-stat-value">' + avgAcc + '%</span></div>'
+      + '<div class="qi-chapter-stat"><span class="qi-stat-label">Most Missed</span><span class="qi-stat-value" style="color:var(--red-500);font-size:0.7rem;">' + (d.missedQ ? escHtml(d.missedQ.text.slice(0, 25) + '...') : '-') + '</span></div>'
+      + '<div class="qi-chapter-stat"><span class="qi-stat-label">Attempts</span><span class="qi-stat-value">' + totalAttempts + '</span></div>'
+      + '</div>';
+  }
+  html += '</div>';
+  document.getElementById('qiChapterIntelligence').innerHTML = html;
+}
+
+function renderSubjectChart() {
+  var subjData = {};
+  for (var i = 0; i < _qiQuestionStats.length; i++) {
+    var q = _qiQuestionStats[i];
+    if (!subjData[q.subject]) subjData[q.subject] = { count: 0, accSum: 0 };
+    subjData[q.subject].count++;
+    subjData[q.subject].accSum += q.correctPct;
+  }
+  var entries = [];
+  for (var key in subjData) {
+    entries.push({ name: key, count: subjData[key].count, avgAcc: Math.round(subjData[key].accSum / subjData[key].count) });
+  }
+  if (entries.length === 0) { document.getElementById('qiSubjectChart').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No data.</p>'; return; }
+  renderSimpleBarChart('qiSubjectChart', entries, 'Questions', 'count');
+}
+
+function renderChapterChart() {
+  var chData = {};
+  for (var i = 0; i < _qiQuestionStats.length; i++) {
+    var q = _qiQuestionStats[i];
+    var ch = q.chapter || 'General';
+    if (!chData[ch]) chData[ch] = { count: 0, accSum: 0 };
+    chData[ch].count++;
+    chData[ch].accSum += q.correctPct;
+  }
+  var entries = [];
+  for (var key in chData) {
+    entries.push({ name: key, count: chData[key].count, avgAcc: Math.round(chData[key].accSum / chData[key].count) });
+  }
+  if (entries.length === 0) { document.getElementById('qiChapterChart').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No data.</p>'; return; }
+  renderSimpleBarChart('qiChapterChart', entries, 'Avg Accuracy %', 'avgAcc');
+}
+
+function renderSimpleBarChart(containerId, data, label, valueField) {
+  var maxVal = 1;
+  for (var i = 0; i < data.length; i++) { if (data[i][valueField] > maxVal) maxVal = data[i][valueField]; }
+  var chartW = 560, chartH = Math.max(120, data.length * 28 + 20);
+  var svg = '<svg viewBox="0 0 ' + chartW + ' ' + chartH + '" class="analytics-chart-svg">';
+
+  for (var ri = 0; ri < data.length; ri++) {
+    var item = data[ri];
+    var barW = (item[valueField] / maxVal) * (chartW - 120);
+    var y = ri * 28 + 10;
+    svg += '<text x="110" y="' + (y + 12) + '" text-anchor="end" fill="var(--gray-500)" font-size="11">' + escHtml(item.name.length > 12 ? item.name.slice(0, 12) + '..' : item.name) + '</text>';
+    svg += '<rect x="120" y="' + (y + 2) + '" width="' + barW + '" height="20" rx="3" fill="var(--indigo-400)"/>';
+    svg += '<text x="' + (125 + barW) + '" y="' + (y + 16) + '" fill="var(--text-primary)" font-size="11" font-weight="500">' + item[valueField] + '</text>';
+  }
+  svg += '</svg>';
+  document.getElementById(containerId).innerHTML = svg;
+}
+
+// Close drawer
+document.getElementById('qiDrawerOverlay').addEventListener('click', function() {
+  document.getElementById('qiDrawerOverlay').classList.remove('open');
+  document.getElementById('qiDrawer').classList.remove('open');
+  document.body.style.overflow = '';
+});
+document.getElementById('qiDrawerClose').addEventListener('click', function() {
+  document.getElementById('qiDrawerOverlay').classList.remove('open');
+  document.getElementById('qiDrawer').classList.remove('open');
+  document.body.style.overflow = '';
+});
 </script>
 
 </body>
