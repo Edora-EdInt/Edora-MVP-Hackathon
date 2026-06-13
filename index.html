@@ -5346,6 +5346,90 @@ html.dark-mode .student-photo-preview {
   .qi-table-controls { flex-direction:column; align-items:stretch; }
   .qi-drawer { width:100%; right:-100%; max-width:none; }
 }
+
+/* ===== CHAPTER INTELLIGENCE CSS ===== */
+.ci-page { max-width:1200px; }
+.ci-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:28px; gap:16px; }
+.ci-header h2 { margin:0 0 4px; }
+.ci-header p { margin:0; color:var(--gray-400); font-size:0.867rem; }
+.ci-loading,.ci-error,.ci-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; text-align:center; gap:12px; }
+.ci-loading .spinner { width:32px; height:32px; border:3px solid var(--gray-100); border-top-color:var(--indigo-500); border-radius:50%; animation:spin 0.7s linear infinite; }
+.ci-loading span { color:var(--gray-400); font-size:0.867rem; }
+.ci-error svg,.ci-empty svg { width:48px; height:48px; color:var(--gray-300); margin-bottom:8px; }
+.ci-error h3,.ci-empty h3 { margin:0; font-size:1.067rem; font-weight:600; color:var(--text-primary); }
+.ci-error p,.ci-empty p { margin:0; font-size:0.867rem; color:var(--gray-400); max-width:420px; }
+.ci-retry-btn { padding:8px 20px; border:none; border-radius:8px; background:var(--indigo-500); color:#fff; font-size:0.867rem; font-weight:500; cursor:pointer; font-family:inherit; }
+.ci-retry-btn:hover { background:var(--indigo-600); }
+.ci-section { background:var(--bg-surface); border:1px solid var(--gray-100); border-radius:12px; padding:24px; margin-bottom:20px; }
+.ci-section-title { font-size:0.867rem; font-weight:600; color:var(--text-primary); margin:0 0 16px; }
+.ci-row-2col { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+.ci-row-2col .ci-section { margin-bottom:0; }
+.ci-overview-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+.ci-ov-card { background:var(--bg-surface); border:1px solid var(--gray-100); border-radius:10px; padding:16px; display:flex; flex-direction:column; gap:4px; }
+.ci-ov-card .ci-ov-value { font-size:1.4rem; font-weight:650; letter-spacing:-0.3px; color:var(--gray-900); line-height:1.1; }
+.ci-ov-card .ci-ov-label { font-size:0.733rem; color:var(--gray-400); font-weight:500; }
+.ci-ov-card.ci-ov-chapters { border-left:3px solid var(--indigo-400); }
+.ci-ov-card.ci-ov-avg { border-left:3px solid var(--blue-400); }
+.ci-ov-card.ci-ov-strongest { border-left:3px solid var(--green-500); }
+.ci-ov-card.ci-ov-weakest { border-left:3px solid var(--red-400); }
+.ci-ov-card.ci-ov-attempts { border-left:3px solid var(--yellow-500); }
+.ci-table-controls { display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
+.ci-sort-label { font-size:0.767rem; color:var(--gray-400); font-weight:500; }
+.ci-sort-select { padding:6px 10px; border:1px solid var(--gray-100); border-radius:6px; font-size:0.8rem; font-family:inherit; background:var(--bg-surface); color:var(--text-primary); outline:none; cursor:pointer; }
+.ci-sort-dir { padding:4px 10px; border:1px solid var(--gray-100); border-radius:6px; background:var(--bg-surface); color:var(--text-primary); font-size:0.9rem; cursor:pointer; font-family:inherit; }
+.ci-search-input { flex:1; min-width:160px; padding:6px 12px; border:1px solid var(--gray-100); border-radius:6px; font-size:0.8rem; font-family:inherit; background:var(--bg-surface); color:var(--text-primary); outline:none; }
+.ci-search-input:focus { border-color:var(--indigo-400); }
+.ci-table-wrap { overflow-x:auto; }
+.ci-table { width:100%; border-collapse:collapse; font-size:0.8rem; }
+.ci-table th { text-align:left; padding:9px 10px; font-size:0.7rem; font-weight:600; color:var(--gray-400); text-transform:uppercase; letter-spacing:0.04em; border-bottom:1px solid var(--gray-100); white-space:nowrap; }
+.ci-table td { padding:9px 10px; color:var(--text-primary); border-bottom:1px solid var(--gray-50); }
+.ci-table tr:last-child td { border-bottom:none; }
+.ci-table tr:hover td { background:var(--gray-50); }
+.ci-rank-list { }
+.ci-rank-item { display:flex; align-items:flex-start; gap:10px; padding:8px 10px; border:1px solid var(--gray-100); border-radius:6px; margin-bottom:6px; font-size:0.767rem; }
+.ci-rank-item:last-child { margin-bottom:0; }
+.ci-rank-num { font-weight:600; color:var(--gray-400); min-width:22px; flex-shrink:0; }
+.ci-rank-text { flex:1; color:var(--text-primary); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ci-rank-subject { font-size:0.7rem; color:var(--gray-400); flex-shrink:0; min-width:60px; text-align:right; }
+.ci-rank-pct { font-weight:600; flex-shrink:0; min-width:40px; text-align:right; }
+.ci-rank-pct.strong { color:var(--green-500); }
+.ci-rank-pct.weak { color:var(--red-500); }
+.ci-risk-card { border:1px solid var(--red-100); border-radius:10px; padding:14px; background:var(--red-50); margin-bottom:8px; }
+.ci-risk-card:last-child { margin-bottom:0; }
+.ci-risk-name { font-weight:600; font-size:0.8rem; color:var(--red-700); }
+.ci-risk-meta { font-size:0.733rem; color:var(--red-500); margin-top:4px; }
+.ci-subj-breakdown { }
+.ci-subj-group { margin-bottom:20px; }
+.ci-subj-group:last-child { margin-bottom:0; }
+.ci-subj-group h4 { font-size:0.867rem; font-weight:600; color:var(--text-primary); margin:0 0 10px; }
+.ci-subj-chapters { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:8px; }
+.ci-subj-chapter-card { border:1px solid var(--gray-100); border-radius:8px; padding:12px; display:flex; flex-direction:column; gap:4px; }
+.ci-subj-chapter-card .ci-sc-name { font-size:0.8rem; font-weight:500; color:var(--text-primary); }
+.ci-subj-chapter-card .ci-sc-stat { font-size:0.7rem; color:var(--gray-400); }
+.ci-trend-up { color:var(--green-500); }
+.ci-trend-down { color:var(--red-500); }
+.ci-trend-stable { color:var(--gray-400); }
+.ci-diff-item { display:flex; align-items:center; gap:12px; padding:10px 12px; border:1px solid var(--gray-100); border-radius:8px; margin-bottom:8px; }
+.ci-diff-item:last-child { margin-bottom:0; }
+.ci-diff-chapter { font-weight:600; font-size:0.8rem; color:var(--text-primary); min-width:140px; }
+.ci-diff-expected { font-size:0.733rem; color:var(--gray-400); }
+.ci-diff-actual { font-size:0.733rem; font-weight:600; }
+.ci-diff-actual.low { color:var(--red-500); }
+.ci-diff-badge { font-size:0.7rem; font-weight:600; padding:2px 8px; border-radius:4px; background:var(--yellow-50); color:var(--yellow-700); }
+.ci-insight-card { border:1px solid var(--gray-100); border-radius:8px; padding:12px; margin-bottom:8px; display:flex; align-items:flex-start; gap:10px; }
+.ci-insight-card:last-child { margin-bottom:0; }
+.ci-insight-icon { font-size:1rem; flex-shrink:0; }
+.ci-insight-text { font-size:0.8rem; color:var(--text-primary); line-height:1.4; }
+.ci-insight-type { font-size:0.667rem; color:var(--gray-400); text-transform:uppercase; letter-spacing:0.04em; font-weight:600; margin-bottom:2px; }
+@media (max-width:1100px) {
+  .ci-overview-grid { grid-template-columns:repeat(3,1fr); }
+  .ci-row-2col { grid-template-columns:1fr; }
+}
+@media (max-width:768px) {
+  .ci-overview-grid { grid-template-columns:repeat(2,1fr); }
+  .ci-header { flex-direction:column; }
+  .ci-table-controls { flex-direction:column; align-items:stretch; }
+}
 </style>
 </head>
 <body>
@@ -5423,6 +5507,10 @@ html.dark-mode .student-photo-preview {
     <a href="#" class="nav-item" data-page="analytics">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       <span>Analytics</span>
+    </a>
+    <a href="#" class="nav-item" data-page="chapter-intelligence">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      <span>Chapter Intelligence</span>
     </a>
     <a href="#" class="nav-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -6653,6 +6741,115 @@ html.dark-mode .student-photo-preview {
   </div>
 </div>
 
+<!-- ===== PAGE: CHAPTER INTELLIGENCE ===== -->
+<div id="page-chapter-intelligence" style="display:none;">
+  <div class="ci-page">
+    <div class="ci-header">
+      <div>
+        <h2>Chapter Intelligence</h2>
+        <p>Analyze student performance at the chapter level across subjects</p>
+      </div>
+    </div>
+
+    <div class="ci-loading" id="ciLoading">
+      <div class="spinner"></div>
+      <span>Analyzing chapter performance...</span>
+    </div>
+
+    <div class="ci-error" id="ciError" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <h3>Failed to Load</h3>
+      <p id="ciErrorMsg">Could not fetch chapter data. Check your connection and try again.</p>
+      <button class="ci-retry-btn" onclick="loadChapterIntelligence()">Retry</button>
+    </div>
+
+    <div class="ci-empty" id="ciEmpty" style="display:none;">
+      <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <h3>Insufficient Data</h3>
+      <p id="ciEmptyMsg">Not enough chapter-level data. Conduct more exams to generate insights.</p>
+    </div>
+
+    <div class="ci-content" id="ciContent" style="display:none;">
+      <!-- Section 1: Overview Cards -->
+      <section class="ci-section">
+        <h3 class="ci-section-title">Overview</h3>
+        <div class="ci-overview-grid" id="ciOverviewGrid"></div>
+      </section>
+
+      <!-- Section 2: Strongest & Weakest Chapters -->
+      <div class="ci-row-2col">
+        <section class="ci-section">
+          <h3 class="ci-section-title">Strongest Chapters</h3>
+          <div id="ciStrongest"></div>
+        </section>
+        <section class="ci-section">
+          <h3 class="ci-section-title">Weakest Chapters</h3>
+          <div id="ciWeakest"></div>
+        </section>
+      </div>
+
+      <!-- Section 3: At-Risk Chapters -->
+      <section class="ci-section">
+        <h3 class="ci-section-title">At-Risk Chapters</h3>
+        <div id="ciAtRisk"></div>
+      </section>
+
+      <!-- Section 4: Chapter Performance Table -->
+      <section class="ci-section">
+        <h3 class="ci-section-title">Chapter Performance</h3>
+        <div class="ci-table-controls">
+          <label class="ci-sort-label">Sort by:</label>
+          <select class="ci-sort-select" id="ciSortBy" onchange="renderChapterTable()">
+            <option value="avgScore">Average Score</option>
+            <option value="passRate">Pass Rate</option>
+            <option value="totalAttempts">Attempts</option>
+            <option value="difficultyScore">Difficulty</option>
+          </select>
+          <button class="ci-sort-dir" id="ciSortDir" onclick="toggleCISort()">↓</button>
+          <input type="text" class="ci-search-input" id="ciSearchInput" placeholder="Search chapters..." oninput="renderChapterTable()">
+        </div>
+        <div class="ci-table-wrap" id="ciTableWrap"></div>
+      </section>
+
+      <!-- Section 5: Subject-Wise Chapter Breakdown -->
+      <section class="ci-section">
+        <h3 class="ci-section-title">Subject-Wise Chapter Breakdown</h3>
+        <div id="ciSubjectBreakdown"></div>
+      </section>
+
+      <!-- Section 6: Chapter Trends -->
+      <section class="ci-section">
+        <h3 class="ci-section-title">Chapter Trends</h3>
+        <div id="ciTrends"></div>
+      </section>
+
+      <!-- Section 7: Difficulty Validation -->
+      <section class="ci-section">
+        <h3 class="ci-section-title">Difficulty Validation</h3>
+        <div id="ciDifficultyValidation"></div>
+      </section>
+
+      <!-- Section 8: Charts -->
+      <div class="ci-row-2col">
+        <section class="ci-section">
+          <h3 class="ci-section-title">Chapter vs Accuracy</h3>
+          <div id="ciAccuracyChart"></div>
+        </section>
+        <section class="ci-section">
+          <h3 class="ci-section-title">Subject-wise Performance</h3>
+          <div id="ciSubjectChart"></div>
+        </section>
+      </div>
+
+      <!-- Section 9: Teacher Insights -->
+      <section class="ci-section">
+        <h3 class="ci-section-title">Teacher Insights</h3>
+        <div id="ciInsights"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
 <!-- Question Detail Drawer -->
 <div class="qi-drawer-overlay" id="qiDrawerOverlay"></div>
 <div class="qi-drawer" id="qiDrawer">
@@ -7053,6 +7250,7 @@ const pageIntegrityDashboard = document.getElementById('page-integrity-dashboard
 const pageStudents = document.getElementById('page-students');
 const pageAnalytics = document.getElementById('page-analytics');
 const pageQuestionIntel = document.getElementById('page-question-intelligence');
+const pageChapterIntel = document.getElementById('page-chapter-intelligence');
 const pageTitleEl = document.querySelector('.nav-left h1');
 const pageNames = {
   dashboard: 'Dashboard',
@@ -7063,6 +7261,7 @@ const pageNames = {
   students: 'Students',
   analytics: 'Analytics',
   'question-intelligence': 'Question Intelligence',
+  'chapter-intelligence': 'Chapter Intelligence',
 };
 
 function navigateTo(page) {
@@ -7075,6 +7274,7 @@ function navigateTo(page) {
   pageStudents.style.display = 'none';
   pageAnalytics.style.display = 'none';
   pageQuestionIntel.style.display = 'none';
+  pageChapterIntel.style.display = 'none';
 
   if (page === 'dashboard') {
     pageDashboard.style.display = 'block';
@@ -7123,6 +7323,11 @@ function navigateTo(page) {
     document.querySelector('.nav-item[data-page="question-intelligence"]')?.classList.add('active');
     pageTitleEl.textContent = 'Question Intelligence';
     loadQuestionIntelligence();
+  } else if (page === 'chapter-intelligence') {
+    pageChapterIntel.style.display = 'block';
+    document.querySelector('.nav-item[data-page="chapter-intelligence"]')?.classList.add('active');
+    pageTitleEl.textContent = 'Chapter Intelligence';
+    loadChapterIntelligence();
   }
 
   if (window.innerWidth <= 768) {
@@ -12239,6 +12444,451 @@ document.getElementById('qiDrawerClose').addEventListener('click', function() {
   document.getElementById('qiDrawer').classList.remove('open');
   document.body.style.overflow = '';
 });
+
+// ===== PHASE 5.6: CHAPTER INTELLIGENCE DASHBOARD =====
+var _ciSubmissions = [];
+var _ciExamsCache = {};
+var _ciChapterStats = [];
+var _ciSortDesc = true;
+
+function loadChapterIntelligence() {
+  var loadingEl = document.getElementById('ciLoading');
+  var errorEl = document.getElementById('ciError');
+  var emptyEl = document.getElementById('ciEmpty');
+  var contentEl = document.getElementById('ciContent');
+
+  loadingEl.style.display = 'flex';
+  errorEl.style.display = 'none';
+  emptyEl.style.display = 'none';
+  contentEl.style.display = 'none';
+
+  if (!window.__firebaseDb) {
+    loadingEl.style.display = 'none';
+    errorEl.style.display = 'block';
+    document.getElementById('ciErrorMsg').textContent = 'Firebase not connected.';
+    return;
+  }
+
+  fetchAllSubmissions(function(submissions) {
+    if (!submissions || submissions.length < 2) {
+      loadingEl.style.display = 'none';
+      emptyEl.style.display = 'block';
+      return;
+    }
+    _ciSubmissions = submissions;
+
+    var seen = {};
+    var examCodes = [];
+    for (var ei = 0; ei < submissions.length; ei++) {
+      var c = submissions[ei].examCode;
+      if (c && !seen[c]) { seen[c] = true; examCodes.push(c); }
+    }
+
+    var fetches = [];
+    for (var fi = 0; fi < examCodes.length; fi++) {
+      (function(code) {
+        if (_ciExamsCache[code]) return;
+        fetches.push(
+          (window.__getExamFromFirestore(code) || Promise.resolve(null))
+            .then(function(data) { if (data) _ciExamsCache[code] = data; })
+            .catch(function() {})
+        );
+      })(examCodes[fi]);
+    }
+
+    if (fetches.length === 0) { computeChapterStats(); renderChapterIntelligence(); contentEl.style.display = 'block'; loadingEl.style.display = 'none'; }
+    else {
+      Promise.all(fetches).then(function() {
+        computeChapterStats();
+        renderChapterIntelligence();
+        contentEl.style.display = 'block';
+        loadingEl.style.display = 'none';
+      });
+    }
+  });
+}
+
+function computeChapterStats() {
+  var chMap = {};
+
+  for (var si = 0; si < _ciSubmissions.length; si++) {
+    var sub = _ciSubmissions[si];
+    var exam = _ciExamsCache[sub.examCode];
+    if (!exam || !exam.paper || !exam.paper.sections) continue;
+    var answers = sub.studentAnswers || {};
+    var sections = exam.paper.sections;
+    var sectionKeys = ['MCQ', 'Short Answer', 'Long Answer'];
+
+    for (var sk = 0; sk < sectionKeys.length; sk++) {
+      var key = sectionKeys[sk];
+      var qs = sections[key] || [];
+      for (var qi = 0; qi < qs.length; qi++) {
+        var q = qs[qi];
+        var ch = q.chapter || 'General';
+        if (!chMap[ch]) {
+          chMap[ch] = {
+            chapter: ch, subject: exam.subject || 'Unknown', class: exam.class || '',
+            totalAttempts: 0, correct: 0, incorrect: 0, unanswered: 0,
+            totalMarks: 0, obtainedMarks: 0,
+            diffSum: 0, diffCount: 0, timestamps: [], accuracies: [],
+          };
+        }
+        var ans = answers[q.id];
+        var isMCQ = key === 'MCQ';
+        var isCorrect = false;
+
+        chMap[ch].totalAttempts++;
+        chMap[ch].totalMarks += (q.marks || 0);
+        chMap[ch].diffSum += (q.difficulty ? {Easy:1,Medium:2,Hard:3}[q.difficulty] || 2 : 2);
+        chMap[ch].diffCount++;
+
+        if (ans === undefined || ans === null || ans === '') {
+          chMap[ch].unanswered++;
+        } else if (isMCQ && q.correctAnswer) {
+          isCorrect = ans.toUpperCase().trim() === q.correctAnswer.toUpperCase().trim();
+          if (isCorrect) { chMap[ch].correct++; chMap[ch].obtainedMarks += (q.marks || 0); }
+          else { chMap[ch].incorrect++; }
+        } else {
+          chMap[ch].correct++;
+          chMap[ch].obtainedMarks += (q.marks || 0);
+        }
+
+        if (sub.submittedAt) {
+          chMap[ch].timestamps.push(sub.submittedAt);
+          var pct = sub.percentage !== undefined ? sub.percentage : 0;
+          chMap[ch].accuracies.push({ ts: sub.submittedAt, acc: pct });
+        }
+      }
+    }
+  }
+
+  _ciChapterStats = [];
+  for (var chName in chMap) {
+    var d = chMap[chName];
+    var avgScore = d.totalAttempts > 0 ? Math.round((d.obtainedMarks / d.totalMarks) * 100) : 0;
+    var passCount = 0;
+    var passTotal = 0;
+    for (var pi = 0; pi < d.accuracies.length; pi++) {
+      if (d.accuracies[pi].acc >= 40) passCount++;
+      passTotal++;
+    }
+    var passRate = passTotal > 0 ? Math.round((passCount / passTotal) * 100) : 0;
+    var difficultyScore = d.diffCount > 0 ? (d.diffSum / d.diffCount) : 2;
+    var correctPct = d.totalAttempts > 0 ? Math.round((d.correct / d.totalAttempts) * 100) : 0;
+
+    // Compute trend
+    var trend = 'stable';
+    if (d.timestamps.length >= 4) {
+      d.timestamps.sort();
+      var mid = Math.floor(d.timestamps.length / 2);
+      var firstHalf = d.accuracies.filter(function(a) { return a.ts <= d.timestamps[mid]; });
+      var secondHalf = d.accuracies.filter(function(a) { return a.ts > d.timestamps[mid]; });
+      var firstAvg = firstHalf.length > 0 ? firstHalf.reduce(function(s, a) { return s + a.acc; }, 0) / firstHalf.length : 0;
+      var secondAvg = secondHalf.length > 0 ? secondHalf.reduce(function(s, a) { return s + a.acc; }, 0) / secondHalf.length : 0;
+      if (secondAvg - firstAvg > 5) trend = 'improving';
+      else if (firstAvg - secondAvg > 5) trend = 'declining';
+    }
+
+    _ciChapterStats.push({
+      chapter: d.chapter, subject: d.subject, class: d.class,
+      totalAttempts: d.totalAttempts, correct: d.correct, incorrect: d.incorrect, unanswered: d.unanswered,
+      avgScore: avgScore, passRate: passRate, correctPct: correctPct,
+      difficultyScore: difficultyScore,
+      trend: trend,
+      expectedDifficulty: difficultyScore <= 1.5 ? 'Easy' : difficultyScore <= 2.5 ? 'Medium' : 'Hard',
+      difficultyMismatch: (difficultyScore <= 1.5 && correctPct < 40) || (difficultyScore > 2.5 && correctPct > 80),
+    });
+  }
+}
+
+function renderChapterIntelligence() {
+  renderCIOverview();
+  renderStrongestWeakest();
+  renderAtRiskChapters();
+  renderChapterTable();
+  renderSubjectBreakdown();
+  renderTrends();
+  renderDifficultyValidation();
+  renderCharts();
+  renderInsights();
+}
+
+function renderCIOverview() {
+  var totalCh = _ciChapterStats.length;
+  var accSum = 0, strongest = null, strongestAcc = -1, weakest = null, weakestAcc = 101;
+  var totalAtt = 0;
+  for (var i = 0; i < _ciChapterStats.length; i++) {
+    var c = _ciChapterStats[i];
+    accSum += c.correctPct;
+    totalAtt += c.totalAttempts;
+    if (c.correctPct > strongestAcc && c.totalAttempts >= 3) { strongestAcc = c.correctPct; strongest = c; }
+    if (c.correctPct < weakestAcc && c.totalAttempts >= 3) { weakestAcc = c.correctPct; weakest = c; }
+  }
+  var avgPerf = totalCh > 0 ? Math.round(accSum / totalCh) : 0;
+
+  document.getElementById('ciOverviewGrid').innerHTML = ''
+    + '<div class="ci-ov-card ci-ov-chapters"><div class="ci-ov-value">' + totalCh + '</div><div class="ci-ov-label">Chapters Analyzed</div></div>'
+    + '<div class="ci-ov-card ci-ov-avg"><div class="ci-ov-value">' + avgPerf + '%</div><div class="ci-ov-label">Avg Chapter Performance</div></div>'
+    + '<div class="ci-ov-card ci-ov-strongest"><div class="ci-ov-value">' + (strongest ? escHtml(strongest.chapter.slice(0, 25)) : '-') + '</div><div class="ci-ov-label">Strongest: ' + strongestAcc + '%</div></div>'
+    + '<div class="ci-ov-card ci-ov-weakest"><div class="ci-ov-value">' + (weakest ? escHtml(weakest.chapter.slice(0, 25)) : '-') + '</div><div class="ci-ov-label">Weakest: ' + weakestAcc + '%</div></div>'
+    + '<div class="ci-ov-card ci-ov-attempts"><div class="ci-ov-value">' + totalAtt + '</div><div class="ci-ov-label">Total Attempts</div></div>';
+}
+
+function renderStrongestWeakest() {
+  var filtered = _ciChapterStats.filter(function(c) { return c.totalAttempts >= 3; });
+  var strongest = filtered.slice().sort(function(a, b) { return b.correctPct - a.correctPct; }).slice(0, 5);
+  var weakest = filtered.slice().sort(function(a, b) { return a.correctPct - b.correctPct; }).slice(0, 5);
+
+  var sHtml = '<div class="ci-rank-list">';
+  for (var i = 0; i < strongest.length; i++) {
+    var c = strongest[i];
+    sHtml += '<div class="ci-rank-item"><span class="ci-rank-num">#' + (i + 1) + '</span><span class="ci-rank-text">' + escHtml(c.chapter) + '</span><span class="ci-rank-subject">' + escHtml(c.subject) + '</span><span class="ci-rank-pct strong">' + c.correctPct + '%</span></div>';
+  }
+  sHtml += '</div>';
+  document.getElementById('ciStrongest').innerHTML = strongest.length > 0 ? sHtml : '<p style="color:var(--gray-400);font-size:0.8rem;">Insufficient data.</p>';
+
+  var wHtml = '<div class="ci-rank-list">';
+  for (var j = 0; j < weakest.length; j++) {
+    var c2 = weakest[j];
+    wHtml += '<div class="ci-rank-item"><span class="ci-rank-num">#' + (j + 1) + '</span><span class="ci-rank-text">' + escHtml(c2.chapter) + '</span><span class="ci-rank-subject">' + escHtml(c2.subject) + '</span><span class="ci-rank-pct weak">' + c2.correctPct + '% ⚠</span></div>';
+  }
+  wHtml += '</div>';
+  document.getElementById('ciWeakest').innerHTML = weakest.length > 0 ? wHtml : '<p style="color:var(--gray-400);font-size:0.8rem;">Insufficient data.</p>';
+}
+
+function renderAtRiskChapters() {
+  var atRisk = _ciChapterStats.filter(function(c) { return c.correctPct < 50 && c.totalAttempts >= 3; });
+  if (atRisk.length === 0) {
+    document.getElementById('ciAtRisk').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No chapters currently at risk.</p>';
+    return;
+  }
+  atRisk.sort(function(a, b) { return a.correctPct - b.correctPct; });
+  var html = '';
+  for (var i = 0; i < atRisk.length; i++) {
+    var c = atRisk[i];
+    html += '<div class="ci-risk-card"><div class="ci-risk-name">⚠ ' + escHtml(c.chapter) + ' (' + escHtml(c.subject) + ')</div><div class="ci-risk-meta">Accuracy: ' + c.correctPct + '% &middot; Attempts: ' + c.totalAttempts + ' &middot; Pass Rate: ' + c.passRate + '%</div></div>';
+  }
+  document.getElementById('ciAtRisk').innerHTML = html;
+}
+
+function renderChapterTable() {
+  var sortBy = document.getElementById('ciSortBy').value;
+  var query = document.getElementById('ciSearchInput').value.trim().toLowerCase();
+
+  var filtered = _ciChapterStats.slice();
+  if (query) {
+    filtered = filtered.filter(function(c) { return c.chapter.toLowerCase().indexOf(query) !== -1 || c.subject.toLowerCase().indexOf(query) !== -1; });
+  }
+
+  if (sortBy === 'difficultyScore') {
+    filtered.sort(function(a, b) { return _ciSortDesc ? b.difficultyScore - a.difficultyScore : a.difficultyScore - b.difficultyScore; });
+  } else {
+    filtered.sort(function(a, b) { return _ciSortDesc ? b[sortBy] - a[sortBy] : a[sortBy] - b[sortBy]; });
+  }
+
+  var trendIcon = { improving: '📈', declining: '📉', stable: '➡' };
+  var trendClass = { improving: 'ci-trend-up', declining: 'ci-trend-down', stable: 'ci-trend-stable' };
+  var diffBadge = function(c) {
+    var label = c.difficultyScore <= 1.5 ? 'Easy' : c.difficultyScore <= 2.5 ? 'Medium' : 'Hard';
+    var cls = label === 'Easy' ? 'qi-badge-easy' : label === 'Hard' ? 'qi-badge-hard' : 'qi-badge-medium';
+    return '<span class="qi-badge ' + cls + '">' + label + '</span>';
+  };
+
+  var html = '<table class="ci-table"><thead><tr><th>Chapter</th><th>Subject</th><th>Class</th><th>Attempts</th><th>Avg Score</th><th>Pass Rate</th><th>Difficulty</th><th>Trend</th></tr></thead><tbody>';
+  for (var i = 0; i < filtered.length; i++) {
+    var c = filtered[i];
+    html += '<tr><td>' + escHtml(c.chapter) + '</td><td>' + escHtml(c.subject) + '</td><td>' + escHtml(c.class) + '</td><td>' + c.totalAttempts + '</td><td>' + c.avgScore + '%</td><td>' + c.passRate + '%</td><td>' + diffBadge(c) + '</td><td><span class="' + trendClass[c.trend] + '">' + trendIcon[c.trend] + ' ' + c.trend.charAt(0).toUpperCase() + c.trend.slice(1) + '</span></td></tr>';
+  }
+  html += '</tbody></table>';
+  document.getElementById('ciTableWrap').innerHTML = html;
+}
+
+function toggleCISort() {
+  _ciSortDesc = !_ciSortDesc;
+  document.getElementById('ciSortDir').textContent = _ciSortDesc ? '↓' : '↑';
+  renderChapterTable();
+}
+
+function renderSubjectBreakdown() {
+  var subjGroups = {};
+  for (var i = 0; i < _ciChapterStats.length; i++) {
+    var c = _ciChapterStats[i];
+    if (!subjGroups[c.subject]) subjGroups[c.subject] = [];
+    subjGroups[c.subject].push(c);
+  }
+
+  var html = '<div class="ci-subj-breakdown">';
+  for (var subj in subjGroups) {
+    var chapters = subjGroups[subj];
+    html += '<div class="ci-subj-group"><h4>' + escHtml(subj) + '</h4><div class="ci-subj-chapters">';
+    for (var j = 0; j < chapters.length; j++) {
+      var ch = chapters[j];
+      var trendIcon2 = ch.trend === 'improving' ? '📈' : ch.trend === 'declining' ? '📉' : '➡';
+      html += '<div class="ci-subj-chapter-card"><span class="ci-sc-name">' + escHtml(ch.chapter) + '</span>'
+        + '<span class="ci-sc-stat">Avg: ' + ch.correctPct + '% &middot; Pass: ' + ch.passRate + '% ' + trendIcon2 + '</span></div>';
+    }
+    html += '</div></div>';
+  }
+  html += '</div>';
+  document.getElementById('ciSubjectBreakdown').innerHTML = html;
+}
+
+function renderTrends() {
+  var withTrend = _ciChapterStats.filter(function(c) { return c.trend !== 'stable' || c.totalAttempts >= 4; });
+  if (withTrend.length === 0) {
+    document.getElementById('ciTrends').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">Insufficient data to determine trends. More submissions across time needed.</p>';
+    return;
+  }
+  withTrend.sort(function(a, b) { return a.correctPct - b.correctPct; });
+
+  var html = '<table class="ci-table"><thead><tr><th>Chapter</th><th>Subject</th><th>Accuracy</th><th>Trend</th></tr></thead><tbody>';
+  for (var i = 0; i < withTrend.length; i++) {
+    var c = withTrend[i];
+    var icon = c.trend === 'improving' ? '📈' : c.trend === 'declining' ? '📉' : '➡';
+    var cls = c.trend === 'improving' ? 'ci-trend-up' : c.trend === 'declining' ? 'ci-trend-down' : 'ci-trend-stable';
+    html += '<tr><td>' + escHtml(c.chapter) + '</td><td>' + escHtml(c.subject) + '</td><td>' + c.correctPct + '%</td><td><span class="' + cls + '">' + icon + ' ' + c.trend.charAt(0).toUpperCase() + c.trend.slice(1) + '</span></td></tr>';
+  }
+  html += '</tbody></table>';
+  document.getElementById('ciTrends').innerHTML = html;
+}
+
+function renderDifficultyValidation() {
+  var mismatches = _ciChapterStats.filter(function(c) { return c.difficultyMismatch && c.totalAttempts >= 3; });
+  if (mismatches.length === 0) {
+    document.getElementById('ciDifficultyValidation').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">No difficulty mismatches detected across chapters.</p>';
+    return;
+  }
+  mismatches.sort(function(a, b) { return a.correctPct - b.correctPct; });
+  var html = '';
+  for (var i = 0; i < mismatches.length; i++) {
+    var c = mismatches[i];
+    html += '<div class="ci-diff-item"><span class="ci-diff-chapter">' + escHtml(c.chapter) + '</span>'
+      + '<span class="ci-diff-expected">Expected: ' + c.expectedDifficulty + '</span>'
+      + '<span class="ci-diff-actual ' + (c.correctPct < 50 ? 'low' : '') + '">Actual: ' + c.correctPct + '%</span>'
+      + '<span class="ci-diff-badge">Difficulty Mismatch</span></div>';
+  }
+  document.getElementById('ciDifficultyValidation').innerHTML = html;
+}
+
+function renderCharts() {
+  // Chapter vs Accuracy bar chart
+  var sorted = _ciChapterStats.slice().sort(function(a, b) { return b.correctPct - a.correctPct; });
+  if (sorted.length > 0) {
+    var maxVal = 100;
+    var chartH = Math.max(120, sorted.length * 28 + 20);
+    var svg = '<svg viewBox="0 0 560 ' + chartH + '" class="analytics-chart-svg">';
+    for (var ri = 0; ri < sorted.length; ri++) {
+      var item = sorted[ri];
+      var barW = (item.correctPct / maxVal) * (560 - 130);
+      var y = ri * 28 + 10;
+      svg += '<text x="120" y="' + (y + 12) + '" text-anchor="end" fill="var(--gray-500)" font-size="10">' + escHtml(item.chapter.length > 14 ? item.chapter.slice(0, 14) + '..' : item.chapter) + '</text>';
+      var color = item.correctPct >= 60 ? 'var(--green-400)' : item.correctPct >= 30 ? 'var(--yellow-400)' : 'var(--red-400)';
+      svg += '<rect x="130" y="' + (y + 2) + '" width="' + barW + '" height="18" rx="3" fill="' + color + '"/>';
+      svg += '<text x="' + (135 + barW) + '" y="' + (y + 15) + '" fill="var(--text-primary)" font-size="10" font-weight="500">' + item.correctPct + '%</text>';
+    }
+    svg += '</svg>';
+    document.getElementById('ciAccuracyChart').innerHTML = svg;
+  }
+
+  // Subject-wise performance chart
+  var subjData = {};
+  for (var i = 0; i < _ciChapterStats.length; i++) {
+    var c = _ciChapterStats[i];
+    if (!subjData[c.subject]) subjData[c.subject] = { accSum: 0, count: 0 };
+    subjData[c.subject].accSum += c.correctPct;
+    subjData[c.subject].count++;
+  }
+  var entries = [];
+  for (var key in subjData) {
+    entries.push({ name: key, avg: Math.round(subjData[key].accSum / subjData[key].count) });
+  }
+  if (entries.length > 0) {
+    var maxV = 100;
+    var h2 = Math.max(100, entries.length * 28 + 20);
+    var svg2 = '<svg viewBox="0 0 560 ' + h2 + '" class="analytics-chart-svg">';
+    for (var ri2 = 0; ri2 < entries.length; ri2++) {
+      var e = entries[ri2];
+      var bw = (e.avg / maxV) * (560 - 130);
+      var y2 = ri2 * 28 + 10;
+      svg2 += '<text x="120" y="' + (y2 + 12) + '" text-anchor="end" fill="var(--gray-500)" font-size="11">' + escHtml(e.name.length > 14 ? e.name.slice(0, 14) + '..' : e.name) + '</text>';
+      svg2 += '<rect x="130" y="' + (y2 + 2) + '" width="' + bw + '" height="18" rx="3" fill="var(--blue-400)"/>';
+      svg2 += '<text x="' + (135 + bw) + '" y="' + (y2 + 15) + '" fill="var(--text-primary)" font-size="10" font-weight="500">' + e.avg + '%</text>';
+    }
+    svg2 += '</svg>';
+    document.getElementById('ciSubjectChart').innerHTML = svg2;
+  }
+}
+
+function renderInsights() {
+  var insights = [];
+
+  // Rule 1: Consistently weak chapters
+  var weakCh = _ciChapterStats.filter(function(c) { return c.correctPct < 40 && c.totalAttempts >= 3; });
+  weakCh.sort(function(a, b) { return a.correctPct - b.correctPct; });
+  if (weakCh.length > 0) {
+    insights.push({ type: 'Weakness', text: 'Students are consistently weak in "' + weakCh[0].chapter + '" (' + weakCh[0].correctPct + '% accuracy) across exams under ' + weakCh[0].subject + '.' });
+    if (weakCh.length > 1) {
+      insights.push({ type: 'Weakness', text: 'Additional weak chapters identified: ' + weakCh.slice(0, 3).map(function(c) { return '"' + c.chapter + '" (' + c.correctPct + '%)'; }).join(', ') + '.' });
+    }
+  }
+
+  // Rule 2: Declining trend
+  var declining = _ciChapterStats.filter(function(c) { return c.trend === 'declining'; });
+  if (declining.length > 0) {
+    declining.forEach(function(c) {
+      insights.push({ type: 'Declining', text: '"' + c.chapter + '" under ' + c.subject + ' shows declining performance trend. Current accuracy: ' + c.correctPct + '%.' });
+    });
+  }
+
+  // Rule 3: High variance (large gap between strong and weak in same subject)
+  var subjGroups = {};
+  for (var i = 0; i < _ciChapterStats.length; i++) {
+    var c = _ciChapterStats[i];
+    if (!subjGroups[c.subject]) subjGroups[c.subject] = [];
+    subjGroups[c.subject].push(c.correctPct);
+  }
+  for (var subj in subjGroups) {
+    var arr = subjGroups[subj];
+    if (arr.length >= 2) {
+      var maxV = Math.max.apply(null, arr);
+      var minV = Math.min.apply(null, arr);
+      if (maxV - minV > 40) {
+        insights.push({ type: 'Variance', text: '"' + subj + '" has high variance (range: ' + minV + '% – ' + maxV + '%), indicating inconsistent understanding across chapters.' });
+      }
+    }
+  }
+
+  // Rule 4: Difficulty mismatches
+  var mismatches = _ciChapterStats.filter(function(c) { return c.difficultyMismatch && c.totalAttempts >= 3; });
+  if (mismatches.length > 0) {
+    insights.push({ type: 'Difficulty', text: mismatches.length + ' chapter(s) flagged with difficulty mismatch. Expected difficulty does not align with actual student performance.' });
+  }
+
+  // Rule 5: At-risk count
+  var atRisk = _ciChapterStats.filter(function(c) { return c.correctPct < 50 && c.totalAttempts >= 3; });
+  if (atRisk.length > 0) {
+    insights.push({ type: 'Alert', text: atRisk.length + ' chapter(s) are at risk with accuracy below 50%. Immediate attention recommended for: ' + atRisk.slice(0, 2).map(function(c) { return '"' + c.chapter + '" (' + c.correctPct + '%)'; }).join(', ') + '.' });
+  }
+
+  // Rule 6: Improving trend
+  var improving = _ciChapterStats.filter(function(c) { return c.trend === 'improving'; });
+  if (improving.length > 0) {
+    insights.push({ type: 'Positive', text: improving.length + ' chapter(s) showing improvement: ' + improving.slice(0, 3).map(function(c) { return '"' + c.chapter + '" (' + c.correctPct + '%)'; }).join(', ') + '.' });
+  }
+
+  if (insights.length === 0) {
+    document.getElementById('ciInsights').innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;">Insufficient data to generate insights. More submissions required.</p>';
+    return;
+  }
+
+  var html = '';
+  for (var ii = 0; ii < insights.length; ii++) {
+    var ins = insights[ii];
+    var icon = ins.type === 'Weakness' ? '⚠️' : ins.type === 'Declining' ? '📉' : ins.type === 'Variance' ? '📊' : ins.type === 'Difficulty' ? '🏷️' : ins.type === 'Alert' ? '🔴' : '✅';
+    html += '<div class="ci-insight-card"><div class="ci-insight-icon">' + icon + '</div><div><div class="ci-insight-type">' + ins.type + '</div><div class="ci-insight-text">' + escHtml(ins.text) + '</div></div></div>';
+  }
+  document.getElementById('ciInsights').innerHTML = html;
+}
 </script>
 
 </body>
