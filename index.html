@@ -4246,6 +4246,605 @@ html.dark-mode .student-photo-preview {
     max-width: none;
   }
 }
+
+/* ===== STUDENTS PAGE ===== */
+.stu-page {
+  padding: 0;
+}
+.stu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.stu-header h2 {
+  font-size: 1.333rem;
+  font-weight: 650;
+  color: var(--text-primary);
+  margin: 0;
+}
+.stu-header p {
+  font-size: 0.867rem;
+  color: var(--text-secondary);
+  margin: 4px 0 0;
+}
+.stu-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stu-stat-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.15s;
+}
+.stu-stat-card:hover {
+  border-color: var(--gray-200);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.stu-stat-value {
+  font-size: 1.6rem;
+  font-weight: 650;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.stu-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.stu-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.stu-filter-select {
+  padding: 8px 12px;
+  border: 1px solid var(--gray-100);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  min-width: 140px;
+  transition: border-color 0.15s;
+}
+.stu-filter-select:focus {
+  border-color: var(--indigo-400);
+}
+.stu-search-input {
+  padding: 8px 12px;
+  border: 1px solid var(--gray-100);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  font-family: inherit;
+  outline: none;
+  flex: 1;
+  min-width: 160px;
+  max-width: 280px;
+  transition: border-color 0.15s;
+}
+.stu-search-input:focus {
+  border-color: var(--indigo-400);
+}
+.stu-search-input::placeholder {
+  color: var(--gray-400);
+}
+.stu-risk-filters {
+  display: flex;
+  gap: 6px;
+}
+.stu-risk-btn {
+  padding: 6px 14px;
+  border: 1px solid var(--gray-100);
+  border-radius: 20px;
+  font-size: 0.767rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.stu-risk-btn:hover {
+  border-color: var(--gray-200);
+  color: var(--text-primary);
+}
+.stu-risk-btn.active {
+  background: var(--indigo-50);
+  border-color: var(--indigo-200);
+  color: var(--indigo-700);
+}
+.stu-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 60px 0;
+  color: var(--text-secondary);
+  font-size: 0.867rem;
+}
+.stu-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+.stu-empty svg {
+  width: 48px;
+  height: 48px;
+  color: var(--gray-300);
+  margin-bottom: 16px;
+}
+.stu-empty h3 {
+  font-size: 1.067rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+}
+.stu-empty p {
+  font-size: 0.867rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.stu-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+.stu-error svg {
+  width: 48px;
+  height: 48px;
+  color: var(--red-400);
+  margin-bottom: 16px;
+}
+.stu-error h3 {
+  font-size: 1.067rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 6px;
+}
+.stu-error p {
+  font-size: 0.867rem;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+}
+.stu-retry-btn {
+  padding: 8px 20px;
+  border: 1px solid var(--gray-100);
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.stu-retry-btn:hover {
+  border-color: var(--gray-200);
+  background: var(--gray-50);
+}
+.stu-table-wrap {
+  background: var(--bg-surface);
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.stu-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+.stu-table thead th {
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.733rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--gray-100);
+  background: var(--bg-surface);
+  white-space: nowrap;
+}
+.stu-table tbody tr {
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.stu-table tbody tr:hover {
+  background: var(--gray-50);
+}
+.stu-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--gray-50);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+.stu-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.stu-table .stu-name-cell {
+  font-weight: 600;
+  font-size: 0.867rem;
+}
+.stu-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.733rem;
+  font-weight: 600;
+}
+.stu-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.stu-badge.pending {
+  background: var(--yellow-50);
+  color: var(--yellow-700);
+}
+.stu-badge.pending .stu-badge-dot {
+  background: var(--yellow-500);
+}
+.stu-badge.partial {
+  background: var(--blue-50);
+  color: var(--blue-700);
+}
+.stu-badge.partial .stu-badge-dot {
+  background: var(--blue-500);
+}
+.stu-badge.completed {
+  background: var(--green-50);
+  color: var(--green-700);
+}
+.stu-badge.completed .stu-badge-dot {
+  background: var(--green-500);
+}
+
+/* Students Drawer */
+.stu-drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 9000;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.stu-drawer-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.stu-drawer {
+  position: fixed;
+  top: 0;
+  right: -580px;
+  width: 560px;
+  max-width: calc(100vw - 40px);
+  height: 100%;
+  background: var(--bg-surface);
+  border-left: 1px solid var(--gray-100);
+  z-index: 9001;
+  overflow-y: auto;
+  transition: right 0.3s ease;
+  box-shadow: -8px 0 24px rgba(0,0,0,0.06);
+}
+.stu-drawer.open {
+  right: 0;
+}
+.stu-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--gray-100);
+  position: sticky;
+  top: 0;
+  background: var(--bg-surface);
+  z-index: 1;
+}
+.stu-drawer-header h3 {
+  font-size: 1.067rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+.stu-drawer-close {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  border-radius: 6px;
+  transition: all 0.15s;
+}
+.stu-drawer-close:hover {
+  background: var(--gray-50);
+  color: var(--text-primary);
+}
+.stu-drawer-body {
+  padding: 24px;
+}
+.stu-section {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gray-50);
+}
+.stu-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.stu-section h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gray-400);
+  margin: 0 0 12px;
+}
+.stu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+.stu-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stu-field.full {
+  grid-column: 1 / -1;
+}
+.stu-label {
+  font-size: 0.733rem;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+.stu-value {
+  font-size: 0.867rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  word-break: break-all;
+}
+.stu-value.mono {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.8rem;
+}
+.stu-photo-thumb {
+  display: inline-block;
+}
+.stu-photo-thumb img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.stu-photo-thumb img:hover {
+  transform: scale(1.05);
+}
+.stu-answer-block {
+  padding: 12px;
+  background: var(--gray-50);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.stu-answer-block:last-child {
+  margin-bottom: 0;
+}
+.stu-question-text {
+  font-size: 0.867rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.stu-question-meta {
+  font-size: 0.733rem;
+  color: var(--gray-400);
+  margin-bottom: 8px;
+}
+.stu-student-answer {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  padding: 6px 10px;
+  background: var(--bg-surface);
+  border-radius: 6px;
+  border: 1px solid var(--gray-100);
+}
+.stu-student-answer-label {
+  font-size: 0.733rem;
+  color: var(--gray-400);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.stu-correct-answer {
+  font-size: 0.8rem;
+  color: var(--green-700);
+  padding: 6px 10px;
+  background: var(--green-50);
+  border-radius: 6px;
+  border: 1px solid var(--green-100);
+}
+.stu-marks-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.733rem;
+  font-weight: 600;
+  color: var(--indigo-600);
+  background: var(--indigo-50);
+}
+.stu-result-correct {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.733rem;
+  font-weight: 600;
+  color: var(--green-600);
+  background: var(--green-50);
+}
+.stu-result-incorrect {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.733rem;
+  font-weight: 600;
+  color: var(--red-600);
+  background: var(--red-50);
+}
+.stu-eval-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 10px;
+  background: var(--bg-surface);
+  border: 1px solid var(--gray-100);
+  border-radius: 8px;
+}
+.stu-eval-row-inner {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.stu-eval-input {
+  width: 70px;
+  padding: 6px 10px;
+  border: 1px solid var(--gray-100);
+  border-radius: 6px;
+  font-size: 0.867rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  font-family: inherit;
+  outline: none;
+  text-align: center;
+  transition: border-color 0.15s;
+}
+.stu-eval-input:focus {
+  border-color: var(--indigo-400);
+}
+.stu-eval-textarea {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid var(--gray-100);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  background: var(--bg-surface);
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+  min-height: 32px;
+  transition: border-color 0.15s;
+}
+.stu-eval-textarea:focus {
+  border-color: var(--indigo-400);
+}
+.stu-eval-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.767rem;
+  font-weight: 600;
+}
+.stu-eval-status.pending {
+  background: var(--yellow-50);
+  color: var(--yellow-700);
+}
+.stu-eval-status.partial {
+  background: var(--blue-50);
+  color: var(--blue-700);
+}
+.stu-eval-status.completed {
+  background: var(--green-50);
+  color: var(--green-700);
+}
+.stu-final-score {
+  padding: 16px;
+  background: var(--indigo-50);
+  border: 1px solid var(--indigo-100);
+  border-radius: 10px;
+  text-align: center;
+}
+.stu-final-score-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--indigo-700);
+}
+.stu-final-score-label {
+  font-size: 0.8rem;
+  color: var(--indigo-400);
+  font-weight: 500;
+  margin-top: 4px;
+}
+.stu-eval-saved {
+  font-size: 0.733rem;
+  color: var(--green-600);
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.stu-eval-saved.show {
+  opacity: 1;
+}
+
+@media (max-width: 1100px) {
+  .stu-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .stu-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .stu-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .stu-search-input {
+    max-width: none;
+  }
+  .stu-drawer {
+    width: 100%;
+    right: -100%;
+    max-width: none;
+  }
+  .stu-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
 <body>
@@ -4312,7 +4911,7 @@ html.dark-mode .student-photo-preview {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
       <span>Published Exams</span>
     </a>
-    <a href="#" class="nav-item">
+    <a href="#" class="nav-item" data-page="students">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       <span>Students</span>
     </a>
@@ -5252,6 +5851,90 @@ html.dark-mode .student-photo-preview {
   <div class="int-drawer-body" id="intDashDrawerBody"></div>
 </div>
 
+<!-- ===== PAGE: STUDENTS ===== -->
+<div id="page-students" style="display:none;">
+  <div class="stu-page">
+    <div class="stu-header">
+      <div>
+        <h2>Students</h2>
+        <p>Review student submissions, evaluate answers, and manage performance</p>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stu-stats-grid" id="stuStatsGrid"></div>
+
+    <!-- Controls -->
+    <div class="stu-controls">
+      <select class="stu-filter-select" id="stuFilterExam">
+        <option value="">All Exams</option>
+      </select>
+      <input type="text" class="stu-search-input" id="stuFilterCode" placeholder="Exam code..." maxlength="20">
+      <input type="date" class="stu-search-input" id="stuFilterDate" style="max-width:160px;">
+      <div class="stu-risk-filters" id="stuRiskFilters">
+        <button class="stu-risk-btn active" data-risk="all">All</button>
+        <button class="stu-risk-btn" data-risk="Low Risk">Low</button>
+        <button class="stu-risk-btn" data-risk="Medium Risk">Medium</button>
+        <button class="stu-risk-btn" data-risk="High Risk">High</button>
+      </div>
+      <input type="text" class="stu-search-input" id="stuSearch" placeholder="Search name, code, attempt ID..." style="max-width:260px;">
+    </div>
+
+    <!-- Loading -->
+    <div class="stu-loading" id="stuLoading">
+      <div class="spinner"></div>
+      <span>Loading submissions...</span>
+    </div>
+
+    <!-- Error -->
+    <div class="stu-error" id="stuError" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <h3>Failed to Load</h3>
+      <p id="stuErrorMsg">Could not fetch submissions. Check your connection and try again.</p>
+      <button class="stu-retry-btn" id="stuRetryBtn">Retry</button>
+    </div>
+
+    <!-- Empty -->
+    <div class="stu-empty" id="stuEmpty" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <h3>No Submissions Found</h3>
+      <p id="stuEmptyMsg">No exam submissions match your filters.</p>
+    </div>
+
+    <!-- Table -->
+    <div class="stu-table-wrap" id="stuTableWrap" style="display:none;">
+      <table class="stu-table" id="stuTable">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Exam Name</th>
+            <th>Exam Code</th>
+            <th>Score</th>
+            <th>Percentage</th>
+            <th>Integrity</th>
+            <th>Risk Level</th>
+            <th>Eval Status</th>
+            <th>Submitted</th>
+          </tr>
+        </thead>
+        <tbody id="stuTbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Students Drawer Overlay -->
+<div class="stu-drawer-overlay" id="stuDrawerOverlay"></div>
+
+<!-- Students Drawer -->
+<div class="stu-drawer" id="stuDrawer">
+  <div class="stu-drawer-header">
+    <h3>Student Evaluation</h3>
+    <button class="stu-drawer-close" id="stuDrawerClose">&times;</button>
+  </div>
+  <div class="stu-drawer-body" id="stuDrawerBody"></div>
+</div>
+
 </main>
 
 </div><!-- /app-view -->
@@ -5639,6 +6322,7 @@ const pageGenerateExam = document.getElementById('page-generate-exam');
 const pageExamPreview = document.getElementById('page-exam-preview');
 const pagePublishedExams = document.getElementById('page-published-exams');
 const pageIntegrityDashboard = document.getElementById('page-integrity-dashboard');
+const pageStudents = document.getElementById('page-students');
 const pageTitleEl = document.querySelector('.nav-left h1');
 const pageNames = {
   dashboard: 'Dashboard',
@@ -5646,6 +6330,7 @@ const pageNames = {
   'exam-preview': 'Exam Preview',
   'published-exams': 'Published Exams',
   'integrity-dashboard': 'Integrity Dashboard',
+  students: 'Students',
 };
 
 function navigateTo(page) {
@@ -5655,6 +6340,7 @@ function navigateTo(page) {
   pageExamPreview.style.display = 'none';
   pagePublishedExams.style.display = 'none';
   pageIntegrityDashboard.style.display = 'none';
+  pageStudents.style.display = 'none';
 
   if (page === 'dashboard') {
     pageDashboard.style.display = 'block';
@@ -5688,6 +6374,11 @@ function navigateTo(page) {
     document.querySelector('.nav-item[data-page="integrity-dashboard"]')?.classList.add('active');
     pageTitleEl.textContent = 'Integrity Dashboard';
     loadIntegrityDashboard();
+  } else if (page === 'students') {
+    pageStudents.style.display = 'block';
+    document.querySelector('.nav-item[data-page="students"]')?.classList.add('active');
+    pageTitleEl.textContent = 'Students';
+    loadStudentsPage();
   }
 
   if (window.innerWidth <= 768) {
@@ -9081,6 +9772,568 @@ try {
     googleBtn.innerHTML = '<p style="color:var(--gray-400);font-size:0.8rem;padding:14px 0;">Google Sign-In requires a valid OAuth Client ID.<br>See README for setup instructions, or use Demo mode below.</p>';
   }
 })();
+
+// ===== PHASE 5.3: STUDENT MANAGEMENT & EVALUATION WORKSPACE =====
+var _stuSubmissions = [];
+var _stuFilterExam = '';
+var _stuFilterCode = '';
+var _stuFilterDate = '';
+var _stuFilterRisk = 'all';
+var _stuSearchQuery = '';
+
+function loadStudentsPage() {
+  var loadingEl = document.getElementById('stuLoading');
+  var errorEl = document.getElementById('stuError');
+  var emptyEl = document.getElementById('stuEmpty');
+  var tableWrap = document.getElementById('stuTableWrap');
+  var statsEl = document.getElementById('stuStatsGrid');
+
+  loadingEl.style.display = 'flex';
+  errorEl.style.display = 'none';
+  emptyEl.style.display = 'none';
+  tableWrap.style.display = 'none';
+  statsEl.innerHTML = '';
+
+  if (!window.__firebaseDb) {
+    loadingEl.style.display = 'none';
+    errorEl.style.display = 'block';
+    document.getElementById('stuErrorMsg').textContent = 'Firebase not connected.';
+    return;
+  }
+
+  fetchAllSubmissions(function(submissions) {
+    loadingEl.style.display = 'none';
+    if (!submissions) {
+      errorEl.style.display = 'block';
+      document.getElementById('stuErrorMsg').textContent = 'Failed to fetch submissions. Check your connection.';
+      return;
+    }
+    _stuSubmissions = submissions;
+    populateExamFilter();
+    if (submissions.length === 0) {
+      emptyEl.style.display = 'block';
+      document.getElementById('stuEmptyMsg').textContent = 'No exam submissions have been recorded yet.';
+      return;
+    }
+    renderStudentsStats(submissions);
+    applyStudentsFilters();
+    tableWrap.style.display = 'block';
+  });
+}
+
+function populateExamFilter() {
+  var sel = document.getElementById('stuFilterExam');
+  var current = sel.value;
+  var exams = getPublishedExams() || [];
+  var seen = {};
+  sel.innerHTML = '<option value="">All Exams</option>';
+  for (var i = 0; i < exams.length; i++) {
+    var name = exams[i].name;
+    if (!name || seen[name]) continue;
+    seen[name] = true;
+    sel.innerHTML += '<option value="' + escHtml(name) + '">' + escHtml(name) + '</option>';
+  }
+  // Also add from stored submissions
+  for (var j = 0; j < _stuSubmissions.length; j++) {
+    var en = _stuSubmissions[j].examName;
+    if (en && !seen[en]) {
+      seen[en] = true;
+      sel.innerHTML += '<option value="' + escHtml(en) + '">' + escHtml(en) + '</option>';
+    }
+  }
+  sel.value = current;
+}
+
+function renderStudentsStats(submissions) {
+  var total = submissions.length;
+  var pending = 0, completed = 0;
+  var scoreSum = 0, scoreCount = 0;
+  for (var i = 0; i < submissions.length; i++) {
+    var s = submissions[i];
+    var status = getEvaluationStatus(s);
+    if (status === 'pending') pending++;
+    else if (status === 'completed' || status === 'partial') completed++;
+    if (s.score !== undefined && s.maxMarks) {
+      scoreSum += (s.score / s.maxMarks) * 100;
+      scoreCount++;
+    }
+  }
+  var avgPct = scoreCount > 0 ? Math.round(scoreSum / scoreCount) : 0;
+
+  var statsEl = document.getElementById('stuStatsGrid');
+  statsEl.innerHTML = ''
+    + '<div class="stu-stat-card">'
+      + '<div class="stu-stat-value">' + total + '</div>'
+      + '<div class="stu-stat-label">Total Students</div>'
+    + '</div>'
+    + '<div class="stu-stat-card">'
+      + '<div class="stu-stat-value" style="color:var(--yellow-600);">' + pending + '</div>'
+      + '<div class="stu-stat-label">Pending Evaluations</div>'
+    + '</div>'
+    + '<div class="stu-stat-card">'
+      + '<div class="stu-stat-value" style="color:var(--green-600);">' + completed + '</div>'
+      + '<div class="stu-stat-label">Completed Evaluations</div>'
+    + '</div>'
+    + '<div class="stu-stat-card">'
+      + '<div class="stu-stat-value" style="color:var(--indigo-600);">' + avgPct + '%</div>'
+      + '<div class="stu-stat-label">Average Score</div>'
+    + '</div>';
+}
+
+function getEvaluationStatus(sub) {
+  if (!sub.evaluation) return 'pending';
+  var evalData = sub.evaluation;
+  if (!evalData.teacherMarks || Object.keys(evalData.teacherMarks).length === 0) return 'pending';
+  // Get subjective question count from exam data
+  var subjectiveCount = 0;
+  var examData = sub.examData;
+  if (examData && examData.paper && examData.paper.sections) {
+    var sections = examData.paper.sections;
+    if (sections['Short Answer']) subjectiveCount += sections['Short Answer'].length;
+    if (sections['Long Answer']) subjectiveCount += sections['Long Answer'].length;
+  }
+  if (subjectiveCount === 0) return 'completed';
+  var evaluatedCount = 0;
+  for (var key in evalData.teacherMarks) {
+    if (evalData.teacherMarks.hasOwnProperty(key)) evaluatedCount++;
+  }
+  if (evaluatedCount >= subjectiveCount) return 'completed';
+  if (evaluatedCount > 0) return 'partial';
+  return 'pending';
+}
+
+function applyStudentsFilters() {
+  var exam = document.getElementById('stuFilterExam').value;
+  var code = document.getElementById('stuFilterCode').value.trim().toLowerCase();
+  var date = document.getElementById('stuFilterDate').value;
+  var risk = _stuFilterRisk;
+  var query = document.getElementById('stuSearch').value.trim().toLowerCase();
+
+  _stuFilterExam = exam;
+  _stuFilterCode = code;
+  _stuFilterDate = date;
+  _stuFilterRisk = risk;
+  _stuSearchQuery = query;
+
+  var filtered = _stuSubmissions.slice();
+
+  if (exam) {
+    filtered = filtered.filter(function(s) { return (s.examName || '') === exam; });
+  }
+  if (code) {
+    filtered = filtered.filter(function(s) { return (s.examCode || '').toLowerCase().indexOf(code) !== -1; });
+  }
+  if (date) {
+    filtered = filtered.filter(function(s) {
+      if (!s.submittedAt) return false;
+      return s.submittedAt.indexOf(date) === 0;
+    });
+  }
+  if (risk !== 'all') {
+    filtered = filtered.filter(function(s) {
+      var r = (s.riskLevel || '').toLowerCase();
+      return r.indexOf(risk.toLowerCase()) !== -1;
+    });
+  }
+  if (query) {
+    filtered = filtered.filter(function(s) {
+      var name = (s.studentName || '').toLowerCase();
+      var ec = (s.examCode || '').toLowerCase();
+      var aid = (s.attemptId || '').toLowerCase();
+      return name.indexOf(query) !== -1 || ec.indexOf(query) !== -1 || aid.indexOf(query) !== -1;
+    });
+  }
+
+  renderStudentsTable(filtered);
+}
+
+function renderStudentsTable(submissions) {
+  var tbody = document.getElementById('stuTbody');
+  var tableWrap = document.getElementById('stuTableWrap');
+  var emptyEl = document.getElementById('stuEmpty');
+
+  if (submissions.length === 0) {
+    tableWrap.style.display = 'none';
+    emptyEl.style.display = 'block';
+    document.getElementById('stuEmptyMsg').textContent = 'No submissions match your filters.';
+    return;
+  }
+
+  tableWrap.style.display = 'block';
+  emptyEl.style.display = 'none';
+
+  tbody.innerHTML = submissions.map(function(s) {
+    var name = s.studentName || s.name || s.attemptId || '-';
+    var score = s.score !== undefined ? s.score : '-';
+    var maxMarks = s.maxMarks !== undefined ? s.maxMarks : '';
+    var scoreDisplay = maxMarks ? score + ' / ' + maxMarks : score;
+    var pct = s.percentage !== undefined ? s.percentage + '%' : '-';
+    var integrity = s.integrityScore !== undefined ? s.integrityScore : 100;
+    var risk = (s.riskLevel || 'Low Risk');
+    var riskClass = risk.toLowerCase().indexOf('low') !== -1 ? 'low' : risk.toLowerCase().indexOf('medium') !== -1 ? 'medium' : 'high';
+    var evalStatus = getEvaluationStatus(s);
+    var submitted = s.submittedAt ? formatDate(s.submittedAt) : '-';
+    var sid = s._firestoreId || '';
+
+    return '<tr onclick="openStudentDrawer(\'' + sid + '\')">'
+      + '<td class="stu-name-cell">' + escHtml(name) + '</td>'
+      + '<td>' + escHtml(s.examName || '-') + '</td>'
+      + '<td><span style="font-family:monospace;font-size:0.8rem;">' + escHtml(s.examCode || '-') + '</span></td>'
+      + '<td>' + scoreDisplay + '</td>'
+      + '<td>' + pct + '</td>'
+      + '<td><strong>' + integrity + '</strong></td>'
+      + '<td><span class="risk-badge ' + riskClass + '"><span class="risk-badge-dot"></span>' + risk + '</span></td>'
+      + '<td><span class="stu-badge ' + evalStatus + '"><span class="stu-badge-dot"></span>' + evalStatus.charAt(0).toUpperCase() + evalStatus.slice(1) + '</span></td>'
+      + '<td style="font-size:0.8rem;">' + submitted + '</td>'
+      + '</tr>';
+  }).join('');
+}
+
+function openStudentDrawer(firestoreId) {
+  var sub = null;
+  for (var i = 0; i < _stuSubmissions.length; i++) {
+    if (_stuSubmissions[i]._firestoreId === firestoreId) {
+      sub = _stuSubmissions[i];
+      break;
+    }
+  }
+  if (!sub) return;
+
+  document.getElementById('stuDrawerOverlay').classList.add('open');
+  document.getElementById('stuDrawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  var body = document.getElementById('stuDrawerBody');
+  body.innerHTML = '';
+
+  // Header: Student name + evaluation status badge
+  var evalStatus = getEvaluationStatus(sub);
+  var evalBadge = '<span class="stu-eval-status ' + evalStatus + '">' + evalStatus.charAt(0).toUpperCase() + evalStatus.slice(1) + '</span>';
+  body.innerHTML += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;"><h3 style="font-size:1.133rem;font-weight:600;color:var(--text-primary);margin:0;">' + escHtml(sub.studentName || 'Student') + '</h3>' + evalBadge + '</div>';
+
+  // Section: Student Info
+  body.innerHTML += '<div class="stu-section">'
+    + '<h4>Student Information</h4>'
+    + '<div class="stu-grid">'
+      + '<div class="stu-field"><span class="stu-label">Name</span><span class="stu-value">' + escHtml(sub.studentName || '-') + '</span></div>'
+      + '<div class="stu-field"><span class="stu-label">Attempt ID</span><span class="stu-value mono">' + escHtml(sub.attemptId || '-') + '</span></div>'
+      + '<div class="stu-field"><span class="stu-label">Session ID</span><span class="stu-value mono">' + escHtml(sub.sessionId || '-') + '</span></div>'
+      + '<div class="stu-field full"><span class="stu-label">Device Fingerprint</span><span class="stu-value mono">' + escHtml(sub.deviceFingerprint || '-') + '</span></div>'
+    + '</div></div>';
+
+  // Section: Photo Verification
+  body.innerHTML += '<div class="stu-section">'
+    + '<h4>Photo Verification</h4>'
+    + '<div class="stu-grid">'
+      + '<div class="stu-field full"><span class="stu-label">Status</span><span class="stu-value">' + renderPhotoStatus(sub.photoVerificationStatus) + '</span></div>'
+      + '<div class="stu-field full"><span class="stu-label">Start Photo</span><span class="stu-value">' + renderPhotoThumb(sub.startPhotoUrl, 'Start') + '</span></div>'
+      + '<div class="stu-field full"><span class="stu-label">End Photo</span><span class="stu-value">' + renderPhotoThumb(sub.endPhotoUrl, 'End') + '</span></div>'
+    + '</div></div>';
+
+  // Section: Integrity
+  var risk = (sub.riskLevel || 'Low Risk');
+  var riskClass = risk.toLowerCase().indexOf('low') !== -1 ? 'low' : risk.toLowerCase().indexOf('medium') !== -1 ? 'medium' : 'high';
+  var tabSwitches = sub.tabSwitches || 0;
+  var refreshCount = sub.refreshCount || 0;
+  var fsExit = sub.fullscreenExitCount || 0;
+  var events = sub.integrityEvents || [];
+  var integrity = sub.integrityScore !== undefined ? sub.integrityScore : 100;
+
+  body.innerHTML += '<div class="stu-section">'
+    + '<h4>Integrity Metrics</h4>'
+    + '<div class="stu-grid">'
+      + '<div class="stu-field"><span class="stu-label">Integrity Score</span><span class="stu-value"><strong>' + integrity + '</strong></span></div>'
+      + '<div class="stu-field"><span class="stu-label">Risk Level</span><span class="stu-value"><span class="risk-badge ' + riskClass + '"><span class="risk-badge-dot"></span>' + risk + '</span></span></div>'
+      + '<div class="stu-field"><span class="stu-label">Tab Switches</span><span class="stu-value">' + tabSwitches + '</span></div>'
+      + '<div class="stu-field"><span class="stu-label">Refresh Count</span><span class="stu-value">' + refreshCount + '</span></div>'
+      + '<div class="stu-field"><span class="stu-label">Fullscreen Exits</span><span class="stu-value">' + fsExit + '</span></div>'
+    + '</div>'
+    + '<div style="margin-top:12px;">'
+    + renderIntegrityTimeline(events)
+    + '</div></div>';
+
+  // Section: Performance
+  var score = sub.score !== undefined ? sub.score : '-';
+  var maxMarks = sub.maxMarks !== undefined ? sub.maxMarks : '';
+  var scoreDisplay = maxMarks ? score + ' / ' + maxMarks : score;
+  var pct = sub.percentage !== undefined ? sub.percentage + '%' : '-';
+
+  body.innerHTML += '<div class="stu-section">'
+    + '<h4>Performance</h4>'
+    + '<div class="stu-grid">'
+      + '<div class="stu-field"><span class="stu-label">MCQ Score</span><span class="stu-value">' + scoreDisplay + '</span></div>'
+      + '<div class="stu-field"><span class="stu-label">Percentage</span><span class="stu-value">' + pct + '</span></div>'
+      + '<div class="stu-field"><span class="stu-label" style="color:var(--green-600);">Correct</span><span class="stu-value" style="color:var(--green-600);">' + (sub.correct || 0) + '</span></div>'
+      + '<div class="stu-field"><span class="stu-label" style="color:var(--red-600);">Incorrect</span><span class="stu-value" style="color:var(--red-600);">' + (sub.incorrect || 0) + '</span></div>'
+      + '<div class="stu-field"><span class="stu-label" style="color:var(--gray-400);">Unanswered</span><span class="stu-value" style="color:var(--gray-400);">' + (sub.unanswered || 0) + '</span></div>'
+    + '</div></div>';
+
+  // Section: Answer Review + Evaluation
+  body.innerHTML += '<div class="stu-section">'
+    + '<h4>Answer Review &amp; Evaluation</h4>'
+    + '<div id="stuAnswerReview"></div>'
+    + '</div>';
+
+  renderAnswerReview(sub);
+
+  // Section: Final Score
+  body.innerHTML += '<div class="stu-section">'
+    + '<h4>Final Score</h4>'
+    + '<div id="stuFinalScore"></div>'
+    + '</div>';
+
+  calculateFinalScore(sub);
+}
+
+function renderAnswerReview(sub) {
+  var container = document.getElementById('stuAnswerReview');
+  if (!container) return;
+  container.innerHTML = '';
+
+  var examData = sub.examData;
+  if (!examData || !examData.paper || !examData.paper.sections) {
+    container.innerHTML = '<p style="color:var(--gray-400);font-size:0.867rem;">No exam data available for answer review.</p>';
+    return;
+  }
+
+  var sections = examData.paper.sections;
+  var answers = sub.studentAnswers || {};
+  var sectionConfig = [
+    { type: 'MCQ', label: 'MCQ Questions' },
+    { type: 'Short Answer', label: 'Short Answer Questions' },
+    { type: 'Long Answer', label: 'Long Answer Questions' },
+  ];
+
+  var foundAny = false;
+
+  for (var si = 0; si < sectionConfig.length; si++) {
+    var config = sectionConfig[si];
+    var questions = sections[config.type] || [];
+    if (questions.length === 0) continue;
+    foundAny = true;
+
+    var sectionHtml = '<div style="margin-bottom:16px;">'
+      + '<div style="font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--gray-400);margin-bottom:8px;">' + config.label + '</div>';
+
+    for (var qi = 0; qi < questions.length; qi++) {
+      var q = questions[qi];
+      var studentAnswer = answers[q.id];
+      var isMCQ = config.type === 'MCQ';
+      var isCorrect = false;
+
+      sectionHtml += '<div class="stu-answer-block">'
+        + '<div class="stu-question-text">' + escHtml(q.question || '') + '</div>'
+        + '<div class="stu-question-meta">' + (q.chapter || '') + ' &middot; ' + q.marks + ' mark' + (q.marks > 1 ? 's' : '') + '</div>';
+
+      if (isMCQ) {
+        // Show options
+        if (q.options) {
+          for (var oi = 0; oi < q.options.length; oi++) {
+            var letter = 'ABCD'[oi];
+            var isSelected = studentAnswer === letter;
+            sectionHtml += '<div style="padding:3px 0;font-size:0.8rem;' + (isSelected ? 'font-weight:600;color:var(--indigo-600);' : 'color:var(--text-secondary);') + '">'
+              + letter + '. ' + escHtml(q.options[oi])
+              + (isSelected ? ' <span style="font-size:0.7rem;color:var(--indigo-400);">(selected)</span>' : '')
+              + '</div>';
+          }
+        }
+        sectionHtml += '<div style="margin-top:6px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">'
+          + '<span class="stu-student-answer-label">Your answer:</span>'
+          + '<span class="stu-student-answer">' + escHtml(studentAnswer || '(not answered)') + '</span>'
+          + '</div>'
+          + '<div style="margin-top:4px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">'
+          + '<span class="stu-student-answer-label">Correct answer:</span>'
+          + '<span class="stu-correct-answer">' + escHtml(q.correctAnswer || '—') + '</span>'
+          + '</div>';
+
+        if (studentAnswer && q.correctAnswer) {
+          isCorrect = studentAnswer.toUpperCase().trim() === q.correctAnswer.toUpperCase().trim();
+          sectionHtml += '<div style="margin-top:6px;">'
+            + '<span class="' + (isCorrect ? 'stu-result-correct' : 'stu-result-incorrect') + '">'
+            + (isCorrect ? 'Correct' : 'Incorrect')
+            + '</span>'
+            + ' <span class="stu-marks-badge">+' + (isCorrect ? q.marks : 0) + ' / ' + q.marks + '</span>'
+            + '</div>';
+        }
+      } else {
+        // Subjective
+        sectionHtml += '<div style="margin-top:6px;">'
+          + '<div class="stu-student-answer-label">Student Answer:</div>'
+          + '<div class="stu-student-answer">' + escHtml(studentAnswer || '(not answered)') + '</div>'
+          + '</div>'
+          + '<div style="margin-top:6px;">'
+          + '<div class="stu-student-answer-label">Model Answer:</div>'
+          + '<div class="stu-correct-answer">' + escHtml(q.answer || '—') + '</div>'
+          + '</div>'
+          + '<div class="stu-eval-row" id="stuEvalRow-' + q.id + '">'
+          + '<div class="stu-eval-row-inner">'
+          + '<div><div class="stu-student-answer-label">Marks Awarded</div>'
+          + '<input type="number" class="stu-eval-input" id="stuEvalMarks-' + q.id + '" min="0" max="' + q.marks + '" step="0.5" value="' + ((sub.evaluation && sub.evaluation.teacherMarks && sub.evaluation.teacherMarks[q.id] !== undefined) ? sub.evaluation.teacherMarks[q.id] : '') + '" placeholder="0" oninput="saveEvaluationDebounced(\'' + sub._firestoreId + '\',\'' + q.id + '\')">'
+          + '</div>'
+          + '<div style="flex:1;"><div class="stu-student-answer-label">Teacher Feedback</div>'
+          + '<textarea class="stu-eval-textarea" id="stuEvalFeedback-' + q.id + '" rows="2" placeholder="Add remarks..." oninput="saveEvaluationDebounced(\'' + sub._firestoreId + '\',\'' + q.id + '\')">' + escHtml((sub.evaluation && sub.evaluation.teacherFeedback && sub.evaluation.teacherFeedback[q.id]) || '') + '</textarea>'
+          + '</div>'
+          + '</div>'
+          + '<span class="stu-eval-saved" id="stuEvalSaved-' + q.id + '">Saved</span>'
+          + '</div>';
+      }
+
+      sectionHtml += '</div>';
+    }
+
+    sectionHtml += '</div>';
+    container.innerHTML += sectionHtml;
+  }
+
+  if (!foundAny) {
+    container.innerHTML = '<p style="color:var(--gray-400);font-size:0.867rem;">No questions found in exam data.</p>';
+  }
+}
+
+var _stuEvalTimers = {};
+
+function saveEvaluationDebounced(firestoreId, questionId) {
+  if (_stuEvalTimers[questionId]) {
+    clearTimeout(_stuEvalTimers[questionId]);
+  }
+  _stuEvalTimers[questionId] = setTimeout(function() {
+    saveEvaluation(firestoreId, questionId);
+  }, 1500);
+}
+
+function saveEvaluation(firestoreId, questionId) {
+  var marksInput = document.getElementById('stuEvalMarks-' + questionId);
+  var feedbackInput = document.getElementById('stuEvalFeedback-' + questionId);
+  var savedEl = document.getElementById('stuEvalSaved-' + questionId);
+
+  if (!marksInput || !feedbackInput) return;
+
+  var marks = marksInput.value !== '' ? parseFloat(marksInput.value) : null;
+  var feedback = feedbackInput.value.trim();
+
+  // Update local state
+  for (var i = 0; i < _stuSubmissions.length; i++) {
+    if (_stuSubmissions[i]._firestoreId === firestoreId) {
+      var sub = _stuSubmissions[i];
+      if (!sub.evaluation) sub.evaluation = { teacherMarks: {}, teacherFeedback: {} };
+      if (marks !== null) sub.evaluation.teacherMarks[questionId] = marks;
+      sub.evaluation.teacherFeedback[questionId] = feedback;
+      // Update status
+      sub.evaluation.evaluatedAt = new Date().toISOString();
+      break;
+    }
+  }
+
+  // Save to Firestore
+  var db = window.__firebaseDb;
+  var fs = window.__firestore;
+  if (db && fs && fs.doc && fs.setDoc) {
+    var evalData = {};
+    // Build full evaluation object from all teacherMarks/Feedback
+    for (var j = 0; j < _stuSubmissions.length; j++) {
+      if (_stuSubmissions[j]._firestoreId === firestoreId) {
+        var s = _stuSubmissions[j];
+        evalData = {
+          teacherMarks: s.evaluation ? s.evaluation.teacherMarks || {} : {},
+          teacherFeedback: s.evaluation ? s.evaluation.teacherFeedback || {} : {},
+          evaluatedAt: new Date().toISOString(),
+          status: getEvaluationStatus(s),
+        };
+        // Update the sub's evaluation status
+        if (s.evaluation) s.evaluation.status = evalData.status;
+        break;
+      }
+    }
+    var docRef = fs.doc(db, 'submissions', firestoreId);
+    fs.setDoc(docRef, { evaluation: evalData }, { merge: true })
+      .then(function() {
+        if (savedEl) {
+          savedEl.classList.add('show');
+          setTimeout(function() { savedEl.classList.remove('show'); }, 2000);
+        }
+        // Recalculate and update final score
+        calculateFinalScore(s);
+        // Update eval status badge in drawer header
+        var status = getEvaluationStatus(s);
+        var headerBadge = document.querySelector('.stu-drawer-body .stu-eval-status');
+        if (headerBadge) {
+          headerBadge.className = 'stu-eval-status ' + status;
+          headerBadge.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+        }
+      })
+      .catch(function(err) {
+        console.error('[StudentEval] Save failed:', err);
+      });
+  }
+}
+
+function calculateFinalScore(sub) {
+  if (!sub) return;
+  var container = document.getElementById('stuFinalScore');
+  if (!container) return;
+
+  // Calculate MCQ auto score
+  var mcqScore = sub.score !== undefined ? sub.score : 0;
+  var maxMarks = sub.maxMarks !== undefined ? sub.maxMarks : 0;
+
+  // Calculate teacher-awarded marks
+  var teacherMarks = 0;
+  if (sub.evaluation && sub.evaluation.teacherMarks) {
+    for (var key in sub.evaluation.teacherMarks) {
+      if (sub.evaluation.teacherMarks.hasOwnProperty(key)) {
+        var val = parseFloat(sub.evaluation.teacherMarks[key]);
+        if (!isNaN(val)) teacherMarks += val;
+      }
+    }
+  }
+
+  var finalScore = (sub.score || 0) + teacherMarks;
+  var finalMax = maxMarks;
+  var finalPct = finalMax > 0 ? Math.round((finalScore / finalMax) * 100) : 0;
+
+  container.innerHTML = '<div class="stu-final-score">'
+    + '<div class="stu-final-score-value">' + finalScore + ' / ' + finalMax + '</div>'
+    + '<div class="stu-final-score-label">' + finalPct + '% — Final Score (Auto MCQ + Teacher Evaluation)</div>'
+    + '</div>';
+}
+
+function closeStudentDrawer() {
+  document.getElementById('stuDrawerOverlay').classList.remove('open');
+  document.getElementById('stuDrawer').classList.remove('open');
+  document.body.style.overflow = '';
+  // Clear debounce timers
+  for (var key in _stuEvalTimers) {
+    if (_stuEvalTimers.hasOwnProperty(key)) {
+      clearTimeout(_stuEvalTimers[key]);
+    }
+  }
+  _stuEvalTimers = {};
+}
+
+// ===== STUDENT PAGE EVENT BINDINGS =====
+document.getElementById('stuFilterExam').addEventListener('change', function() {
+  applyStudentsFilters();
+});
+document.getElementById('stuFilterCode').addEventListener('input', function() {
+  applyStudentsFilters();
+});
+document.getElementById('stuFilterDate').addEventListener('change', function() {
+  applyStudentsFilters();
+});
+document.getElementById('stuRiskFilters').addEventListener('click', function(e) {
+  var btn = e.target.closest('.stu-risk-btn');
+  if (!btn) return;
+  document.querySelectorAll('.stu-risk-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  _stuFilterRisk = btn.dataset.risk;
+  applyStudentsFilters();
+});
+document.getElementById('stuSearch').addEventListener('input', function() {
+  applyStudentsFilters();
+});
+document.getElementById('stuDrawerOverlay').addEventListener('click', closeStudentDrawer);
+document.getElementById('stuDrawerClose').addEventListener('click', closeStudentDrawer);
+document.getElementById('stuRetryBtn').addEventListener('click', loadStudentsPage);
 </script>
 
 </body>
