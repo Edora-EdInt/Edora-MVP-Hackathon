@@ -1,4 +1,4 @@
-# EdInt — AI Examination Platform
+# Edora — AI Examination Platform
 
 A modern SaaS-style dashboard landing page for an AI-powered examination platform, built with vanilla HTML, CSS, and JavaScript.
 
@@ -78,8 +78,8 @@ A **"Continue as Guest (Demo)"** button is available on the login screen. This b
 
 | What | Where | Example |
 |------|-------|---------|
-| Logo text | `.logo-text` in sidebar | `<div class="logo-text">Ed<span>Int</span></div>` |
-| App name | `<title>` tag | `<title>EdInt — AI Examination Platform</title>` |
+| Logo text | `.logo-text` in sidebar | `<div class="logo-text">Ed<span>ora</span></div>` |
+| App name | `<title>` tag | `<title>Edora — AI Examination Platform</title>` |
 | Favicon | `<link rel="icon">` in `<head>` | Add your own `.ico` or `.svg` |
 
 To replace the logo mark (blue square with "E"), edit the `.logo-mark` div in the sidebar:
@@ -87,7 +87,7 @@ To replace the logo mark (blue square with "E"), edit the `.logo-mark` div in th
 ```html
 <div class="logo-mark">
   <!-- Replace with your logo SVG or image -->
-  <img src="logo.svg" alt="EdInt" width="36" height="36">
+  <img src="logo.svg" alt="Edora" width="36" height="36">
 </div>
 ```
 
@@ -114,7 +114,7 @@ To switch to a different accent (e.g. blue, emerald, rose), replace the `--indig
 ## Structure Overview
 
 ```
-edint/
+edora/
   index.html    — single-file page (HTML + CSS + JS)
   README.md     — this file
 ```
