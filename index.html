@@ -1336,6 +1336,27 @@ tbody td .subject {
   -webkit-appearance: none;
   margin: 0;
 }
+/* Static value display (board, class) */
+.gen-static-val {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  background: var(--gray-50);
+  font-family: var(--font);
+  font-size: 0.867rem;
+  color: var(--gray-700);
+  display: flex;
+  align-items: center;
+  cursor: default;
+  user-select: none;
+}
+html.dark-mode .gen-static-val {
+  background: var(--gray-800);
+  border-color: var(--gray-700);
+  color: var(--gray-300);
+}
 /* Searchable Select */
 .ss-wrap {
   position: relative;
@@ -5720,7 +5741,7 @@ html.dark-mode .student-photo-preview {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
         </div>
         <h4>Create Exam</h4>
-        <p>Design a new examination with AI assistance</p>
+        <p>Design a new examination from the question bank</p>
       </div>
       <div class="action-card">
         <div class="action-icon">
@@ -5934,7 +5955,7 @@ html.dark-mode .student-photo-preview {
   <div class="gen-header">
     <div>
       <h2>Generate Exam</h2>
-      <p>Configure a new examination with AI-powered question generation</p>
+        <p>Configure a new examination from the question bank</p>
     </div>
   </div>
 
@@ -5959,36 +5980,20 @@ html.dark-mode .student-photo-preview {
               <input type="text" class="ss-input" id="subjectInput" placeholder="Search subject..." autocomplete="off">
               <svg class="ss-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               <div class="ss-drop" id="subjectDrop">
-                <div class="ss-opt" data-val="Physics">Physics</div>
-                <div class="ss-opt" data-val="Chemistry">Chemistry</div>
-                <div class="ss-opt" data-val="Mathematics">Mathematics</div>
-                <div class="ss-opt" data-val="Biology">Biology</div>
-                <div class="ss-opt" data-val="English">English</div>
-                <div class="ss-opt" data-val="Computer Science">Computer Science</div>
+                <!-- populated by JS from chapterData keys -->
               </div>
             </div>
             <input type="hidden" id="subjectVal">
           </div>
           <div class="gen-field">
             <label>Board <span class="req">*</span></label>
-            <select class="gen-select" id="boardSelect">
-              <option value="CBSE">CBSE</option>
-              <option value="ICSE">ICSE</option>
-              <option value="State Board">State Board</option>
-            </select>
+            <div class="gen-static-val">CBSE</div>
+            <input type="hidden" id="boardSelect" value="CBSE">
           </div>
           <div class="gen-field">
             <label>Class <span class="req">*</span></label>
-            <select class="gen-select" id="classSelect">
-              <option value="">Select class</option>
-              <option value="6">Class 6</option>
-              <option value="7">Class 7</option>
-              <option value="8">Class 8</option>
-              <option value="9">Class 9</option>
-              <option value="10">Class 10</option>
-              <option value="11">Class 11</option>
-              <option value="12">Class 12</option>
-            </select>
+            <div class="gen-static-val">Class 10</div>
+            <input type="hidden" id="classSelect" value="10">
           </div>
         </div>
       </section>
@@ -6194,7 +6199,7 @@ html.dark-mode .student-photo-preview {
       <!-- SECTION 8: Generate Button -->
       <button class="gen-submit" id="genSubmitBtn">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        Generate Exam with AI
+        Generate Exam
       </button>
 
     </div><!-- /gen-form -->
@@ -7267,7 +7272,7 @@ html.dark-mode .student-photo-preview {
 
 </div>
 
-<script src="data/questions.js"></script>
+<script src="data/questions_cbse_class10.js"></script>
 <script src="services/questionBank.js"></script>
 <script src="services/questionSelector.js"></script>
 <script type="module" src="services/firebase.js"></script>
@@ -7516,11 +7521,38 @@ document.querySelector('.action-card')?.addEventListener('click', function() {
   navigateTo('generate-exam');
 });
 
-// ===== SEARCHABLE SELECT (Subject) =====
+// ===== SEARCHABLE SELECT (Subject) — dynamic from chapterData =====
 const subjectInput = document.getElementById('subjectInput');
 const subjectDrop = document.getElementById('subjectDrop');
 const subjectVal = document.getElementById('subjectVal');
-const subjectOpts = subjectDrop.querySelectorAll('.ss-opt');
+
+function populateSubjectDropdown() {
+  subjectDrop.innerHTML = '';
+  const subjects = Object.keys(chapterData);
+  subjects.forEach(function(subj) {
+    var opt = document.createElement('div');
+    opt.className = 'ss-opt';
+    opt.dataset.val = subj;
+    opt.textContent = subj;
+    opt.addEventListener('click', function() {
+      subjectDrop.querySelectorAll('.ss-opt').forEach(function(o) { o.classList.remove('sel'); });
+      this.classList.add('sel');
+      subjectInput.value = this.textContent;
+      subjectInput.classList.add('selected');
+      subjectVal.value = this.dataset.val;
+      subjectDrop.classList.remove('open');
+      updateSummary();
+      updateChapterList();
+    });
+    subjectDrop.appendChild(opt);
+  });
+}
+
+populateSubjectDropdown();
+
+function getSubjectOpts() {
+  return subjectDrop.querySelectorAll('.ss-opt');
+}
 
 subjectInput.addEventListener('focus', function() {
   subjectDrop.classList.add('open');
@@ -7539,8 +7571,9 @@ document.addEventListener('click', function(e) {
 
 function filterSubjectOptions() {
   const q = subjectInput.value.toLowerCase();
+  const opts = getSubjectOpts();
   let found = false;
-  subjectOpts.forEach(opt => {
+  opts.forEach(function(opt) {
     const match = opt.textContent.toLowerCase().includes(q);
     opt.style.display = match ? '' : 'none';
     if (match) found = true;
@@ -7559,27 +7592,123 @@ function filterSubjectOptions() {
   }
 }
 
-subjectOpts.forEach(opt => {
-  opt.addEventListener('click', function() {
-    subjectOpts.forEach(o => o.classList.remove('sel'));
-    this.classList.add('sel');
-    subjectInput.value = this.textContent;
-    subjectInput.classList.add('selected');
-    subjectVal.value = this.dataset.val;
-    subjectDrop.classList.remove('open');
-    updateSummary();
-    updateChapterList();
-  });
-});
-
-// ===== MULTI-SELECT CHAPTERS =====
+// ===== CBSE CLASS 10 SYLLABUS — QUESTION BANK ALIGNMENT =====
 const chapterData = {
-  Physics: ['Physical World', 'Units & Measurements', 'Motion in a Straight Line', 'Motion in a Plane', 'Laws of Motion', 'Work, Energy & Power', 'System of Particles', 'Gravitation', 'Mechanical Properties of Solids', 'Mechanical Properties of Fluids', 'Thermal Properties', 'Thermodynamics', 'Kinetic Theory', 'Oscillations', 'Waves', 'Electric Charges & Fields', 'Electrostatic Potential', 'Current Electricity', 'Moving Charges', 'Magnetism & Matter', 'Electromagnetic Induction', 'Alternating Current', 'Electromagnetic Waves', 'Ray Optics', 'Wave Optics', 'Dual Nature of Radiation', 'Atoms', 'Nuclei', 'Semiconductor Electronics'],
-  Chemistry: ['Some Basic Concepts', 'Structure of Atom', 'Classification of Elements', 'Chemical Bonding', 'States of Matter', 'Thermodynamics', 'Equilibrium', 'Redox Reactions', 'Hydrogen', 's-Block Elements', 'p-Block Elements', 'Organic Chemistry', 'Hydrocarbons', 'Environmental Chemistry', 'Solid State', 'Solutions', 'Electrochemistry', 'Chemical Kinetics', 'Surface Chemistry', 'General Principles of Metallurgy', 'd & f Block Elements', 'Coordination Compounds', 'Haloalkanes & Haloarenes', 'Alcohols, Phenols & Ethers', 'Aldehydes, Ketones & Carboxylic Acids', 'Amines', 'Biomolecules', 'Polymers', 'Chemistry in Everyday Life'],
-  Mathematics: ['Sets', 'Relations & Functions', 'Trigonometric Functions', 'Principle of Mathematical Induction', 'Complex Numbers', 'Linear Inequalities', 'Permutations & Combinations', 'Binomial Theorem', 'Sequences & Series', 'Straight Lines', 'Conic Sections', 'Introduction to 3D Geometry', 'Limits & Derivatives', 'Statistics', 'Probability', 'Relations & Functions (II)', 'Inverse Trigonometric Functions', 'Matrices', 'Determinants', 'Continuity & Differentiability', 'Application of Derivatives', 'Integrals', 'Application of Integrals', 'Differential Equations', 'Vector Algebra', 'Three Dimensional Geometry', 'Linear Programming'],
-  Biology: ['The Living World', 'Biological Classification', 'Plant Kingdom', 'Animal Kingdom', 'Morphology of Flowering Plants', 'Anatomy of Flowering Plants', 'Structural Organisation in Animals', 'Cell: The Unit of Life', 'Biomolecules', 'Cell Cycle & Cell Division', 'Transport in Plants', 'Mineral Nutrition', 'Photosynthesis', 'Respiration in Plants', 'Plant Growth & Development', 'Reproduction in Organisms', 'Sexual Reproduction in Flowering Plants', 'Human Reproduction', 'Reproductive Health', 'Principles of Inheritance', 'Molecular Basis of Inheritance', 'Evolution', 'Human Health & Disease', 'Microbes in Human Welfare', 'Biotechnology: Principles & Processes', 'Biotechnology & Its Applications', 'Organisms & Populations', 'Ecosystem', 'Biodiversity & Conservation', 'Environmental Issues'],
-  English: ['Reading Comprehension', 'Writing Skills', 'Grammar & Usage', 'Literature: Prose', 'Literature: Poetry', 'Literature: Drama', 'Creative Writing', 'Letter Writing', 'Essay Writing', 'Report Writing', 'Speech Writing', 'Debate Writing', 'Article Writing', 'Notice Writing', 'Advertisement Writing', 'Poster Writing', 'Note Making', 'Summary Writing', 'Dialogue Writing', 'Story Writing'],
-  'Computer Science': ['Computer System Overview', 'Data Representation', 'Boolean Logic', 'Computer Networks', 'Programming Fundamentals', 'Data Structures', 'Object-Oriented Programming', 'Database Management Systems', 'SQL', 'Number System', 'Encoding Schemes', 'Emerging Trends', 'Computational Thinking', 'Python Programming', 'Functions', 'File Handling', 'Exception Handling', 'Data Science Basics', 'Cyber Security', 'Project Work'],
+
+  English: [
+    // First Flight — Prose
+    'A Letter to God',
+    'Nelson Mandela: Long Walk to Freedom',
+    'Two Stories About Flying',
+    'From the Diary of Anne Frank',
+    'Glimpses of India',
+    'Mijbil the Otter',
+    'Madam Rides the Bus',
+    'The Sermon at Benares',
+    'The Proposal',
+    // First Flight — Poems
+    'Dust of Snow',
+    'Fire and Ice',
+    'A Tiger in the Zoo',
+    'How to Tell Wild Animals',
+    'The Ball Poem',
+    'Amanda!',
+    'Animals',
+    'The Trees',
+    'Fog',
+    'The Tale of Custard the Dragon',
+    'For Anne Gregory',
+    // Footprints Without Feet
+    'A Triumph of Surgery',
+    'The Thief\'s Story',
+    'The Midnight Visitor',
+    'A Question of Trust',
+    'Footprints Without Feet',
+    'The Making of a Scientist',
+    'The Necklace',
+    'Bholi',
+    'The Book That Saved the Earth',
+  ],
+
+  Mathematics: [
+    'Real Numbers',
+    'Polynomials',
+    'Pair of Linear Equations in Two Variables',
+    'Quadratic Equations',
+    'Arithmetic Progressions',
+    'Triangles',
+    'Coordinate Geometry',
+    'Introduction to Trigonometry',
+    'Some Applications of Trigonometry',
+    'Circles',
+    'Areas Related to Circles',
+    'Surface Areas and Volumes',
+    'Statistics',
+    'Probability',
+  ],
+
+  Science: [
+    'Chemical Reactions and Equations',
+    'Acids, Bases and Salts',
+    'Metals and Non-Metals',
+    'Carbon and its Compounds',
+    'Periodic Classification of Elements',
+    'Life Processes',
+    'Control and Coordination',
+    'How Do Organisms Reproduce?',
+    'Heredity and Evolution',
+    'Light – Reflection and Refraction',
+    'The Human Eye and the Colourful World',
+    'Electricity',
+    'Magnetic Effects of Electric Current',
+    'Sources of Energy',
+    'Our Environment',
+    'Management of Natural Resources',
+  ],
+
+  'Social Science': [
+    // History
+    'The Rise of Nationalism in Europe',
+    'Nationalism in India',
+    'The Making of a Global World',
+    'The Age of Industrialisation',
+    'Print Culture and the Modern World',
+    // Geography
+    'Resources and Development',
+    'Forest and Wildlife Resources',
+    'Water Resources',
+    'Agriculture',
+    'Minerals and Energy Resources',
+    'Manufacturing Industries',
+    'Lifelines of National Economy',
+    // Political Science
+    'Power Sharing',
+    'Federalism',
+    'Gender, Religion and Caste',
+    'Political Parties',
+    'Outcomes of Democracy',
+    // Economics
+    'Development',
+    'Sectors of the Indian Economy',
+    'Money and Credit',
+    'Globalisation and the Indian Economy',
+    'Consumer Rights',
+  ],
+
+  'Information Technology': [
+    // Employability Skills
+    'Communication Skills-II',
+    'Self-Management Skills-II',
+    'ICT Skills-II',
+    'Entrepreneurial Skills-II',
+    'Green Skills-II',
+    // Subject Specific Skills
+    'Digital Documentation (Advanced)',
+    'Electronic Spreadsheet (Advanced)',
+    'Database Management System',
+    'Maintain Healthy, Safe and Secure Working Environment',
+  ],
+
 };
 
 let selectedChapters = [];
