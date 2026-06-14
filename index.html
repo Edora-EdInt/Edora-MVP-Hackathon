@@ -7548,8 +7548,6 @@ function populateSubjectDropdown() {
   });
 }
 
-populateSubjectDropdown();
-
 function getSubjectOpts() {
   return subjectDrop.querySelectorAll('.ss-opt');
 }
@@ -7710,6 +7708,8 @@ const chapterData = {
   ],
 
 };
+
+populateSubjectDropdown();
 
 let selectedChapters = [];
 
