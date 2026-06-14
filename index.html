@@ -10583,37 +10583,43 @@ function evaluateExam(session) {
   var unanswered = 0;
   var marksObtained = 0;
   var maxMarks = 0;
+  var mcqMax = 0;
+  var descriptiveMax = 0;
   var details = [];
 
   for (var i = 0; i < questions.length; i++) {
     var q = questions[i];
     var qd = q.data;
-    if (q.sectionType !== 'MCQ') continue;
+    if (q.sectionType === 'MCQ') {
+      totalMCQ++;
+      mcqMax += (qd.marks || 1);
+      maxMarks += (qd.marks || 1);
+      var studentAnswer = (answers[qd.id] || '').toString().trim().toUpperCase();
+      var correctAnswer = (qd.correctAnswer || '').toString().trim().toUpperCase();
+      var isCorrect = studentAnswer === correctAnswer && studentAnswer !== '';
 
-    totalMCQ++;
-    maxMarks += (qd.marks || 1);
-    var studentAnswer = (answers[qd.id] || '').toString().trim().toUpperCase();
-    var correctAnswer = (qd.correctAnswer || '').toString().trim().toUpperCase();
-    var isCorrect = studentAnswer === correctAnswer && studentAnswer !== '';
+      if (!studentAnswer) {
+        unanswered++;
+      } else if (isCorrect) {
+        attempted++;
+        correct++;
+        marksObtained += (qd.marks || 1);
+      } else {
+        attempted++;
+        incorrect++;
+      }
 
-    if (!studentAnswer) {
-      unanswered++;
-    } else if (isCorrect) {
-      attempted++;
-      correct++;
-      marksObtained += (qd.marks || 1);
+      details.push({
+        num: details.length + 1,
+        question: qd.question,
+        studentAnswer: studentAnswer || '—',
+        correctAnswer: correctAnswer || '—',
+        correct: isCorrect,
+      });
     } else {
-      attempted++;
-      incorrect++;
+      descriptiveMax += (qd.marks || 1);
+      maxMarks += (qd.marks || 1);
     }
-
-    details.push({
-      num: details.length + 1,
-      question: qd.question,
-      studentAnswer: studentAnswer || '—',
-      correctAnswer: correctAnswer || '—',
-      correct: isCorrect,
-    });
   }
 
   var percentage = maxMarks > 0 ? Math.round((marksObtained / maxMarks) * 100) : 0;
@@ -10626,6 +10632,8 @@ function evaluateExam(session) {
     unanswered: unanswered,
     marksObtained: marksObtained,
     maxMarks: maxMarks,
+    mcqMax: mcqMax,
+    descriptiveMax: descriptiveMax,
     percentage: percentage,
     details: details,
   };
@@ -10669,8 +10677,9 @@ function showCompletionScreen(session) {
 
   // Evaluate and display score
   var result = evaluateExam(session);
-  if (result.totalMCQ > 0) {
-    document.getElementById('studentScoreDisplay').textContent = result.marksObtained + ' / ' + result.maxMarks;
+  if (result.maxMarks > 0) {
+    var scoreLabel = result.descriptiveMax > 0 ? result.marksObtained + ' / ' + result.maxMarks + ' (MCQ)' : result.marksObtained + ' / ' + result.maxMarks;
+    document.getElementById('studentScoreDisplay').textContent = scoreLabel;
     document.getElementById('studentPercentDisplay').textContent = result.percentage + '%';
     document.getElementById('studentCorrectCount').textContent = result.correct;
     document.getElementById('studentIncorrectCount').textContent = result.incorrect;
@@ -10693,6 +10702,7 @@ function showCompletionScreen(session) {
       photoVerificationStatus: session.photoVerificationStatus || '(empty)',
       score: result.marksObtained,
       maxMarks: result.maxMarks,
+      descriptiveMax: result.descriptiveMax,
       percentage: result.percentage,
       correct: result.correct,
       incorrect: result.incorrect,
@@ -10716,6 +10726,7 @@ function showCompletionScreen(session) {
         studentAnswers: session.answers || {},
         score: result.marksObtained,
         maxMarks: result.maxMarks,
+        descriptiveMax: result.descriptiveMax,
         percentage: result.percentage,
         correct: result.correct,
         incorrect: result.incorrect,
@@ -11178,7 +11189,7 @@ function openStudentDrawer(firestoreId) {
   body.innerHTML += '<div class="stu-section">'
     + '<h4>Performance</h4>'
     + '<div class="stu-grid">'
-      + '<div class="stu-field"><span class="stu-label">MCQ Score</span><span class="stu-value">' + scoreDisplay + '</span></div>'
+      + '<div class="stu-field"><span class="stu-label">Score</span><span class="stu-value">' + scoreDisplay + '</span></div>'
       + '<div class="stu-field"><span class="stu-label">Percentage</span><span class="stu-value">' + pct + '</span></div>'
       + '<div class="stu-field"><span class="stu-label" style="color:var(--green-600);">Correct</span><span class="stu-value" style="color:var(--green-600);">' + (sub.correct || 0) + '</span></div>'
       + '<div class="stu-field"><span class="stu-label" style="color:var(--red-600);">Incorrect</span><span class="stu-value" style="color:var(--red-600);">' + (sub.incorrect || 0) + '</span></div>'
@@ -11374,10 +11385,11 @@ function saveEvaluation(firestoreId, questionId) {
   var fs = window.__firestore;
   if (db && fs && fs.doc && fs.setDoc) {
     var evalData = {};
+    var s = null;
     // Build full evaluation object from all teacherMarks/Feedback
     for (var j = 0; j < _stuSubmissions.length; j++) {
       if (_stuSubmissions[j]._firestoreId === firestoreId) {
-        var s = _stuSubmissions[j];
+        s = _stuSubmissions[j];
         evalData = {
           teacherMarks: s.evaluation ? s.evaluation.teacherMarks || {} : {},
           teacherFeedback: s.evaluation ? s.evaluation.teacherFeedback || {} : {},
@@ -11389,14 +11401,56 @@ function saveEvaluation(firestoreId, questionId) {
         break;
       }
     }
+
+    // Calculate corrected final score fields
+    var finalScoreFields = {};
+    if (s) {
+      var allTeacherMarks = 0;
+      var evalMarks = s.evaluation ? s.evaluation.teacherMarks || {} : {};
+      for (var mk in evalMarks) {
+        if (evalMarks.hasOwnProperty(mk)) {
+          var mv = parseFloat(evalMarks[mk]);
+          if (!isNaN(mv)) allTeacherMarks += mv;
+        }
+      }
+      var subScore = s.score || 0;
+      var subMax = s.maxMarks || 0;
+      // New submissions already have combined maxMarks; old ones need descriptiveMax from exam data
+      var effectiveMax = subMax;
+      if (s.descriptiveMax === undefined && s._examData && s._examData.paper && s._examData.paper.sections) {
+        var descMaxLookup = 0;
+        var secKeys = ['Short Answer', 'Long Answer', 'Case Study', 'Numerical'];
+        for (var sk = 0; sk < secKeys.length; sk++) {
+          var qs = s._examData.paper.sections[secKeys[sk]] || [];
+          for (var qi = 0; qi < qs.length; qi++) {
+            descMaxLookup += (qs[qi].marks || 1);
+          }
+        }
+        effectiveMax = subMax + descMaxLookup;
+      }
+      var combinedScore = subScore + allTeacherMarks;
+      var combinedPct = effectiveMax > 0 ? Math.round((combinedScore / effectiveMax) * 100) : 0;
+      finalScoreFields = {
+        score: combinedScore,
+        maxMarks: effectiveMax,
+        percentage: combinedPct,
+        teacherMarksAwarded: allTeacherMarks,
+      };
+      // Update local state for immediate consistency
+      s.score = combinedScore;
+      s.maxMarks = effectiveMax;
+      s.percentage = combinedPct;
+      s.teacherMarksAwarded = allTeacherMarks;
+    }
+
     var docRef = fs.doc(db, 'submissions', firestoreId);
-    fs.setDoc(docRef, { evaluation: evalData }, { merge: true })
+    fs.setDoc(docRef, { evaluation: evalData, ...finalScoreFields }, { merge: true })
       .then(function() {
         if (savedEl) {
           savedEl.classList.add('show');
           setTimeout(function() { savedEl.classList.remove('show'); }, 2000);
         }
-        // Recalculate and update final score
+        // Recalculate and update final score display
         calculateFinalScore(s);
         // Update eval status badge in drawer header
         var status = getEvaluationStatus(s);
@@ -11419,7 +11473,23 @@ function calculateFinalScore(sub) {
 
   // Calculate MCQ auto score
   var mcqScore = sub.score !== undefined ? sub.score : 0;
-  var maxMarks = sub.maxMarks !== undefined ? sub.maxMarks : 0;
+
+  // Determine true total max marks
+  // New submissions: sub.maxMarks already includes descriptiveMax
+  // Old submissions: compute descriptiveMax from exam data if available
+  var trueMaxMarks = sub.maxMarks !== undefined ? sub.maxMarks : 0;
+  if (sub.descriptiveMax === undefined && sub._examData && sub._examData.paper && sub._examData.paper.sections) {
+    var oldMcqMax = sub.maxMarks || 0;
+    var descMax = 0;
+    var secKeys = ['Short Answer', 'Long Answer', 'Case Study', 'Numerical'];
+    for (var sk = 0; sk < secKeys.length; sk++) {
+      var qs = sub._examData.paper.sections[secKeys[sk]] || [];
+      for (var qi = 0; qi < qs.length; qi++) {
+        descMax += (qs[qi].marks || 1);
+      }
+    }
+    trueMaxMarks = oldMcqMax + descMax;
+  }
 
   // Calculate teacher-awarded marks
   var teacherMarks = 0;
@@ -11433,12 +11503,12 @@ function calculateFinalScore(sub) {
   }
 
   var finalScore = (sub.score || 0) + teacherMarks;
-  var finalMax = maxMarks;
+  var finalMax = trueMaxMarks;
   var finalPct = finalMax > 0 ? Math.round((finalScore / finalMax) * 100) : 0;
 
   container.innerHTML = '<div class="stu-final-score">'
     + '<div class="stu-final-score-value">' + finalScore + ' / ' + finalMax + '</div>'
-    + '<div class="stu-final-score-label">' + finalPct + '% — Final Score (Auto MCQ + Teacher Evaluation)</div>'
+    + '<div class="stu-final-score-label">' + finalPct + '% — Final Score (MCQ + Teacher Evaluation)</div>'
     + '</div>';
 }
 
